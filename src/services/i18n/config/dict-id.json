@@ -1,0 +1,420 @@
+{
+  "common": {
+    "terms": {
+      "applications": "Aplikasi",
+      "machines": "Mesin",
+      "unknown": "Tidak diketahui",
+      "unavailable": "Tidak tersedia",
+      "view": "Tampilkan",
+      "engine": "Engine",
+      "user": "Pengguna",
+      "database": "Database",
+      "search": "Cari",
+      "all": "Semua",
+      "filters": "Saring",
+      "owner": "Pemilik",
+      "ownership": "Kepemilikan",
+      "mine": "Punya saya",
+      "sharedWithMe": "Dibagikan dengan saya",
+      "team": "Tim",
+      "teamResource": "Resource Tim",
+      "publicResource": "Resource Publik",
+      "bundleType": "Tipe Bundle",
+      "sourceType": "Tipe Sumber",
+      "noSource": "Tanpa Sumber",
+      "running": "Berjalan",
+      "stopped": "Berhenti",
+      "dead": "Mati",
+      "exited": "Dikeluarkan",
+      "restarting": "Memuat ulang",
+      "region": "Kawasan",
+      "system": "Sistem",
+      "agent": "Agen",
+      "address": "Alamat",
+      "status": "Status",
+      "access": "Akses",
+      "private": "Pribadi",
+      "public": "Publik",
+      "sshPort": "Port SSH",
+      "cpuUsage": "Penggunaan CPU",
+      "ramUsage": "Penggunaan RAM",
+      "diskUsage": "Penggunaan Disk",
+      "coreCount": "Jumlah Inti",
+      "free": "Bebas",
+      "total": "Total",
+      "actions": "Aksi",
+      "state": "Keadaan",
+      "serviceName": "Nama Layanan",
+      "runningServices": "Layanan Berjalan",
+      "managementTools": "Alat Manajemen",
+      "installedModules": "Modul Terinstal",
+      "server": "Server",
+      "domain": "Domain",
+      "subscription": "Subscription",
+      "order": "Pesanan",
+      "success": "Sukses",
+      "failed": "Gagal",
+      "inProgress": "Dalam Proses",
+      "deployed": "Terpasang",
+      "cancelled": "Dibatalkan",
+      "inactive": "Tidak Aktif",
+      "information": "Informasi",
+      "repository": "Repositori",
+      "lastUpdated": "Terakhir diperbarui",
+      "selectBranch": "Pilih Branch",
+      "selectWorker": "Pilih Worker",
+      "deleting": "Menghapus",
+      "deleted": "Terhapus",
+      "ready": "Siap",
+      "artifact": "Artefak",
+      "service": "Layanan"
+    },
+    "actions": {
+      "refresh": "Segarkan",
+      "addMore": "Tambah Lagi",
+      "more": "Lebih",
+      "details": "Detil",
+      "yes": "Ya",
+      "no": "Tidak",
+      "ok": "Oke",
+      "cancel": "Batal",
+      "claim": "Klaim",
+      "delete": "Hapus",
+      "grant": "Izinkan",
+      "next": "Selanjutnya",
+      "previous": "Sebelumnya",
+      "seeMore": "Lihat lebih",
+      "start": "Mulai",
+      "stop": "Hentikan",
+      "restart": "Restart",
+      "reload": "Reload",
+      "discover": "Temukan",
+      "new": "Baru",
+      "legacyView": "Tampilan Lama",
+      "edit": "Ubah",
+      "save": "Simpan",
+      "retry": "Coba lagi",
+      "backToDashboard": "Kembali ke Dasbor"
+    },
+    "brands": {
+      "googleCloud": "Google Cloud",
+      "idCloudHost": "IDCloudHost",
+      "digitalOcean": "DigitalOcean"
+    }
+  },
+  "page": {
+    "dashboard": {
+      "headerTitle": "Dashboard",
+      "headerDesc": "Lihat aplikasi yang telah Anda deploy dan server yang terdaftar di sini.",
+      "headerFootnote": "Anda dapat menggunakan <i>resource</i> sendiri atau <i>resource</i> publik untuk membuat aplikasi. Kunjungi <a>kanal YouTube</a> kami untuk panduannya."
+    },
+    "database": {
+      "headerTitle": "Database",
+      "headerDesc": "Lihat database yang telah Anda deploy dan penggunanya di sini.",
+      "headerFootnote": "Anda dapat menggunakan <i>resource</i> sendiri atau <i>resource</i> publik untuk membuat database. Kunjungi <a>kanal YouTube</a> kami untuk panduannya."
+    },
+    "applications": {
+      "headerTitle": "Aplikasi",
+      "headerDesc": "Lihat aplikasi yang telah Anda deploy di sini.",
+      "headerFootnote": "Anda dapat menggunakan <i>resource</i> sendiri atau <i>resource</i> publik untuk membuat aplikasi. Kunjungi <a>kanal YouTube</a> kami untuk panduannya.",
+      "emptyState": {
+        "title": "Tidak ada aplikasi ditemukan.",
+        "message": "Mengapa tidak menambahkan yang baru untuk memulai?",
+        "cta": "Tambah aplikasi baru"
+      }
+    },
+    "applicationDetail": {
+      "header": {
+        "noDeployments": "Belum ada deployment"
+      },
+      "githubBanner": {
+        "title": "Beberapa informasi mungkin tidak tersedia",
+        "subtitle": "Anda perlu login ke akun GitHub anda untuk melihatnya."
+      },
+      "artifactsHistory": {
+        "title": "Riwayat Artefak",
+        "subtitle": "Artefak terkini dan opsi rollback",
+        "emptyMessage": "Belum ada artefak tersedia.",
+        "unsupportedMessage": "Artefak tidak didukung untuk jenis aplikasi ini."
+      },
+      "usageStats": {
+        "title": "Statistik Penggunaan",
+        "unavailablePlaceholder": "Statistik penggunaan terkait sedang tidak tersedia untuk aplikasi ini."
+      },
+      "serviceActions": {
+        "unavailablePlaceholder": "Layanan terkait sedang tidak tersedia untuk aplikasi ini."
+      },
+      "appLogs": {
+        "title": "Log Aplikasi",
+        "subtitle": "Log aplikasi dan error terkini"
+      }
+    },
+    "applicationsCreate": {
+      "headerTitle": "Buat aplikasi baru",
+      "headerDesc": "Deploy aplikasi web baru ke server Anda hanya dalam beberapa langkah.",
+      "progress": {
+        "title": "Kemajuan",
+        "step1": {
+          "title": "Sumber",
+          "desc": "Pilih sumber aplikasi"
+        },
+        "step2": {
+          "title": "Detil",
+          "desc": "Konfigurasikan Detil Aplikasi & Server"
+        },
+        "step3": {
+          "title": "Konfigurasi",
+          "desc": "Atur konfigurasi yang diperlukan"
+        },
+        "step4": {
+          "title": "Deploy",
+          "desc": "Review dan deploy aplikasi"
+        }
+      },
+      "wizard": {
+        "step1": {
+          "sectionSelectSource": {
+            "title": "Pilih Sumber",
+            "desc": "Anda perlu menyediakan sumber aplikasi Anda melalui GitHub atau membuat yang baru berdasarkan bundle dari kami.",
+            "appBundle": {
+              "title": "Bundle Aplikasi",
+              "desc": "Pilih dari bundle aplikasi yang tersedia."
+            },
+            "ghRepo": {
+              "title": "Repo Github",
+              "desc": "Impor dari repositori GitHub Anda."
+            }
+          },
+          "sectionSelectAppBundle": {
+            "title": "Pilih Bundle Applikasi"
+          },
+          "sectionGithubRepo": {
+            "title": "Pilih Repo Github",
+            "desc": "Pilih salah satu repositori GitHub Anda untuk dijadikan sumber aplikasi Anda.",
+            "search": "Cari"
+          }
+        },
+        "step2": {
+          "sectionAppDetails": {
+            "title": "Detil Aplikasi",
+            "desc": "Mari tentukan nama aplikasi Anda dan bagaimana aplikasi tersebut dapat diakses.",
+            "inputAppName": "Nama Aplikasi",
+            "inputAppNamePlaceholder": "Masukkan nama aplikasimu",
+            "inputDomain": "Domain",
+            "inputDomainPlaceholder": "Masukkan nama domain aplikasimu",
+            "inputProgLang": "Bahasa Pemrograman",
+            "inputProgLangPlaceholder": "Masukkan bahasa pemrograman aplikasimu",
+            "inputProgLangVersion": "Versi Bahasa Pemrograman",
+            "inputProgLangVersionPlaceholder": "Masukkan versi bahasa pemrograman aplikasimu",
+            "inputBuildCommand": "Perintah Build",
+            "inputBuildCommandPlaceholder": "Masukkan perintah build aplikasimu",
+            "inputRunCommand": "Perintah Run",
+            "inputRunCommandPlaceholder": "Masukkan perintah run aplikasimu",
+            "inputPort": "Port",
+            "inputPortPlaceholder": "Masukkan port aplikasimu"
+          },
+          "sectionSelectServer": {
+            "title": "Pilih Server",
+            "desc": "Anda perlu memilih server tempat aplikasi akan dihosting.",
+            "btnAddNewServer": "Tambah server baru"
+          }
+        },
+        "step4": {
+          "sectionDeploySummary": {
+            "title": "Ringkasan Deployment",
+            "desc": "Pastikan semuanya sudah sesuai sebelum melakukan deployment."
+          }
+        }
+      }
+    },
+    "servers": {
+      "headerTitle": "Servers",
+      "headerDesc": "Lihat server yang telah Anda deploy di sini.",
+      "headerFootnote": "Sistem operasi didukung: Ubuntu 22.04, 22.10, 24.04; Debian 11, 12. Kunjungi <a>kanal YouTube kami</a> untuk panduan.",
+      "emptyState": {
+        "title": "Tidak ada server ditemukan.",
+        "message": "Mengapa tidak menambahkan yang baru untuk memulai?",
+        "cta": "Tambah server baru"
+      }
+    },
+    "serverDetail": {
+      "sectionModules": {
+        "emptyState": {
+          "title": "Anda belum memasang modul apapun saat ini.",
+          "subtitle": "Alat jelajah modul kami memiliki banyak modul yang bisa anda tambahkan ke server anda."
+        }
+      }
+    },
+    "runningServices": {
+      "headerTitle": "Service Berjalan",
+      "headerDesc": "Lihat semua service yang sedang berjalan di server ini."
+    }
+  },
+  "widget": {
+    "disclaimersLabel": {
+      "immediatelyCommitOnSave": {
+        "message": "<strong>Catatan:</strong> Menyimpan akan langsung memproses perubahan tanpa konfirmasi."
+      }
+    },
+    "failedState": {
+      "bannerRetryable": {
+        "general": {
+          "title": "Gagal memuat konten.",
+          "subtitle": "Klik tombol di samping untuk coba lagi."
+        }
+      },
+      "wallCentered": {
+        "title": "Telah terjadi kesalahan.",
+        "subtitleNoPayload": "Mohon hubungi <contact></contact> untuk informasi lebih lanjut.",
+        "subtitleHasPayload": "Mohon hubungi <contact></contact> dengan muatan berikut:"
+      }
+    },
+    "fallbackState": {
+      "genericUnauthorized": {
+        "title": "Tidak punya akses",
+        "subtitle": "Maaf, anda tidak memiliki akses terhadap halaman ini."
+      }
+    },
+    "helpAndSupportFull": {
+      "title": "Bantuan & Dukungan",
+      "desc": "Dapatkan bantuan untuk {topic}.",
+      "documentation": {
+        "title": "Dokumentasi",
+        "desc": "Baca panduan lengkap kami tentang {topic}.",
+        "cta": "Lihat dokumentasi"
+      },
+      "chatTeam": {
+        "title": "Chat tim",
+        "desc": "Mengobrol dengan tim dukungan kami untuk bantuan langsung.",
+        "cta": "Mulai Chat"
+      },
+      "emailSupport": {
+        "title": "Dukungan Email",
+        "desc": "Diskusikan dengan tim kami untuk mendapatkan bantuan dan dukungan.",
+        "cta": "Email sekarang"
+      },
+      "topic": {
+        "appCreation": "pembuatan aplikasi",
+        "application": "membuat dan mengatur aplikasi",
+        "server": "membuat dan mengatur server"
+      }
+    },
+    "helpAndSupportCompact": {
+      "title": "Butuh bantuan?",
+      "desc": "Jika Anda memerlukan bantuan dalam {topic}, lihat <doc>dokumentasi kami</doc> atau <contact>hubungi dukungan kami</contact>.",
+      "topic": {
+        "application": "membuat dan mengatur aplikasi",
+        "server": "membuat dan mengatur server"
+      }
+    }
+  },
+  "dialog": {
+    "databaseDelete": {
+      "title": "Hapus Database",
+      "message": "Apa anda yakin anda ingin menghapus \"<code>{databaseName}</code>\"?"
+    },
+    "machineReinstall": {
+      "title": "Re-install Mesin",
+      "message": "Apa anda yakin anda ingin melakukan reinstall mesin dengan id <code>{machineID}</code>?"
+    },
+    "claimToTeam": {
+      "title": "Masukkan ke tim",
+      "message": "Apa anda yakin memindahkan <code>{type}</code> <code>{name}</code> ke dalam tim?"
+    },
+    "machineDelete": {
+      "title": "Hapus Mesin",
+      "message": "Apa anda yakin anda ingin menghapus mesin <code>{machineName}</code> (<code>{machineID}</code>)?"
+    },
+    "osServicePushActivity": {
+      "title": "Kirim Aktivitas",
+      "message": "Apa anda yakin ingin mengirim aktivitas <strong>\"{activity}\"</strong> ke layanan <em>\"{serviceName}\"</em>?"
+    },
+    "genericUnsavedChanges": {
+      "title": "Perubahan belum tersimpan",
+      "message": "Apakah Anda yakin ingin membatalkan semua perubahan?"
+    }
+  },
+  "toaster": {
+    "claimToTeam": {
+      "success": "Berhasil memindahkan <code>{type}</code> <code>{name}</code> ke tim",
+      "noteam": "Silakan pilih tim atau buat tim baru terlebih dahulu!",
+      "error": "Gagal memindahkan <code>{type}</code> <code>{name}</code> ke tim!"
+    },
+    "databaseDelete": {
+      "success": "Berhasil menghapus database <code>{databaseName}</code>.",
+      "error": "Gagal menghapus database <code>{databaseName}</code>!"
+    },
+    "machineReinstall": {
+      "success": "Berhasil melakukan reinstall mesin dengan id <code>{machineID}</code>.",
+      "error": "Gagal melakukan reinstall mesin dengan id <code>{machineID}</code>!"
+    },
+    "machineDelete": {
+      "success": "Berhasil menghapus mesin <code>{machineName}</code> (<code>{machineID}</code>).",
+      "error": "Gagal menghapus mesin <code>{machineName}</code> (<code>{machineID}</code>)"
+    },
+    "osServicePushActivity": {
+      "success": "Berhasil mengirim aktivitas \"{activity}\" ke layanan \"{serviceName}\"!",
+      "error": "Gagal mengirim aktivitas \"{activity}\" ke layanan \"{serviceName}\"!"
+    },
+    "updateServer": {
+      "success": "Berhasil memperbarui server dengan id {id}.",
+      "error": "Gagal memperbarui server dengan id {id}!"
+    },
+    "updateApplication": {
+      "success": "Berhasil memperbarui aplikasi dengan id {id}.",
+      "error": "Gagal memperbarui aplikasi dengan id {id}!"
+    }
+  },
+  "sidepanel": {
+    "editApplication": {
+      "title": "Ubah Aplikasi",
+      "autoDeployment": {
+        "title": "Deploy otomatis",
+        "enable": "Gunakan deploy otomatis",
+        "deployFromBranch": "Deploy dari branch"
+      }
+    },
+    "artifactNew": {
+      "title": "Buat Artefak",
+      "subtitle": "Buat sebuah artefak baru",
+      "fieldBranch": {
+        "title": "Branch",
+        "placeholder": "Pilih branch",
+        "onError": "Gagal untuk memuat git branch, mohon <a>coba lagi.</a>"
+      },
+      "fieldConfig": {
+        "title": "Konfigurasi",
+        "placeholder": "Pilih konfigurasi",
+        "onInitial": "Silakan pilih branch terlebih dahulu.",
+        "onError": "Gagal untuk memuat daftar konfigurasi, mohon <a>coba lagi.</a>"
+      },
+      "fieldWorker": {
+        "title": "Worker",
+        "placeholder": "Pilih worker",
+        "onError": "Gagal untuk memuat daftar worker, mohon <a>coba lagi.</a>"
+      }
+    }
+  },
+  "formErrors": {
+    "required": "Dibutuhkan",
+    "branchRequiredWhenAutoDeploy": "Branch dibutuhkan ketika deploy otomatis dipakai."
+  },
+  "sidebar": {
+    "workspace": "Ruang kerja",
+    "dashboard": "Dasbor",
+    "applications": "Aplikasi",
+    "servers": "Server",
+    "serversSubmenu": {
+      "filterHasDb": "punya database...",
+      "filterHasMemstore": "punya memstore..."
+    },
+    "backend": "Backend",
+    "database": "Database",
+    "loadBalancers": "Load Balancer",
+    "dDns": "Domain & DNS",
+    "cloudProject": "Proyek Cloud",
+    "secretMgr": "Manajemen Kunci",
+    "explore": "Jelajah",
+    "serverModules": "Modul Server"
+  }
+}
