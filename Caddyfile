@@ -1,0 +1,4 @@
+cloud-dev.terpusat.com {
+    reverse_proxy localhost:3000
+    tls internal
+}

@@ -1,0 +1,171 @@
+@import 'tailwindcss';
+
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --color-alert-positive-bg: var(--alert-positive-bg);
+  --color-alert-positive-fg: var(--alert-positive-fg);
+
+  --color-alert-neutral-bg: var(--alert-neutral-bg);
+  --color-alert-neutral-fg: var(--alert-neutral-fg);
+
+  --color-alert-negative-bg: var(--alert-negative-bg);
+  --color-alert-negative-fg: var(--alert-negative-fg);
+
+  --color-alert-warning-bg: var(--alert-warning-bg);
+  --color-alert-warning-fg: var(--alert-warning-fg);
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer base {
+  :root {
+    --background: 228 23.81% 95.88%;
+    --foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --primary: 213.91 69.7% 19.41%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 218.18 84.62% 97.45%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --accent: 219.51 100% 50%;
+    --accent-foreground: 222.2 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --ring: 221.2 83.2% 53.3%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+
+    --alert-positive-bg: #F6FFEE;
+    --alert-positive-fg: #5DBE26;
+    --alert-neutral-bg: #EBF2FE;
+    --alert-neutral-fg: #0F2D54;
+    --alert-negative-bg: #FEF3F1;
+    --alert-negative-fg: #ED5056;
+    --alert-warning-bg: #FFFBE6;
+    --alert-warning-fg: #FAAE13;
+  }
+
+  .dark {
+    --background: 228 10% 10%;
+    --card: 220 9% 14%;
+    --card-foreground: 210 17% 87%;
+    --accent: 219.51 100% 50%;
+    --accent-foreground: 222.2 0% 100%;
+    --popover: 210 7% 25%;
+    --popover-foreground: 210 17% 92%;
+
+    --foreground: 210 17% 82%;
+    --muted: 216 12% 15%;
+    --muted-foreground: 216 12% 65%;
+    /* --border: 216 18% 12%; */
+    --border: 228 5% 21%;
+    --input: 228 5% 21%;
+    --primary: 210 17% 82%;
+    --primary-foreground: 210 17% 22%;
+    --secondary: 210 7% 25%;
+    --secondary-foreground: 210 7% 85%;
+
+    --alert-positive-bg: #25391E;
+    --alert-positive-fg: #5DBE26;
+    --alert-neutral-bg: #132244;
+    --alert-neutral-fg: #C6D7FF;
+    --alert-negative-bg: #422327;
+    --alert-negative-fg: #ED5056;
+    --alert-warning-bg: #45361A;
+    --alert-warning-fg: #FAAE13;
+
+
+    /* --accent: 216 28% 22%; */
+    /* --accent-foreground: 216 28% 82%; */
+    /* --destructive: 1 86% 57%;
+    --destructive-foreground: 0 0% 100%; */
+    /* --ring: 210 17% 82%; */
+    /* --chart-1: 210 17% 82%;
+    --chart-2: 210 7% 25%;
+    --chart-3: 216 28% 22%;
+    --chart-4: 210 7% 28%;
+    --chart-5: 210 20% 82%; */
+  }
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
