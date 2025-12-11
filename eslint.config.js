@@ -1,7 +1,7 @@
 //  @ts-check
 
-import { tanstackConfig } from '@tanstack/eslint-config'
-import eslintPluginImport from "eslint-plugin-import";
+import { tanstackConfig } from '@tanstack/eslint-config';
+import eslintPluginImport from 'eslint-plugin-import';
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
 
 const eslintConfig = [
@@ -13,14 +13,14 @@ const eslintConfig = [
       'react-hooks': eslintPluginReactHooks,
     },
     settings: {
-      "react-hooks": {
-        "additionalEffectHooks": "(useIsomorphicEffect)"
-      }
+      'react-hooks': {
+        additionalEffectHooks: '(useIsomorphicEffect)',
+      },
     },
     rules: {
-      "import/order": 'off',
-      "@typescript-eslint/naming-convention": [
-        "error",
+      'import/order': 'off',
+      '@typescript-eslint/naming-convention': [
+        'error',
         {
           selector: 'typeParameter',
           format: ['PascalCase'],
@@ -32,57 +32,64 @@ const eslintConfig = [
           },
         },
       ],
-      "@typescript-eslint/array-type": [
-        "error",
+      '@typescript-eslint/array-type': [
+        'error',
         {
-          default: "array-simple"
-        }
+          default: 'array-simple',
+        },
       ],
-      "eslintPluginImport/order": [
-        "error",
+      'eslintPluginImport/order': [
+        'error',
         {
-          groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+          ],
           pathGroups: [
             {
-              pattern: "react",
-              group: "builtin",
-              position: "before",
+              pattern: 'react',
+              group: 'builtin',
+              position: 'before',
             },
             {
-              pattern: "@/services/**",
-              group: "internal",
-              position: "before",
+              pattern: '@/services/**',
+              group: 'internal',
+              position: 'before',
             },
             {
-              pattern: "@/entities/**",
-              group: "internal",
-              position: "before",
+              pattern: '@/entities/**',
+              group: 'internal',
+              position: 'before',
             },
             {
-              pattern: "@/features/**",
-              group: "internal",
-              position: "before",
+              pattern: '@/features/**',
+              group: 'internal',
+              position: 'before',
             },
             {
-              pattern: "@/**",
-              group: "internal",
+              pattern: '@/**',
+              group: 'internal',
             },
           ],
           pathGroupsExcludedImportTypes: [],
-          "newlines-between": "always",
+          'newlines-between': 'always',
           alphabetize: {
-            order: "asc",
+            order: 'asc',
             caseInsensitive: true,
           },
         },
       ],
-      "padding-line-between-statements": [
-        "error",
-        { blankLine: "always", prev: "directive", next: "import" },
+      'padding-line-between-statements': [
+        'error',
+        { blankLine: 'always', prev: 'directive', next: 'import' },
       ],
-      "react-hooks/exhaustive-deps": "error",
+      'react-hooks/exhaustive-deps': 'error',
     },
-  }
+  },
 ];
 
-export default eslintConfig
+export default eslintConfig;

@@ -1,0 +1,420 @@
+{
+  "common": {
+    "terms": {
+      "applications": "Applications",
+      "machines": "Machines",
+      "unknown": "Unknown",
+      "unavailable": "Unavailable",
+      "view": "View",
+      "engine": "Engine",
+      "user": "User",
+      "database": "Database",
+      "search": "Search",
+      "all": "All",
+      "filters": "Filters",
+      "owner": "Owner",
+      "ownership": "Ownership",
+      "mine": "Mine",
+      "sharedWithMe": "Shared with me",
+      "team": "Team",
+      "teamResource": "Team Resource",
+      "publicResource": "Public Resource",
+      "bundleType": "Bundle Type",
+      "sourceType": "Source Type",
+      "noSource": "No Source",
+      "running": "Running",
+      "stopped": "Stopped",
+      "dead": "Dead",
+      "exited": "Exited",
+      "restarting": "Reloading",
+      "region": "Region",
+      "system": "System",
+      "agent": "Agent",
+      "address": "Address",
+      "status": "Status",
+      "access": "Access",
+      "private": "Private",
+      "public": "Public",
+      "sshPort": "SSH Port",
+      "cpuUsage": "CPU Usage",
+      "ramUsage": "RAM Usage",
+      "diskUsage": "Disk Usage",
+      "coreCount": "Core Count",
+      "free": "Free",
+      "total": "Total",
+      "actions": "Actions",
+      "state": "State",
+      "serviceName": "Service Name",
+      "runningServices": "Running Services",
+      "managementTools": "Management Tools",
+      "installedModules": "Installed Modules",
+      "server": "Server",
+      "domain": "Domain",
+      "subscription": "Subscription",
+      "order": "Order",
+      "success": "Success",
+      "failed": "Failed",
+      "inProgress": "In Progress",
+      "deployed": "Deployed",
+      "cancelled": "Cancelled",
+      "inactive": "Inactive",
+      "information": "Information",
+      "repository": "Repository",
+      "lastUpdated": "Last updated",
+      "selectBranch": "Select Branch",
+      "selectWorker": "Select Worker",
+      "deleting": "Deleting",
+      "deleted": "Deleted",
+      "ready": "Ready",
+      "artifact": "Artifact",
+      "service": "Service"
+    },
+    "actions": {
+      "refresh": "Refresh",
+      "addMore": "Add More",
+      "more": "More",
+      "details": "Details",
+      "yes": "Yes",
+      "no": "No",
+      "ok": "OK",
+      "cancel": "Cancel",
+      "claim": "Claim",
+      "delete": "Delete",
+      "grant": "Grant",
+      "next": "Next",
+      "previous": "Previous",
+      "seeMore": "See More",
+      "start": "Start",
+      "stop": "Stop",
+      "restart": "Restart",
+      "reload": "Reload",
+      "discover": "Discover",
+      "new": "New",
+      "legacyView": "Legacy View",
+      "edit": "Edit",
+      "save": "Save",
+      "retry": "Retry",
+      "backToDashboard": "Back to Dashboard"
+    },
+    "brands": {
+      "googleCloud": "Google Cloud",
+      "idCloudHost": "IDCloudHost",
+      "digitalOcean": "DigitalOcean"
+    }
+  },
+  "page": {
+    "dashboard": {
+      "headerTitle": "Dashboard",
+      "headerDesc": "View your deployed applications and registered servers here.",
+      "headerFootnote": "You can use your own resources or a public resource to create application. Visit our <a>YouTube channel</a> for a tutorial."
+    },
+    "database": {
+      "headerTitle": "Database",
+      "headerDesc": "View your deployed databases and its users here.",
+      "headerFootnote": "You can use your own resources or a public resource to create database. Visit our <a>YouTube channel</a> for a tutorial."
+    },
+    "applications": {
+      "headerTitle": "Applications",
+      "headerDesc": "View your deployed applications here.",
+      "headerFootnote": "You can use your own resources or a public resource to create application. Visit our <a>YouTube channel</a> for a tutorial.",
+      "emptyState": {
+        "title": "No applications found.",
+        "message": "Why not add new one to get started?",
+        "cta": "Add new application"
+      }
+    },
+    "applicationDetail": {
+      "header": {
+        "noDeployments": "No deployments"
+      },
+      "githubBanner": {
+        "title": "Some information might be missing",
+        "subtitle": "You'll need to log in to your GitHub account to see them."
+      },
+      "artifactsHistory": {
+        "title": "Artifacts History",
+        "subtitle": "Recent artifacts and rollback options",
+        "emptyMessage": "No artifacts available.",
+        "unsupportedMessage": "Artifacts are not supported for this app."
+      },
+      "usageStats": {
+        "title": "Usage Stats",
+        "unavailablePlaceholder": "Corresponding usage stats are unavailable for this application."
+      },
+      "serviceActions": {
+        "unavailablePlaceholder": "Corresponding service is unavailable for this application."
+      },
+      "appLogs": {
+        "title": "Application Logs",
+        "subtitle": "Real-time application logs and errors"
+      }
+    },
+    "applicationsCreate": {
+      "headerTitle": "Create New Application",
+      "headerDesc": "Deploy a new web application to your server in just a few steps.",
+      "progress": {
+        "title": "Progress",
+        "step1": {
+          "title": "Source",
+          "desc": "Select Application Source"
+        },
+        "step2": {
+          "title": "Details",
+          "desc": "Configure Application & Server Details"
+        },
+        "step3": {
+          "title": "Configuration",
+          "desc": "Set up required configuration"
+        },
+        "step4": {
+          "title": "Deploy",
+          "desc": "Review and deploy application"
+        }
+      },
+      "wizard": {
+        "step1": {
+          "sectionSelectSource": {
+            "title": "Select Source",
+            "desc": "You'll need to provide your application source through GitHub or create a new one based on our bundles.",
+            "appBundle": {
+              "title": "Application Bundle",
+              "desc": "Choose from pre-configured application bundles."
+            },
+            "ghRepo": {
+              "title": "Github Repository",
+              "desc": "Import from your GitHub repository."
+            }
+          },
+          "sectionSelectAppBundle": {
+            "title": "Select Application Bundle"
+          },
+          "sectionGithubRepo": {
+            "title": "Select GitHub Repository",
+            "desc": "Pick one of your github repository to be initiated as your application source.",
+            "search": "Search"
+          }
+        },
+        "step2": {
+          "sectionAppDetails": {
+            "title": "Application Details",
+            "desc": "Let's define what your app name will be and how it can be accessed.",
+            "inputAppName": "Application Name",
+            "inputAppNamePlaceholder": "Enter your application name",
+            "inputDomain": "Domain",
+            "inputDomainPlaceholder": "Enter your application domain",
+            "inputProgLang": "Programming Language",
+            "inputProgLangPlaceholder": "Enter your application programming language",
+            "inputProgLangVersion": "Programming Language Version",
+            "inputProgLangVersionPlaceholder": "Enter your application programming language version",
+            "inputBuildCommand": "Build Command",
+            "inputBuildCommandPlaceholder": "Enter your application build command",
+            "inputRunCommand": "Run Command",
+            "inputRunCommandPlaceholder": "Enter your application run command",
+            "inputPort": "Port",
+            "inputPortPlaceholder": "Enter your application port"
+          },
+          "sectionSelectServer": {
+            "title": "Select Server",
+            "desc": "You'll need to select a server the app will be hosted in.",
+            "btnAddNewServer": "Add new server"
+          }
+        },
+        "step4": {
+          "sectionDeploySummary": {
+            "title": "Deployment Summary",
+            "desc": "Make sure everything is in order before deploying."
+          }
+        }
+      }
+    },
+    "servers": {
+      "headerTitle": "Servers",
+      "headerDesc": "View your deployed servers here.",
+      "headerFootnote": "Supported operating systems: Ubuntu 22.04, 22.10, 24.04; Debian 11, 12. Visit our <a>YouTube channel</a> for a tutorial.",
+      "emptyState": {
+        "title": "No servers found.",
+        "message": "Why not add new one to get started?",
+        "cta": "Add new server"
+      }
+    },
+    "serverDetail": {
+      "sectionModules": {
+        "emptyState": {
+          "title": "You haven't installed any modules yet.",
+          "subtitle": "Our modules discovery has tons of modules you can add for your server."
+        }
+      }
+    },
+    "runningServices": {
+      "headerTitle": "Running Services",
+      "headerDesc": "See all running services for this server."
+    }
+  },
+  "widget": {
+    "disclaimersLabel": {
+      "immediatelyCommitOnSave": {
+        "message": "<strong>Note:</strong> Clicking Save will immediately process changes without confirmation."
+      }
+    },
+    "failedState": {
+      "bannerRetryable": {
+        "general": {
+          "title": "Failed to load content.",
+          "subtitle": "Click on the side button to retry."
+        }
+      },
+      "wallCentered": {
+        "title": "An error has occured.",
+        "subtitleNoPayload": "Please contact <contact></contact> for more information.",
+        "subtitleHasPayload": "Please contact <contact></contact> with the following payload:"
+      }
+    },
+    "fallbackState": {
+      "genericUnauthorized": {
+        "title": "Unauthorized",
+        "subtitle": "Sorry, you are not authorized to access this page."
+      }
+    },
+    "helpAndSupportFull": {
+      "title": "Help & Support",
+      "desc": "Get assistance with {topic}",
+      "documentation": {
+        "title": "Documentation",
+        "desc": "Read our comprehensive guides on {topic}",
+        "cta": "View documentation"
+      },
+      "chatTeam": {
+        "title": "Chat team",
+        "desc": "Chat with our support team for immediate assistance.",
+        "cta": "Start Chat"
+      },
+      "emailSupport": {
+        "title": "Email Support",
+        "desc": "Discuss with our team for help and support.",
+        "cta": "Email support"
+      },
+      "topic": {
+        "appCreation": "app creation",
+        "application": "creating and managing applications",
+        "server": "creating and managing servers"
+      }
+    },
+    "helpAndSupportCompact": {
+      "title": "Need help?",
+      "desc": "If you need assistance with {topic}, check our <doc>documentation</doc> or <contact>contact support</contact>.",
+      "topic": {
+        "application": "creating and managing applications",
+        "server": "creating and managing servers"
+      }
+    }
+  },
+  "dialog": {
+    "databaseDelete": {
+      "title": "Delete Database",
+      "message": "Are you sure you want to delete \"<code>{databaseName}</code>\"?"
+    },
+    "machineReinstall": {
+      "title": "Reinstall Machine",
+      "message": "Are you sure you want to reinstall machine with id <code>{machineID}</code>?"
+    },
+    "claimToTeam": {
+      "title": "Claim to team",
+      "message": "Are you sure want to claim <code>{type}</code> <code>{name}</code> to team?"
+    },
+    "machineDelete": {
+      "title": "Delete Machine",
+      "message": "Are you sure you want to delete machine <code>{machineName}</code> (<code>{machineID}</code>)?"
+    },
+    "osServicePushActivity": {
+      "title": "Push Activity",
+      "message": "Are you sure you want push activity <strong>\"{activity}\"</strong> to service <em>\"{serviceName}\"</em>?"
+    },
+    "genericUnsavedChanges": {
+      "title": "Unsaved changes",
+      "message": "Are you sure you want to discard all of the changes?"
+    }
+  },
+  "toaster": {
+    "claimToTeam": {
+      "success": "Successfully claim <code>{type}</code> <code>{name}</code> to team",
+      "noteam": "Please select team or create new team first!",
+      "error": "Failed to claim <code>{type}</code> <code>{name}</code> to team!"
+    },
+    "databaseDelete": {
+      "success": "Successfully deleted database <code>{databaseName}</code>.",
+      "error": "Failed to delete database <code>{databaseName}</code>!"
+    },
+    "machineReinstall": {
+      "success": "Successfully reinstalled machine with id <code>{machineID}</code>.",
+      "error": "Failed to reinstall machine with id <code>{machineID}</code>!"
+    },
+    "machineDelete": {
+      "success": "Successfully deleted machine <code>{machineName}</code> (<code>{machineID}</code>).",
+      "error": "Failed to delete machine <code>{machineName}</code> (<code>{machineID}</code>)!"
+    },
+    "osServicePushActivity": {
+      "success": "Successfully pushed activity \"{activity}\" to service \"{serviceName}\"!",
+      "error": "Failed to push activity \"{activity}\" to service \"{serviceName}\"!"
+    },
+    "updateServer": {
+      "success": "Successfully updated server with id {id}.",
+      "error": "Failed to update server with id {id}!"
+    },
+    "updateApplication": {
+      "success": "Successfully updated application with id {id}.",
+      "error": "Failed to update application with id {id}!"
+    }
+  },
+  "sidepanel": {
+    "editApplication": {
+      "title": "Edit Application",
+      "autoDeployment": {
+        "title": "Auto Deployment",
+        "enable": "Enable auto deployment",
+        "deployFromBranch": "Deploy from branch"
+      }
+    },
+    "artifactNew": {
+      "title": "New Artifact",
+      "subtitle": "Create a new artifact",
+      "fieldBranch": {
+        "title": "Branch",
+        "placeholder": "Select a branch",
+        "onError": "Failed to get git branches, please <a>try again.</a>"
+      },
+      "fieldConfig": {
+        "title": "Configuration",
+        "placeholder": "Select a configuration",
+        "onInitial": "Please pick a branch first.",
+        "onError": "Failed to get configuration files, please <a>try again.</a>"
+      },
+      "fieldWorker": {
+        "title": "Worker",
+        "placeholder": "Select a worker",
+        "onError": "Failed to get workers, please <a>try again.</a>"
+      }
+    }
+  },
+  "formErrors": {
+    "required": "Required",
+    "branchRequiredWhenAutoDeploy": "Branch is required when auto-deploy is enabled."
+  },
+  "sidebar": {
+    "workspace": "Workspace",
+    "dashboard": "Dashboard",
+    "applications": "Applications",
+    "servers": "Servers",
+    "serversSubmenu": {
+      "filterHasDb": "has database...",
+      "filterHasMemstore": "has memstore..."
+    },
+    "backend": "Backend",
+    "database": "Database",
+    "loadBalancers": "Load Balancers",
+    "dDns": "Domain & DNS",
+    "cloudProject": "Cloud Projects",
+    "secretMgr": "Secret Managers",
+    "explore": "Discover",
+    "serverModules": "Server Modules"
+  }
+}

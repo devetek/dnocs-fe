@@ -1,0 +1,1 @@
+export { AppInformationLayout } from './Layout';
