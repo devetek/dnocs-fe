@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# TODO: Create '@dpanel/vite-plugin-tanstack-start' for better approach
+
+# BUILD_DIR=".dpanel"
+# CURRENT_VERSION=$(cat version)
+# NEXT_VERSION=".build-$(git rev-parse --short HEAD)"
+
+
+echo ">>>>> Installing dependencies <<<<<"
+pnpm install # install all dependencies
+
+echo ">>>>> Running Build <<<<<"
+pnpm run build || exit 2
+
+# echo ">>>>> Move output directory to next version folder <<<<<"
+# mv .output ${NEXT_VERSION}
+
+# echo ">>>>> Create Version Control <<<<<"
+# cat version | xargs rm -rf
+# echo ${NEXT_VERSION} > version
