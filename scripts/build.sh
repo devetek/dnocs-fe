@@ -2,6 +2,9 @@
 
 # TODO: Create '@dpanel/vite-plugin-tanstack-start' for better approach
 
+# Copy env example to .env before implement dPanel env variables
+mv .env.example .env
+
 # BUILD_DIR=".dpanel"
 # CURRENT_VERSION=$(cat version)
 # NEXT_VERSION=".build-$(git rev-parse --short HEAD)"
