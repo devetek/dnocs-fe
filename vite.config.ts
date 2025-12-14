@@ -6,14 +6,14 @@ import { nitro } from 'nitro/vite';
 import { defineConfig } from 'vite';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
 
-const BASE_PATH: string = process.env.BASE_PATH || '/';
+const BASE_PATH: string = process.env.BASE_PATH || '/v3';
 const isProduction: boolean = process.env.NODE_ENV === 'production';
 const ALLOWED_HOSTS: string[] = JSON.parse(process.env.ALLOWED_HOSTS || '["*"]');
 
 const config = defineConfig({
   // TODO: enable this once we have versioned static assets
   // build:{
-  //   assetsDir: process.env.NEXT_VERSION || '',
+    // assetsDir: ASSETS_DIR || '',
   // },
   base: BASE_PATH,
   server: {

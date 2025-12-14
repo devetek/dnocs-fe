@@ -4,6 +4,9 @@
 
 export NODE_OPTIONS="--max-old-space-size=1536"
 
+# remove previous .env file, but ignore error if not exists
+rm -f .env | true
+
 # Copy env example to .env before implement dPanel env variables
 mv .env.example .env
 
