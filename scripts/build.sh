@@ -2,6 +2,8 @@
 
 # TODO: Create '@dpanel/vite-plugin-tanstack-start' for better approach
 
+export NODE_OPTIONS="--max-old-space-size=1024"
+
 # Copy env example to .env before implement dPanel env variables
 mv .env.example .env
 
