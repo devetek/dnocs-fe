@@ -27,7 +27,14 @@ export default function RCDAdditionals(props: Props) {
 }
 
 RCDAdditionals.PrimeInfo = function PrimeInfo(props: PrimeInfoProps) {
-  const { title, titleIcon: TitleIcon, value, className, onClick } = props;
+  const {
+    title,
+    titleIcon: TitleIcon,
+    value,
+    valueTooltip,
+    className,
+    onClick,
+  } = props;
 
   const cnWrapper = cn('flex flex-col overflow-hidden', className);
 
@@ -48,7 +55,7 @@ RCDAdditionals.PrimeInfo = function PrimeInfo(props: PrimeInfoProps) {
       </div>
 
       <Tooltip
-        message={value}
+        message={valueTooltip || value}
         className="mt-1.5 text-sm w-max max-w-full font-mono overflow-hidden flex items-center gap-x-1"
       >
         <p className={cnValue} onClick={value ? onClick : undefined}>

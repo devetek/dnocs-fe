@@ -67,7 +67,9 @@
       "deleted": "Terhapus",
       "ready": "Siap",
       "artifact": "Artefak",
-      "service": "Layanan"
+      "service": "Layanan",
+      "rules": "Aturan",
+      "pending": "Tertunda"
     },
     "actions": {
       "refresh": "Segarkan",
@@ -99,7 +101,8 @@
     "brands": {
       "googleCloud": "Google Cloud",
       "idCloudHost": "IDCloudHost",
-      "digitalOcean": "DigitalOcean"
+      "digitalOcean": "DigitalOcean",
+      "caddy": "Caddy"
     }
   },
   "page": {
@@ -248,6 +251,19 @@
     "runningServices": {
       "headerTitle": "Service Berjalan",
       "headerDesc": "Lihat semua service yang sedang berjalan di server ini."
+    },
+    "loadBalancers": {
+      "headerTitle": "Load Balancer",
+      "headerDesc": "Lihat load balancer anda di sini.",
+      "headerFootnote": "Kunjungi <a>kanal YouTube</a> kami untuk panduannya.",
+      "gatewayServer": "Server Gerbang",
+      "gatewayAddress": "Alamat Gerbang",
+      "enabledFeatures": "Fitur"
+    },
+    "domain": {
+      "headerTitle": "Domain & DNS",
+      "headerDesc": "Lihat domain dan DNS anda yang telah teregistrasi di sini.",
+      "headerFootnote": "Kunjungi <a>kanal YouTube</a> kami untuk panduannya."
     }
   },
   "widget": {
@@ -397,7 +413,10 @@
   },
   "formErrors": {
     "required": "Dibutuhkan",
-    "branchRequiredWhenAutoDeploy": "Branch dibutuhkan ketika deploy otomatis dipakai."
+    "branchRequiredWhenAutoDeploy": "Branch dibutuhkan ketika deploy otomatis dipakai.",
+    "domainInvalid": "Domain tidak valid!",
+    "domainTldMissing": "Domain membutuhkan TLD!",
+    "domainL2Missing": "Domain membutuhkan level 2!"
   },
   "sidebar": {
     "workspace": "Ruang kerja",

@@ -50,7 +50,7 @@ export default function SectionMachine() {
 
         const handleClickDetails = () => {
           navigate({
-            to: `/resources/servers/${id}`,
+            to: `/servers/${id}`,
           });
         };
 
@@ -67,7 +67,7 @@ export default function SectionMachine() {
 
     const handleClickAddResource = () => {
       navigate({
-        to: '/resources/servers/create',
+        to: '/servers/create',
       });
     };
 

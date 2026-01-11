@@ -84,9 +84,12 @@ export default function useFilesystemHistoryUsecase() {
       };
 
       for (let i = 0; i < newHistoryStack.length; i++) {
+        const stackItem = newHistoryStack[i];
+        if (!stackItem) continue;
+
         if (
-          !isDescendant(newHistoryStack[i], newFullPath) ||
-          newHistoryStack[i] === newFullPath
+          !isDescendant(stackItem, newFullPath) ||
+          stackItem === newFullPath
         ) {
           continue;
         }

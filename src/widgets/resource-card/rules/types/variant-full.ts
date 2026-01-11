@@ -44,7 +44,8 @@ export interface ResourceCardFullAdditionalsPrimeInfoProps {
   className?: string;
   title: string;
   titleIcon: CommonIcon;
-  value?: string | null;
+  value?: ReactNode;
+  valueTooltip?: string;
   onClick?: () => void;
 }
 

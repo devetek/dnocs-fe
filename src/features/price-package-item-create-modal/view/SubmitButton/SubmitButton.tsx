@@ -1,4 +1,4 @@
-import { useSearch } from '@tanstack/react-router';
+import { useParams } from '@tanstack/react-router';
 
 import { useModalEmit } from '@/services/modal/model/event';
 import { useToaster } from '@/services/toaster';
@@ -11,7 +11,7 @@ import { useDcContext } from '../../model';
 
 export default function SubmitButton() {
   const { props, form } = useDcContext();
-  const params = useSearch({ strict: false });
+  const params = useParams({ strict: false });
   const id = params.id?.toString() || '';
 
   const [openToaster] = useToaster();

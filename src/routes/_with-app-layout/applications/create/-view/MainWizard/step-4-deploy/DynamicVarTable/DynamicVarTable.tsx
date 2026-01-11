@@ -50,7 +50,7 @@ export default function DynamicVarTable(props: Props) {
 
                 const secure = item.type === 'input_text_password';
 
-                const stringifiedValues = String(dynamicConfig[key][kValue]);
+                const stringifiedValues = String(dynamicConfig[key]?.[kValue]);
 
                 return (
                   <div key={`${key}-${value}}`} className={cnWrapped}>
