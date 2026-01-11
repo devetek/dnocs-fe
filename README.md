@@ -16,6 +16,7 @@ pnpm --version
 ```
 
 Make sure you have caddy installed:
+
 ```sh
 brew install caddy
 ```

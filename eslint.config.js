@@ -8,6 +8,7 @@ const eslintConfig = [
   ...tanstackConfig,
   eslintPluginReactHooks.configs.flat.recommended,
   {
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
     plugins: {
       eslintPluginImport,
       'react-hooks': eslintPluginReactHooks,
