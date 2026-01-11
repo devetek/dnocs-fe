@@ -14,7 +14,11 @@ import AppLogsSection from './_presentation/AppLogsSection';
 import LogViewer from './_presentation/LogViewer';
 
 const [guardLogs, useLogs] = guardedSelects({
-  fallbackError: () => <FailedState.WallCentered />,
+  fallbackError: () => (
+    <div className="pb-4">
+      <FailedState.WallCentered />
+    </div>
+  ),
 })(couple(useAppLogsModel, (s) => s.log));
 
 const LogView = guardLogs(() => {

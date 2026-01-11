@@ -35,6 +35,7 @@ export function createDispatcher<
   ) => {
     setStateHandler((prevState) => {
       const origAction = actionRegistry[type];
+      if (!origAction) return prevState;
       return origAction(prevState, ...rest);
     });
   };

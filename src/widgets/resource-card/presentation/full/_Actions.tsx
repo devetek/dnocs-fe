@@ -158,6 +158,8 @@ export default function RCDActions(props: ActionProps) {
 
   const [primaryAction, ...secondaryActions] = actions.filter(excludeFalsy);
 
+  if (primaryAction == null) return null;
+
   const cnWrapper = cn(
     'border-l flex flex-col justify-center min-w-16 h-full',
     className,

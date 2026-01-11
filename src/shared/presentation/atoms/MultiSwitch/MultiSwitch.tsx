@@ -13,6 +13,8 @@ export default function MultiSwitch<S extends string = string>(
 
   if (items.length < 1) return null;
 
+  // SAFETY: items.length is checked above, so items[0] is guaranteed to exist.
+  // @ts-expect-error
   const activeItemId = activeId || items[0].id;
 
   const cnWrapper = cn(

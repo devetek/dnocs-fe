@@ -67,7 +67,9 @@
       "deleted": "Deleted",
       "ready": "Ready",
       "artifact": "Artifact",
-      "service": "Service"
+      "service": "Service",
+      "rules": "Rules",
+      "pending": "Pending"
     },
     "actions": {
       "refresh": "Refresh",
@@ -99,7 +101,13 @@
     "brands": {
       "googleCloud": "Google Cloud",
       "idCloudHost": "IDCloudHost",
-      "digitalOcean": "DigitalOcean"
+      "digitalOcean": "DigitalOcean",
+      "caddy": "Caddy",
+      "http": "HTTP",
+      "http2": "HTTP/2",
+      "quic": "QUIC",
+      "ssltls": "SSL/TLS",
+      "brotli": "Brotli"
     }
   },
   "page": {
@@ -248,6 +256,19 @@
     "runningServices": {
       "headerTitle": "Running Services",
       "headerDesc": "See all running services for this server."
+    },
+    "loadBalancers": {
+      "headerTitle": "Load Balancers",
+      "headerDesc": "View your load balancers here.",
+      "headerFootnote": "Visit our <a>YouTube channel</a> for a tutorial.",
+      "gatewayServer": "Gateway Server",
+      "gatewayAddress": "Gateway Address",
+      "features": "Features"
+    },
+    "domain": {
+      "headerTitle": "Domain & DNS",
+      "headerDesc": "View your registered domain and DNS here.",
+      "headerFootnote": "Visit our <a>YouTube channel</a> for a tutorial."
     }
   },
   "widget": {
@@ -397,7 +418,10 @@
   },
   "formErrors": {
     "required": "Required",
-    "branchRequiredWhenAutoDeploy": "Branch is required when auto-deploy is enabled."
+    "branchRequiredWhenAutoDeploy": "Branch is required when auto-deploy is enabled.",
+    "domainInvalid": "Domain is invalid!",
+    "domainTldMissing": "Domain needs a TLD defined!",
+    "domainL2Missing": "Domain needs a level-2 part defined!"
   },
   "sidebar": {
     "workspace": "Workspace",

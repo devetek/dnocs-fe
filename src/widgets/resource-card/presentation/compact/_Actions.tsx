@@ -162,6 +162,8 @@ export default function CompactActions(props: ActionProps) {
 
   const [primaryAction, ...secondaryActions] = actions.filter(excludeFalsy);
 
+  if (primaryAction == null) return null;
+
   const cnWrapper = cn('flex items-center justify-center w-full', className);
 
   const cnPopover = cn('w-max p-0 flex flex-col py-1');

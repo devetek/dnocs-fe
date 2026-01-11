@@ -75,6 +75,9 @@ export const [BrowserModelProvider, useBrowserModel] = buildSelector(
         );
         if (targetIdx < 0) return prev;
 
+        // SAFETY: TS fails to track the discriminated union member when spreading.
+        // We are only updating 'status' (shared property), so the object remains valid.
+        // @ts-expect-error TS2322
         newList[targetIdx] = {
           ...newList[targetIdx],
           status: opStatusPayload.status,

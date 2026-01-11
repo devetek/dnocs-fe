@@ -1,3 +1,4 @@
+import '@/shared/libs/browser/array';
 import type {
   Permission,
   PermissionUnit,
@@ -25,7 +26,8 @@ const parseFromOctal = (raw: string): Permission => {
 
   if (!/^[0-7]{4}$/.test(s))
     throw new Error('Octal must be 3 - 4 digits (0 - 7).');
-  const [sp, u, g, o] = s.split('').map(Number);
+
+  const [sp, u, g, o] = s.split('').map(Number).toTuple(4);
 
   return {
     owner: digitToPermissionUnit(u),
