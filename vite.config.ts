@@ -6,15 +6,25 @@ import { nitro } from 'nitro/vite';
 import { defineConfig } from 'vite';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
 
+const BASE_PATH: string = process.env.BASE_PATH || '/v3';
+const isProduction: boolean = process.env.NODE_ENV === 'production';
+const ALLOWED_HOSTS: string[] = JSON.parse(process.env.ALLOWED_HOSTS || '["*"]');
+
 const config = defineConfig({
-  base: process.env.BASE_PATH,
+  // TODO: enable this once we have versioned static assets
+  // build:{
+    // assetsDir: ASSETS_DIR || '',
+  // },
+  base: BASE_PATH,
   server: {
-    allowedHosts: ['cloud-dev.terpusat.com'],
+    allowedHosts: ALLOWED_HOSTS,
   },
   plugins: [
-    devtools(),
+    devtools({
+      removeDevtoolsOnBuild: isProduction,
+    }),
     nitro({
-      baseURL: process.env.BASE_PATH,
+      baseURL: BASE_PATH,
     }),
     // this is the plugin that enables path aliases
     viteTsConfigPaths({
