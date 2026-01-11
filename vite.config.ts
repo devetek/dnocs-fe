@@ -24,7 +24,7 @@ const config = defineConfig({
       removeDevtoolsOnBuild: isProduction,
     }),
     nitro({
-      baseURL: process.env.BASE_PATH,
+      baseURL: BASE_PATH,
     }),
     // this is the plugin that enables path aliases
     viteTsConfigPaths({
