@@ -16,7 +16,7 @@ mv .env.example .env
 
 
 echo ">>>>> Installing dependencies <<<<<"
-pnpm install # install all dependencies
+pnpm install --frozen-lockfile # install all dependencies
 
 echo ">>>>> Running Build <<<<<"
 pnpm run build || exit 2
