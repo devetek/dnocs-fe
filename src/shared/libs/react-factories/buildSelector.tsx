@@ -35,7 +35,10 @@ export default function buildSelector(description: string) {
       );
     }
 
-    function useSelector<V>(selector: (store: T) => V) {
+    function useSelector<V>(selector: (store: T) => V): V;
+    function useSelector(): T;
+
+    function useSelector<V>(selector?: (store: T) => V) {
       const storeInstance = use(StoreInstanceContext);
 
       if (typeof storeInstance === 'symbol' || storeInstance.current == null) {
@@ -46,7 +49,9 @@ export default function buildSelector(description: string) {
 
       return useStore(
         storeInstance.current,
-        useShallow((store) => selector(store.source)),
+        useShallow((store) =>
+          selector == null ? store.source : selector(store.source),
+        ),
       );
     }
 
