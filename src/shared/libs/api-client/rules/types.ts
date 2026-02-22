@@ -61,3 +61,12 @@ export interface UseApiGetOptions {
 export type WithApiGetOptions<T = unknown> = T & {
   options?: UseApiGetOptions;
 };
+
+// =============================================================================
+//   useApiGetWhen
+// =============================================================================
+
+export interface UseApiGetWhenParams {
+  config?: GetRequestRecipe;
+  options?: UseApiGetOptions;
+}
