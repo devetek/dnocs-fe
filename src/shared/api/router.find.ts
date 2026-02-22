@@ -4,28 +4,31 @@ import type {
   WithApiGetOptions,
 } from '@/shared/libs/api-client/rules/types';
 
-import useApiGetWhen from '../libs/api-client/hooks/useApiGetWhen';
+import type { DTOs } from '.';
 
 // =============================================================================
 //   Recipe
 // =============================================================================
 
 export interface RecipeParams {
-  serverId?: string;
-  file?: string;
-  line?: number;
+  searchQuery?: string | null;
+  page?: number;
+  pageSize?: number;
+  forceMine?: boolean;
 }
 
 export function recipe(params: RecipeParams): GetRequestRecipe {
-  const { serverId, file, line } = params;
+  const { page, pageSize, searchQuery, forceMine } = params;
 
   const queryParams = createQueryParams({
-    file,
-    line,
+    name: searchQuery,
+    page,
+    limit: pageSize,
+    force_mine: forceMine,
   });
 
   return {
-    url: `v0/machine/detail/${serverId}/log?${queryParams.toString()}`,
+    url: `/v1/router/find?${queryParams.toString()}`,
   };
 }
 
@@ -33,17 +36,11 @@ export function recipe(params: RecipeParams): GetRequestRecipe {
 //   Method
 // =============================================================================
 
-export function useGet(params: WithApiGetOptions<RecipeParams>) {
-  return useApiGet<string[]>(recipe(params), params.options);
+export interface Dto {
+  routers?: DTOs.RouterV1[];
+  pagination: DTOs.Pagination;
 }
 
-export function useGetWhen(
-  predicate: () => WithApiGetOptions<RecipeParams> | undefined,
-) {
-  const params = predicate();
-
-  return useApiGetWhen<string[]>({
-    config: params != null ? recipe(params) : undefined,
-    options: params?.options,
-  });
+export function useGet(params: WithApiGetOptions<RecipeParams>) {
+  return useApiGet<Dto>(recipe(params), params.options);
 }
