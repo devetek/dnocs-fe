@@ -11,6 +11,7 @@ export * from './pricepackage';
 export * from './pricename';
 export * from './pricepackageitem';
 export * from './pricepackageconsumer';
+export * from './router';
 export * from './user';
 export * from './cloud';
 export * from './secret';

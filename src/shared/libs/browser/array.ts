@@ -6,7 +6,7 @@ export type Tuple<
 
 declare global {
   interface Array<T> {
-    toTuple<N extends number>(length: N): Tuple<T, N>;
+    toTuple: <N extends number>(length: N) => Tuple<T, N>;
   }
 }
 

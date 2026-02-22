@@ -9,7 +9,8 @@ export type AsElement =
   | 'h6'
   | 'div'
   | 'p'
-  | 'span';
+  | 'span'
+  | 'button';
 
 export interface TooltipProps<As extends AsElement> {
   as?: As;

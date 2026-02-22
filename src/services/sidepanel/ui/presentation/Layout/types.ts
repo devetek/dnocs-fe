@@ -16,6 +16,7 @@ export interface SidepanelLayoutGeneralTitleProps {
   className?: string;
   title: string;
   subtitle?: string;
+  subtitleLoading?: boolean;
   hasCloseButton?: boolean;
 }
 

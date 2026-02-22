@@ -16,6 +16,7 @@ export { default as ApiPriceName } from './price-name';
 export { default as ApiPricePackage } from './price-package';
 export { default as ApiPricePackageConsumer } from './price-package-consumer';
 export { default as ApiPricePackageItem } from './price-package-item';
+export { default as ApiRouter } from './router';
 export { default as ApiSecret } from './secret';
 export { default as ApiServer } from './server';
 export { default as ApiService } from './service';

@@ -80,13 +80,14 @@ export const MENUS: MenuGroup[] = [
         icon: IconLoadBalancer,
         iconActive: IconLoadBalancerActive,
         i18nKey: 'sidebar.loadBalancers',
-        url: '/router',
+        url: '/v2/backend/load-balancers',
       },
       {
         id: 'ddns',
         icon: IconGlobe,
         iconActive: IconGlobeActive,
         i18nKey: 'sidebar.dDns',
+        // @ts-expect-error
         url: '/domain',
       },
       {
@@ -101,7 +102,7 @@ export const MENUS: MenuGroup[] = [
         icon: IconLock,
         iconActive: IconLockActive,
         i18nKey: 'sidebar.secretMgr',
-        url: '/v2/secret-managers/ssh-key',
+        url: '/v2/backend/secret-managers/ssh-key',
       },
     ],
   },

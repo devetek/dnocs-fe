@@ -9,6 +9,7 @@ export default function SearchInput(props: SearchInputProps) {
     defaultValue,
     placeholder,
     value,
+    maxLength,
     onChange,
     onEnter,
   } = props;
@@ -27,6 +28,7 @@ export default function SearchInput(props: SearchInputProps) {
         className="grow outline-hidden w-full"
         placeholder={placeholder ?? 'Search'}
         value={internalValue ?? defaultValue}
+        maxLength={maxLength}
         onChange={(e) => {
           setInternalValue(e.target.value);
           onChange?.(e.target.value);
@@ -48,6 +50,7 @@ interface SearchInputProps {
   defaultValue?: string;
   value?: string;
   placeholder?: string;
+  maxLength?: number;
   onChange?: (newValue: string) => void;
   onEnter?: (value: string) => void;
 }
