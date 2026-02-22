@@ -22,7 +22,7 @@ export default function CompactSecondaryInfos(props: Props) {
         return (
           <div key={index} className="flex flex-col cursor-default">
             <div className="flex items-center gap-x-1">
-              <Icon className="size-3" />
+              <Icon className="size-3 shrink-0" />
               <p className="text-[0.625rem] sm:text-xs font-bold text-primary">
                 {infoLabel}
               </p>
