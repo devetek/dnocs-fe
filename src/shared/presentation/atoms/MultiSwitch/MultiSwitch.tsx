@@ -1,5 +1,8 @@
 import { cn } from '@/shared/libs/tailwind/cn';
 
+/**
+ * @deprecated use SegmentedControls instead
+ */
 export default function MultiSwitch<S extends string = string>(
   props: MultiSwitchProps<S>,
 ) {
