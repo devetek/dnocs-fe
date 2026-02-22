@@ -1,7 +1,8 @@
 import { useNavigate } from '@tanstack/react-router';
-import { CheckIcon, PlusIcon } from 'lucide-react';
 
 import { useAuthLoggedIn } from '@/services/auth/usecase';
+
+import type { TeamPopupItem } from '@/features/app-shell/rules/types';
 
 import { ApiOrganizationPeople } from '@/shared/api';
 import { iife } from '@/shared/libs/browser/iife';
@@ -10,9 +11,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/shared/presentation/atoms/Popover';
-import { SearchInput } from '@/shared/presentation/atoms/SearchInput';
 
 import TeamsDropdown from '../../presentation/TeamsDropdown';
+import TeamsPopup from '../../presentation/TeamsPopup';
 
 interface TeamsProps {
   collapsed?: boolean;
@@ -30,31 +31,29 @@ export default function Teams(props: TeamsProps) {
     userId: userProfile.id,
   });
 
-  const selectedTeam = localStorage.getItem('organization_id') || '';
+  const selectedTeamId = localStorage.getItem('organization_id') || null;
 
-  const handleClickSelectTeam = (teamID: string) => {
-    return () => {
-      if (selectedTeam === teamID) {
-        localStorage.removeItem('organization_id');
-      } else {
-        localStorage.setItem('organization_id', teamID);
-      }
+  const handleClickSelectTeam = (teamId: string) => {
+    if (selectedTeamId === teamId) {
+      localStorage.removeItem('organization_id');
+    } else {
+      localStorage.setItem('organization_id', teamId);
+    }
 
-      navigate({
-        to: '/dashboard',
-        reloadDocument: true,
-      });
-    };
+    window.location.reload();
+  };
+
+  const handleClickPersonal = () => {
+    localStorage.removeItem('organization_id');
+    window.location.reload();
   };
 
   const handleClickAddNewTeams = () => {
-    navigate({
-      to: '/teams',
-    });
+    navigate({ to: '/teams' });
     return;
   };
 
-  const teams: Array<{ name: string; id: string }> = iife(() => {
+  const teams: TeamPopupItem[] = iife(() => {
     if (resOrganizationPeople.$status !== 'success') return [];
 
     return (resOrganizationPeople.org_peoples ?? []).map((org) => {
@@ -72,7 +71,7 @@ export default function Teams(props: TeamsProps) {
 
     const { organization } =
       resOrganizationPeople.org_peoples?.find(
-        (org) => org.organization_id === selectedTeam,
+        (org) => org.organization_id === selectedTeamId,
       ) ?? {};
     if (!organization) return undefined;
 
@@ -90,42 +89,13 @@ export default function Teams(props: TeamsProps) {
         className="ml-2 data-[collapsed=true]:ml-5 p-0 overflow-hidden"
         data-collapsed={collapsed}
       >
-        <div className="p-2">
-          <SearchInput />
-        </div>
-
-        <div className="flex flex-col">
-          {teams.map((team) => {
-            return (
-              <button
-                key={team.id}
-                className="p-3 cursor-pointer hover:bg-primary/10 transition-all flex items-center justify-between w-full text-left"
-                onClick={handleClickSelectTeam(team.id)}
-              >
-                <div className="flex flex-col">
-                  <p className="text-sm text-primary font-semibold">
-                    {team.name}
-                  </p>
-                  <p className="text-xs italic text-primary/70">
-                    Team ID: {team.id}
-                  </p>
-                </div>
-
-                {team.id === selectedTeam && <CheckIcon className="size-4" />}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="border-t">
-          <button
-            className="cursor-pointer p-3 w-full flex items-center gap-1 hover:bg-primary/10 transition-all"
-            onClick={handleClickAddNewTeams}
-          >
-            <PlusIcon className="size-4" />
-            <p className="text-sm text-primary">Add new teams...</p>
-          </button>
-        </div>
+        <TeamsPopup
+          teams={teams}
+          onClickAddNewTeams={handleClickAddNewTeams}
+          selectedTeamId={selectedTeamId}
+          onClickTeam={handleClickSelectTeam}
+          onClickPersonal={handleClickPersonal}
+        />
       </PopoverContent>
     </Popover>
   );
