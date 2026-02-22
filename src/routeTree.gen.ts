@@ -24,7 +24,6 @@ import { Route as WithAppLayoutPawonPaymentIndexRouteImport } from './routes/_wi
 import { Route as WithAppLayoutPawonPackageIndexRouteImport } from './routes/_with-app-layout/pawon/package/index'
 import { Route as WithAppLayoutDiscoverModulesIndexRouteImport } from './routes/_with-app-layout/discover/modules/index'
 import { Route as WithAppLayoutBackendLoadBalancersIndexRouteImport } from './routes/_with-app-layout/backend/load-balancers/index'
-import { Route as WithAppLayoutBackendDomainIndexRouteImport } from './routes/_with-app-layout/backend/domain/index'
 import { Route as WithAppLayoutBackendDatabaseIndexRouteImport } from './routes/_with-app-layout/backend/database/index'
 import { Route as WithAppLayoutBackendCloudProjectsIndexRouteImport } from './routes/_with-app-layout/backend/cloud-projects/index'
 import { Route as WithAppLayoutApplicationsCreateIndexRouteImport } from './routes/_with-app-layout/applications/create/index'
@@ -122,12 +121,6 @@ const WithAppLayoutBackendLoadBalancersIndexRoute =
     path: '/backend/load-balancers/',
     getParentRoute: () => WithAppLayoutRouteRoute,
   } as any)
-const WithAppLayoutBackendDomainIndexRoute =
-  WithAppLayoutBackendDomainIndexRouteImport.update({
-    id: '/backend/domain/',
-    path: '/backend/domain/',
-    getParentRoute: () => WithAppLayoutRouteRoute,
-  } as any)
 const WithAppLayoutBackendDatabaseIndexRoute =
   WithAppLayoutBackendDatabaseIndexRouteImport.update({
     id: '/backend/database/',
@@ -200,7 +193,6 @@ export interface FileRoutesByFullPath {
   '/applications/create': typeof WithAppLayoutApplicationsCreateIndexRoute
   '/backend/cloud-projects': typeof WithAppLayoutBackendCloudProjectsIndexRoute
   '/backend/database': typeof WithAppLayoutBackendDatabaseIndexRoute
-  '/backend/domain': typeof WithAppLayoutBackendDomainIndexRoute
   '/backend/load-balancers': typeof WithAppLayoutBackendLoadBalancersIndexRoute
   '/discover/modules': typeof WithAppLayoutDiscoverModulesIndexRoute
   '/pawon/package': typeof WithAppLayoutPawonPackageIndexRoute
@@ -227,7 +219,6 @@ export interface FileRoutesByTo {
   '/applications/create': typeof WithAppLayoutApplicationsCreateIndexRoute
   '/backend/cloud-projects': typeof WithAppLayoutBackendCloudProjectsIndexRoute
   '/backend/database': typeof WithAppLayoutBackendDatabaseIndexRoute
-  '/backend/domain': typeof WithAppLayoutBackendDomainIndexRoute
   '/backend/load-balancers': typeof WithAppLayoutBackendLoadBalancersIndexRoute
   '/discover/modules': typeof WithAppLayoutDiscoverModulesIndexRoute
   '/pawon/package': typeof WithAppLayoutPawonPackageIndexRoute
@@ -256,7 +247,6 @@ export interface FileRoutesById {
   '/_with-app-layout/applications/create/': typeof WithAppLayoutApplicationsCreateIndexRoute
   '/_with-app-layout/backend/cloud-projects/': typeof WithAppLayoutBackendCloudProjectsIndexRoute
   '/_with-app-layout/backend/database/': typeof WithAppLayoutBackendDatabaseIndexRoute
-  '/_with-app-layout/backend/domain/': typeof WithAppLayoutBackendDomainIndexRoute
   '/_with-app-layout/backend/load-balancers/': typeof WithAppLayoutBackendLoadBalancersIndexRoute
   '/_with-app-layout/discover/modules/': typeof WithAppLayoutDiscoverModulesIndexRoute
   '/_with-app-layout/pawon/package/': typeof WithAppLayoutPawonPackageIndexRoute
@@ -285,7 +275,6 @@ export interface FileRouteTypes {
     | '/applications/create'
     | '/backend/cloud-projects'
     | '/backend/database'
-    | '/backend/domain'
     | '/backend/load-balancers'
     | '/discover/modules'
     | '/pawon/package'
@@ -312,7 +301,6 @@ export interface FileRouteTypes {
     | '/applications/create'
     | '/backend/cloud-projects'
     | '/backend/database'
-    | '/backend/domain'
     | '/backend/load-balancers'
     | '/discover/modules'
     | '/pawon/package'
@@ -340,7 +328,6 @@ export interface FileRouteTypes {
     | '/_with-app-layout/applications/create/'
     | '/_with-app-layout/backend/cloud-projects/'
     | '/_with-app-layout/backend/database/'
-    | '/_with-app-layout/backend/domain/'
     | '/_with-app-layout/backend/load-balancers/'
     | '/_with-app-layout/discover/modules/'
     | '/_with-app-layout/pawon/package/'
@@ -469,13 +456,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WithAppLayoutBackendLoadBalancersIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
-    '/_with-app-layout/backend/domain/': {
-      id: '/_with-app-layout/backend/domain/'
-      path: '/backend/domain'
-      fullPath: '/backend/domain'
-      preLoaderRoute: typeof WithAppLayoutBackendDomainIndexRouteImport
-      parentRoute: typeof WithAppLayoutRouteRoute
-    }
     '/_with-app-layout/backend/database/': {
       id: '/_with-app-layout/backend/database/'
       path: '/backend/database'
@@ -559,7 +539,6 @@ interface WithAppLayoutRouteRouteChildren {
   WithAppLayoutApplicationsCreateIndexRoute: typeof WithAppLayoutApplicationsCreateIndexRoute
   WithAppLayoutBackendCloudProjectsIndexRoute: typeof WithAppLayoutBackendCloudProjectsIndexRoute
   WithAppLayoutBackendDatabaseIndexRoute: typeof WithAppLayoutBackendDatabaseIndexRoute
-  WithAppLayoutBackendDomainIndexRoute: typeof WithAppLayoutBackendDomainIndexRoute
   WithAppLayoutBackendLoadBalancersIndexRoute: typeof WithAppLayoutBackendLoadBalancersIndexRoute
   WithAppLayoutDiscoverModulesIndexRoute: typeof WithAppLayoutDiscoverModulesIndexRoute
   WithAppLayoutPawonPackageIndexRoute: typeof WithAppLayoutPawonPackageIndexRoute
@@ -589,7 +568,6 @@ const WithAppLayoutRouteRouteChildren: WithAppLayoutRouteRouteChildren = {
     WithAppLayoutBackendCloudProjectsIndexRoute,
   WithAppLayoutBackendDatabaseIndexRoute:
     WithAppLayoutBackendDatabaseIndexRoute,
-  WithAppLayoutBackendDomainIndexRoute: WithAppLayoutBackendDomainIndexRoute,
   WithAppLayoutBackendLoadBalancersIndexRoute:
     WithAppLayoutBackendLoadBalancersIndexRoute,
   WithAppLayoutDiscoverModulesIndexRoute:
