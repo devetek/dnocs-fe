@@ -2,6 +2,7 @@
   "common": {
     "terms": {
       "applications": "Aplikasi",
+      "loadBalancer": "Load Balancer",
       "machines": "Mesin",
       "unknown": "Tidak diketahui",
       "unavailable": "Tidak tersedia",
@@ -17,6 +18,7 @@
       "mine": "Punya saya",
       "sharedWithMe": "Dibagikan dengan saya",
       "team": "Tim",
+      "teams": "Tim",
       "teamResource": "Resource Tim",
       "publicResource": "Resource Publik",
       "bundleType": "Tipe Bundle",
@@ -69,7 +71,13 @@
       "artifact": "Artefak",
       "service": "Layanan",
       "rules": "Aturan",
-      "pending": "Tertunda"
+      "pending": "Tertunda",
+      "searchPlaceholder": "Cari...",
+      "automaticView": "Tampilan Otomatis",
+      "cardGridView": "Tampilan Grid Kartu",
+      "cardListView": "Tampilan Daftar Kartu",
+      "xOfY": "{0} of {1}",
+      "forX": "untuk {0}"
     },
     "actions": {
       "refresh": "Segarkan",
@@ -96,7 +104,8 @@
       "edit": "Ubah",
       "save": "Simpan",
       "retry": "Coba lagi",
-      "backToDashboard": "Kembali ke Dasbor"
+      "backToDashboard": "Kembali ke Dasbor",
+      "migrateOwnership": "Pindah Pemilik"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -258,7 +267,10 @@
       "headerFootnote": "Kunjungi <a>kanal YouTube</a> kami untuk panduannya.",
       "gatewayServer": "Server Gerbang",
       "gatewayAddress": "Alamat Gerbang",
-      "enabledFeatures": "Fitur"
+      "gatewayServerAndAddress": "Server & Alamat Gerbang",
+      "enabledFeatures": "Fitur",
+      "xUpstream": "{length} Upstream(s)",
+      "xPorts": "{length} Port(s)"
     },
     "domain": {
       "headerTitle": "Domain & DNS",
@@ -409,6 +421,10 @@
         "placeholder": "Pilih worker",
         "onError": "Gagal untuk memuat daftar worker, mohon <a>coba lagi.</a>"
       }
+    },
+    "loadBalancerDetails": {
+      "title": "Detil Load Balancer",
+      "pathPattern": "Pola Jalur URL"
     }
   },
   "formErrors": {
@@ -416,9 +432,18 @@
     "branchRequiredWhenAutoDeploy": "Branch dibutuhkan ketika deploy otomatis dipakai.",
     "domainInvalid": "Domain tidak valid!",
     "domainTldMissing": "Domain membutuhkan TLD!",
-    "domainL2Missing": "Domain membutuhkan level 2!"
+    "domainL2Missing": "Domain membutuhkan level 2!",
+    "invalidUrl": "URL diterima tidak valid!"
   },
   "sidebar": {
+    "teamsWidget": {
+      "tooltipTeamX": "Tim: {teamName}",
+      "selectATeamHere": "Pilih tim disini",
+      "personalMode": "Mode personal",
+      "usePersonalMode": "Gunakan mode personal",
+      "usingPersonalMode": "Dalam mode personal",
+      "addNewTeams": "Tambah tim baru"
+    },
     "workspace": "Ruang kerja",
     "dashboard": "Dasbor",
     "applications": "Aplikasi",

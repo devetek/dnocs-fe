@@ -2,6 +2,7 @@
   "common": {
     "terms": {
       "applications": "Applications",
+      "loadBalancer": "Load Balancer",
       "machines": "Machines",
       "unknown": "Unknown",
       "unavailable": "Unavailable",
@@ -17,6 +18,7 @@
       "mine": "Mine",
       "sharedWithMe": "Shared with me",
       "team": "Team",
+      "teams": "Teams",
       "teamResource": "Team Resource",
       "publicResource": "Public Resource",
       "bundleType": "Bundle Type",
@@ -69,7 +71,13 @@
       "artifact": "Artifact",
       "service": "Service",
       "rules": "Rules",
-      "pending": "Pending"
+      "pending": "Pending",
+      "searchPlaceholder": "Search...",
+      "automaticView": "Automatic View",
+      "cardGridView": "Card Grid View",
+      "cardListView": "Card List View",
+      "xOfY": "{0} of {1}",
+      "forX": "for {0}"
     },
     "actions": {
       "refresh": "Refresh",
@@ -96,7 +104,8 @@
       "edit": "Edit",
       "save": "Save",
       "retry": "Retry",
-      "backToDashboard": "Back to Dashboard"
+      "backToDashboard": "Back to Dashboard",
+      "migrateOwnership": "Migrate Ownership"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -263,7 +272,15 @@
       "headerFootnote": "Visit our <a>YouTube channel</a> for a tutorial.",
       "gatewayServer": "Gateway Server",
       "gatewayAddress": "Gateway Address",
-      "features": "Features"
+      "gatewayServerAndAddress": "Gateway Server & Address",
+      "features": "Features",
+      "xUpstream": "{length} Upstream(s)",
+      "xPorts": "{length} Port(s)",
+      "emptyState": {
+        "title": "No load balancers found.",
+        "message": "Why not add new one to get started?",
+        "cta": "Add new load balancer"
+      }
     },
     "domain": {
       "headerTitle": "Domain & DNS",
@@ -414,6 +431,10 @@
         "placeholder": "Select a worker",
         "onError": "Failed to get workers, please <a>try again.</a>"
       }
+    },
+    "loadBalancerDetails": {
+      "title": "Load Balancer Details",
+      "pathPattern": "Path Pattern"
     }
   },
   "formErrors": {
@@ -421,9 +442,18 @@
     "branchRequiredWhenAutoDeploy": "Branch is required when auto-deploy is enabled.",
     "domainInvalid": "Domain is invalid!",
     "domainTldMissing": "Domain needs a TLD defined!",
-    "domainL2Missing": "Domain needs a level-2 part defined!"
+    "domainL2Missing": "Domain needs a level-2 part defined!",
+    "invalidUrl": "Invalid URL retrieved!"
   },
   "sidebar": {
+    "teamsWidget": {
+      "tooltipTeamX": "Team: {teamName}",
+      "selectATeamHere": "Select a team here",
+      "personalMode": "Personal mode",
+      "usePersonalMode": "Use personal mode",
+      "usingPersonalMode": "Using personal mode",
+      "addNewTeams": "Add new teams"
+    },
     "workspace": "Workspace",
     "dashboard": "Dashboard",
     "applications": "Applications",
