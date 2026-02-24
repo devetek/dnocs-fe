@@ -15,12 +15,16 @@ export interface RecipeParams {
 export function recipe(params: RecipeParams): DoRequestRecipe {
   const { serviceName, eventName, serverId } = params;
 
+  // TODO: Remove data casting after backend migrate all modules to use string in ID fields.
+  // temporary cast string to number, since some of modules is not migrated to use string type for unitIds yet. this should be removed after all modules are migrated.
+  const intServerId = Number(serverId);
+
   return {
     method: 'POST',
     url: `/v1/service/trigger/${serviceName}`,
     data: {
       event: eventName,
-      machine_id: serverId,
+      machine_id: intServerId,
     },
   };
 }
