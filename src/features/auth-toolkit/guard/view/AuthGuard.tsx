@@ -24,11 +24,11 @@ export default function AuthGuard({ children }: GuardProps) {
     if (
       authBase.$status !== 'success' ||
       authBase.isLoggedIn ||
-      window.location.pathname === '/auth'
+      window.location.pathname === '/'
     )
       return;
 
-    window.location.assign('/auth');
+    window.location.assign('/');
   }, [authBase]);
 
   if (authBase.$status === 'loading') {
