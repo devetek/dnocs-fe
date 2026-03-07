@@ -1,5 +1,6 @@
 export { default as ApiApplication } from './application';
 export { default as ApiArtifact } from './artifact';
+export { default as ApiAuth } from './auth';
 export { default as ApiBundle } from './bundle';
 export { default as ApiCloud } from './cloud';
 export { default as ApiDatabase } from './database';
