@@ -1,11 +1,14 @@
 import { TanStackDevtools } from '@tanstack/react-devtools';
 import {
+  ClientOnly,
   HeadContent,
   Outlet,
   Scripts,
   createRootRoute,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
+import { createServerFn } from '@tanstack/react-start';
+import { getRequestHeaders } from '@tanstack/react-start/server';
 
 import { AuthModelProvider } from '@/services/auth/model';
 import { DialogController } from '@/services/dialog';
@@ -17,13 +20,20 @@ import { ThemeScript } from '@/services/theme/lib/themeScript';
 import { DevetekThemeModel } from '@/services/theme/model';
 import { ToasterController } from '@/services/toaster';
 
-import { AuthGuard } from '@/features/auth-guard';
-
 import { EventsProvider } from '@/shared/libs/events';
 
 import appCss from '../styles.css?url';
 
+const getHeaders = createServerFn().handler(() => {
+  const headers = getRequestHeaders();
+
+  return {
+    userAgent: headers.get('User-Agent'),
+  };
+});
+
 export const Route = createRootRoute({
+  ssr: true,
   head: () => ({
     meta: [
       {
@@ -34,7 +44,7 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'dPanel Dashboard',
+        title: 'dnocs | Managing Your Services',
       },
     ],
     links: [
@@ -48,10 +58,12 @@ export const Route = createRootRoute({
   loader: async () => {
     const locale = await getLocale();
     const messages = await loadMessages(locale);
+    const requestHeaders = await getHeaders();
 
     return {
       locale,
       messages,
+      requestHeaders,
     };
   },
   component: RootComponent,
@@ -65,14 +77,14 @@ function RootComponent() {
       <DevetekIntlProvider locale={locale} messages={messages}>
         <DevetekThemeModel>
           <AuthModelProvider>
-            <AuthGuard>
+            <ClientOnly>
               <SidepanelController />
               <ModalController />
               <DialogController />
               <ToasterController />
+            </ClientOnly>
 
-              <Outlet />
-            </AuthGuard>
+            <Outlet />
           </AuthModelProvider>
         </DevetekThemeModel>
       </DevetekIntlProvider>

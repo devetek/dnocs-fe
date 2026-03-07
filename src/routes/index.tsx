@@ -1,9 +1,17 @@
-import { createFileRoute, redirect } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
+
+import { ModelProvider } from './-models';
+import LandingView from './-view';
 
 export const Route = createFileRoute('/')({
-  beforeLoad: () => {
-    throw redirect({
-      to: '/dashboard',
-    });
-  },
+  ssr: true,
+  component: Landing,
 });
+
+function Landing() {
+  return (
+    <ModelProvider>
+      <LandingView />
+    </ModelProvider>
+  );
+}
