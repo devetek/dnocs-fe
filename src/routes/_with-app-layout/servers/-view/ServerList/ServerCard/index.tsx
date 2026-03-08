@@ -14,7 +14,7 @@ import { SERVER_PROVIDER_METADATA } from '@/entities/server/ui/constants/provide
 import { SERVER_STATE_METADATA } from '@/entities/server/ui/constants/state-metadata';
 
 import { getDistanceFromNow } from '@/shared/libs/browser/date';
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { cn } from '@/shared/libs/tailwind/cn';
 import IconEye from '@/shared/presentation/icons/Eye';
 import IconEyeActive from '@/shared/presentation/icons/EyeActive';

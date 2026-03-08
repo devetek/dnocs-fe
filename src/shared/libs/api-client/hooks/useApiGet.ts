@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { AxiosError, isCancel } from 'axios';
 
-import { iife } from '../../browser/iife';
+import { iife } from '../../browser/fn';
 import { isOnline } from '../../browser/is-online';
 import useHandler from '../../react-hooks/useHandler';
 import { axiosClient } from '../lib/client';

@@ -4,7 +4,7 @@ import { AdapterApplicationFromDto } from '@/entities/application/adapter';
 
 import { ApiApplication } from '@/shared/api';
 import { useAdapter } from '@/shared/libs/api-client';
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import buildSelector from '@/shared/libs/react-factories/buildSelector';
 
 import { useSubscribe } from './events';

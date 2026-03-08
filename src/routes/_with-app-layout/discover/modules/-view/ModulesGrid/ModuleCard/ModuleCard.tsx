@@ -6,7 +6,7 @@ import type { ServerModule } from '@/entities/server-modules/model/types';
 import { useServerModulesDetailModal } from '@/features/server-modules-detail-modal';
 
 import { ApiService } from '@/shared/api';
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { Button } from '@/shared/presentation/atoms/Button';
 import { Card } from '@/shared/presentation/atoms/Card';
 

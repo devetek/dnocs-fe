@@ -1,4 +1,4 @@
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 
 import { useAuthModel } from '../model';
 

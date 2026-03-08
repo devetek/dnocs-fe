@@ -3,7 +3,7 @@ import type z from 'zod';
 import type { schemaServerMinimal } from '@/entities/server/rules/schema';
 
 import type { DTOs } from '@/shared/api';
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { excludeNully } from '@/shared/libs/browser/typeguards';
 import type { KeysOnlyDeep } from '@/shared/libs/types/keys-only';
 

@@ -5,7 +5,7 @@ import { useDevetekTranslations } from '@/services/i18n';
 import { formatValueUsage } from '@/entities/server-statistics/lib/formatUsage';
 import type { DiskStats } from '@/entities/server-statistics/rules/schema';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { Card } from '@/shared/presentation/atoms/Card';
 
 import { LINE_OPTIONS, generateBackgroundColor } from './_options';

@@ -1,7 +1,7 @@
 import type { z } from 'zod';
 
 import type { DTOs } from '@/shared/api';
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import type { KeysOnlyDeep } from '@/shared/libs/types/keys-only';
 
 import type {

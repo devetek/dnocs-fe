@@ -5,7 +5,7 @@ import { useAuthLoggedIn } from '@/services/auth/usecase';
 import type { TeamPopupItem } from '@/features/app-shell/rules/types';
 
 import { ApiOrganizationPeople } from '@/shared/api';
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import {
   Popover,
   PopoverContent,

@@ -12,7 +12,7 @@ import {
 import { useDevetekLocale } from '@/services/i18n';
 
 import { getDistanceFromNow } from '@/shared/libs/browser/date';
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { capitalizeFirstLetter } from '@/shared/libs/browser/string';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
 

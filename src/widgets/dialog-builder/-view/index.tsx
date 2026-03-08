@@ -6,7 +6,7 @@ import { useDevetekTranslations } from '@/services/i18n';
 import { useModalEmit } from '@/services/modal/model/event';
 import { ModalLayoutGeneral } from '@/services/modal/ui/presentation';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { cn } from '@/shared/libs/tailwind/cn';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';

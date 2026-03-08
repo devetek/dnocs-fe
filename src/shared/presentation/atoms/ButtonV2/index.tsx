@@ -4,7 +4,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva } from 'class-variance-authority';
 import { CheckIcon, Loader2Icon } from 'lucide-react';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { cn } from '@/shared/libs/tailwind/cn';
 
 import type { ButtonActionProps, ButtonExtraProps, ButtonProps } from './types';

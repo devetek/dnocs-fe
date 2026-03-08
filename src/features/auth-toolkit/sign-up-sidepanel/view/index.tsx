@@ -4,7 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useDevetekTranslations } from '@/services/i18n';
 import Layout from '@/services/sidepanel/ui/presentation/Layout/General';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import type { ButtonState } from '@/shared/presentation/atoms/ButtonV2/types';
 import { DisclaimersLabel } from '@/widgets/disclaimers-label';

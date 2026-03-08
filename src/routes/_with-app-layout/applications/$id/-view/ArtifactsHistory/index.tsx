@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { useArtifactNewSidepanel } from '@/features/artifact-new-sidepanel';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import {
   couple,
   guardedSelects,

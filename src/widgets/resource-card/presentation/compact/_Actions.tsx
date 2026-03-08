@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { excludeFalsy } from '@/shared/libs/browser/typeguards';
 import useClickOutside from '@/shared/libs/react-hooks/useClickOutside';
 import { cn } from '@/shared/libs/tailwind/cn';

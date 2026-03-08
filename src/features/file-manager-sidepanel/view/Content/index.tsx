@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import type { SchemaFilesystemContent } from '@/entities/file-manager/rules/schema';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { useBreakpoint } from '@/shared/libs/react-hooks/useBreakpoint';
 import { FailedState } from '@/widgets/failed-state';
 

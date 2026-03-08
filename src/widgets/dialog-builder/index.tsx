@@ -1,6 +1,6 @@
 import { registerModal } from '@/services/modal';
 
-import { iife, noop } from '@/shared/libs/browser/iife';
+import { iife, noop } from '@/shared/libs/browser/fn';
 import useHandler from '@/shared/libs/react-hooks/useHandler';
 
 import type {

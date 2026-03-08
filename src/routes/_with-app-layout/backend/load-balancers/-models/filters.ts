@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { useNavigate, useSearch } from '@tanstack/react-router';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import buildSelector from '@/shared/libs/react-factories/buildSelector';
 import { useBreakpoint } from '@/shared/libs/react-hooks/useBreakpoint';
 import useHandler from '@/shared/libs/react-hooks/useHandler';
