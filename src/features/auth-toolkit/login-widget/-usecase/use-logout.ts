@@ -16,7 +16,7 @@ export default function useLogoutUsecase() {
 
   const [pushToast] = useToaster();
 
-  const handleLogout = useHandler(async (redirect = true) => {
+  const handleLogout = useHandler(async (forceRedirect?: boolean) => {
     const response = await ApiAuth.Logout.doLogout();
 
     if (response.$status === 'failed') {
@@ -32,7 +32,7 @@ export default function useLogoutUsecase() {
     localStorage.clear();
     authEmit('%%auth/refresh', null);
 
-    if (redirect) {
+    if (forceRedirect) {
       navigate({
         to: '/',
         replace: true,
