@@ -190,7 +190,7 @@ const SectionServer = () => {
   ]);
 
   const handleClickAddNewServer = () => {
-    window.open('/resources/servers/create', '_blank')?.focus();
+    window.open('/servers/create', '_blank')?.focus();
   };
 
   let serverList = <Spinner />;
