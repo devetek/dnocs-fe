@@ -5,7 +5,7 @@ import { useDevetekTranslations } from '@/services/i18n';
 import type { SchemaOsServiceParts } from '@/entities/os-service/rules/schema';
 import usePushServiceActivityUsecase from '@/entities/os-service/usecase/push-activity';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 
 import { useAppDataModel } from '../../-model/app-data';
 import { useArtifactHistoryModel } from '../../-model/artifact-history';

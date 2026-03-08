@@ -5,7 +5,7 @@ import { useDevetekTranslations } from '@/services/i18n';
 import { useEmit } from '@/features/artifact-new-sidepanel/model/events';
 import { useArtifactNewGeneralModel } from '@/features/artifact-new-sidepanel/model/general';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { ErrorInline } from '@/shared/presentation/atoms/ErrorInline';
 import { ComboboxWithSearch } from '@/shared/presentation/molecules/ComboboxWithSearch';
 

@@ -3,6 +3,7 @@ import useHandler from '@/shared/libs/react-hooks/useHandler';
 import { useDialogEmit } from '../model/event';
 import type { DialogPayload } from '../rules/types';
 
+/** @deprecated use Dialog Builder instead! */
 export function useDialog() {
   const emit = useDialogEmit();
 

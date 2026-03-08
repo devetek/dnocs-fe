@@ -2,7 +2,7 @@ import { createElement, useLayoutEffect, useRef, useState } from 'react';
 
 import { createPortal } from 'react-dom';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { cn } from '@/shared/libs/tailwind/cn';
 
 import type { AsElement, TargetRect, TooltipProps, TooltipRect } from './types';

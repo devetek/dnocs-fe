@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { excludeNully } from '@/shared/libs/browser/typeguards';
 import useHandler from '@/shared/libs/react-hooks/useHandler';
 

@@ -1,4 +1,4 @@
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { cn } from '@/shared/libs/tailwind/cn';
 
 import { Tooltip } from '../../atoms/Tooltip';

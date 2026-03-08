@@ -1,13 +1,15 @@
-import type { ReactNode } from 'react';
+import type { JSX, ReactNode } from 'react';
 import { Children, isValidElement } from 'react';
 
 type Component<P> = (props: P) => ReactNode;
+type ComponentJSX<P> = (props: P) => JSX.Element;
 
 interface SlotTag {
   $$slotName: string;
 }
 
 export type SlotComponent<P> = Component<P> & SlotTag;
+export type SlotComponentJSX<P> = ComponentJSX<P> & SlotTag;
 
 export const createSlot = <C extends Component<any>>(
   slotName: string,
@@ -28,15 +30,30 @@ const hasSlotTag = (t: unknown): t is SlotTag =>
   t != null &&
   '$$slotName' in t;
 
-export const slotMatch = (child: ReactNode, slotName: string): boolean => {
+export const slotMatch = (
+  child: ReactNode,
+  slotName: string,
+  strictJSX = false,
+): boolean => {
   if (!isValidElement(child)) return false;
 
-  const validChild = child.type;
+  const childToCheck = child.type;
+
+  if (strictJSX) {
+    if (
+      typeof childToCheck === 'function' ||
+      typeof childToCheck === 'object'
+    ) {
+      return hasSlotTag(childToCheck) && childToCheck.$$slotName === slotName;
+    }
+
+    return false;
+  }
 
   const match =
-    typeof validChild !== 'string' &&
-    hasSlotTag(validChild) &&
-    validChild.$$slotName === slotName;
+    typeof childToCheck !== 'string' &&
+    hasSlotTag(childToCheck) &&
+    childToCheck.$$slotName === slotName;
 
   return match;
 };
@@ -58,4 +75,19 @@ export const extractSlots = <T extends Array<SlotComponent<any>>>(
   });
 
   return results;
+};
+
+export const extractSlotMultchildren = <T extends SlotComponent<any>>(
+  children: ReactNode,
+  slotComponent: T,
+): ReactNode[] => {
+  const collectedSlotChildren: ReactNode[] = [];
+
+  Children.forEach(children, (child) => {
+    if (slotMatch(child, slotComponent.$$slotName, true)) {
+      collectedSlotChildren.push(child);
+    }
+  });
+
+  return collectedSlotChildren;
 };

@@ -15,7 +15,7 @@ import { LOAD_BALANCER_STATUS_METADATA } from '@/entities/load-balancer/ui/const
 import { LOAD_BALANCER_WEBSERVER_ENGINE } from '@/entities/load-balancer/ui/constants/webserver';
 
 import { getDistanceFromNow } from '@/shared/libs/browser/date';
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { IconServer } from '@/shared/presentation/icons';
 import IconEye from '@/shared/presentation/icons/Eye';
 import IconEyeActive from '@/shared/presentation/icons/EyeActive';

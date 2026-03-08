@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { isBrowser } from '@/shared/libs/browser/environment';
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { buildContext } from '@/shared/libs/react-factories/buildContext';
 import { useBreakpoint } from '@/shared/libs/react-hooks/useBreakpoint';
 import useHandler from '@/shared/libs/react-hooks/useHandler';

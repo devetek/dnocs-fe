@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useBrowserModel } from '@/features/file-manager-sidepanel/model/browser';
 import { useEmit } from '@/features/file-manager-sidepanel/model/events';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { Dropdown } from '@/shared/presentation/atoms/Dropdown';
 
 import { OperationEmptyState, OperationRow } from './_Partials';

@@ -105,7 +105,10 @@
       "save": "Simpan",
       "retry": "Coba lagi",
       "backToDashboard": "Kembali ke Dasbor",
-      "migrateOwnership": "Pindah Pemilik"
+      "migrateOwnership": "Pindah Pemilik",
+      "login": "Masuk",
+      "signUp": "Daftar",
+      "back": "Kembali"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -115,6 +118,35 @@
     }
   },
   "page": {
+    "landing": {
+      "heading": {
+        "slogan": "Mengelola layanan anda"
+      },
+      "marketing": {
+        "ctaStartNow": "Mulai sekarang",
+        "slide1": {
+          "title": "Berkembang bersama <highlight>komunitasmu.</highlight>",
+          "message": "d<b>nocs</b> adalah platform yang dirancang untuk memfasilitasi berbagi sumber daya secara lancar di dalam komunitas Anda; memungkinkan kolaborasi, koneksi, dan penggunaan aset bersama secara efisien."
+        },
+        "slide2": {
+          "title": "Fokus dengan <highlight>bisnismu.</highlight>",
+          "message": "Biarkan sistem otomatis d<b>nocs</b> membantu operasional Anda sehingga Anda dapat fokus pada bisnis Anda. Masalah seperti keamanan, skalabilitas, keandalan, dan observabilitas ditangani secara otomatis oleh sistem."
+        }
+      },
+      "asideLogin": {
+        "welcomeBack": "Selamat datang!",
+        "pleaseLogIntoYourAcc": "Silakan masuk ke akun anda",
+        "orSignInWith": "Atau masuk dengan",
+        "forgotPasswordQM": "Lupa password?",
+        "dontHaveAnAccQM": "Belum punya akun?"
+      },
+      "asideGreeting": {
+        "helloAgain": "Halo lagi,",
+        "goToDashboard": "Ke dashbor",
+        "viewProfile": "Lihat profil",
+        "logout": "Keluar"
+      }
+    },
     "dashboard": {
       "headerTitle": "Dashboard",
       "headerDesc": "Lihat aplikasi yang telah Anda deploy dan server yang terdaftar di sini.",
@@ -360,9 +392,27 @@
     "genericUnsavedChanges": {
       "title": "Perubahan belum tersimpan",
       "message": "Apakah Anda yakin ingin membatalkan semua perubahan?"
+    },
+    "forgotPassword": {
+      "title": "Lupa Password?",
+      "message": "Mohon hubungi kontak berikut untuk bantuan:"
+    },
+    "confirmExit": {
+      "title": "Yakin Keluar?",
+      "message": "Anda memiliki beberapa perubahan belum tersimpan. Apakah anda yakin ingin tetap keluar?"
     }
   },
   "toaster": {
+    "loginByEmail": {
+      "error": "Gagal masuk menggunakan akun {email}."
+    },
+    "logout": {
+      "error": "Gagal keluar, mohon dicoba kembali."
+    },
+    "signUp": {
+      "success": "Berhasil mendaftarkan {email}, mohon menunggu untuk pengarahan halaman.",
+      "error": "Gagal mendaftarkan {email}!"
+    },
     "claimToTeam": {
       "success": "Berhasil memindahkan <code>{type}</code> <code>{name}</code> ke tim",
       "noteam": "Silakan pilih tim atau buat tim baru terlebih dahulu!",
@@ -394,6 +444,9 @@
     }
   },
   "sidepanel": {
+    "signUp": {
+      "title": "Daftar"
+    },
     "editApplication": {
       "title": "Ubah Aplikasi",
       "autoDeployment": {
@@ -433,7 +486,12 @@
     "domainInvalid": "Domain tidak valid!",
     "domainTldMissing": "Domain membutuhkan TLD!",
     "domainL2Missing": "Domain membutuhkan level 2!",
-    "invalidUrl": "URL diterima tidak valid!"
+    "invalidUrl": "URL diterima tidak valid!",
+    "invalidEmailAddress": "Alamat email tidak sah",
+    "usernameMustBeFilled": "Username perlu diisi",
+    "invalidPassword": "Password tidak sah",
+    "confirmPasswordMustBeFilled": "Konfirmasi password perlu diisi",
+    "confirmPasswordMismatch": "Password dan konfirmasi password tidak serupa"
   },
   "sidebar": {
     "teamsWidget": {

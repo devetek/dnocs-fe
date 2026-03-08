@@ -5,6 +5,8 @@ import { Settings2Icon } from 'lucide-react';
 
 import { useAuthLoggedIn } from '@/services/auth/usecase';
 
+import { useLogoutUsecase } from '@/features/auth-toolkit/login-widget';
+
 import useClickOutside from '@/shared/libs/react-hooks/useClickOutside';
 import { Button } from '@/shared/presentation/atoms/Button';
 import {
@@ -22,8 +24,10 @@ export default function UserPanel(props: UserPanelProps) {
 
   const [showOptions, setShowOptions] = useState(false);
 
-  const { userProfile } = useAuthLoggedIn();
   const navigate = useNavigate();
+
+  const { userProfile } = useAuthLoggedIn();
+  const { handleLogout } = useLogoutUsecase();
 
   const userData = {
     avatarUrl: userProfile.avatarSrc ?? '',
@@ -48,7 +52,7 @@ export default function UserPanel(props: UserPanelProps) {
   };
 
   const handleClickLogout = () => {
-    window.location.assign('/auth/logout');
+    handleLogout();
   };
 
   const elUserInfo = (

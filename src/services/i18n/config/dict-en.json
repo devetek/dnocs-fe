@@ -105,7 +105,10 @@
       "save": "Save",
       "retry": "Retry",
       "backToDashboard": "Back to Dashboard",
-      "migrateOwnership": "Migrate Ownership"
+      "migrateOwnership": "Migrate Ownership",
+      "login": "Login",
+      "signUp": "Sign Up",
+      "back": "Back"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -120,6 +123,35 @@
     }
   },
   "page": {
+    "landing": {
+      "heading": {
+        "slogan": "Managing your services"
+      },
+      "marketing": {
+        "ctaStartNow": "Start now",
+        "slide1": {
+          "title": "Grow together with <highlight>your community.</highlight>",
+          "message": "d<b>nocs</b> is a platform designed to facilitate seamless resource sharing within your community; enabling collaboration, connection, and efficient use of shared assets."
+        },
+        "slide2": {
+          "title": "Focus on <highlight>your business.</highlight>",
+          "message": "Let d<b>nocs</b>'s automated system assist your operations so you can focus on your business. Issues like security, scalability, reliability, and observability are handled automatically by the system."
+        }
+      },
+      "asideLogin": {
+        "welcomeBack": "Welcome back!",
+        "pleaseLogIntoYourAcc": "Please log into your account",
+        "orSignInWith": "Or sign in with",
+        "forgotPasswordQM": "Forgot password?",
+        "dontHaveAnAccQM": "Don't have an account?"
+      },
+      "asideGreeting": {
+        "helloAgain": "Hello again,",
+        "goToDashboard": "Go to dashboard",
+        "viewProfile": "View profile",
+        "logout": "Logout"
+      }
+    },
     "dashboard": {
       "headerTitle": "Dashboard",
       "headerDesc": "View your deployed applications and registered servers here.",
@@ -370,9 +402,27 @@
     "genericUnsavedChanges": {
       "title": "Unsaved changes",
       "message": "Are you sure you want to discard all of the changes?"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password?",
+      "message": "Please reach out to the following contact for assistance:"
+    },
+    "confirmExit": {
+      "title": "Confirm Exit?",
+      "message": "You have some unsaved changes. Are you sure you want to leave?"
     }
   },
   "toaster": {
+    "loginByEmail": {
+      "error": "Failed to login for account {email}."
+    },
+    "logout": {
+      "error": "Failed to log out, please try again."
+    },
+    "signUp": {
+      "success": "Successfully registered {email}, please wait for the redirection.",
+      "error": "Failed to register {email}!"
+    },
     "claimToTeam": {
       "success": "Successfully claim <code>{type}</code> <code>{name}</code> to team",
       "noteam": "Please select team or create new team first!",
@@ -404,6 +454,9 @@
     }
   },
   "sidepanel": {
+    "signUp": {
+      "title": "Sign Up"
+    },
     "editApplication": {
       "title": "Edit Application",
       "autoDeployment": {
@@ -443,7 +496,12 @@
     "domainInvalid": "Domain is invalid!",
     "domainTldMissing": "Domain needs a TLD defined!",
     "domainL2Missing": "Domain needs a level-2 part defined!",
-    "invalidUrl": "Invalid URL retrieved!"
+    "invalidUrl": "Invalid URL retrieved!",
+    "invalidEmailAddress": "Invalid email address",
+    "usernameMustBeFilled": "Username must be filled",
+    "invalidPassword": "Invalid Password",
+    "confirmPasswordMustBeFilled": "Confirm password must be filled",
+    "confirmPasswordMismatch": "Password and confirm password don't match"
   },
   "sidebar": {
     "teamsWidget": {

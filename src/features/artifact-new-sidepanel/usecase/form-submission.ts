@@ -1,7 +1,7 @@
 import { useToaster } from '@/services/toaster';
 
 import { ApiArtifact, ApiDeploy, ApiGitBranch, ApiGitFile } from '@/shared/api';
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 
 import { useEmit, useSubscribe } from '../model/events';
 import { useArtifactNewGeneralModel } from '../model/general';

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { useBreakpoint } from '@/shared/libs/react-hooks/useBreakpoint';
 import { cn } from '@/shared/libs/tailwind/cn';
 

@@ -6,7 +6,7 @@ import { useAuthLoggedIn } from '@/services/auth';
 
 import type { FilesystemRegistry } from '@/entities/file-manager/rules/filesystem';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import buildSelector from '@/shared/libs/react-factories/buildSelector';
 
 import type { FilesystemBrowserHistory } from '../rules/types';

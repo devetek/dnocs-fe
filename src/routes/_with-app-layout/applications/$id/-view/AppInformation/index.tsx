@@ -1,6 +1,6 @@
 import { useDevetekTranslations } from '@/services/i18n';
 
-import { iife } from '@/shared/libs/browser/iife';
+import { iife } from '@/shared/libs/browser/fn';
 import { capitalizeFirstLetter } from '@/shared/libs/browser/string';
 import {
   couple,

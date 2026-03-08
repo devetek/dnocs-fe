@@ -2,7 +2,7 @@ import type { AxiosRequestConfig } from 'axios';
 import axios, { AxiosError, AxiosHeaders } from 'axios';
 
 import { isBrowser } from '../../browser/environment';
-import { iife } from '../../browser/iife';
+import { iife } from '../../browser/fn';
 import { LS_ORGANIZATION_ID, X_AUTH_ORGANIZATION_ID } from '../config';
 import type { ApiClientResponse, BaseResponse } from '../rules/types';
 
