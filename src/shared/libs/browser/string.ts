@@ -20,3 +20,16 @@ export const capitalizeEveryFirstLetter = (sentence?: string) => {
     .map((word) => capitalizeFirstLetter(word))
     .join(' ');
 };
+
+export const camelCaseToCapitalizedSentence = (sentence?: string) => {
+  if (!sentence) return '';
+  return (
+    sentence
+      // 1. Insert space before uppercase letters
+      .replace(/([A-Z])/g, ' $1')
+      // 2. Uppercase the first character
+      .replace(/^./, (match) => match.toUpperCase())
+      // 3. Trim any leading/trailing spaces
+      .trim()
+  );
+};

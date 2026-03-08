@@ -13,7 +13,7 @@ const useConfirmExitDialog = buildDialog({
   variant: 'warning',
   action: 'yes-no',
   title: '@dialog.confirmExit.title',
-  content: ({ t }) => t('dialog.confirmExit.message'),
+  content: '@dialog.confirmExit.message',
 });
 
 export default function useContextualBehavior() {

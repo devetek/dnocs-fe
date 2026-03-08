@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import React from 'react';
 
 import type { VariantProps } from 'class-variance-authority';
@@ -40,15 +41,14 @@ interface SpinnerContentProps
   children?: React.ReactNode;
 }
 
-export function Spinner({
-  size,
-  show,
-  children,
-  className,
-  classNameWrapper,
-}: SpinnerContentProps) {
+type SpinnerProps = SpinnerContentProps &
+  Omit<ComponentProps<'span'>, keyof SpinnerContentProps>;
+
+export function Spinner(props: SpinnerProps) {
+  const { size, show, children, className, classNameWrapper, ...rest } = props;
+
   return (
-    <span className={cn(spinnerVariants({ show }), classNameWrapper)}>
+    <span {...rest} className={cn(spinnerVariants({ show }), classNameWrapper)}>
       <Loader2 className={cn(loaderVariants({ size }), className)} />
       {children}
     </span>

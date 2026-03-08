@@ -1,22 +1,24 @@
-import * as React from 'react';
+import type { ComponentProps } from 'react';
 
 import { cn } from '@/shared/libs/tailwind/cn';
 
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<'input'>>(
-  ({ className, type, ...props }, ref) => {
-    return (
-      <input
-        type={type}
-        className={cn(
-          'flex h-10 w-full rounded-md border border-input bg-white dark:bg-secondary px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
-          className,
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
-Input.displayName = 'Input';
+export interface InputProps extends ComponentProps<'input'> {
+  variant?: 'flat' | '3d';
+}
 
-export { Input };
+export function Input(props: InputProps) {
+  const { className, variant = 'flat', ref, type: inputType, ...rest } = props;
+
+  const cnInput = cn(
+    'flex h-10 w-full rounded-md px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+    'file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground',
+    'focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+    {
+      'border border-input bg-white dark:bg-secondary': variant === 'flat',
+      'inset-shadow-sm border bg-card rounded-xl': variant === '3d',
+    },
+    className,
+  );
+
+  return <input {...rest} type={inputType} ref={ref} className={cnInput} />;
+}
