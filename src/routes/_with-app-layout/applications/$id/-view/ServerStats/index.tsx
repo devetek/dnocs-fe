@@ -33,7 +33,7 @@ const ServerHostname = () => {
     return (
       <a
         className="cursor-pointer hover:underline text-sm font-bold flex items-center gap-1"
-        href={`/v2/resources/servers/${serverId}`}
+        href={`/servers/${serverId}`}
         target="_blank"
         rel="noreferrer noopener"
       >
@@ -59,9 +59,9 @@ const [guard, useUsageCpu, useUsageDisk, useUsageMemory] = guardedSelects({
   fallbackLoading: UIStates.Loading,
   fallbackError: UIStates.Failed,
 })(
-  couple(useServerUsageModel, (s) => s.usageCpu),
-  couple(useServerUsageModel, (s) => s.usageDisk),
-  couple(useServerUsageModel, (s) => s.usageMemory),
+  couple(useServerUsageModel, (s: any) => s.usageCpu),
+  couple(useServerUsageModel, (s: any) => s.usageDisk),
+  couple(useServerUsageModel, (s: any) => s.usageMemory),
 );
 
 export default guard(function ServerStats() {

@@ -129,7 +129,7 @@ export default function SectionSourceGithub() {
     const publicEndpoint = import.meta.env.VITE_FRONTEND ?? '';
     localStorage.setItem('auth:provider', 'github');
     window.location.href = `${backendEndpoint}/v0/auth/github?state=${encodeURI(
-      `${publicEndpoint}/v2/applications/create?source=github`,
+      `${publicEndpoint}/applications/create?source=github`,
     )}`;
   };
 
