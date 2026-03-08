@@ -1,6 +1,9 @@
 import { useNavigate } from '@tanstack/react-router';
 
+
 import { useDevetekTranslations } from '@/services/i18n';
+
+import type { ApplicationCard } from '@/entities/application/rules/schema';
 
 import {
   couple,
@@ -10,6 +13,7 @@ import { useBreakpoint } from '@/shared/libs/react-hooks/useBreakpoint';
 import { Pagination } from '@/shared/presentation/atoms/Pagination';
 import SpinnerOverlay from '@/shared/presentation/atoms/SpinnerOverlay';
 import { EmptyState } from '@/shared/presentation/organisms/EmptyState';
+
 
 import { useAppsDataModel } from '../../-model/apps-data';
 import { useEmit } from '../../-model/events';
@@ -21,7 +25,7 @@ import AppCard from './AppCard';
 const [guard, useApplications] = guardedSelects({
   fallbackError: AppListState.Error,
   fallbackLoading: AppListState.Loading,
-})(couple(useAppsDataModel, (s) => s.applications));
+})(couple(useAppsDataModel, (s: any) => s.applications));
 
 export default guard(function MainAppList() {
   const navigate = useNavigate();
@@ -58,16 +62,11 @@ export default guard(function MainAppList() {
   return (
     <SpinnerOverlay classNameWrapper="flex flex-col gap-4" loading={refetching}>
       <div className="pb-2 grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-col gap-1 sm:gap-2 overflow-x-auto">
-        {applications.map((application) => {
+        {applications.map((application: ApplicationCard) => {
           const handleClickDetails = () => {
             const { id } = application;
 
-            const href =
-              application.identity.source === 'repository'
-                ? `/v2/applications/${id}`
-                : `/application/${id}`;
-
-            window.open(`${import.meta.env.VITE_FRONTEND}${href}`, '_blank');
+            window.open(`${import.meta.env.VITE_FRONTEND}${`/applications/${id}`}`, '_blank');
           };
 
           const handleClickEdit = () => {

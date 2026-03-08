@@ -6,7 +6,7 @@ import { nitro } from 'nitro/vite';
 import { defineConfig } from 'vite';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
 
-const BASE_PATH: string = process.env.BASE_PATH || '/v3';
+const BASE_PATH: string = process.env.BASE_PATH || '/';
 const isProduction: boolean = process.env.NODE_ENV === 'production';
 const ALLOWED_HOSTS: string[] | true = process.env.ALLOWED_HOSTS ? JSON.parse(process.env.ALLOWED_HOSTS || '["*"]') : true;
 

@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# TODO: Create '@dpanel/vite-plugin-tanstack-start' for better approach
-
-export NODE_OPTIONS="--max-old-space-size=1536"
+# export NODE_OPTIONS="--max-old-space-size=1536"
 
 # remove previous .env file, but ignore error if not exists
 rm -f .env | true

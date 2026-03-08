@@ -58,11 +58,11 @@ export default guard(function ServerList() {
       loading={refetching}
     >
       <div className="pb-2 grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-col gap-1 sm:gap-2 overflow-x-auto">
-        {servers.map((server) => {
+        {servers.map((server: any) => {
           const handleClickDetails = () => {
             if (!server.host.name) return undefined;
 
-            return () => window.open(`/v2/servers/${server.id}`, '_blank');
+            return () => window.open(`/servers/${server.id}`, '_blank');
           };
 
           const handleClickEdit = () => {
