@@ -57,3 +57,5 @@ count.txt
 .output
 .dpanel
 .vinxi
+version
+.build-*
