@@ -17,6 +17,7 @@ export default function Username(props: UsernameProps) {
         placeholder="Username"
         {...form.register('username')}
         defaultValue={props.value}
+        disabled
       />
 
       <ErrorInline message={form.formState.errors.username?.message} />

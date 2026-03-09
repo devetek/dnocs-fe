@@ -22,7 +22,7 @@ export default function SubmitButton() {
       payload: {
         fullname: values.fullname,
         username: values.username,
-        email: values.email ?? '',
+        password: values.password ?? '',
       },
     });
 

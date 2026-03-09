@@ -3,6 +3,7 @@ export interface User {
   fullname: string;
   username: string;
   email: string;
+  password?: string;
   register_from_user_id?: string;
   register_from?: string;
   avatar_url?: string;
