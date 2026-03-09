@@ -9,6 +9,7 @@ export const formSchema = z.object({
   email: z //
     .email()
     .optional(),
+  password: z.string().optional().optional(),
   id: z //
     .number()
     .optional(),
