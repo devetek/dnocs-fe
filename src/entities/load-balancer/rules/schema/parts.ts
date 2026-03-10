@@ -65,10 +65,12 @@ export const domain = relaxedUrl('https').transform((val, ctx) => {
     return z.NEVER;
   }
 
-  if (!l2) {
-    ctx.addIssue({ code: 'custom', message: 'formErrors.domainL2Missing' });
-    return z.NEVER;
-  }
+  // TODO: Disable check domain to support development
+  // Please use keyword "DPANEL-MIGRATION" to find all related code and remove them after migration is done
+  // if (!l2) {
+  //   ctx.addIssue({ code: 'custom', message: 'formErrors.domainL2Missing' });
+  //   return z.NEVER;
+  // }
 
   return {
     fqdn: url.hostname,
