@@ -5,5 +5,8 @@ export const [FiltersProvider, useFiltersContext] = buildQsFilterContext(
   'DiscoverModulesPageFilters',
   {
     serverID: (value) => safeParseInt(value),
+    serverId: (value) => safeParseInt(value),
+    serverid: (value) => safeParseInt(value),
+    SERVERID: (value) => safeParseInt(value),
   },
 );

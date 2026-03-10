@@ -33,11 +33,11 @@ export default guarded(function Header() {
         },
         {
           text: 'Servers',
-          url: '/resources/servers',
+          url: '/servers',
         },
         {
           text: serverHostName,
-          url: `/resources/servers/${serverId}`,
+          url: `/servers/${serverId}`,
         },
       ]}
     />

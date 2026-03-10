@@ -2,7 +2,8 @@ export type ServerModuleCategoryTag =
   | 'language'
   | 'database'
   | 'container'
-  | 'utilities';
+  | 'utilities'
+  | 'infrastructure';
 export type ServerModulePlatformTag = 'vm';
 
 export interface ServerModule {
