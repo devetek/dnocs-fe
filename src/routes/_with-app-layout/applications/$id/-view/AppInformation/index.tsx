@@ -21,7 +21,10 @@ const [guard, useAppDetail] = guardedSelects({
 
 export default guard(function AppInformation() {
   const [appSource] = useAppDetail((s) => [s.identity.source]);
+  const configDefs = useAppDetail((s) => s.configDefs);
   const [gitDetail] = useAppDataModel((s) => [s.gitDetail]);
+  const langVersion = configDefs?.lifecycle?.setup?.languages[0]?.version ?? '-';
+  const port = configDefs?.lifecycle?.run?.port ?? '-';
 
   const t = useDevetekTranslations();
 
@@ -39,7 +42,7 @@ export default guard(function AppInformation() {
 
   const language = iife(() => {
     if (gitDetail.$status === 'success' && gitDetail.repo_language) {
-      return capitalizeFirstLetter(gitDetail.repo_language);
+      return `${capitalizeFirstLetter(gitDetail.repo_language)} (${langVersion})`;
     }
 
     if (gitDetail.$status === 'loading') {
@@ -54,14 +57,6 @@ export default guard(function AppInformation() {
     }
 
     return '-';
-  });
-
-  const defaultBranch = iife(() => {
-    if (gitDetail.$status === 'success' && gitDetail.default_branch) {
-      return gitDetail.default_branch;
-    }
-
-    return null;
   });
 
   const repoInfo = iife(() => {
@@ -91,9 +86,7 @@ export default guard(function AppInformation() {
 
         <Layout.Row label="Environment" value="Production" />
 
-        {defaultBranch && (
-          <Layout.Row label="Default Branch" value={defaultBranch} />
-        )}
+        <Layout.Row label="Port" value={port} />
       </Layout.TwoCols>
     </Layout.Frame>
   );

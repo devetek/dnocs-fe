@@ -15,7 +15,7 @@ export function recipe(params: RecipeParams): DoRequestRecipe {
 
   return {
     method: 'POST',
-    url: `/bundle/create`,
+    url: `/v2/bundle/create`,
     data: payload,
   };
 }
