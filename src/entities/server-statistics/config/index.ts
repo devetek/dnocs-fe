@@ -1,3 +1,3 @@
-export const POLL_INTERVAL_MS__CPU = 2000;
-export const POLL_INTERVAL_MS__MEMORY = 2000;
-export const POLL_INTERVAL_MS__DISK = 5000;
+export const POLL_INTERVAL_MS__CPU = 5000;
+export const POLL_INTERVAL_MS__MEMORY = 5000;
+export const POLL_INTERVAL_MS__DISK = 10000;
