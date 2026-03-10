@@ -37,7 +37,7 @@ export function ctorConfiguration(raw: DTOs.RouterV1) {
       ] as KeysOnlyDeep<L7Rule[]>;
     }
 
-    const [backendAddress, backendPort] = raw.upstream?.split(':') ?? [];
+    const [backendAddress, backendPort = ''] = raw.upstream?.split(':') ?? [];
 
     return [
       {
@@ -46,7 +46,7 @@ export function ctorConfiguration(raw: DTOs.RouterV1) {
           backendTarget: [
             {
               address: backendAddress,
-              port: parseInt(backendPort || ''),
+              port: parseInt(backendPort) || 0,
             },
           ],
           matchingPath: '/*',
