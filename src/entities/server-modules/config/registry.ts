@@ -6,6 +6,7 @@ import LogoNodejs from '@/shared/assets/server-modules/module-pl-nodejs.svg';
 import LogoPHP from '@/shared/assets/server-modules/module-pl-php.svg';
 import LogoPython from '@/shared/assets/server-modules/module-pl-python.svg';
 import LogoRuby from '@/shared/assets/server-modules/module-pl-ruby.png';
+import LogoCaddyServer from '@/shared/assets/server-modules/module-ut-caddyserver.svg';
 import LogoDocker from '@/shared/assets/server-modules/module-ut-docker.svg';
 import LogoFFMPEG from '@/shared/assets/server-modules/module-ut-ffmpeg.svg';
 import LogoFrankenPHP from '@/shared/assets/server-modules/module-ut-frankenPHP.svg';
@@ -125,9 +126,23 @@ export const HARDCODED_SERVER_MODULES: ServerModule[] = [
     logoUrl: LogoFrankenPHP,
     has_submodule: false,
   },
+  {
+    category: ['infrastructure'],
+    platform: ['vm'],
+    id: 'caddyserver',
+    name: 'Caddy Server',
+    description:
+      'Caddy Server is a powerful, enterprise-ready, open source web server with automatic HTTPS written in Go.',
+    logoUrl: LogoCaddyServer,
+    has_submodule: false,
+  },
 ];
 
 export const SERVER_MODULES_CATEGORY: ServerModuleCategory[] = [
+  {
+    id: 'infrastructure',
+    name: 'Infrastructure',
+  },
   {
     id: 'language',
     name: 'Programming Languages Runtime',

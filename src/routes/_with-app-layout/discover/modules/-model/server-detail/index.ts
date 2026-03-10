@@ -10,10 +10,11 @@ import { useFiltersContext } from '../filters';
 export const [ServerDetailProvider, useServerDetailContext] = buildContext(
   'DiscoverModulesPageServerDetail',
   () => {
-    const { serverID } = useFiltersContext();
+    const { serverID, serverId, serverid, SERVERID } = useFiltersContext();
+    const serverIDToUse = serverID ?? serverId ?? serverid ?? SERVERID;
 
     const [response, mutate] = ApiServer.Detail.$Id.useGet({
-      serverId: String(serverID),
+      serverId: String(serverIDToUse),
     });
 
     const serverDetail = useMemo(() => {

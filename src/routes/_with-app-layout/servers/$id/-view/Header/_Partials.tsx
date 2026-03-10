@@ -15,7 +15,7 @@ function Headnote() {
           },
           {
             text: 'Servers',
-            url: '/resources/servers',
+            url: '/servers',
           },
         ]}
       />

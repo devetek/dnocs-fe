@@ -179,6 +179,24 @@ export const payloadUtFrankenPHP: PayloadFn = (props) => {
   };
 };
 
+export const payloadUtCaddyServer: PayloadFn = (props) => {
+  const { serverID } = props;
+
+  return {
+    installer_attributes: {
+      router_action: "install",
+      router_git_version: "tags/v0.1.0-alpha.0",
+    },
+    installer_type: "infrastructure",
+    installer_name: "caddyserver",
+    machine_id: serverID,
+    name: `caddyserver`,
+    module: {
+      playbook: "playbooks/module-caddyserver.yml",
+    },
+  };
+};
+
 export const PAYLOAD_REGISTRY: Record<string, PayloadFn> = {
   nodejs: payloadRtNodeJS,
   python: payloadRtPython,
@@ -190,4 +208,5 @@ export const PAYLOAD_REGISTRY: Record<string, PayloadFn> = {
   ffmpeg: payloadUtFFMPEG,
   docker: payloadUtDocker,
   frankenphp: payloadUtFrankenPHP,
+  caddyserver: payloadUtCaddyServer,
 };

@@ -25,11 +25,11 @@ const BREADCRUMB = (
       },
       {
         text: 'Servers',
-        url: '/resources/servers',
+        url: '/servers',
       },
       {
         text: 'Create new server',
-        url: '/resources/servers/create',
+        url: '/servers/create',
       },
     ]}
   />
