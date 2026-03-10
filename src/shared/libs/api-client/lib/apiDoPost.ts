@@ -21,7 +21,15 @@ export async function apiDoPost<D>(
       throw new BaseResponseError(axiosResponse.data);
     }
 
-    const data = axiosResponse.data.data as PureResponse<D>;
+    // TODO: Temporary monkey patching during migration
+    // Please use keyword "DPANEL-MIGRATION" to find all related code and remove them after migration is done
+    let data: PureResponse<D> = {} as PureResponse<D>;
+    if (typeof axiosResponse.data.data === 'string') {
+      data.$status = 'success';
+      return data;
+    }
+
+    data = axiosResponse.data.data as PureResponse<D>;
     data.$status = 'success';
 
     return data;

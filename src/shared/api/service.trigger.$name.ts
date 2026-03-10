@@ -20,7 +20,11 @@ export function recipe(params: RecipeParams): DoRequestRecipe {
     url: `/v1/service/trigger/${serviceName}`,
     data: {
       event: eventName,
-      machine_id: serverId,
+      // TODO: Temporary monkey patching during migration
+      // Please use keyword "DPANEL-MIGRATION" to find all related code and remove them after migration is done
+      // ORIGIN CODE: machine_id: Number(serverId),
+      // This will update after all ID from backend migrated to string, since javascript has limited to process int64, we need to convert it to string to avoid precision loss 
+      machine_id: Number(serverId),
     },
   };
 }
