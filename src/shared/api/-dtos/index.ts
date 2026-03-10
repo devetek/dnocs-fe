@@ -15,6 +15,8 @@ export * from './router';
 export * from './user';
 export * from './cloud';
 export * from './secret';
+export * from './networkinterface';
+export * from './portinused';
 
 export interface Pagination {
   page: number;

@@ -13,6 +13,7 @@ import MainMgmtTools from './MainMgmtTools';
 import MainModules from './MainModules';
 import MainServices from './MainServices';
 import MainNetworkInterfaces from './NetworkInterfaces';
+import MainPortInUsed from './PortInUsed';
 
 export default function ServerDetailView() {
   return (
@@ -23,27 +24,27 @@ export default function ServerDetailView() {
         <Layout.Main>
           <MainMgmtTools />
           <MainModules />
-          <Tabs defaultValue="services">
-            <TabsList>
-              <TabsTrigger value="services">Services</TabsTrigger>
+          <Tabs defaultValue="service">
+            <TabsList className='w-full text-left'>
+              <TabsTrigger value="service">Services</TabsTrigger>
               <TabsTrigger value="network">Networks</TabsTrigger>
-              <TabsTrigger value="ports">Ports</TabsTrigger>
+              <TabsTrigger value="port">Ports</TabsTrigger>
               <TabsTrigger value="syslog">Syslog</TabsTrigger>
             </TabsList>
-            <TabsContent value="services">
+            <TabsContent value="service">
               <MainServices />
             </TabsContent>
             <TabsContent value="network">
               {/* HIT API: https://pawon.terpusat.com/api/v1/server/origin/$serverId/network-interface */}
               <MainNetworkInterfaces />
             </TabsContent>
-            <TabsContent value="ports">
+            <TabsContent value="port">
               {/* HIT API:  https://pawon.terpusat.com/api/v1/server/origin/$serverId/port-in-used */}
-              <MainNetworkInterfaces />
+              <MainPortInUsed />
             </TabsContent>
             <TabsContent value="syslog">
               {/* HIT API:  https://pawon-dev.terpusat.com/api/v1/server/origin/$serverId/log?file=/var/log/syslog&line=100 */}
-              <MainNetworkInterfaces />
+              {/* <MainNetworkInterfaces /> */}
             </TabsContent>
           </Tabs>
         </Layout.Main>

@@ -48,6 +48,8 @@
       "state": "Keadaan",
       "serviceName": "Nama Layanan",
       "runningServices": "Layanan Berjalan",
+      "networkInterfaces": "Antarmuka Jaringan",
+      "portInUsed": "Port digunakan",
       "managementTools": "Alat Manajemen",
       "installedModules": "Modul Terinstal",
       "server": "Server",

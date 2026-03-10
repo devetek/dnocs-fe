@@ -1,4 +1,6 @@
+import { AdapterNetworkInterfaceFromDto } from '@/entities/network-interface/adapter';
 import { AdapterOsServiceFromDto } from '@/entities/os-service/adapter';
+import { AdapterPortInUsedFromDto } from '@/entities/port-in-used/adapter';
 import { AdapterServerFromDto } from '@/entities/server/adapter';
 import type { SchemaCommon } from '@/entities/shared/rules/schema';
 
@@ -38,6 +40,21 @@ export const [ServerDataModelProvider, useServerDataModel] = buildSelector(
     },
   });
 
+  const [responseNetworkInterface, refreshNetworkInterface] =
+    ApiServer.Origin.$Id.NetworkInterface.useGet({
+      serverId,
+      options: {
+        skip: responseServerDetail.$status !== 'success',
+      },
+    });
+
+    const [responsePortInUsed, refreshPortInUsed] = ApiServer.Origin.$Id.PortInUsed.useGet({
+      serverId,
+      options: {
+        skip: responseServerDetail.$status !== 'success',
+      },
+    });
+
   useSubscribe('@servers::detail/server-detail-refresh', () =>
     refreshServerDetail(),
   );
@@ -48,6 +65,14 @@ export const [ServerDataModelProvider, useServerDataModel] = buildSelector(
 
   useSubscribe('@servers::detail/server-modules-refresh', () =>
     refreshModules(),
+  );
+
+  useSubscribe('@servers::detail/server-network-interface-refresh', () =>
+    refreshNetworkInterface(),
+  );
+
+  useSubscribe('@servers::detail/server-port-in-used-refresh', () =>
+    refreshPortInUsed(),
   );
 
   return {
@@ -74,5 +99,9 @@ export const [ServerDataModelProvider, useServerDataModel] = buildSelector(
         modules,
       };
     }),
+    networkInterfaces: useAdapter(responseNetworkInterface, (raw) =>
+      AdapterNetworkInterfaceFromDto.toNetworkInterface(raw).unwrap(),
+    ),
+    portInUseds: useAdapter(responsePortInUsed, (raw) => AdapterPortInUsedFromDto.toPortInUsed(raw).unwrap()),
   };
 });

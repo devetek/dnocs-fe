@@ -13,37 +13,37 @@ import { useServerDataModel } from '../../-model/server-data';
 
 import { MainServicesStates as UIStates } from './_States';
 
-const [guard, useServerNetworkInterfaces] = guardedSelects({
+const [guard, useServerPortInUseds] = guardedSelects({
   initialIsLoading: true,
   fallbackLoading: UIStates.Loading,
   fallbackError: UIStates.Failed,
-})(couple(useServerDataModel, (s) => s.networkInterfaces));
+})(couple(useServerDataModel, (s) => s.portInUseds));
 
-const NetworkInterfaces = guard(() => {
-  const networkInterfaces = useServerNetworkInterfaces((s) => s);
+const PortInUseds = guard(() => {
+  const portInUseds = useServerPortInUseds((s) => s);
   // const emit = useEmit();
 
-  // const handleRefreshNetworkInterface = () => {
-  //   emit('@servers::detail/server-network-interface-refresh', null);
+  // const handleRefreshPortInUsed = () => {
+  //   emit('@servers::detail/server-port-in-used-refresh', null);
   // }
 
-  if (networkInterfaces.length === 0) {
+  if (portInUseds.length === 0) {
     return <UIStates.Empty />;
   }
 
-  return (<div>{JSON.stringify(networkInterfaces)}</div>);
+  return <div style={{ maxWidth: '100px' }}>{JSON.stringify(portInUseds)}</div>;
 });
 
-export default function MainNetworkInterfaces() {
+export default function MainPortInUsed() {
   const t = useDevetekTranslations();
 
   return (
     <CardSectionTitled
       icon={SettingsIcon}
       placement="main"
-      title={t('common.terms.networkInterfaces')}
+      title={t('common.terms.portInUsed')}
     >
-      <NetworkInterfaces />
+      <PortInUseds />
     </CardSectionTitled>
   );
 }

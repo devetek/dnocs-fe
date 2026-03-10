@@ -48,6 +48,8 @@
       "state": "State",
       "serviceName": "Service Name",
       "runningServices": "Running Services",
+      "networkInterfaces": "Network Interfaces",
+      "portInUsed": "Port in use",
       "managementTools": "Management Tools",
       "installedModules": "Installed Modules",
       "server": "Server",

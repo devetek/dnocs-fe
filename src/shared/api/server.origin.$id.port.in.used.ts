@@ -4,6 +4,8 @@ import type {
   WithApiGetOptions,
 } from '@/shared/libs/api-client/rules/types';
 
+import type { PortInUsed } from './-dtos';
+
 // =============================================================================
 //   Recipe
 // =============================================================================
@@ -24,5 +26,5 @@ export function recipe(params: RecipeParams): GetRequestRecipe {
 // =============================================================================
 
 export function useGet(params: WithApiGetOptions<RecipeParams>) {
-  return useApiGet<string[]>(recipe(params), params.options);
+  return useApiGet<PortInUsed[]>(recipe(params), params.options);
 }
