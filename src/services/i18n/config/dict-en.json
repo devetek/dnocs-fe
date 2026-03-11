@@ -49,7 +49,7 @@
       "serviceName": "Service Name",
       "runningServices": "Running Services",
       "networkInterfaces": "Network Interfaces",
-      "portInUsed": "Port in use",
+      "portInUsed": "Port in Use",
       "managementTools": "Management Tools",
       "installedModules": "Installed Modules",
       "server": "Server",
