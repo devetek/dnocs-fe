@@ -15,6 +15,7 @@ export interface RecipeParams {
   page?: number;
   pageSize?: number;
   forceMine?: boolean;
+  refreshIntervalMs?: number;
 }
 
 export function recipe(params: RecipeParams): GetRequestRecipe {
