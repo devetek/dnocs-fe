@@ -20,7 +20,7 @@ export const [ServersModelProvider, useServersModel] = buildSelector(
     filter: ownership,
     hasModules,
     userId,
-    pageSize: 8,
+    pageSize: 4,
     page: pagination,
     searchQuery,
   });

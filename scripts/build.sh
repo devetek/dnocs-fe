@@ -33,19 +33,12 @@ if [[ "${NEXT_VERSION}" != "${CURRENT_VERSION}" ]]; then
     cat version | xargs rm -rf
     echo ${NEXT_VERSION} > version
 
-    echo ">>>>> Copy current version to .output <<<<<"
-    if [ -d ".output" ]; then
-        cp -rf ${BUILD_DIR}/* .output
-    else
-        cp -rf ${BUILD_DIR} .output
-    fi
-
     echo ">>>>> Cleanup previous version <<<<<"
     # Refetch current version
     NEXT_VERSION=$(cat version)
 
-    # Delete temporary build folder
-    rm -rf .build-*
+    # Delete temporary old build version
+    find "." -name ".build-*" -not -name ".build-${CURRENT_VERSION}" -not -name ".build-${NEXT_VERSION}" -prune -exec rm -rf {} \;
 fi
 
 if [[ "${NEXT_VERSION}" == "${CURRENT_VERSION}" ]]; then
