@@ -1,6 +1,7 @@
 import { useAuthLoggedIn } from '@/services/auth';
 
 import { AdapterApplicationFromDto } from '@/entities/application/adapter';
+import { POLL_INTERVAL_MS__LIST } from '@/entities/server/config';
 
 import { ApiApplication } from '@/shared/api';
 import { useAdapter } from '@/shared/libs/api-client';
@@ -20,7 +21,7 @@ export const [AppsDataModelProvider, useAppsDataModel] = buildSelector(
 
   const [response, refresh] = ApiApplication.Find.useGet({
     page: pagination,
-    limit: 8,
+    limit: 4,
     name: searchQuery,
     source: iife(() => {
       switch (true) {
@@ -36,6 +37,9 @@ export const [AppsDataModelProvider, useAppsDataModel] = buildSelector(
     }),
     forceMine: ownership === 'mine' ? 'true' : undefined,
     userId: ownership === 'mine' ? userProfile.id : undefined,
+    options: {
+      refreshIntervalMs: POLL_INTERVAL_MS__LIST,
+    }
   });
 
   useSubscribe('@applications/application-refresh', () => refresh());

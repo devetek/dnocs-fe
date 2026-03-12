@@ -15,7 +15,7 @@ export const [LbDataModelProvider, useLbDataModel] = buildSelector(
 
   const [response, refresh] = ApiRouter.Find.useGet({
     page: currentPage,
-    pageSize: 8,
+    pageSize: 4,
     searchQuery,
     forceMine: localStorage.getItem('organization_id') == null,
     options: {
