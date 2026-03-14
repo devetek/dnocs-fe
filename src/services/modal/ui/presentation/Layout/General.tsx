@@ -17,7 +17,7 @@ export default function ModalLayoutGeneral(props: Props) {
   const { className, children, maxWidth = '512px' } = props;
 
   const cnWrapper = cn(
-    'z-[51]',
+    'z-[50]',
     'fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]',
     'border bg-card shadow-lg sm:rounded-lg w-full flex flex-col gap-4',
     className,
