@@ -1,4 +1,5 @@
 export type ServerModuleCategoryTag =
+  | 'cms'
   | 'language'
   | 'database'
   | 'container'

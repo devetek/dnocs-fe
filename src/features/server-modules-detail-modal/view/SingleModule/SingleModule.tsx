@@ -5,6 +5,7 @@ import { PAYLOAD_REGISTRY } from '@/entities/server-modules/config/installerPayl
 
 import { ApiService } from '@/shared/api';
 import { Button } from '@/shared/presentation/atoms/Button';
+import { ErrorInline } from '@/shared/presentation/atoms/ErrorInline';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
 import { FailedState } from '@/widgets/failed-state';
 
@@ -37,6 +38,24 @@ export default function SingleModule() {
     return payloadFn({ serverID, version: '' });
   }, [moduleInfo.id, serverID]);
 
+  const renderedJSON = useMemo(() => {
+    if (!configuration) return null;
+
+    try {
+      return {
+        status: 'success' as const,
+        rendered: JSON.stringify(configuration, null, 2),
+      };
+    } catch (error) {
+      return {
+        status: 'error' as const,
+        error: `[Parse Error] ${
+          error instanceof Error ? error.message : error
+        }`,
+      };
+    }
+  }, [configuration]);
+
   const handleClickInstall = () => {
     if (!configuration) return;
     installModule('', configuration);
@@ -54,7 +73,15 @@ export default function SingleModule() {
 
   const svcId = response.services?.[0]?.id ?? -1;
 
-  if (svcId === -1)
+  if (!configuration || !renderedJSON) {
+    return (
+      <p className="text-sm italic">
+        No module configuration found for this module.
+      </p>
+    );
+  }
+
+  if (svcId === -1) {
     return (
       <div className="rounded-xl bg-background w-full flex flex-col">
         <div className="flex items-center justify-between px-3 py-2">
@@ -68,8 +95,28 @@ export default function SingleModule() {
             Install
           </Button>
         </div>
+
+        <div className="flex flex-col border-t">
+          <div className="overflow-hidden p-2">
+            <>
+              <h6 className="text-sm font-bold opacity-70 mb-1">
+                Rendered Configuration JSON
+              </h6>
+              {renderedJSON.status === 'success' ? (
+                <div className="border bg-card rounded-lg">
+                  <pre className="text-xs overflow-auto p-2 whitespace-pre-wrap">
+                    {renderedJSON.rendered}
+                  </pre>
+                </div>
+              ) : (
+                <ErrorInline className="mt-2" message={renderedJSON.error} />
+              )}
+            </>
+          </div>
+        </div>
       </div>
     );
+  }
 
   return (
     <div className="italic text-right">

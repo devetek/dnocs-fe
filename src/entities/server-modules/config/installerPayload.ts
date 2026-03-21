@@ -184,20 +184,99 @@ export const payloadUtCaddyServer: PayloadFn = (props) => {
 
   return {
     installer_attributes: {
-      router_action: "install",
-      router_git_version: "tags/v0.1.0-alpha.0",
+      router_action: 'install',
+      router_git_version: 'tags/v0.1.0-alpha.0',
     },
-    installer_type: "infrastructure",
-    installer_name: "caddyserver",
+    installer_type: 'infrastructure',
+    installer_name: 'caddyserver',
     machine_id: serverID,
     name: `caddyserver`,
     module: {
-      playbook: "playbooks/module-caddyserver.yml",
+      playbook: 'playbooks/module-caddyserver.yml',
+    },
+  };
+};
+
+export const payloadDbMariaDB: PayloadFn = (props) => {
+  const { serverID } = props;
+
+  return {
+    installer_attributes: {
+      mariadb_use_official_repo_version: 10.6,
+      mariadb_bind_address: '0.0.0.0',
+    },
+    installer_type: 'database',
+    installer_name: 'mariadb',
+    machine_id: serverID,
+    name: `mariadb`,
+    module: {
+      playbook: 'playbooks/module-mariadb.yml',
+    },
+  };
+};
+
+export const payloadDbPostgreSQL: PayloadFn = (props) => {
+  const { serverID } = props;
+
+  return {
+    installer_attributes: {
+      postgresql_version: '17',
+      postgresql_listen_addresses: ['*'],
+      postgresql_admin_user: 'postgres',
+    },
+    installer_type: 'database',
+    installer_name: 'postgresql',
+    machine_id: serverID,
+    name: `postgresql`,
+    module: {
+      playbook: 'playbooks/module-postgresql.yml',
+    },
+  };
+};
+
+export const payloadDbMongo: PayloadFn = (props) => {
+  const { serverID } = props;
+
+  return {
+    installer_attributes: {
+      mongodb_version: '8.0.12',
+      mongodb_net_bindip: '0.0.0.0',
+      mongodb_security_authorization: 'enabled',
+      disable_logging_for_auth: false,
+    },
+    installer_type: 'database',
+    installer_name: 'mongodb',
+    machine_id: serverID,
+    name: `mongodb`,
+    module: {
+      playbook: 'playbooks/module-mongodb.yml',
+    },
+  };
+};
+
+export const payloadDbRedis: PayloadFn = (props) => {
+  const { serverID } = props;
+
+  return {
+    installer_attributes: {
+      redis_port: 6379,
+      redis_bind_interface: '0.0.0.0',
+    },
+    installer_type: 'database',
+    installer_name: 'redis',
+    machine_id: serverID,
+    name: `redis`,
+    module: {
+      playbook: 'playbooks/module-redis.yml',
     },
   };
 };
 
 export const PAYLOAD_REGISTRY: Record<string, PayloadFn> = {
+  redis: payloadDbRedis,
+  mongodb: payloadDbMongo,
+  mariadb: payloadDbMariaDB,
+  postgresql: payloadDbPostgreSQL,
   nodejs: payloadRtNodeJS,
   python: payloadRtPython,
   ruby: payloadRtRuby,
