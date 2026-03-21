@@ -1,5 +1,8 @@
+import LogoAdminerDBM from '@/shared/assets/server-modules/module-cm-adminer.png';
 import LogoMariaDB from '@/shared/assets/server-modules/module-db-mariadb.svg';
+import LogoMongoDB from '@/shared/assets/server-modules/module-db-mongo.svg';
 import LogoPostgreSQL from '@/shared/assets/server-modules/module-db-postgresql.svg';
+import LogoRedis from '@/shared/assets/server-modules/module-db-redis.svg';
 import LogoBun from '@/shared/assets/server-modules/module-pl-bun.svg';
 import LogoGolang from '@/shared/assets/server-modules/module-pl-golang.svg';
 import LogoNodejs from '@/shared/assets/server-modules/module-pl-nodejs.svg';
@@ -80,6 +83,24 @@ export const HARDCODED_SERVER_MODULES: ServerModule[] = [
   {
     category: ['database'],
     platform: ['vm'],
+    id: 'redis',
+    name: 'Redis',
+    description: 'Open-source in-memory data structure store, used as a database, cache, and message broker.',
+    logoUrl: LogoRedis,
+    has_submodule: false,
+  },
+  {
+    category: ['database'],
+    platform: ['vm'],
+    id: 'mongodb',
+    name: 'MongoDB',
+    description: 'Open-source NoSQL database management system.',
+    logoUrl: LogoMongoDB,
+    has_submodule: false,
+  },
+  {
+    category: ['database'],
+    platform: ['vm'],
     id: 'mariadb',
     name: 'MariaDB',
     description: 'Open-source relational database management system.',
@@ -94,6 +115,16 @@ export const HARDCODED_SERVER_MODULES: ServerModule[] = [
     description:
       'Free and open-source relational database management system emphasizing extensibility and SQL compliance.',
     logoUrl: LogoPostgreSQL,
+    has_submodule: false,
+  },
+  {
+    category: ['cms'],
+    platform: ['vm'],
+    id: 'adminer',
+    name: 'Adminer',
+    description:
+      'Adminer is a full-featured database management tool written in PHP.',
+    logoUrl: LogoAdminerDBM,
     has_submodule: false,
   },
   {
