@@ -101,7 +101,7 @@ export default function Installation() {
               </h6>
               {renderedJSON.status === 'success' ? (
                 <div className="border bg-card rounded-lg">
-                  <textarea className="text-xs overflow-auto p-2 whitespace-pre-wrap w-full">
+                  <textarea className="text-xs overflow-auto p-2 whitespace-pre-wrap w-full" rows={10}>
                     {renderedJSON.rendered}
                   </textarea>
                 </div>
