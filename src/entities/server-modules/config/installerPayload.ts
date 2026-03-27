@@ -272,11 +272,29 @@ export const payloadDbRedis: PayloadFn = (props) => {
   };
 };
 
+export const payloadCmsAdminer: PayloadFn = (props) => {
+  const { serverID } = props;
+
+  return {
+    installer_attributes: {
+      adminer_port: 8080,
+    },
+    installer_type: 'cms',
+    installer_name: 'adminer',
+    machine_id: serverID,
+    name: `adminer`,
+    module: {
+      playbook: 'playbooks/module-adminer.yml',
+    },
+  };
+};
+
 export const PAYLOAD_REGISTRY: Record<string, PayloadFn> = {
   redis: payloadDbRedis,
   mongodb: payloadDbMongo,
   mariadb: payloadDbMariaDB,
   postgresql: payloadDbPostgreSQL,
+  adminer: payloadCmsAdminer,
   nodejs: payloadRtNodeJS,
   python: payloadRtPython,
   ruby: payloadRtRuby,

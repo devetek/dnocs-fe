@@ -85,7 +85,8 @@ export const HARDCODED_SERVER_MODULES: ServerModule[] = [
     platform: ['vm'],
     id: 'redis',
     name: 'Redis',
-    description: 'Open-source in-memory data structure store, used as a database, cache, and message broker.',
+    description:
+      'Open-source in-memory data structure store, used as a database, cache, and message broker.',
     logoUrl: LogoRedis,
     has_submodule: false,
   },
@@ -177,6 +178,10 @@ export const SERVER_MODULES_CATEGORY: ServerModuleCategory[] = [
   {
     id: 'language',
     name: 'Programming Languages Runtime',
+  },
+  {
+    id: 'cms',
+    name: 'Content Management Systems',
   },
   {
     id: 'database',
