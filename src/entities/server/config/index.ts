@@ -1,1 +1,1 @@
-export const POLL_INTERVAL_MS__LIST = 10000;
+export const POLL_INTERVAL_MS__LIST = 60000;
