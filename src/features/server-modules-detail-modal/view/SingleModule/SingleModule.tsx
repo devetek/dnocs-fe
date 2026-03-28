@@ -104,9 +104,9 @@ export default function SingleModule() {
               </h6>
               {renderedJSON.status === 'success' ? (
                 <div className="border bg-card rounded-lg">
-                  <pre className="text-xs overflow-auto p-2 whitespace-pre-wrap">
+                  <textarea className="text-xs overflow-auto p-2 whitespace-pre-wrap w-full" rows={10}>
                     {renderedJSON.rendered}
-                  </pre>
+                  </textarea>
                 </div>
               ) : (
                 <ErrorInline className="mt-2" message={renderedJSON.error} />
