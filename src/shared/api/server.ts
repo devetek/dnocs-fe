@@ -7,6 +7,7 @@ import * as Origin$IdCpuUsage from './server.origin.$id.cpu.usage';
 import * as Origin$IdDiskUsage from './server.origin.$id.disk.usage';
 import * as Origin$IdLog from './server.origin.$id.log';
 import * as Origin$IdMemoryUsage from './server.origin.$id.memory.usage';
+import * as Origin$IdUserMachine from './server.origin.$id.user.machine';
 import * as Setup$Id from './server.setup.$id';
 import * as Update$Id from './server.update.$id';
 
@@ -34,6 +35,7 @@ const Root = {
       Memory: {
         Usage: Origin$IdMemoryUsage,
       },
+      User: Origin$IdUserMachine,
     },
   },
   Setup: {

@@ -44,3 +44,20 @@ export interface MachineV1 {
   created_at?: string;
   updated_at?: string;
 }
+
+export interface MachineUser {
+    id?: number;
+    username?: string;
+    password?: string;
+    group?: string;
+    uid?: number;
+    gid?: number;
+    comment?: string;
+    machine_id?: number;
+    user_id?: number;
+    installer?: string;
+    installer_status?: string;
+    error?: string;
+    created_at?: string;
+    updated_at?: string;
+}

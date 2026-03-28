@@ -4,6 +4,7 @@ import { useDevetekTranslations } from '@/services/i18n';
 
 import { useFileManagerSidepanel } from '@/features/file-manager-sidepanel';
 import { useFilePreviewSidepanel } from '@/features/file-preview-sidepanel';
+import { useUserMachineSidepanel } from '@/features/user-machine-sidepanel';
 
 import IconFileManager from '@/shared/assets/ico-filemanager.svg';
 import IconMariaDB from '@/shared/assets/ico-mariadb.svg';
@@ -23,6 +24,7 @@ export default function MainMgmtTools() {
 
   const [openFileManagerSidepanel] = useFileManagerSidepanel();
   const [openFilePreviewSidepanel] = useFilePreviewSidepanel();
+  const [openUserMachineSidepanel] = useUserMachineSidepanel();
 
   const t = useDevetekTranslations();
 
@@ -43,18 +45,20 @@ export default function MainMgmtTools() {
   };
 
   const handleClickUserManager = () => {
-    window.location.assign(`/machine/${serverId}/user`);
+    openUserMachineSidepanel({
+      serverId,
+    });
   };
 
-  const handleClickDBMariaDB = () => {
-    window.location.assign(`/machine/${serverId}/installer/database/mariadb`);
-  };
+  // const handleClickDBMariaDB = () => {
+  //   window.location.assign(`/machine/${serverId}/installer/database/mariadb`);
+  // };
 
-  const handleClickDBPostgreSQL = () => {
-    window.location.assign(
-      `/machine/${serverId}/installer/database/postgresql`,
-    );
-  };
+  // const handleClickDBPostgreSQL = () => {
+  //   window.location.assign(
+  //     `/machine/${serverId}/installer/database/postgresql`,
+  //   );
+  // };
 
   return (
     <CardSectionTitled
@@ -64,16 +68,16 @@ export default function MainMgmtTools() {
     >
       <FlexGrid gridItemsMax={4}>
         <QuickLinkItem
-          label="File Manager"
+          label="Files"
           logoUrl={IconFileManager}
           onClick={handleClickFileManager}
         />
         <QuickLinkItem
-          label="User Manager"
+          label="Users"
           logoUrl={IconUserHome}
           onClick={handleClickUserManager}
         />
-        <QuickLinkItem
+        {/* <QuickLinkItem
           label="MariaDB"
           logoUrl={IconMariaDB}
           onClick={handleClickDBMariaDB}
@@ -82,7 +86,7 @@ export default function MainMgmtTools() {
           label="PostgreSQL"
           logoUrl={IconPostgresql}
           onClick={handleClickDBPostgreSQL}
-        />
+        /> */}
       </FlexGrid>
     </CardSectionTitled>
   );
