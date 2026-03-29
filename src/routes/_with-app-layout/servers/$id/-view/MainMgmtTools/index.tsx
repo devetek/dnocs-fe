@@ -6,8 +6,7 @@ import { useFileManagerSidepanel } from '@/features/file-manager-sidepanel';
 import { useFilePreviewSidepanel } from '@/features/file-preview-sidepanel';
 
 import IconFileManager from '@/shared/assets/ico-filemanager.svg';
-import IconMariaDB from '@/shared/assets/ico-mariadb.svg';
-import IconPostgresql from '@/shared/assets/ico-postgresql.svg';
+import IconSSH from '@/shared/assets/ico-ssh.svg';
 import IconUserHome from '@/shared/assets/ico-userhome.svg';
 import { FlexGrid } from '@/shared/presentation/atoms/FlexGrid';
 import CardSectionTitled from '@/shared/presentation/molecules/CardSectionTitled';
@@ -43,17 +42,11 @@ export default function MainMgmtTools() {
   };
 
   const handleClickUserManager = () => {
-    window.location.assign(`/machine/${serverId}/user`);
+    alert('Under development!');
   };
 
-  const handleClickDBMariaDB = () => {
-    window.location.assign(`/machine/${serverId}/installer/database/mariadb`);
-  };
-
-  const handleClickDBPostgreSQL = () => {
-    window.location.assign(
-      `/machine/${serverId}/installer/database/postgresql`,
-    );
+  const handleClickSSH = () => {
+    alert('SSH coming soon!');
   };
 
   return (
@@ -64,24 +57,19 @@ export default function MainMgmtTools() {
     >
       <FlexGrid gridItemsMax={4}>
         <QuickLinkItem
-          label="File Manager"
+          label="Files"
           logoUrl={IconFileManager}
           onClick={handleClickFileManager}
         />
         <QuickLinkItem
-          label="User Manager"
+          label="Users"
           logoUrl={IconUserHome}
           onClick={handleClickUserManager}
         />
         <QuickLinkItem
-          label="MariaDB"
-          logoUrl={IconMariaDB}
-          onClick={handleClickDBMariaDB}
-        />
-        <QuickLinkItem
-          label="PostgreSQL"
-          logoUrl={IconPostgresql}
-          onClick={handleClickDBPostgreSQL}
+          label="SSH"
+          logoUrl={IconSSH}
+          onClick={handleClickSSH}
         />
       </FlexGrid>
     </CardSectionTitled>
