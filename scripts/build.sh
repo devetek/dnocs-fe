@@ -24,10 +24,6 @@ if [[ "${NEXT_VERSION}" != "${CURRENT_VERSION}" ]]; then
 
     echo ">>>>> Running Build <<<<<"
     pnpm run build || exit 2
-    
-    echo ">>>>> Create Version Control <<<<<"
-    cat version | xargs rm -rf
-    echo ${NEXT_VERSION} > version
 
     echo ">>>>> Create Version Control <<<<<"
     cat version | xargs rm -rf
