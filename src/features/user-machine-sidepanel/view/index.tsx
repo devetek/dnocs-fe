@@ -13,7 +13,7 @@ import Layout from './_presentation/Layout';
 // import Content from './Content';
 import Header from './Header';
 // import Sidebar from './Sidebar';
-// import Toolbar from './Toolbar';
+import Toolbar from './Toolbar';
 
 const Controller = () => {
   // useFilesystemHistoryUsecase();
@@ -32,15 +32,16 @@ const View = () => {
       <Layout.Header>
         <Header />
       </Layout.Header>
+
+      <Layout.Toolbar>
+        <Toolbar />
+      </Layout.Toolbar>
       {/* 
 
       <Layout.Sidebar>
         <Sidebar />
       </Layout.Sidebar>
 
-      <Layout.Toolbar>
-        <Toolbar />
-      </Layout.Toolbar>
 
       <Layout.Content>
         <Content />

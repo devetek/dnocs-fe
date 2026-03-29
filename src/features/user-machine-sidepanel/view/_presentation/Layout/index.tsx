@@ -11,17 +11,17 @@ import type {
   LayoutToolbarProps,
 } from './types';
 
-const slotted = createScopeForSlot('##FileManagerSidepanel');
+const slotted = createScopeForSlot('##UserMachineSidepanel');
 
-export default function FileManagerSidepanelLayout(props: LayoutProps) {
+export default function UserMachineSidepanelLayout(props: LayoutProps) {
   const { children, className, mode } = props;
 
   const [slotHeader, slotSidebar, slotToolbar, slotContent] = extractSlots(
     children,
-    FileManagerSidepanelLayout.Header,
-    FileManagerSidepanelLayout.Sidebar,
-    FileManagerSidepanelLayout.Toolbar,
-    FileManagerSidepanelLayout.Content,
+    UserMachineSidepanelLayout.Header,
+    UserMachineSidepanelLayout.Sidebar,
+    UserMachineSidepanelLayout.Toolbar,
+    UserMachineSidepanelLayout.Content,
   );
 
   const cnLayoutFrameWrapper = cn(
@@ -29,6 +29,11 @@ export default function FileManagerSidepanelLayout(props: LayoutProps) {
   );
 
   const cnLayoutFrame = cn('w-full max-w-full');
+
+
+  console.log("modemode")
+  console.log(mode)
+  console.log("modemode")
 
   if (mode === 'expanded') {
     const cnLayout = cn(
@@ -83,12 +88,13 @@ export default function FileManagerSidepanelLayout(props: LayoutProps) {
 
       <div className="w-full h-full border-t rounded-tl-xl overflow-hidden">
         {slotContent}
+        Kocak
       </div>
     </SidepanelLayout>
   );
 }
 
-FileManagerSidepanelLayout.Header = slotted(
+UserMachineSidepanelLayout.Header = slotted(
   'Header',
   (props: LayoutHeaderProps) => {
     const { children } = props;
@@ -97,7 +103,7 @@ FileManagerSidepanelLayout.Header = slotted(
   },
 );
 
-FileManagerSidepanelLayout.Sidebar = slotted(
+UserMachineSidepanelLayout.Sidebar = slotted(
   'Sidebar',
   (props: LayoutSidebarProps) => {
     const { children } = props;
@@ -106,7 +112,7 @@ FileManagerSidepanelLayout.Sidebar = slotted(
   },
 );
 
-FileManagerSidepanelLayout.Toolbar = slotted(
+UserMachineSidepanelLayout.Toolbar = slotted(
   'Toolbar',
   (props: LayoutToolbarProps) => {
     const { children } = props;
@@ -115,7 +121,7 @@ FileManagerSidepanelLayout.Toolbar = slotted(
   },
 );
 
-FileManagerSidepanelLayout.Content = slotted(
+UserMachineSidepanelLayout.Content = slotted(
   'Content',
   (props: LayoutContentProps) => {
     const { children } = props;

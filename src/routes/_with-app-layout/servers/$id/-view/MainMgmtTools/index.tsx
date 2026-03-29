@@ -7,8 +7,8 @@ import { useFilePreviewSidepanel } from '@/features/file-preview-sidepanel';
 import { useUserMachineSidepanel } from '@/features/user-machine-sidepanel';
 
 import IconFileManager from '@/shared/assets/ico-filemanager.svg';
-import IconMariaDB from '@/shared/assets/ico-mariadb.svg';
-import IconPostgresql from '@/shared/assets/ico-postgresql.svg';
+// import IconMariaDB from '@/shared/assets/ico-mariadb.svg';
+// import IconPostgresql from '@/shared/assets/ico-postgresql.svg';
 import IconUserHome from '@/shared/assets/ico-userhome.svg';
 import { FlexGrid } from '@/shared/presentation/atoms/FlexGrid';
 import CardSectionTitled from '@/shared/presentation/molecules/CardSectionTitled';
