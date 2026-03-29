@@ -46,7 +46,7 @@ export default function MainMgmtTools() {
   };
 
   const handleClickSSH = () => {
-    alert('SSH coming soon!');
+    window.open(`${import.meta.env.VITE_SECURE_SHELL_HOST}?id=${serverId}`, '_blank');
   };
 
   return (
