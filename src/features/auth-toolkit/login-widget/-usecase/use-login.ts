@@ -25,7 +25,7 @@ export default function useLoginUsecase() {
         ? window.location.href
         : `${window.location.href}/`;
 
-    const constructedUrl = `${backendEndpoint}/v0/auth/google?state=${encodeURI(`${redirectUrl}dashboard`)}`;
+    const constructedUrl = `${backendEndpoint}/v1/auth/google?state=${encodeURI(`${redirectUrl}dashboard`)}`;
 
     window.open(constructedUrl, '_self', 'noreferer');
 

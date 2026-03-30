@@ -13,7 +13,7 @@ import type { DTOs } from '.';
 
 export function recipe(): GetRequestRecipe {
   return {
-    url: '/v0/user/profile',
+    url: '/v1/user/profile',
   };
 }
 
