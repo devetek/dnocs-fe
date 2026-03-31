@@ -5,7 +5,7 @@ export default function useGithubLoginUsecase() {
     const publicEndpoint = import.meta.env.VITE_FRONTEND ?? '';
     const backendEndpoint = import.meta.env.VITE_BACKEND ?? '';
     localStorage.setItem('auth:provider', 'github');
-    window.location.href = `${backendEndpoint}/v0/auth/github?state=${encodeURI(
+    window.location.href = `${backendEndpoint}/v1/auth/github?state=${encodeURI(
       `${publicEndpoint}/applications`,
     )}`;
   });

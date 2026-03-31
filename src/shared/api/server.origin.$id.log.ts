@@ -23,7 +23,7 @@ export function recipe(params: RecipeParams): GetRequestRecipe {
   });
 
   return {
-    url: `v0/machine/detail/${serverId}/log?${queryParams.toString()}`,
+    url: `/v1/folder/origin/${serverId}/watch?${queryParams.toString()}`,
   };
 }
 

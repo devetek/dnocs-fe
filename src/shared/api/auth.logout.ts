@@ -12,7 +12,7 @@ import type { DTOs } from '.';
 
 export function recipe(): GetRequestRecipe {
   return {
-    url: `/v0/auth/logout`,
+    url: `/v1/auth/logout`,
   };
 }
 

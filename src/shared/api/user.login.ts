@@ -16,7 +16,7 @@ export function recipe(params: RecipeParams): DoRequestRecipe {
 
   return {
     method: 'POST',
-    url: `/v0/user/login`,
+    url: `/v1/auth/login`,
     data: {
       email,
       password,

@@ -20,7 +20,7 @@ export function recipe(params: RecipeParams): DoRequestRecipe {
 
   return {
     method: 'POST',
-    url: `/v0/user/register`,
+    url: `/v1/auth/register`,
     data: payload,
   };
 }
