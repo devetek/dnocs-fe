@@ -9,6 +9,8 @@ import * as Origin$IdLog from './server.origin.$id.log';
 import * as Origin$IdMemoryUsage from './server.origin.$id.memory.usage';
 import * as Origin$IdNetworkInterface from './server.origin.$id.network-interface';
 import * as Origin$IdPortInUsed from './server.origin.$id.port-in-used';
+import * as Origin$IdUser from './server.origin.$id.user';
+import * as Origin$IdUserCreate from './server.origin.$id.user.create';
 import * as Setup$Id from './server.setup.$id';
 import * as Update$Id from './server.update.$id';
 
@@ -38,6 +40,10 @@ const Root = {
       },
       NetworkInterface: Origin$IdNetworkInterface,
       PortInUsed: Origin$IdPortInUsed,
+      User: {
+        ...Origin$IdUser,
+        Create: Origin$IdUserCreate,
+      },
     },
   },
   Setup: {
