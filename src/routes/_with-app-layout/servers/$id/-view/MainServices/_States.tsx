@@ -2,7 +2,7 @@ import ServicesTable from '@/entities/os-service/ui/presentation/ServicesTable';
 
 import { FailedState } from '@/widgets/failed-state';
 
-import { useEmit } from '../../-model/events';
+import { useServerDataModel } from '../../-model/server-data';
 
 function Empty() {
   return <div>No running services found.</div>;
@@ -13,10 +13,10 @@ function Loading() {
 }
 
 function Failed() {
-  const emit = useEmit();
+  const [refreshServices] = useServerDataModel((s) => [s.refreshServices]);
 
   const handleClickRetry = () => {
-    emit('@servers::detail/server-services-refresh', null);
+    refreshServices();
   };
 
   return (

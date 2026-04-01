@@ -29,12 +29,14 @@ function RowHeader() {
         className="basis-[10%]"
         message="Is Loaded, Is Active, Service State"
       >
-        <p className="font-semibold text-md">{t('common.terms.state')}</p>
+        <p className="font-semibold text-md leading-5">
+          {t('common.terms.state')}
+        </p>
       </Tooltip>
-      <p className="basis-[70%] font-semibold text-md">
+      <p className="basis-[70%] font-semibold text-md leading-5">
         {t('common.terms.serviceName')}
       </p>
-      <p className="basis-[20%] font-semibold text-md">
+      <p className="basis-[20%] font-semibold text-md leading-5">
         {t('common.terms.actions')}
       </p>
     </div>
@@ -79,9 +81,9 @@ function Row(props: ServiceTableRowProps) {
           </Tooltip>
         </p>
 
-        <p className="basis-[70%]">{serviceName}</p>
+        <p className="basis-[70%] text-sm">{serviceName}</p>
 
-        <p className="basis-[20%] flex items-center gap-1">
+        <p className="basis-[20%] flex items-center gap-1 text-sm">
           <Button size="sm" variant="outline" onClick={onClickServiceDetail}>
             {t('common.actions.details')}
           </Button>

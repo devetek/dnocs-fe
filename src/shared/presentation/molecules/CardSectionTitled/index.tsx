@@ -14,9 +14,11 @@ export default function CardSectionTitled(props: CardSectionTitledProps) {
     title,
     placement,
     toolbarActions,
+    toolbarContent,
   } = props;
 
   const elToolbarActions = iife(() => {
+    if (toolbarContent) return toolbarContent;
     if (!toolbarActions) return null;
     const { label, onClick } = toolbarActions;
 

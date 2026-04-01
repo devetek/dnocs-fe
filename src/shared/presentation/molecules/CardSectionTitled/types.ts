@@ -9,6 +9,7 @@ export interface CardSectionTitledProps {
   title: string;
   placement: 'main' | 'aside';
   toolbarActions?: ToolbarAction;
+  toolbarContent?: ReactNode;
 }
 
 export interface ToolbarAction {
