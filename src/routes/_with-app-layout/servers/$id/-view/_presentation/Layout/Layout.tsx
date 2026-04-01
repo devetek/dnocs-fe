@@ -9,7 +9,7 @@ interface BaseProps {
 
 export default function ServerDetailLayout({ className, children }: BaseProps) {
   const cnRoot = cn(
-    'grid grid-cols-1 xl:grid-cols-[1fr_0.45fr] gap-4',
+    'grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(0,0.45fr)] gap-4',
     className,
   );
 
@@ -19,7 +19,7 @@ export default function ServerDetailLayout({ className, children }: BaseProps) {
 ServerDetailLayout.Main = function ServerDetailLayoutMain(props: BaseProps) {
   const { className, children } = props;
 
-  const cnRoot = cn('order-2 xl:order-1 flex flex-col gap-4', className);
+  const cnRoot = cn('order-2 xl:order-1 flex flex-col gap-4 min-w-0', className);
 
   return <div className={cnRoot}>{children}</div>;
 };
@@ -27,7 +27,7 @@ ServerDetailLayout.Main = function ServerDetailLayoutMain(props: BaseProps) {
 ServerDetailLayout.Aside = function ServerDetailLayoutAside(props: BaseProps) {
   const { className, children } = props;
 
-  const cnRoot = cn('order-1 xl:order-2', className);
+  const cnRoot = cn('order-1 xl:order-2 min-w-0', className);
 
   return <div className={cnRoot}>{children}</div>;
 };

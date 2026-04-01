@@ -30,7 +30,7 @@ function PortInUsedTable() {
   }
 
   return (
-    <div className="w-full rounded-lg border overflow-hidden">
+    <div className="w-full rounded-lg border overflow-x-auto">
       <Table>
         <TableHeader className="bg-background [&_tr]:border-b">
           <TableRow className="hover:bg-transparent">
