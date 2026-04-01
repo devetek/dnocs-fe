@@ -6,11 +6,15 @@ import { cn } from '@/shared/libs/tailwind/cn';
 export default function SearchInput(props: SearchInputProps) {
   const {
     classNameWrapper,
+    name,
     defaultValue,
     placeholder,
     value,
     maxLength,
     autoComplete,
+    autoCorrect,
+    autoCapitalize,
+    spellCheck,
     onChange,
     onEnter,
   } = props;
@@ -26,11 +30,15 @@ export default function SearchInput(props: SearchInputProps) {
     <label className={cnWrapper}>
       <input
         type="text"
+        name={name}
         className="grow outline-hidden w-full"
         placeholder={placeholder ?? 'Search'}
         value={internalValue ?? defaultValue}
         maxLength={maxLength}
         autoComplete={autoComplete}
+        autoCorrect={autoCorrect}
+        autoCapitalize={autoCapitalize}
+        spellCheck={spellCheck}
         onChange={(e) => {
           setInternalValue(e.target.value);
           onChange?.(e.target.value);
@@ -48,12 +56,16 @@ export default function SearchInput(props: SearchInputProps) {
 
 interface SearchInputProps {
   classNameWrapper?: string;
+  name?: string;
 
   defaultValue?: string;
   value?: string;
   placeholder?: string;
   maxLength?: number;
   autoComplete?: string;
+  autoCorrect?: string;
+  autoCapitalize?: string;
+  spellCheck?: boolean;
   onChange?: (newValue: string) => void;
   onEnter?: (value: string) => void;
 }

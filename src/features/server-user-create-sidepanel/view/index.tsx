@@ -115,7 +115,7 @@ export default function ServerUserCreateSidepanel(props: Props) {
 
   return (
     <Layout classNameFrame="w-[calc(100svw_-_16px)] max-w-[520px]">
-      <Layout.CloseButton icon="back" position="left" />
+      <Layout.CloseButton position="right" />
 
       <Layout.Title
         title="Add New"
@@ -246,6 +246,14 @@ export default function ServerUserCreateSidepanel(props: Props) {
       <Layout.Cta className="gap-y-2">
         <Button disabled={!canSubmit} onClick={handleCreate}>
           {isCreating ? 'Creating...' : 'Create User'}
+        </Button>
+
+        <Button
+          buttonColor="secondary"
+          disabled={isCreating}
+          onClick={() => emitSidepanel('%%sidepanel/pop', null)}
+        >
+          Close
         </Button>
       </Layout.Cta>
     </Layout>

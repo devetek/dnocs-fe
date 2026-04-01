@@ -99,8 +99,12 @@ export default function ServerUsersSidepanel(props: Props) {
         <div className="flex items-center gap-2">
           <SearchInput
             classNameWrapper="grow"
+            name="linux-user-search"
             value={searchQuery}
             autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="none"
+            spellCheck={false}
             onChange={setSearchQuery}
           />
 
