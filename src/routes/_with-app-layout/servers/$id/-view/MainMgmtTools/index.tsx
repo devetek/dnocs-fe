@@ -4,6 +4,7 @@ import { useDevetekTranslations } from '@/services/i18n';
 
 import { useFileManagerSidepanel } from '@/features/file-manager-sidepanel';
 import { useFilePreviewSidepanel } from '@/features/file-preview-sidepanel';
+import { useServerUsersSidepanel } from '@/features/server-users-sidepanel';
 
 import IconFileManager from '@/shared/assets/ico-filemanager.svg';
 import IconSSH from '@/shared/assets/ico-ssh.svg';
@@ -22,6 +23,7 @@ export default function MainMgmtTools() {
 
   const [openFileManagerSidepanel] = useFileManagerSidepanel();
   const [openFilePreviewSidepanel] = useFilePreviewSidepanel();
+  const [openServerUsersSidepanel] = useServerUsersSidepanel();
 
   const t = useDevetekTranslations();
 
@@ -42,7 +44,12 @@ export default function MainMgmtTools() {
   };
 
   const handleClickUserManager = () => {
-    alert('Under development!');
+    if (serverDetail.$status !== 'success') return;
+
+    openServerUsersSidepanel({
+      serverId,
+      serverName: serverDetail.host.name,
+    });
   };
 
   const handleClickSSH = () => {
