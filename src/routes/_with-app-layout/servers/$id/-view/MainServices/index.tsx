@@ -12,9 +12,9 @@ import {
   couple,
   guardedSelects,
 } from '@/shared/libs/react-factories/guardedSelect';
+import { Button } from '@/shared/presentation/atoms/Button';
 import CardSectionTitled from '@/shared/presentation/molecules/CardSectionTitled';
 
-import { useEmit } from '../../-model/events';
 import { useServerDataModel } from '../../-model/server-data';
 
 import { MainServicesStates as UIStates } from './_States';
@@ -23,19 +23,25 @@ const [guard, useServerServices] = guardedSelects({
   initialIsLoading: true,
   fallbackLoading: UIStates.Loading,
   fallbackError: UIStates.Failed,
-})(couple(useServerDataModel, (s) => s.services));
+})(
+  couple(
+    useServerDataModel as <R>(selector: (store: any) => R) => R,
+    (s) => s.services,
+  ),
+);
 
 const RunningServices = guard(() => {
   const [services] = useServerServices((s) => [s.list]);
 
-  const [serverId] = useServerDataModel((s) => [s.serverId]);
-
-  const emit = useEmit();
+  const [serverId, refreshServices] = useServerDataModel((s) => [
+    s.serverId,
+    s.refreshServices,
+  ]);
 
   const [openServiceOverviewModal] = useServiceOverviewModal();
 
   const [handlePushServiceActivity] = usePushServiceActivityUsecase({
-    onSuccess: () => emit('@servers::detail/server-services-refresh', null),
+    onSuccess: () => refreshServices(),
   });
 
   if (services.length === 0) {
@@ -58,7 +64,10 @@ const RunningServices = guard(() => {
 });
 
 export default function MainServices() {
-  const [serverId] = useServerDataModel((s) => [s.serverId]);
+  const [serverId, refreshServices] = useServerDataModel((s) => [
+    s.serverId,
+    s.refreshServices,
+  ]);
 
   const navigate = useNavigate();
 
@@ -73,17 +82,30 @@ export default function MainServices() {
     });
   };
 
+  const handleClickRefresh = () => {
+    refreshServices();
+  };
+
   return (
     <CardSectionTitled
       icon={SettingsIcon}
       placement="main"
       title={t('common.terms.runningServices')}
-      toolbarActions={{
-        label: t('common.actions.seeMore'),
-        onClick: handleClickSeeMore,
-      }}
+      toolbarContent={
+        <div className="flex items-center gap-2">
+          <Button size="sm" variant="outline" onClick={handleClickRefresh}>
+            Refresh
+          </Button>
+
+          <Button size="sm" variant="outline" onClick={handleClickSeeMore}>
+            {t('common.actions.seeMore')}
+          </Button>
+        </div>
+      }
     >
-      <RunningServices />
+      <div className="w-full flex flex-col gap-4">
+        <RunningServices />
+      </div>
     </CardSectionTitled>
   );
 }

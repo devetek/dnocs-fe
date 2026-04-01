@@ -52,6 +52,9 @@ export const [ServerDataModelProvider, useServerDataModel] = buildSelector(
 
   return {
     serverId,
+    refreshServerDetail,
+    refreshServices,
+    refreshModules,
     detail: useAdapter(responseServerDetail, (raw) =>
       AdapterServerFromDto.toServerDetail(raw).unwrap(),
     ),

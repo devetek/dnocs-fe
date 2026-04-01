@@ -8,6 +8,7 @@ type EventsRegistry = {
   'server-stats-refresh': null;
   'server-services-refresh': null;
   'server-modules-refresh': null;
+  'server-network-refresh': null;
   'favorite-navigation': FavoriteNavigationPayload;
 };
 
