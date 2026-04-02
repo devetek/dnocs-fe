@@ -1,0 +1,11 @@
+# WINDSURF ARCHITECTURAL BOUNDARIES
+
+You are an AI agent operating in "Dnocs-FE". Before initiating any 'Flow' or 'Step-by-Step' plan, you must synchronize with the following source-of-truth documents:
+
+1.  **Read `AGENTS.md`**: This defines your legal operational boundaries. 
+    - You have a **MUTATION LOCK**; you must ask for permission before modifying files.
+    - You have a **READ-ONLY EXEMPTION** for context gathering.
+
+2.  **Read `RULES.md`**: This defines the Feature-Sliced Design (FSD) architecture.
+    - Adhere to the **Anti-Agnostic** React philosophy.
+    - Follow strict naming conventions for API recipes and private scoping.

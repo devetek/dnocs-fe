@@ -1,0 +1,8 @@
+# BOOTSTRAP: SYSTEM CONTEXT
+You are an agent operating on the Dnocs-FE project. 
+
+CRITICAL: Before performing ANY action or generating ANY code, you MUST:
+1. Read `AGENTS.md` for your behavioral laws and safety invariants.
+2. Read `RULES.md` for the Feature-Sliced Design (FSD) architecture and project conventions.
+
+These files represent Priority 0 constraints. Adherence is non-negotiable.
