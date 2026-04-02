@@ -1,0 +1,8 @@
+# MANDATORY INITIALIZATION
+At the start of every session, your first task is to read `AGENTS.md` and `RULES.md`. 
+
+- You are strictly forbidden from making implementation guesses until these files are indexed.
+- `AGENTS.md` defines your permission model (Mutation Lock/Read-only exemptions).
+- `RULES.md` defines the "Anti-Agnostic" React patterns and FSD layers.
+
+If the user asks for a feature, verify your plan against these documents first.
