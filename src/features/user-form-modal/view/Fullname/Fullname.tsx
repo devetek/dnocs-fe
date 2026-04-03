@@ -11,14 +11,16 @@ export default function Fullname(props: FullnameProps) {
   const { form } = useDcContext();
 
   return (
-    <section className="flex flex-col gap-1">
-      <p className="text-sm font-medium">Fullname</p>
+    <section className="flex flex-col gap-1.5">
+      <label htmlFor="fullname" className="text-sm font-medium">
+        Full Name
+      </label>
       <Input
-        placeholder="Fullname"
+        id="fullname"
+        placeholder="Enter your full name"
         {...form.register('fullname')}
         defaultValue={props.value}
       />
-
       <ErrorInline message={form.formState.errors.fullname?.message} />
     </section>
   );
