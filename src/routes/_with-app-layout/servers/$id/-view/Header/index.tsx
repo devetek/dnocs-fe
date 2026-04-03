@@ -1,4 +1,4 @@
-import { CloudIcon, GlobeIcon, HardHatIcon, ServerIcon } from 'lucide-react';
+import { CloudIcon, GlobeIcon, HardHatIcon, ServerIcon, TerminalIcon } from 'lucide-react';
 import { useMetaTags } from 'react-metatags-hook';
 
 import {
@@ -19,8 +19,8 @@ const [guard, useServerDetail] = guardedSelects({
 })(couple(useServerDataModel, (s) => s.detail));
 
 export default guard(function Header() {
-  const [hostName, hostAddress, agentVersion, cloudProvider] = useServerDetail(
-    (s) => [s.host.name, s.host.address, s.agent.version, s.cloud?.provider],
+  const [hostName, hostAddress, agentVersion, cloudProvider, sshPort] = useServerDetail(
+    (s) => [s.host.name, s.host.address, s.agent.version, s.cloud?.provider, s.ssh?.port],
   );
 
   useMetaTags(
@@ -40,6 +40,11 @@ export default guard(function Header() {
           kind: 'status',
           icon: GlobeIcon,
           text: hostAddress,
+        },
+        {
+          kind: 'status',
+          icon: TerminalIcon,
+          text: sshPort ? `SSH :${sshPort}` : 'SSH -',
         },
         {
           kind: 'status',
