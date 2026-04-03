@@ -1,7 +1,6 @@
 import { ChevronRightIcon, ExternalLinkIcon } from 'lucide-react';
 
 import { cn } from '@/shared/libs/tailwind/cn';
-import { Button } from '@/shared/presentation/atoms/Button';
 
 export interface AppCardProps {
   appName: string;
@@ -53,7 +52,11 @@ export default function AppCard(props: AppCardProps) {
   const status = STATUS_CONFIG[statusState];
 
   return (
-    <div className="flex items-center gap-3 px-4 py-3 hover:bg-muted/40 transition-colors group">
+    <button
+      type="button"
+      className="w-full flex items-center gap-3 px-4 py-3 hover:bg-muted/40 transition-colors text-left"
+      onClick={onClickDetails}
+    >
       <img
         src={appIconURL}
         alt={appName}
@@ -68,7 +71,7 @@ export default function AppCard(props: AppCardProps) {
           <button
             type="button"
             className="text-xs text-primary/50 hover:text-primary truncate transition-colors max-w-[220px] text-left"
-            onClick={onClickAppURL}
+            onClick={(e) => { e.stopPropagation(); onClickAppURL?.(); }}
           >
             {appURL}
           </button>
@@ -93,16 +96,9 @@ export default function AppCard(props: AppCardProps) {
           {status.label}
         </span>
 
-        <Button
-          size="icon"
-          variant="ghost"
-          className="w-7 h-7 opacity-0 group-hover:opacity-100 transition-opacity"
-          onClick={onClickDetails}
-        >
-          <ChevronRightIcon className="w-4 h-4" />
-        </Button>
+        <ChevronRightIcon className="w-4 h-4 text-primary/40" />
       </div>
-    </div>
+    </button>
   );
 }
 

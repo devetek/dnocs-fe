@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router';
 import { CloudIcon, KeyRoundIcon, LayoutGridIcon, ServerIcon } from 'lucide-react';
 import type { ElementType } from 'react';
 
@@ -13,7 +14,7 @@ interface StatItem {
   label: string;
   value: number | undefined;
   icon: ElementType;
-  href: string;
+  to: string;
   colorClass: string;
 }
 
@@ -43,7 +44,7 @@ function StatCard({ stat }: { stat: StatItem }) {
   const Icon = stat.icon;
 
   return (
-    <a href={stat.href} className="block group">
+    <Link to={stat.to} className="block group">
       <Card
         className={cn(
           'p-4 flex flex-col gap-2 transition-all duration-200',
@@ -66,7 +67,7 @@ function StatCard({ stat }: { stat: StatItem }) {
 
         <p className="text-sm text-primary/60 font-medium">{stat.label}</p>
       </Card>
-    </a>
+    </Link>
   );
 }
 
@@ -82,28 +83,28 @@ export default function QuickStats(props: QuickStatsProps) {
       label: 'Servers',
       value: serverCount,
       icon: ServerIcon,
-      href: '/servers',
+      to: '/servers',
       colorClass: 'bg-blue-500/10 text-blue-500',
     },
     {
       label: 'Applications',
       value: appCount,
       icon: LayoutGridIcon,
-      href: '/applications',
+      to: '/applications',
       colorClass: 'bg-violet-500/10 text-violet-500',
     },
     {
       label: 'SSH Keys',
       value: sshKeyCount,
       icon: KeyRoundIcon,
-      href: '/backend/secret-managers/ssh-key',
+      to: '/backend/secret-managers/ssh-key',
       colorClass: 'bg-amber-500/10 text-amber-500',
     },
     {
       label: 'Cloud Accounts',
       value: cloudCount,
       icon: CloudIcon,
-      href: '/backend/cloud-projects',
+      to: '/backend/cloud-projects',
       colorClass: 'bg-green-500/10 text-green-500',
     },
   ];
