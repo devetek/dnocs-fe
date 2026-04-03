@@ -1,9 +1,10 @@
 import { Card } from '@/shared/presentation/atoms/Card';
 import { AsideHelpSupport } from '@/widgets/aside-help-support';
 
-import { ApplicationLayout as Layout } from './_presentation/Layout';
+import Layout from './-presentation/Layout';
 import Header from './Header';
 import MainAppList from './MainAppList';
+import MainBottomActions from './MainBottomActions';
 import MainFilter from './MainFilter';
 
 export default function ApplicationsView() {
@@ -15,6 +16,7 @@ export default function ApplicationsView() {
         <Layout.Main>
           <MainFilter />
           <MainAppList />
+          <MainBottomActions />
         </Layout.Main>
 
         <Layout.Aside>
