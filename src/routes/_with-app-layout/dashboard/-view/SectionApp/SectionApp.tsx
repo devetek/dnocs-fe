@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router';
 import { CirclePlusIcon } from 'lucide-react';
 
 import { useDevetekTranslations } from '@/services/i18n';
@@ -16,6 +17,7 @@ import { AppCard, SectionWrapper } from '../../-presentation';
 
 export default function SectionApp() {
   const t = useDevetekTranslations();
+  const navigate = useNavigate();
 
   const [response, refresh] = ApiApplication.Find.useGet({
     page: 1,
@@ -55,12 +57,12 @@ export default function SectionApp() {
         const { statusState, statusMessage } = mapAppCardStatus(app);
 
         const handleClickDetails = () => {
-          window.location.assign(`/application/${id}`);
+          navigate({ to: '/applications/$id', params: { id: String(id) } });
         };
 
         const handleClickAppURL = urlDomain
           ? () => {
-              window.location.assign(`//${urlDomain}`);
+              window.open(`//${urlDomain}`, '_blank', 'noopener,noreferrer');
             }
           : undefined;
 
@@ -81,7 +83,7 @@ export default function SectionApp() {
       .filter(excludeNully);
 
     const handleClickAddApplication = () => {
-      window.location.assign('/applications/create');
+      navigate({ to: '/applications/create' });
     };
 
     const appCount = collectedMachineEls.length;
@@ -107,7 +109,7 @@ export default function SectionApp() {
       <SectionWrapper
         sectionTitle={t('common.terms.applications')}
         count={appCount}
-        viewAllHref="/applications"
+        viewAllTo="/applications"
       >
         {elAppList}
       </SectionWrapper>

@@ -91,7 +91,7 @@ export default function SectionMachine() {
       <SectionWrapper
         sectionTitle={t('common.terms.machines')}
         count={machines.length}
-        viewAllHref="/servers"
+        viewAllTo="/servers"
       >
         {elMachineList}
       </SectionWrapper>
