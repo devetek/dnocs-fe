@@ -30,8 +30,9 @@ export default function Header() {
       description="Connect your cloud provider account to dNocs so you can create and manage resources — like virtual machines and networks — directly from here, without opening each provider's dashboard separately."
       footnote={
         <>
-          Supported providers: <strong>IDCloudHost</strong> and{' '}
-          <strong>Google Cloud Platform</strong>. More providers coming soon.
+          Supported providers: <strong>IDCloudHost</strong>,{' '}
+          <strong>Google Cloud Platform</strong>, and{' '}
+          <strong>Proxmox VE</strong>. More providers coming soon.
           Visit our{' '}
           <a className="underline" href="//www.youtube.com/@dpanel_id">
             YouTube channel

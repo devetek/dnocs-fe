@@ -1,14 +1,12 @@
 import { useRef, useState } from 'react';
 
 import { AlertCircleIcon, UploadIcon } from 'lucide-react';
+import type { ZodType } from 'zod';
 
 import { cn } from '@/shared/libs/tailwind/cn';
 
-import type { SchemaGcpForm } from '../../model/forms/schema';
-import { schemaGcpForm } from '../../model/forms/schema';
-
-export default function UploadArea(props: Props) {
-  const { maxSizeInMiB = 5, onUploadData } = props;
+export default function UploadArea<T extends Record<string, unknown>>(props: Props<T>) {
+  const { maxSizeInMiB = 5, onUploadData, schema } = props;
 
   const [isDragging, setIsDragging] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -31,7 +29,12 @@ export default function UploadArea(props: Props) {
       return;
     }
 
-    if (selectedFile.type !== 'application/json') {
+    const isJson =
+      selectedFile.type === 'application/json' ||
+      selectedFile.type === 'text/plain' ||
+      selectedFile.name.endsWith('.json');
+
+    if (!isJson) {
       setErrorMessage(`File "${selectedFile.name}" is not a JSON file!`);
       return;
     }
@@ -62,7 +65,7 @@ export default function UploadArea(props: Props) {
       return;
     }
 
-    const parsedResult = schemaGcpForm.safeParse(result);
+    const parsedResult = schema.safeParse(result);
     if (!parsedResult.success) {
       setErrorMessage(
         parsedResult.error.issues
@@ -74,7 +77,7 @@ export default function UploadArea(props: Props) {
       return;
     }
 
-    onUploadData?.(parsedResult.data);
+    onUploadData?.(parsedResult.data as T);
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -144,7 +147,8 @@ export default function UploadArea(props: Props) {
   );
 }
 
-interface Props {
+interface Props<T extends Record<string, unknown>> {
   maxSizeInMiB?: number;
-  onUploadData?: (data: SchemaGcpForm) => void;
+  schema: ZodType<T>;
+  onUploadData?: (data: T) => void;
 }

@@ -7,6 +7,7 @@ import LogoIDCloudHost from '@/shared/assets/ico-idcloudhost.svg';
 import IconAWS from '@/shared/assets/ico-aws.svg';
 import IconDO from '@/shared/assets/ico-do.svg';
 import IconHetzner from '@/shared/assets/ico-hetzner.svg';
+import IconProxmox from '@/shared/assets/ico-proxmox.png';
 import IconVultr from '@/shared/assets/ico-vultr.svg';
 import { cn } from '@/shared/libs/tailwind/cn';
 import { Input } from '@/shared/presentation/atoms/Input';
@@ -44,6 +45,11 @@ const AVAILABLE_PROVIDERS: AnyProviderOption[] = [
     value: 'gcp',
     label: 'Google Cloud',
     imgSrc: LogoGoogleCloud,
+  },
+  {
+    value: 'proxmox',
+    label: 'Proxmox VE',
+    imgSrc: IconProxmox,
   },
   {
     value: 'digitalocean',

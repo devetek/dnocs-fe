@@ -2,6 +2,7 @@ import { Button } from '@/shared/presentation/atoms/Button';
 
 import { useCpcFormContext } from '../../model/forms/context';
 import type { SchemaGcpForm } from '../../model/forms/schema';
+import { schemaGcpForm } from '../../model/forms/schema';
 import useModelSubmission from '../../model/submission';
 import { ReadOnlyView } from '../../presentation/ReadOnlyView';
 import { SubmitButton } from '../../presentation/SubmitButton';
@@ -29,7 +30,7 @@ export default function FormGCP() {
   return (
     <section className="flex flex-col mt-6">
       {!isUploaded ? (
-        <UploadArea onUploadData={handleUploadData} />
+        <UploadArea schema={schemaGcpForm} onUploadData={handleUploadData} />
       ) : (
         <div className="flex flex-col gap-2">
           <ReadOnlyView data={values} />
