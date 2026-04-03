@@ -3,6 +3,7 @@ import { CirclePlusIcon } from 'lucide-react';
 import { useDevetekTranslations } from '@/services/i18n';
 
 import { ApiApplication } from '@/shared/api';
+import IconGithub from '@/shared/assets/ico-github.svg';
 import IconWordpress from '@/shared/assets/ico-wordpress.png';
 import { excludeNully } from '@/shared/libs/browser/typeguards';
 import { Button } from '@/shared/presentation/atoms/Button';
@@ -43,12 +44,13 @@ export default function SectionApp() {
   if (response.$status === 'success') {
     const collectedMachineEls = (response.applications ?? [])
       .map((app) => {
-        const { id, name, domain: urlDomain, deploys } = app;
-        if (!id || !name || !urlDomain) return null;
+        const { id, name, domain: urlDomain, deploys, source_type } = app;
+        if (!id || !name) return null;
 
         const { machine } = deploys?.[0] ?? {};
-
         const { hostname } = machine ?? {};
+
+        const appIconURL = source_type === 'github' ? IconGithub : IconWordpress;
 
         const { statusState, statusMessage } = mapAppCardStatus(app);
 
@@ -56,16 +58,18 @@ export default function SectionApp() {
           window.location.assign(`/application/${id}`);
         };
 
-        const handleClickAppURL = () => {
-          window.location.assign(`//${urlDomain}`);
-        };
+        const handleClickAppURL = urlDomain
+          ? () => {
+              window.location.assign(`//${urlDomain}`);
+            }
+          : undefined;
 
         return (
           <AppCard
             key={id}
             appName={name}
-            appURL={urlDomain}
-            appIconURL={IconWordpress}
+            appURL={urlDomain ?? '—'}
+            appIconURL={appIconURL}
             machineName={hostname}
             statusState={statusState}
             statusMessage={statusMessage}
