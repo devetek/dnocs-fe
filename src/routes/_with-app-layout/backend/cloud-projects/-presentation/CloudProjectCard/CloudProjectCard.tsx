@@ -2,6 +2,7 @@ import { ClockIcon, CloudIcon, Trash2Icon } from 'lucide-react';
 
 import IconGoogleCloudPlatform from '@/shared/assets/ico-gcloud.png';
 import IconIDCloudHost from '@/shared/assets/ico-idcloudhost.svg';
+import IconProxmox from '@/shared/assets/ico-proxmox.png';
 import { Button } from '@/shared/presentation/atoms/Button';
 import { Card } from '@/shared/presentation/atoms/Card';
 import { Tooltip } from '@/shared/presentation/atoms/Tooltip';
@@ -9,6 +10,7 @@ import { Tooltip } from '@/shared/presentation/atoms/Tooltip';
 const PROVIDER_META: Record<string, { src?: string; label: string }> = {
   idcloudhost: { src: IconIDCloudHost, label: 'IDCloudHost' },
   gcp: { src: IconGoogleCloudPlatform, label: 'Google Cloud' },
+  proxmox: { src: IconProxmox, label: 'Proxmox VE' },
 };
 
 const HeroIcon = ({ cloudProvider = '' }: { cloudProvider?: string }) => {

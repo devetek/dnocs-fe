@@ -8,6 +8,7 @@ import { CpcFormContext, useCpcFormContext } from '../model/forms/context';
 import { FormBase } from './FormBase';
 import { FormGCP } from './FormGCP';
 import { FormIDCloudHost } from './FormIDCloudHost';
+import { FormProxmox } from './FormProxmox';
 import type { CloudProjectCreateModalProps as Props } from './types';
 
 const CloudProviderForm = () => {
@@ -24,6 +25,9 @@ const CloudProviderForm = () => {
 
     case 'gcp':
       return <FormGCP />;
+
+    case 'proxmox':
+      return <FormProxmox />;
   }
 };
 

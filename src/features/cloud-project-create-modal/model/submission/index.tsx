@@ -5,11 +5,11 @@ import { ApiCloud } from '@/shared/api';
 
 import { useCpcPropsContext } from '../../config/context';
 import { useCpcFormContext } from '../forms/context';
-import type { SchemaGcpForm, SchemaIDCloudHostForm } from '../forms/schema';
+import type { SchemaGcpForm, SchemaIDCloudHostForm, SchemaProxmoxForm } from '../forms/schema';
 
 export default function useModelSubmission() {
   const { onSubmitSuccess } = useCpcPropsContext();
-  const { formGCP, formIDCloudHost, formBase } = useCpcFormContext();
+  const { formGCP, formIDCloudHost, formBase, formProxmox } = useCpcFormContext();
 
   const [openToaster] = useToaster();
   const emitModal = useModalEmit();
@@ -32,6 +32,15 @@ export default function useModelSubmission() {
     });
   };
 
+  const handleSubmitProxmox = async () => {
+    return new Promise<SchemaProxmoxForm | undefined>((resolve) => {
+      formProxmox.handleSubmit(
+        (data) => resolve(data),
+        () => resolve(undefined),
+      )();
+    });
+  };
+
   const handleSubmit = formBase.handleSubmit(async (baseData) => {
     let credential: Record<string, unknown> | undefined;
 
@@ -39,6 +48,12 @@ export default function useModelSubmission() {
       case 'gcp':
         credential = await handleSubmitGCP();
         break;
+
+      case 'proxmox': {
+        const proxmoxData = await handleSubmitProxmox();
+        credential = proxmoxData?.credential;
+        break;
+      }
 
       case 'IDCloudHost':
         credential = await handleSubmitIDCloudHost();
@@ -79,7 +94,8 @@ export default function useModelSubmission() {
   const isSubmitting =
     formBase.formState.isSubmitting ||
     formIDCloudHost.formState.isSubmitting ||
-    formGCP.formState.isSubmitting;
+    formGCP.formState.isSubmitting ||
+    formProxmox.formState.isSubmitting;
 
   return {
     handleSubmit,

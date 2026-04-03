@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { buildContext } from '@/shared/libs/react-factories/buildContext';
 
-import { schemaBaseForm, schemaGcpForm, schemaIDCloudHostForm } from './schema';
+import { schemaBaseForm, schemaGcpForm, schemaIDCloudHostForm, schemaProxmoxForm } from './schema';
 
 export const [CpcFormContext, useCpcFormContext] = buildContext(
   'CloudProjectCreationForm',
@@ -20,10 +20,15 @@ export const [CpcFormContext, useCpcFormContext] = buildContext(
       resolver: zodResolver(schemaGcpForm),
     });
 
+    const formProxmox = useForm({
+      resolver: zodResolver(schemaProxmoxForm),
+    });
+
     return {
       formBase,
       formIDCloudHost,
       formGCP,
+      formProxmox,
     };
   },
 );

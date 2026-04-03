@@ -4,6 +4,7 @@ import { CloudIcon } from 'lucide-react';
 
 import IconGoogleCloudPlatform from '@/shared/assets/ico-gcloud.png';
 import IconIDCloudHost from '@/shared/assets/ico-idcloudhost.svg';
+import IconProxmox from '@/shared/assets/ico-proxmox.png';
 import IconEye from '@/shared/presentation/icons/Eye';
 import IconEyeActive from '@/shared/presentation/icons/EyeActive';
 import IconLastDateActive from '@/shared/presentation/icons/LastDateActive';
@@ -25,6 +26,7 @@ export interface CloudCardProps {
 const PROVIDER_META: Record<string, { src?: string; label: string }> = {
   idcloudhost: { src: IconIDCloudHost, label: 'IDCloudHost' },
   gcp: { src: IconGoogleCloudPlatform, label: 'Google Cloud' },
+  proxmox: { src: IconProxmox, label: 'Proxmox VE' },
 };
 
 export default function CloudCard(props: CloudCardProps) {
