@@ -1,10 +1,13 @@
 import { useNavigate } from '@tanstack/react-router';
 import { ArrowLeftIcon, HomeIcon } from 'lucide-react';
 
+import { useDevetekTranslations } from '@/services/i18n';
+
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 
 export default function NotFoundView() {
   const navigate = useNavigate();
+  const t = useDevetekTranslations();
 
   const canGoBack = typeof window !== 'undefined' && window.history.length > 1;
 
@@ -38,11 +41,10 @@ export default function NotFoundView() {
         {/* Heading & description */}
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            Halaman Tidak Ditemukan
+            {t('page.notFound.title')}
           </h1>
           <p className="max-w-md text-sm text-muted-foreground sm:text-base">
-            Halaman yang kamu cari tidak tersedia atau mungkin sudah dipindahkan.
-            Periksa kembali URL atau kembali ke halaman sebelumnya.
+            {t('page.notFound.description')}
           </p>
         </div>
 
@@ -50,7 +52,7 @@ export default function NotFoundView() {
         <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
           <Button buttonStyle="flat" buttonColor="primary" size="lg" onClick={handleBack}>
             <ArrowLeftIcon />
-            {canGoBack ? 'Kembali' : 'Ke Dashboard'}
+            {canGoBack ? t('common.actions.back') : t('common.actions.backToDashboard')}
           </Button>
 
           {canGoBack && (
@@ -61,7 +63,7 @@ export default function NotFoundView() {
               onClick={() => navigate({ to: '/dashboard' })}
             >
               <HomeIcon />
-              Dashboard
+              {t('sidebar.dashboard')}
             </Button>
           )}
         </div>

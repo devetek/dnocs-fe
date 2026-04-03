@@ -319,6 +319,10 @@
       "headerTitle": "Domain & DNS",
       "headerDesc": "View your registered domain and DNS here.",
       "headerFootnote": "Visit our <a>YouTube channel</a> for a tutorial."
+    },
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you are looking for is unavailable or may have been moved. Check the URL again or go back to the previous page."
     }
   },
   "widget": {

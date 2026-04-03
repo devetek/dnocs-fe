@@ -309,6 +309,10 @@
       "headerTitle": "Domain & DNS",
       "headerDesc": "Lihat domain dan DNS anda yang telah teregistrasi di sini.",
       "headerFootnote": "Kunjungi <a>kanal YouTube</a> kami untuk panduannya."
+    },
+    "notFound": {
+      "title": "Halaman Tidak Ditemukan",
+      "description": "Halaman yang kamu cari tidak tersedia atau mungkin sudah dipindahkan. Periksa kembali URL atau kembali ke halaman sebelumnya."
     }
   },
   "widget": {
