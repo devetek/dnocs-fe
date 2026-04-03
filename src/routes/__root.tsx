@@ -22,6 +22,7 @@ import { ToasterController } from '@/services/toaster';
 
 import { EventsProvider } from '@/shared/libs/events';
 
+import NotFoundView from './-view/NotFound';
 import appCss from '../styles.css?url';
 
 const getHeaders = createServerFn().handler(() => {
@@ -34,6 +35,7 @@ const getHeaders = createServerFn().handler(() => {
 
 export const Route = createRootRoute({
   ssr: true,
+  notFoundComponent: NotFoundView,
   head: () => ({
     meta: [
       {

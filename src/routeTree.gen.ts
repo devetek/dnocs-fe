@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SplatRouteImport } from './routes/$'
 import { Route as WithAppLayoutRouteRouteImport } from './routes/_with-app-layout/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WithAppLayoutTeamsIndexRouteImport } from './routes/_with-app-layout/teams/index'
@@ -35,6 +36,11 @@ import { Route as WithAppLayoutPawonPackageIdIndexRouteImport } from './routes/_
 import { Route as WithAppLayoutBackendSecretManagersSshKeyIndexRouteImport } from './routes/_with-app-layout/backend/secret-managers/ssh-key/index'
 import { Route as WithAppLayoutBackendSecretManagersSshKeyIdIndexRouteImport } from './routes/_with-app-layout/backend/secret-managers/ssh-key/$id/index'
 
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WithAppLayoutRouteRoute = WithAppLayoutRouteRouteImport.update({
   id: '/_with-app-layout',
   getParentRoute: () => rootRouteImport,
@@ -184,6 +190,7 @@ const WithAppLayoutBackendSecretManagersSshKeyIdIndexRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/applications': typeof WithAppLayoutApplicationsIndexRoute
   '/dashboard': typeof WithAppLayoutDashboardIndexRoute
   '/profile': typeof WithAppLayoutProfileIndexRoute
@@ -210,6 +217,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/applications': typeof WithAppLayoutApplicationsIndexRoute
   '/dashboard': typeof WithAppLayoutDashboardIndexRoute
   '/profile': typeof WithAppLayoutProfileIndexRoute
@@ -238,6 +246,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_with-app-layout': typeof WithAppLayoutRouteRouteWithChildren
+  '/$': typeof SplatRoute
   '/_with-app-layout/applications/': typeof WithAppLayoutApplicationsIndexRoute
   '/_with-app-layout/dashboard/': typeof WithAppLayoutDashboardIndexRoute
   '/_with-app-layout/profile/': typeof WithAppLayoutProfileIndexRoute
@@ -266,6 +275,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$'
     | '/applications'
     | '/dashboard'
     | '/profile'
@@ -292,6 +302,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$'
     | '/applications'
     | '/dashboard'
     | '/profile'
@@ -319,6 +330,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_with-app-layout'
+    | '/$'
     | '/_with-app-layout/applications/'
     | '/_with-app-layout/dashboard/'
     | '/_with-app-layout/profile/'
@@ -347,10 +359,18 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   WithAppLayoutRouteRoute: typeof WithAppLayoutRouteRouteWithChildren
+  SplatRoute: typeof SplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_with-app-layout': {
       id: '/_with-app-layout'
       path: ''
@@ -597,6 +617,7 @@ const WithAppLayoutRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   WithAppLayoutRouteRoute: WithAppLayoutRouteRouteWithChildren,
+  SplatRoute: SplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
