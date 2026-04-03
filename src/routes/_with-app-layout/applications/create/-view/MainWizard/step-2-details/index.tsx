@@ -1,4 +1,11 @@
-import { PencilLineIcon, PlusCircleIcon, ServerIcon } from 'lucide-react';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  PencilLineIcon,
+  PlusCircleIcon,
+  SearchIcon,
+  ServerIcon,
+} from 'lucide-react';
 
 import { useDevetekTranslations } from '@/services/i18n';
 
@@ -182,7 +189,8 @@ const SectionServer = () => {
     'page.applicationsCreate.wizard.step2.sectionSelectServer',
   );
 
-  const [serversStore] = useServersStore();
+  const [serversStore, { page, setPage, searchQuery, setSearchQuery }] =
+    useServersStore();
 
   const [hostedServerID, setHostedServerID] = useFormStore((s) => [
     s.hostedServerID,
@@ -193,26 +201,32 @@ const SectionServer = () => {
     window.open('/servers/create', '_blank')?.focus();
   };
 
-  let serverList = <Spinner />;
+  const totalPage =
+    serversStore.$status === 'success' ? serversStore.totalPage : 1;
+
+  let serverList = (
+    <div className="flex justify-center py-6">
+      <Spinner />
+    </div>
+  );
 
   if (serversStore.$status === 'success') {
-    serverList = (
-      <SelectionList<number>
-        items={serversStore.servers.map((server) => {
-          const { hostname, id, publicIP } = server;
-
-          return {
-            id,
-            title: hostname,
-            desc: publicIP,
-          };
-        })}
-        onClickItem={(id) => {
-          setHostedServerID(id);
-        }}
-        selectedId={hostedServerID}
-      />
-    );
+    serverList =
+      serversStore.servers.length > 0 ? (
+        <SelectionList<number>
+          items={serversStore.servers.map((server) => ({
+            id: server.id,
+            title: server.hostname,
+            desc: server.publicIP,
+          }))}
+          onClickItem={(id) => setHostedServerID(id)}
+          selectedId={hostedServerID}
+        />
+      ) : (
+        <p className="text-sm text-muted-foreground text-center py-6">
+          No servers found.
+        </p>
+      );
   }
 
   return (
@@ -230,7 +244,44 @@ const SectionServer = () => {
         </div>
       }
     >
+      <div className="relative mb-3">
+        <SearchIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
+        <Input
+          className="pl-8 h-8 text-sm"
+          placeholder="Search server..."
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setPage(1);
+          }}
+        />
+      </div>
+
       {serverList}
+
+      {totalPage > 1 && (
+        <div className="flex items-center justify-between mt-3">
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page <= 1}
+            onClick={() => setPage((p) => p - 1)}
+          >
+            <ChevronLeftIcon className="h-4 w-4" />
+          </Button>
+          <span className="text-xs text-muted-foreground">
+            Page {page} of {totalPage}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page >= totalPage}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            <ChevronRightIcon className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
     </Sectioned>
   );
 };
