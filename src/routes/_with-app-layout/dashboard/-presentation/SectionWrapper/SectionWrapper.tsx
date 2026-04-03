@@ -1,16 +1,17 @@
 import type { ReactNode } from 'react';
 
+import { Link } from '@tanstack/react-router';
 import { ArrowRightIcon } from 'lucide-react';
 
 interface Props {
   sectionTitle: string;
   count?: number;
-  viewAllHref?: string;
+  viewAllTo?: string;
   children: ReactNode;
 }
 
 export default function SectionWrapper(props: Props) {
-  const { sectionTitle, count, viewAllHref, children } = props;
+  const { sectionTitle, count, viewAllTo, children } = props;
 
   return (
     <section className="flex flex-col gap-3">
@@ -24,14 +25,14 @@ export default function SectionWrapper(props: Props) {
           )}
         </h6>
 
-        {viewAllHref && (
-          <a
+        {viewAllTo && (
+          <Link
+            to={viewAllTo}
             className="text-xs text-primary/50 hover:text-primary flex items-center gap-1 transition-colors"
-            href={viewAllHref}
           >
             View all
             <ArrowRightIcon className="w-3 h-3" />
-          </a>
+          </Link>
         )}
       </div>
 

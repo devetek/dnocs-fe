@@ -1,7 +1,5 @@
 import { ChevronRightIcon, ServerIcon } from 'lucide-react';
 
-import { Button } from '@/shared/presentation/atoms/Button';
-
 interface MachineCardProps {
   serverName: string;
   serverHostAddress: string;
@@ -12,7 +10,11 @@ export default function MachineCard(props: MachineCardProps) {
   const { serverName, serverHostAddress, onClickDetails } = props;
 
   return (
-    <div className="flex items-center gap-3 px-4 py-3 hover:bg-muted/40 transition-colors group">
+    <button
+      type="button"
+      className="w-full flex items-center gap-3 px-4 py-3 hover:bg-muted/40 transition-colors text-left"
+      onClick={onClickDetails}
+    >
       <div className="w-9 h-9 rounded-xl bg-blue-500/10 flex items-center justify-center shrink-0">
         <ServerIcon className="w-4 h-4 text-blue-500" />
       </div>
@@ -26,14 +28,7 @@ export default function MachineCard(props: MachineCardProps) {
         </p>
       </div>
 
-      <Button
-        size="icon"
-        variant="ghost"
-        className="w-7 h-7 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-        onClick={onClickDetails}
-      >
-        <ChevronRightIcon className="w-4 h-4" />
-      </Button>
-    </div>
+      <ChevronRightIcon className="w-4 h-4 text-primary/40 shrink-0" />
+    </button>
   );
 }
