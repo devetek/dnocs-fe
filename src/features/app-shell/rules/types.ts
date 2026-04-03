@@ -5,7 +5,8 @@ import type { LucideProps } from 'lucide-react';
 
 export type KnownRoutes =
   | FileRoutesByPath[keyof FileRoutesByPath]['path']
-  | `/v2${FileRoutesByPath[keyof FileRoutesByPath]['path']}`;
+  | `/v2${FileRoutesByPath[keyof FileRoutesByPath]['path']}`
+  | '/domain'; // navigates via plain <a> href until route is registered
 
 export interface MenuGroup {
   i18nKey: string;

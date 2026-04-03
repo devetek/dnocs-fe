@@ -49,6 +49,11 @@ export default function ServerCard(props: ServerCardProps) {
 
   const serverStateMetadata = SERVER_STATE_METADATA[data.state.status];
 
+  const isAnomalousStatus = data.state.status !== 'ready';
+  const statusBadgeColorClass = isAnomalousStatus
+    ? `text-[var(${serverStateMetadata.color})]`
+    : undefined;
+
   const { imageSrc: serverIconSrc } =
     SERVER_PROVIDER_METADATA[data.cloud?.provider ?? 'other'];
 
@@ -59,11 +64,11 @@ export default function ServerCard(props: ServerCardProps) {
       iconActive: IconEyeActive,
       onClick: onClickDetails,
     },
-    status !== 'progress' && {
+    data.state.status !== 'progress' && {
       label: 'Reinstall',
       onClick: onClickReinstall,
     },
-    status !== 'progress' &&
+    data.state.status !== 'progress' &&
       !!onClickEdit && {
         label: t('common.actions.edit'),
         onClick: onClickEdit,
@@ -93,7 +98,14 @@ export default function ServerCard(props: ServerCardProps) {
     return (
       <ResourceCard.Compact classNameCardWrapper={cnCardWrapper}>
         <ResourceCard.Compact.Main>
-          <ResourceCard.Compact.Main.Hero image={serverIconSrc} />
+          <ResourceCard.Compact.Main.Hero
+            image={serverIconSrc}
+            badge={isAnomalousStatus ? serverStateMetadata.icon : undefined}
+            badgeTooltipMessage={
+              isAnomalousStatus ? t(serverStateMetadata.i18n.statusLabel) : undefined
+            }
+            classNameBadge={statusBadgeColorClass}
+          />
           <ResourceCard.Compact.Main.Content
             title={data.host.name}
             status={[
@@ -113,7 +125,7 @@ export default function ServerCard(props: ServerCardProps) {
           infos={[
             {
               icon: UserCheck2Icon,
-              infoLabel: 'SSH Default User',
+              infoLabel: t('common.terms.sshDefaultUser'),
               value: data.ssh.defaultUser,
             },
             {
@@ -176,7 +188,14 @@ export default function ServerCard(props: ServerCardProps) {
   return (
     <ResourceCard.Full classNameCardWrapper={cnCardWrapper}>
       <ResourceCard.Full.Main>
-        <ResourceCard.Full.Main.Hero image={serverIconSrc} />
+        <ResourceCard.Full.Main.Hero
+          image={serverIconSrc}
+          badge={isAnomalousStatus ? serverStateMetadata.icon : undefined}
+          badgeTooltipMessage={
+            isAnomalousStatus ? t(serverStateMetadata.i18n.statusLabel) : undefined
+          }
+          classNameBadge={statusBadgeColorClass}
+        />
         <ResourceCard.Full.Main.Content
           title={data.host.name}
           status={[
@@ -206,7 +225,7 @@ export default function ServerCard(props: ServerCardProps) {
           infos={[
             {
               icon: UserCheck2Icon,
-              infoLabel: 'SSH Default User',
+              infoLabel: t('common.terms.sshDefaultUser'),
               value: data.ssh.defaultUser,
             },
             {

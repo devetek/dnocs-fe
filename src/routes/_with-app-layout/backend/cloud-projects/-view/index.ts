@@ -1,2 +1,5 @@
-export { default as FilterBar } from './FilterBar/FilterBar';
-export { default as GridList } from './GridList/GridList';
+export { default as Header } from './Header';
+export { default as MainFilter } from './MainFilter';
+export { default as MainList } from './MainList';
+export { default as MainBottomActions } from './MainBottomActions';
+export { default as Layout } from './-presentation/Layout';

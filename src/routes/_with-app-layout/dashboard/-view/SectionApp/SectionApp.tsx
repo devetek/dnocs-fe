@@ -80,6 +80,8 @@ export default function SectionApp() {
       window.location.assign('/hosting/wordpress');
     };
 
+    const appCount = collectedMachineEls.length;
+
     elAppList = (
       <FlexGrid gridItemsMax={5}>
         <AddCard onClick={handleClickAddApplication} />
@@ -87,10 +89,19 @@ export default function SectionApp() {
         {...collectedMachineEls}
       </FlexGrid>
     );
+
+    return (
+      <SectionWrapper
+        sectionTitle={t('common.terms.applications')}
+        count={appCount}
+      >
+        {elAppList}
+      </SectionWrapper>
+    );
   }
 
   return (
-    <SectionWrapper sectionTitle={t('common.terms.applications').toUpperCase()}>
+    <SectionWrapper sectionTitle={t('common.terms.applications')}>
       {elAppList}
     </SectionWrapper>
   );

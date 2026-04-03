@@ -38,6 +38,7 @@
       "private": "Private",
       "public": "Public",
       "sshPort": "SSH Port",
+      "sshDefaultUser": "Login Username",
       "cpuUsage": "CPU Usage",
       "ramUsage": "RAM Usage",
       "diskUsage": "Disk Usage",
@@ -518,7 +519,7 @@
     "servers": "Servers",
     "serversSubmenu": {
       "filterHasDb": "has database...",
-      "filterHasMemstore": "has memstore..."
+      "filterHasMemstore": "has cache (Redis)..."
     },
     "backend": "Backend",
     "database": "Database",

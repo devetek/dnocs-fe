@@ -32,7 +32,7 @@ export default function ServerDetailView() {
                 Services
               </TabsTrigger>
               <TabsTrigger className="w-full" value="port-in-used">
-                Port In Used
+                Active Ports
               </TabsTrigger>
               <TabsTrigger className="w-full" value="network-interface">
                 Network Interface

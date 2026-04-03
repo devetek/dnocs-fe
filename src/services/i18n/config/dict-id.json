@@ -38,6 +38,7 @@
       "private": "Pribadi",
       "public": "Publik",
       "sshPort": "Port SSH",
+      "sshDefaultUser": "Username Login",
       "cpuUsage": "Penggunaan CPU",
       "ramUsage": "Penggunaan RAM",
       "diskUsage": "Penggunaan Disk",
@@ -508,7 +509,7 @@
     "servers": "Server",
     "serversSubmenu": {
       "filterHasDb": "punya database...",
-      "filterHasMemstore": "punya memstore..."
+      "filterHasMemstore": "punya cache (Redis)..."
     },
     "backend": "Backend",
     "database": "Database",
