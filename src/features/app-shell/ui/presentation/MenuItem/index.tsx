@@ -1,8 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { ChevronDown } from 'lucide-react';
 
-import { isPathV2 } from '@/features/app-shell/lib/isPathV2';
-
 import { cn } from '@/shared/libs/tailwind/cn';
 import { Tooltip } from '@/shared/presentation/atoms/Tooltip';
 
@@ -11,18 +9,10 @@ import type { LinkWrapperProps, MenuItemProps } from './types';
 const LinkWrapper = (props: LinkWrapperProps) => {
   const { className, children, url, onClick } = props;
 
-  if (isPathV2(url)) {
-    return (
-      <Link className={className} to={url.replace('/v2', '')} onClick={onClick}>
-        {children}
-      </Link>
-    );
-  }
-
   return (
-    <a className={className} href={url} onClick={onClick}>
+    <Link className={className} to={url.replace(/\/v2/, '') as any} onClick={onClick}>
       {children}
-    </a>
+    </Link>
   );
 };
 

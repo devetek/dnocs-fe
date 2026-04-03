@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useLocation } from '@tanstack/react-router';
+import { Link, useLocation } from '@tanstack/react-router';
 
 import { useDevetekTranslations } from '@/services/i18n';
 
@@ -65,16 +65,15 @@ const MenuItemWrapper = (props: MenuItemServersProps) => {
 
             const qs = new URLSearchParams(queryParam);
 
-            const href = `${url}?${qs.toString()}`;
-
             return (
-              <a
+              <Link
                 key={i18nKeyFilter}
                 className="cursor-pointer pl-2 text-sm italic hover:underline text-primary"
-                href={href}
+                to={url.replace(/\/v2/, '') as any}
+                search={Object.fromEntries(qs) as any}
               >
                 {t(i18nKeyFilter)}
-              </a>
+              </Link>
             );
           })}
         </div>
