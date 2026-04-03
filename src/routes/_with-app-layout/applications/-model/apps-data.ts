@@ -5,7 +5,6 @@ import { POLL_INTERVAL_MS__LIST } from '@/entities/server/config';
 
 import { ApiApplication } from '@/shared/api';
 import { useAdapter } from '@/shared/libs/api-client';
-import { iife } from '@/shared/libs/browser/fn';
 import buildSelector from '@/shared/libs/react-factories/buildSelector';
 
 import { useSubscribe } from './events';
@@ -16,25 +15,13 @@ export const [AppsDataModelProvider, useAppsDataModel] = buildSelector(
 )(() => {
   const { userProfile } = useAuthLoggedIn();
 
-  const { pagination, searchQuery, bundleType, sourceType, ownership } =
+  const { pagination, searchQuery, ownership } =
     useFilterModel();
 
   const [response, refresh] = ApiApplication.Find.useGet({
     page: pagination,
     limit: 4,
     name: searchQuery,
-    source: iife(() => {
-      switch (true) {
-        case sourceType === 'github':
-          return 'github';
-
-        case bundleType === 'laravel':
-          return 'laravel';
-
-        case bundleType === 'wordpress':
-          return 'wordpress';
-      }
-    }),
     forceMine: ownership === 'mine' ? 'true' : undefined,
     userId: ownership === 'mine' ? userProfile.id : undefined,
     options: {

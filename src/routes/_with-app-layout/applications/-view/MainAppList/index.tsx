@@ -1,50 +1,39 @@
 import { useNavigate } from '@tanstack/react-router';
 
-
 import { useDevetekTranslations } from '@/services/i18n';
 
 import type { ApplicationCard } from '@/entities/application/rules/schema';
 
-import {
-  couple,
-  guardedSelects,
-} from '@/shared/libs/react-factories/guardedSelect';
 import { useBreakpoint } from '@/shared/libs/react-hooks/useBreakpoint';
-import { Pagination } from '@/shared/presentation/atoms/Pagination';
-import SpinnerOverlay from '@/shared/presentation/atoms/SpinnerOverlay';
+import LayoutAutoGridList from '@/shared/presentation/atoms/LayoutAutoGridList';
 import { EmptyState } from '@/shared/presentation/organisms/EmptyState';
-
+import { buildResponseView } from '@/widgets/response-view-builder';
 
 import { useAppsDataModel } from '../../-model/apps-data';
 import { useEmit } from '../../-model/events';
 import { useFilterModel } from '../../-model/filters';
-import { AppListState } from '../_presentation/AppListState';
+import { AppListState } from '../-presentation/AppListState';
 
 import AppCard from './AppCard';
 
-const [guard, useApplications] = guardedSelects({
+export default buildResponseView({
+  useResponse: () => useAppsDataModel((s) => s.applications),
   fallbackError: AppListState.Error,
   fallbackLoading: AppListState.Loading,
-})(couple(useAppsDataModel, (s: any) => s.applications));
+  render: function Render(props) {
+    const { list } = props;
 
-export default guard(function MainAppList() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const t = useDevetekTranslations();
+    const emit = useEmit();
 
-  const t = useDevetekTranslations();
+    const isDesktop = useBreakpoint('lg');
+    const { viewMode } = useFilterModel();
 
-  const isDesktop = useBreakpoint('lg');
+    const derivedViewMode = viewMode !== 'auto' ? viewMode : isDesktop ? 'list' : 'grid';
 
-  const { pagination, setPagination } = useFilterModel();
-
-  const emit = useEmit();
-
-  const [refetching, applications, paginationData] = useApplications(
-    (s, isRefetching) => [isRefetching, s.list, s.pagination],
-  );
-
-  if (applications.length < 1) {
-    return (
-      <SpinnerOverlay loading={refetching}>
+    if (list.length < 1) {
+      return (
         <EmptyState
           title={t('page.applications.emptyState.title')}
           message={t('page.applications.emptyState.message')}
@@ -55,18 +44,18 @@ export default guard(function MainAppList() {
             })
           }
         />
-      </SpinnerOverlay>
-    );
-  }
+      );
+    }
 
-  return (
-    <SpinnerOverlay classNameWrapper="flex flex-col gap-4" loading={refetching}>
-      <div className="pb-2 grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-col gap-1 sm:gap-2 overflow-x-auto">
-        {applications.map((application: ApplicationCard) => {
+    return (
+      <LayoutAutoGridList viewMode={viewMode}>
+        {list.map((application: ApplicationCard) => {
           const handleClickDetails = () => {
             const { id } = application;
-
-            window.open(`${import.meta.env.VITE_FRONTEND}${`/applications/${id}`}`, '_blank');
+            window.open(
+              `${import.meta.env.VITE_FRONTEND}${`/applications/${id}`}`,
+              '_blank',
+            );
           };
 
           const handleClickEdit = () => {
@@ -90,7 +79,7 @@ export default guard(function MainAppList() {
           return (
             <AppCard
               key={application.id}
-              variant={isDesktop ? 'full' : 'compact'}
+              variant={derivedViewMode === 'grid' ? 'compact' : 'full'}
               data={application}
               onClickEdit={handleClickEdit}
               onClickDetails={handleClickDetails}
@@ -99,15 +88,8 @@ export default guard(function MainAppList() {
             />
           );
         })}
-      </div>
-
-      <div className="flex flex-row-reverse">
-        <Pagination
-          maxPage={paginationData.total_page}
-          currentPage={pagination}
-          onPageChange={setPagination}
-        />
-      </div>
-    </SpinnerOverlay>
-  );
+      </LayoutAutoGridList>
+    );
+  },
 });
+

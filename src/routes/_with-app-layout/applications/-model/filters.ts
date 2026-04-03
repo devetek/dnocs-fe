@@ -15,36 +15,6 @@ export const [FilterModelProvider, useFilterModel] = buildQsFilterContext(
           return null;
       }
     },
-    bundleType: (value) => {
-      switch (value) {
-        case 'all':
-          return 'all' as const;
-
-        case 'wordpress':
-          return 'wordpress' as const;
-
-        case 'laravel':
-          return 'laravel' as const;
-
-        default:
-          return null;
-      }
-    },
-    sourceType: (value) => {
-      switch (value) {
-        case 'all':
-          return 'all' as const;
-
-        case 'github':
-          return 'github' as const;
-
-        case 'no-source':
-          return 'no-source' as const;
-
-        default:
-          return null;
-      }
-    },
     searchQuery: {
       qs: 'q',
       init: (value) => value || '',
@@ -52,6 +22,18 @@ export const [FilterModelProvider, useFilterModel] = buildQsFilterContext(
     pagination: {
       qs: 'page',
       init: (value) => Number(value) || 1,
+    },
+    viewMode: (value) => {
+      switch (value) {
+        case 'list':
+          return 'list' as const;
+
+        case 'grid':
+          return 'grid' as const;
+
+        default:
+          return 'auto' as const;
+      }
     },
   },
 );
