@@ -1,22 +1,22 @@
-import { useAuthLoggedIn } from '@/services/auth/usecase';
+import { CirclePlusIcon } from 'lucide-react';
+
 import { useDevetekTranslations } from '@/services/i18n';
 
 import { ApiApplication } from '@/shared/api';
 import IconWordpress from '@/shared/assets/ico-wordpress.png';
 import { excludeNully } from '@/shared/libs/browser/typeguards';
-import { FlexGrid } from '@/shared/presentation/atoms/FlexGrid';
+import { Button } from '@/shared/presentation/atoms/Button';
+import { Card } from '@/shared/presentation/atoms/Card';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
 import { FailedState } from '@/widgets/failed-state';
 
 import mapAppCardStatus from '../../-lib/mapAppCardStatus';
-import { AddCard, AppCard, SectionWrapper } from '../../-presentation';
+import { AppCard, SectionWrapper } from '../../-presentation';
 
 export default function SectionApp() {
-  const userId = useAuthLoggedIn().userProfile.id;
   const t = useDevetekTranslations();
 
   const [response, refresh] = ApiApplication.Find.useGet({
-    userId,
     page: 1,
   });
 
@@ -77,23 +77,33 @@ export default function SectionApp() {
       .filter(excludeNully);
 
     const handleClickAddApplication = () => {
-      window.location.assign('/hosting/wordpress');
+      window.location.assign('/applications/create');
     };
 
     const appCount = collectedMachineEls.length;
 
     elAppList = (
-      <FlexGrid gridItemsMax={5}>
-        <AddCard onClick={handleClickAddApplication} />
+      <Card className="rounded-2xl overflow-hidden divide-y divide-border/50 p-0">
+        {collectedMachineEls}
 
-        {...collectedMachineEls}
-      </FlexGrid>
+        <Button
+          variant="ghost"
+          className="w-full justify-start gap-3 px-4 py-3 h-auto rounded-none text-primary/50 hover:text-primary"
+          onClick={handleClickAddApplication}
+        >
+          <div className="w-9 h-9 rounded-xl border-2 border-dashed border-border flex items-center justify-center shrink-0">
+            <CirclePlusIcon className="w-4 h-4" />
+          </div>
+          <span className="text-sm">{t('common.actions.addMore')}</span>
+        </Button>
+      </Card>
     );
 
     return (
       <SectionWrapper
         sectionTitle={t('common.terms.applications')}
         count={appCount}
+        viewAllHref="/applications"
       >
         {elAppList}
       </SectionWrapper>
@@ -106,3 +116,4 @@ export default function SectionApp() {
     </SectionWrapper>
   );
 }
+

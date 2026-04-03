@@ -1,97 +1,7 @@
-import type { JSX } from 'react';
+import { ChevronRightIcon, ExternalLinkIcon } from 'lucide-react';
 
-import {
-  CheckCircleIcon,
-  CircleAlertIcon,
-  ClockIcon,
-  Settings2Icon,
-} from 'lucide-react';
-
-import { useDevetekTranslations } from '@/services/i18n';
-
-import IconServer from '@/shared/assets/ico-server.webp';
 import { cn } from '@/shared/libs/tailwind/cn';
 import { Button } from '@/shared/presentation/atoms/Button';
-import { Card } from '@/shared/presentation/atoms/Card';
-
-import TemplateCardInfo from '../Template/CardInfo';
-
-export default function AppCard(props: AppCardProps) {
-  const {
-    appName,
-    appURL,
-    appIconURL,
-    machineName,
-    statusState,
-    statusMessage,
-    onClickAppURL,
-    onClickDetails,
-  } = props;
-
-  const t = useDevetekTranslations();
-
-  let statusIcon: JSX.Element | null = null;
-
-  switch (statusState) {
-    case 'check':
-      statusIcon = <CheckCircleIcon width={24} height={24} color="#3ecf8e" />;
-      break;
-
-    case 'pending':
-      statusIcon = <ClockIcon width={24} height={24} color="#a8a7a5" />;
-      break;
-
-    case 'progress':
-      statusIcon = <ClockIcon width={24} height={24} color="#efb041" />;
-      break;
-
-    case 'error':
-      statusIcon = <CircleAlertIcon width={24} height={24} color="#ec5b56" />;
-  }
-
-  const cnInnerCard = cn('rounded-2xl shadow-xs bg-card w-full', {
-    'border-red-500': statusState === 'error',
-  });
-
-  return (
-    <Card className="rounded-2xl border-none bg-card/65">
-      <Card className={cnInnerCard}>
-        <div className="h-[224px] p-3 flex flex-col justify-between">
-          <TemplateCardInfo
-            title={appName}
-            desc={appURL}
-            iconURL={appIconURL}
-            slotStatusIcon={statusIcon}
-            slotStatusTooltip={statusMessage}
-            onClickDesc={onClickAppURL}
-          />
-
-          <div className="flex gap-2">
-            <Button
-              className="flex-1"
-              variant="secondary"
-              size="sm"
-              onClick={onClickDetails}
-            >
-              <Settings2Icon width={16} height={16} />
-              {t('common.actions.details')}
-            </Button>
-          </div>
-        </div>
-      </Card>
-
-      <div className="px-2 py-1 flex items-center gap-[2px]">
-        <img className="w-4 h-4" src={IconServer} alt="Server" />
-
-        <p className="text-sm text-primary overflow-hidden text-ellipsis">
-          {machineName || (
-            <em className="opacity-50">{t('common.terms.unknown')}</em>
-          )}
-        </p>
-      </div>
-    </Card>
-  );
-}
 
 export interface AppCardProps {
   appName: string;
@@ -104,3 +14,95 @@ export interface AppCardProps {
   onClickAppURL?: () => void;
   onClickDetails?: () => void;
 }
+
+const STATUS_CONFIG: Record<
+  AppCardProps['statusState'],
+  { label: string; className: string }
+> = {
+  check: {
+    label: 'Ready',
+    className:
+      'bg-green-500/10 text-green-600 dark:text-green-400 ring-green-500/20',
+  },
+  pending: {
+    label: 'Pending',
+    className: 'bg-gray-500/10 text-gray-500 ring-gray-500/20',
+  },
+  progress: {
+    label: 'In Progress',
+    className:
+      'bg-amber-500/10 text-amber-600 dark:text-amber-400 ring-amber-500/20',
+  },
+  error: {
+    label: 'Error',
+    className: 'bg-red-500/10 text-red-600 dark:text-red-400 ring-red-500/20',
+  },
+};
+
+export default function AppCard(props: AppCardProps) {
+  const {
+    appName,
+    appURL,
+    appIconURL,
+    machineName,
+    statusState,
+    onClickAppURL,
+    onClickDetails,
+  } = props;
+
+  const status = STATUS_CONFIG[statusState];
+
+  return (
+    <div className="flex items-center gap-3 px-4 py-3 hover:bg-muted/40 transition-colors group">
+      <img
+        src={appIconURL}
+        alt={appName}
+        className="w-9 h-9 rounded-xl shrink-0 object-contain"
+      />
+
+      <div className="flex-1 min-w-0">
+        <p className="font-semibold text-sm text-primary truncate leading-tight">
+          {appName}
+        </p>
+        <div className="flex items-center gap-1 mt-0.5">
+          <button
+            type="button"
+            className="text-xs text-primary/50 hover:text-primary truncate transition-colors max-w-[220px] text-left"
+            onClick={onClickAppURL}
+          >
+            {appURL}
+          </button>
+          {onClickAppURL && (
+            <ExternalLinkIcon className="w-3 h-3 text-primary/30 shrink-0" />
+          )}
+        </div>
+        {machineName && (
+          <p className="text-xs text-primary/35 truncate mt-0.5 font-mono">
+            {machineName}
+          </p>
+        )}
+      </div>
+
+      <div className="flex items-center gap-2 shrink-0">
+        <span
+          className={cn(
+            'text-xs font-medium px-2 py-0.5 rounded-full ring-1 ring-inset hidden sm:inline-block',
+            status.className,
+          )}
+        >
+          {status.label}
+        </span>
+
+        <Button
+          size="icon"
+          variant="ghost"
+          className="w-7 h-7 opacity-0 group-hover:opacity-100 transition-opacity"
+          onClick={onClickDetails}
+        >
+          <ChevronRightIcon className="w-4 h-4" />
+        </Button>
+      </div>
+    </div>
+  );
+}
+

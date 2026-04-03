@@ -1,26 +1,24 @@
+import { CirclePlusIcon } from 'lucide-react';
+
 import { useNavigate } from '@tanstack/react-router';
 
-import { useAuthLoggedIn } from '@/services/auth';
 import { useDevetekTranslations } from '@/services/i18n';
 
 import { ApiServer } from '@/shared/api';
 import { excludeNully } from '@/shared/libs/browser/typeguards';
-import { FlexGrid } from '@/shared/presentation/atoms/FlexGrid';
+import { Button } from '@/shared/presentation/atoms/Button';
+import { Card } from '@/shared/presentation/atoms/Card';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
 import { FailedState } from '@/widgets/failed-state';
 
-import { AddCard, MachineCard, SectionWrapper } from '../../-presentation';
+import { MachineCard, SectionWrapper } from '../../-presentation';
 
 export default function SectionMachine() {
-  const userId = useAuthLoggedIn().userProfile.id;
   const t = useDevetekTranslations();
 
   const navigate = useNavigate();
 
-  const [response, getServerFind] = ApiServer.Find.useGet({
-    userId,
-    filter: 'shared-with-me',
-  });
+  const [response, getServerFind] = ApiServer.Find.useGet({});
 
   let elMachineList = (
     <div className="h-20 flex items-center justify-center">
@@ -73,17 +71,27 @@ export default function SectionMachine() {
     };
 
     elMachineList = (
-      <FlexGrid gridItemsMax={5}>
-        <AddCard onClick={handleClickAddResource} />
-
+      <Card className="rounded-2xl overflow-hidden divide-y divide-border/50 p-0">
         {elCollectedMachines}
-      </FlexGrid>
+
+        <Button
+          variant="ghost"
+          className="w-full justify-start gap-3 px-4 py-3 h-auto rounded-none text-primary/50 hover:text-primary"
+          onClick={handleClickAddResource}
+        >
+          <div className="w-9 h-9 rounded-xl border-2 border-dashed border-border flex items-center justify-center shrink-0">
+            <CirclePlusIcon className="w-4 h-4" />
+          </div>
+          <span className="text-sm">{t('common.actions.addMore')}</span>
+        </Button>
+      </Card>
     );
 
     return (
       <SectionWrapper
         sectionTitle={t('common.terms.machines')}
         count={machines.length}
+        viewAllHref="/servers"
       >
         {elMachineList}
       </SectionWrapper>
@@ -96,3 +104,4 @@ export default function SectionMachine() {
     </SectionWrapper>
   );
 }
+
