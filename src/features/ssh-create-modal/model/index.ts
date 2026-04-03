@@ -9,7 +9,7 @@ export const [SSHCreateProvider, useSSHCreateContext] = buildContext(
   (props: Props) => {
     const [displayName, setDisplayName] = useState('');
 
-    const [keyLength, setKeyLength] = useState<number>(0);
+    const [keyLength, setKeyLength] = useState<number>(4096);
 
     const [isMutating, setIsMutating] = useState(false);
 

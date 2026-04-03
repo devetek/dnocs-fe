@@ -64,8 +64,12 @@ export default function SubmitButton() {
   };
 
   return (
-    <Button disabled={!canSubmit || isMutating} onClick={handleClick}>
-      {isMutating ? <Spinner className="text-white" /> : 'Submit'}
+    <Button
+      className="w-full"
+      disabled={!canSubmit || isMutating}
+      onClick={handleClick}
+    >
+      {isMutating ? <Spinner className="text-white" /> : 'Generate SSH Key'}
     </Button>
   );
 }

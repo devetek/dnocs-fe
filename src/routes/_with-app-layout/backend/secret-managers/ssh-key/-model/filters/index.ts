@@ -9,4 +9,11 @@ export const [FilterProvider, useFilter] = buildQsFilterContext('Filter', {
     qs: 'page',
     init: (value) => Number(value) || 1,
   },
+  viewMode: {
+    qs: 'viewMode',
+    init: (value): 'auto' | 'list' | 'grid' => {
+      if (value === 'list' || value === 'grid') return value;
+      return 'auto';
+    },
+  },
 });
