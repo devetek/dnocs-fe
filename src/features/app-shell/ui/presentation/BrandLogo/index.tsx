@@ -1,3 +1,5 @@
+import { Link } from '@tanstack/react-router';
+
 import { useTheme } from '@/services/theme/model';
 
 import LOGO_TERPUSAT_WHITE from '@/shared/assets/ico-terpusat-white.svg';
@@ -14,10 +16,10 @@ export default function BrandLogo(props: BrandLogoProps) {
 
   return (
     <div className="w-max">
-      <a
+      <Link
         className="px-3 data-[collapsed=true]:px-2.5 py-2 flex items-center gap-2 cursor-pointer transition-all rounded-lg hover:bg-primary/20"
         data-collapsed={collapsed}
-        href="/"
+        to="/"
       >
         <div
           className="size-5 data-[collapsed=true]:size-7 transition-all"
@@ -34,7 +36,7 @@ export default function BrandLogo(props: BrandLogoProps) {
             d<span className="font-bold">nocs</span>
           </p>
         )}
-      </a>
+      </Link>
     </div>
   );
 }
