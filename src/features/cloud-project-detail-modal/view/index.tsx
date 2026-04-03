@@ -13,8 +13,8 @@ export default function CloudProjectCreateModal(props: Props) {
       <ModalLayoutGeneral>
         <ModalLayoutGeneral.Title
           canClickClose
-          title="Cloud Project Detail"
-          description={`For project "${cloudProjectName}"`}
+          title={`Cloud Account: ${cloudProjectName}`}
+          description="Browse available regions and VPC networks for this connected account."
         />
 
         <ModalLayoutGeneral.Content>

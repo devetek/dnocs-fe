@@ -43,7 +43,8 @@ export default function SectionMachine() {
   }
 
   if (response.$status === 'success') {
-    const elCollectedMachines = (response.machines ?? [])
+    const machines = response.machines ?? [];
+    const elCollectedMachines = machines
       .map((machine) => {
         const { id, address: publicIP, hostname: hostName } = machine;
         if (!id || !publicIP || !hostName) return null;
@@ -78,10 +79,19 @@ export default function SectionMachine() {
         {elCollectedMachines}
       </FlexGrid>
     );
+
+    return (
+      <SectionWrapper
+        sectionTitle={t('common.terms.machines')}
+        count={machines.length}
+      >
+        {elMachineList}
+      </SectionWrapper>
+    );
   }
 
   return (
-    <SectionWrapper sectionTitle={t('common.terms.machines').toUpperCase()}>
+    <SectionWrapper sectionTitle={t('common.terms.machines')}>
       {elMachineList}
     </SectionWrapper>
   );

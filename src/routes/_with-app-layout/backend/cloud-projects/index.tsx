@@ -1,9 +1,17 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { PageHeader } from '@/shared/presentation/organisms/PageHeader';
+import { Card } from '@/shared/presentation/atoms/Card';
+import { AsideHelpSupport } from '@/widgets/aside-help-support';
 
+import { CloudDataProvider } from './-model/cloud-data';
 import { FilterProvider } from './-model/filters';
-import { FilterBar, GridList } from './-view';
+import {
+  Header,
+  Layout,
+  MainBottomActions,
+  MainFilter,
+  MainList,
+} from './-view';
 
 export const Route = createFileRoute(
   '/_with-app-layout/backend/cloud-projects/',
@@ -13,25 +21,25 @@ export const Route = createFileRoute(
 
 function DatabasePage() {
   return (
-    <>
-      <PageHeader
-        title="Cloud Projects"
-        description="View your cloud projects here."
-        footnote={
-          <>
-            Visit our{' '}
-            <a className="underline" href="//www.youtube.com/@dpanel_id">
-              YouTube channel
-            </a>{' '}
-            for a tutorial on how to register new cloud project.
-          </>
-        }
-      />
+    <FilterProvider>
+      <CloudDataProvider>
+        <Header />
 
-      <FilterProvider>
-        <FilterBar />
-        <GridList />
-      </FilterProvider>
-    </>
+        <Layout>
+          <Layout.Main>
+            <MainFilter />
+            <MainList />
+            <MainBottomActions />
+          </Layout.Main>
+
+          <Layout.Aside>
+            <Card className="rounded-2xl">
+              <AsideHelpSupport.Complete topic="cloud" />
+            </Card>
+          </Layout.Aside>
+        </Layout>
+      </CloudDataProvider>
+    </FilterProvider>
   );
 }
+

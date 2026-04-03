@@ -87,7 +87,6 @@ export const MENUS: MenuGroup[] = [
         icon: IconGlobe,
         iconActive: IconGlobeActive,
         i18nKey: 'sidebar.dDns',
-        // @ts-expect-error
         url: '/domain',
       },
       {

@@ -32,7 +32,8 @@ export default function CloudProjectCreateModal(props: Props) {
     <ModalLayoutGeneral maxWidth="632px">
       <ModalLayoutGeneral.Title
         canClickClose
-        title="Create new Cloud Project"
+        title="Connect Cloud Account"
+        description="Give this connection a name, pick your cloud provider, then paste the API token or upload credentials. Once connected, you can create resources directly from dNocs."
       />
 
       <ModalLayoutGeneral.Content>

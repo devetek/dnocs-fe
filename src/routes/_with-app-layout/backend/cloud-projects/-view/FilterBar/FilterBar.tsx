@@ -9,9 +9,7 @@ export default function FilterBar() {
   return (
     <div>
       <Card className="mb-6">
-        <div className="py-2 px-4 flex flex-wrap gap-2 lg:gap-6 justify-between">
-          <div />
-
+        <div className="py-2 px-4 flex flex-wrap gap-2 lg:gap-6 justify-end">
           <SearchInput
             defaultValue={searchQuery}
             onEnter={(value) => {
