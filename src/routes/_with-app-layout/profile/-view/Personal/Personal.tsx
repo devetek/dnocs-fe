@@ -1,4 +1,4 @@
-import { CalendarIcon, MailIcon, SettingsIcon, UserIcon } from 'lucide-react';
+import { CalendarIcon, MailIcon, PencilIcon, UserIcon } from 'lucide-react';
 
 import { useAuthLoggedIn } from '@/services/auth';
 import { useAuthEmit } from '@/services/auth/model/events';
@@ -24,96 +24,76 @@ import { Separator } from '@/shared/presentation/atoms/Separator';
 export default function Personal() {
   const { userProfile } = useAuthLoggedIn();
   const authEmit = useAuthEmit();
-  const username = userProfile.username;
-  const fullname = userProfile.fullname;
-  const email = userProfile.email;
+  const { username, fullname, email } = userProfile;
   const avatarUrl = userProfile.avatarSrc ?? '';
-  const createAt = getDistanceFromNow(userProfile.createAt ?? '');
+  const joinedAt = getDistanceFromNow(userProfile.createAt ?? '');
 
   const [userForm] = useUserFormModal();
 
+  const handleEditProfile = () => {
+    userForm({
+      action: 'update',
+      user: {
+        id: Number(userProfile.id),
+        fullname: userProfile.fullname,
+        email: userProfile.email,
+        username: userProfile.username,
+      },
+      onSubmitSuccess: () => {
+        authEmit('%%auth/refresh', null);
+      },
+    });
+  };
+
   return (
-    <Card className="rounded-2xl flex flex-col">
+    <Card className="rounded-2xl">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <UserIcon className="h-5 w-5" />
-          Personal Information
-        </CardTitle>
-        <CardDescription>
-          Your account details and contact information
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="flex items-center gap-3">
-            <Avatar className="h-16 w-16">
-              <AvatarImage
-                src={avatarUrl || '/placeholder.svg'}
-                alt={fullname}
-              />
-              <AvatarFallback>
-                {username
-                  .split(' ')
-                  .map((n) => n[0])
-                  .join('')}
-              </AvatarFallback>
-            </Avatar>
-            <div>
-              <h3 className="font-semibold">{fullname}</h3>
-              <p className="text-sm text-gray-400">@{username}</p>
-            </div>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <CardTitle className="flex items-center gap-2">
+              <UserIcon className="h-4 w-4" />
+              Personal Information
+            </CardTitle>
+            <CardDescription className="mt-1">
+              Your account details and contact information
+            </CardDescription>
           </div>
-          <div className="flex justify-end">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                userForm({
-                  action: 'update',
-                  user: {
-                    id: Number(userProfile.id),
-                    fullname: userProfile.fullname,
-                    email: userProfile.email,
-                    username: userProfile.username,
-                  },
-                  onSubmitSuccess: () => {
-                    authEmit('%%auth/refresh', null);
-                  },
-                });
-              }}
-            >
-              <SettingsIcon className="h-4 w-4 mr-2" />
-              Edit Profile
-            </Button>
+          <Button variant="outline" size="sm" onClick={handleEditProfile}>
+            <PencilIcon className="h-3.5 w-3.5" />
+            Edit
+          </Button>
+        </div>
+      </CardHeader>
+
+      <CardContent className="space-y-4">
+        <div className="flex items-center gap-4">
+          <Avatar className="h-14 w-14 ring-2 ring-primary/20">
+            <AvatarImage src={avatarUrl || '/placeholder.svg'} alt={fullname} />
+            <AvatarFallback className="text-lg font-semibold">
+              {username
+                .split(' ')
+                .map((n) => n[0])
+                .join('')
+                .toUpperCase()
+                .slice(0, 2)}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <p className="font-semibold text-base">{fullname || username}</p>
+            <p className="text-sm text-muted-foreground">@{username}</p>
           </div>
         </div>
 
-        <Separator className="bg-gray-800" />
+        <Separator />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <MailIcon className="h-4 w-4 text-gray-400" />
-              <span className="text-sm">{email}</span>
-            </div>
-            {/* <div className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-gray-400" />
-              <span className="text-sm">-</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Globe className="h-4 w-4 text-gray-400" />
-              <span className="text-sm">-</span>
-            </div> */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="flex items-center gap-2.5 text-sm">
+            <MailIcon className="h-4 w-4 text-muted-foreground shrink-0" />
+            <span className="truncate">{email}</span>
           </div>
-          <div className="space-y-3">
-            {/* <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-gray-400" />
-              <span className="text-sm">{userInfo.location}</span>
-            </div> */}
-            <div className="flex items-center gap-2">
-              <CalendarIcon className="h-4 w-4 text-gray-400" />
-              <span className="text-sm">Joined {createAt}</span>
-            </div>
+          <div className="flex items-center gap-2.5 text-sm">
+            <CalendarIcon className="h-4 w-4 text-muted-foreground shrink-0" />
+            <span className="text-muted-foreground">Joined {joinedAt}</span>
           </div>
         </div>
       </CardContent>

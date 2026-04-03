@@ -28,12 +28,7 @@ export default function SubmitButton() {
 
     if (response.$status === 'failed') {
       openToaster({
-        title: (
-          <>
-            Error while creating organization with name{' '}
-            <code>{values.fullname}</code>
-          </>
-        ),
+        title: <>Failed to update profile</>,
         message: response.error.message,
         variant: 'error',
         duration: 5000,
@@ -49,7 +44,7 @@ export default function SubmitButton() {
       variant: 'success',
       message: (
         <>
-          Successfully created price with name <code>{values.fullname}</code>
+          Profile updated successfully.
         </>
       ),
     });

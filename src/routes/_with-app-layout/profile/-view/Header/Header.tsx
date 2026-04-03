@@ -6,39 +6,30 @@ import { useAuthLoggedIn } from '@/services/auth';
 import { Breadcrumb } from '@/shared/presentation/molecules/Breadcrumb';
 import { PageHeader } from '@/shared/presentation/organisms/PageHeader';
 
-const BREADCRUMB = (
+const Headnote = () => (
   <Breadcrumb
     items={[
-      {
-        text: 'Dashboard',
-        url: '/dashboard',
-      },
-      {
-        text: 'Profile',
-        url: '/profile',
-      },
+      { text: 'Dashboard', url: '/dashboard' },
+      { text: 'Profile', url: '/profile' },
     ]}
   />
 );
 
 export default function Header() {
   const { userProfile } = useAuthLoggedIn();
-  const fullname = userProfile.fullname;
-  const username = userProfile.username;
-  const displayName = fullname || username;
+  const displayName = userProfile.fullname || userProfile.username;
 
   useMetaTags(
-    {
-      title: `Profile: ${displayName} | dPanel`,
-    },
+    { title: `Profile: ${displayName} | dPanel` },
     [displayName],
   );
 
   return (
     <PageHeader
       heroIcon={User2Icon}
-      headnote={BREADCRUMB}
+      headnote={<Headnote />}
       title={`Profile: ${displayName}`}
+      description="Manage your personal information, subscription, and billing history."
     />
   );
 }

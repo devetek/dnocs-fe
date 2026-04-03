@@ -11,15 +11,19 @@ export default function Username(props: UsernameProps) {
   const { form } = useDcContext();
 
   return (
-    <section className="flex flex-col gap-1">
-      <p className="text-sm font-medium">Username</p>
+    <section className="flex flex-col gap-1.5">
+      <label htmlFor="username" className="text-sm font-medium">
+        Username
+      </label>
       <Input
+        id="username"
         placeholder="Username"
         {...form.register('username')}
         defaultValue={props.value}
         disabled
+        className="opacity-60"
       />
-
+      <p className="text-xs text-muted-foreground">Username cannot be changed.</p>
       <ErrorInline message={form.formState.errors.username?.message} />
     </section>
   );

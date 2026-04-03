@@ -21,10 +21,20 @@ export default function UserFormModal(props: Props) {
           title={`${capitalizeEveryFirstLetter(action)} User`}
         />
 
-        <ModalLayoutGeneral.Content className="flex flex-col gap-6">
+        <ModalLayoutGeneral.Content className="flex flex-col gap-4">
+          {user.email && (
+            <section className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium">Email</label>
+              <p className="text-sm px-3 py-2 rounded-md border bg-muted text-muted-foreground">
+                {user.email}
+              </p>
+              <p className="text-xs text-muted-foreground">Email cannot be changed.</p>
+            </section>
+          )}
+
           <Fullname value={user.fullname} />
           <Username value={user.username} />
-          <Password value={user.password} />
+          <Password />
           <SubmitButton />
         </ModalLayoutGeneral.Content>
       </ModalLayoutGeneral>
