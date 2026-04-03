@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useSearch } from '@tanstack/react-router';
 
@@ -41,6 +41,33 @@ export function buildQsFilterContext<S extends object>(
 
       return tempFilter;
     });
+
+    // Sync URL → filter when Router navigates with new search params (e.g. sidebar filter links).
+    // We use a ref to skip the very first render (useState already handles that).
+    const isMounted = useRef(false);
+    const searchParamsKey = JSON.stringify(searchParams);
+
+    useEffect(() => {
+      if (!isMounted.current) {
+        isMounted.current = true;
+        return;
+      }
+
+      const newFilter = {} as S;
+
+      for (const key in init) {
+        const selectedKey = init[key];
+
+        if (typeof selectedKey === 'object') {
+          newFilter[key] = selectedKey.init(searchParams[selectedKey.qs]);
+        } else {
+          newFilter[key] = selectedKey(searchParams[key]);
+        }
+      }
+
+      setFilter(newFilter);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchParamsKey]);
 
     useEffect(() => {
       const newQuery = new URLSearchParams(searchParams);

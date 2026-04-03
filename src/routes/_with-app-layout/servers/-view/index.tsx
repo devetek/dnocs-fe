@@ -4,24 +4,27 @@ import { AsideHelpSupport } from '@/widgets/aside-help-support';
 import { Layout } from './_presentation/Layout';
 import FilterBar from './FilterBar';
 import Header from './Header';
+import MainBottomActions from './MainBottomActions';
 import ServerList from './ServerList';
 
 export default function ServersView() {
   return (
-    <Layout>
+    <>
       <Header />
 
-      <Layout.Content>
+      <Layout>
         <Layout.Main>
           <FilterBar />
           <ServerList />
+          <MainBottomActions />
         </Layout.Main>
+
         <Layout.Aside>
           <Card className="rounded-2xl">
             <AsideHelpSupport.Complete topic="server" />
           </Card>
         </Layout.Aside>
-      </Layout.Content>
-    </Layout>
+      </Layout>
+    </>
   );
 }
