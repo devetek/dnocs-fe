@@ -2,7 +2,7 @@ import { buildPaginationV2 } from '@/widgets/ui-atomic-builder/atom-pagination-v
 
 import { useFilterPagination } from '../../-usecase/filters';
 
-const DomainPaginationControl = buildPaginationV2({});
+const LbPaginationControl = buildPaginationV2({});
 
 export default function MainBottomActions() {
   const {
@@ -17,7 +17,7 @@ export default function MainBottomActions() {
 
   return (
     <div className="flex justify-end w-full">
-      <DomainPaginationControl
+      <LbPaginationControl
         currentPage={currentPage}
         totalPage={pagination.totalPage}
         onClickBack={handleGoBack}

@@ -17,9 +17,6 @@ export default function useAdapterMany<R extends Array<Response<any>>, Data>(
 ): Response<Data, ResponseErrors> {
   const [cachedSuccessData, setCachedSuccessData] = useState<[...R]>();
 
-  // const [cachedFailedResponse, setCachedFailedResponse]
-  //   = useState<ResponseError>();
-
   const stableAdapter = useHandler(adapter);
 
   return useMemo((): Response<any> => {
@@ -73,6 +70,8 @@ export default function useAdapterMany<R extends Array<Response<any>>, Data>(
       };
     }
 
-    return response;
+    return {
+      $status: 'initial',
+    };
   }, [response, stableAdapter, cachedSuccessData]);
 }

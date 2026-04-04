@@ -48,9 +48,12 @@ export default function useLbDeleteUsecase(params: Params) {
       });
 
       if (apiResponse.$status === 'success') {
+        dialog.resolve();
         openToaster({
           variant: 'success',
-          message: t('toaster.loadBalancerDelete.success'),
+          message: t('toaster.loadBalancerDelete.success', {
+            loadBalancer: domain.fqdn,
+          }),
         });
         onSuccess();
         return;
@@ -58,7 +61,9 @@ export default function useLbDeleteUsecase(params: Params) {
 
       openToaster({
         variant: 'error',
-        title: t('toaster.loadBalancerDelete.error'),
+        title: t('toaster.loadBalancerDelete.error', {
+          loadBalancer: domain.fqdn,
+        }),
         message: apiResponse.error.message,
       });
 

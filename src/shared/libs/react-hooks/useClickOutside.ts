@@ -30,6 +30,8 @@ function useClickOutside<T extends HTMLElement = HTMLElement>(
     const listener = (event: Event) => {
       const refs = Array.isArray(ref) ? ref : [ref];
 
+      if (!refs.some((r) => r.current)) return;
+
       // Check if the click target is inside ANY of the provided refs
       const isInside = refs.some((refItem) =>
         refItem.current?.contains(event.target as Node),
