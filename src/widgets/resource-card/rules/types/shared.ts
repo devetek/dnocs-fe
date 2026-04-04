@@ -1,8 +1,8 @@
-import type { ReactNode, Ref } from 'react';
+import type { ComponentType, Ref } from 'react';
 
 import type { LucideProps } from 'lucide-react';
 
-export type CommonIcon = (props: LucideProps) => ReactNode;
+export type CommonIcon = ComponentType<LucideProps>;
 
 export interface Action {
   variant?: 'normal' | 'destructive';

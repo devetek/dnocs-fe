@@ -10,6 +10,7 @@ import {
 import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
 
 import type { DomainEssentials } from '@/entities/domain/rules/schema';
+import '@/shared/libs/browser/fn-extensions';
 import { DOMAIN_PROVIDER_BRANDS } from '@/entities/domain/ui/constants/provider';
 import type { SchemaCommon } from '@/entities/shared/rules/schema';
 
