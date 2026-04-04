@@ -21,15 +21,22 @@ export type PureResponse<D> =
   | ({ $status: 'success' } & D)
   | ({ $status: 'failed' } & ResponseError);
 
-export type Response<D> =
+export type Response<D, E = ResponseError> =
   | { $status: 'initial' }
-  | { $status: 'loading'; prevData?: D; prevError?: ResponseError }
+  | { $status: 'loading'; prevData?: D; prevError?: E }
   | PureResponse<D>;
 
 export type ResponseError =
   | { kind: 'api'; error: AxiosError | BaseResponseError }
   | { kind: 'adapter'; error: AdapterError }
   | { kind: 'general'; error: Error };
+
+export type ResponseErrors =
+  | ResponseError
+  | {
+      kind: 'aggregate';
+      errors: ResponseError[];
+    };
 
 export type Adapter<Raw, Data> = (raw: Raw) => Data;
 

@@ -11,7 +11,7 @@ import type { SignUpForm } from '../rules/login';
 
 const useConfirmExitDialog = buildDialog({
   variant: 'warning',
-  action: 'yes-no',
+  action: 'yesNo',
   title: '@dialog.confirmExit.title',
   content: '@dialog.confirmExit.message',
 });
@@ -31,9 +31,9 @@ export default function useContextualBehavior() {
 
   const handleCloseSidepanel = useHandler(async () => {
     if (isDirty) {
-      const [dialogResponse] = await openDialogConfirmExit();
+      const dialog = await openDialogConfirmExit();
 
-      if (dialogResponse !== 'yes') return;
+      if (dialog.response !== 'yes') return;
     }
 
     sidepanelEmit('%%sidepanel/close', null);

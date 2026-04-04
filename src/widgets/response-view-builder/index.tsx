@@ -1,8 +1,11 @@
+import type { ResponseError } from '@/shared/libs/api-client/rules/types';
 import SpinnerOverlay from '@/shared/presentation/atoms/SpinnerOverlay';
 
 import type { BuildResponseViewParams } from './types';
 
-export function buildResponseView<Data>(params: BuildResponseViewParams<Data>) {
+export function buildResponseView<Data, E extends {} = ResponseError>(
+  params: BuildResponseViewParams<Data, E>,
+) {
   const {
     useResponse,
     render: Render,
@@ -18,11 +21,9 @@ export function buildResponseView<Data>(params: BuildResponseViewParams<Data>) {
       (response.$status === 'loading' && response.prevError != null)
     ) {
       const errorPayload =
-        response.$status === 'failed'
-          ? response.error
-          : response.prevError!.error;
+        response.$status === 'failed' ? response : response.prevError!;
 
-      return <FallbackError error={errorPayload} />;
+      return <FallbackError {...(errorPayload as E)} />;
     }
 
     if (

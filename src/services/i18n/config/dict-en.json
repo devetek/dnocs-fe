@@ -77,8 +77,10 @@
       "automaticView": "Automatic View",
       "cardGridView": "Card Grid View",
       "cardListView": "Card List View",
+      "tableView": "Table View",
       "xOfY": "{0} of {1}",
-      "forX": "for {0}"
+      "forX": "for {0}",
+      "description": "Description"
     },
     "actions": {
       "refresh": "Refresh",
@@ -109,7 +111,8 @@
       "migrateOwnership": "Migrate Ownership",
       "login": "Login",
       "signUp": "Sign Up",
-      "back": "Back"
+      "back": "Back",
+      "create": "Create"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -318,7 +321,19 @@
     "domain": {
       "headerTitle": "Domain & DNS",
       "headerDesc": "View your registered domain and DNS here.",
-      "headerFootnote": "Visit our <a>YouTube channel</a> for a tutorial."
+      "headerFootnote": "Visit our <a>YouTube channel</a> for a tutorial.",
+      "emptyState": {
+        "title": "No domains found.",
+        "message": "Why not add new one to get started?",
+        "cta": "Add new domain"
+      },
+      "table": {
+        "headers": {
+          "domain": "Domain",
+          "owner": "Owner",
+          "lastModified": "Last Modified"
+        }
+      }
     },
     "notFound": {
       "title": "Page Not Found",
@@ -415,6 +430,18 @@
     "confirmExit": {
       "title": "Confirm Exit?",
       "message": "You have some unsaved changes. Are you sure you want to leave?"
+    },
+    "loadBalancerDelete": {
+      "title": "Delete Load Balancer",
+      "message": "Are you sure you want to delete load balancer « {loadBalancer} »?"
+    },
+    "domainDelete": {
+      "title": "Delete Domain",
+      "message": "Are you sure you want to delete domain « {domain} »?"
+    },
+    "domainRecordDelete": {
+      "title": "Delete Domain Record",
+      "message": "Are you sure you want to delete domain record « {recordName} »?"
     }
   },
   "toaster": {
@@ -456,9 +483,24 @@
     "updateApplication": {
       "success": "Successfully updated application with id {id}.",
       "error": "Failed to update application with id {id}!"
+    },
+    "domainDelete": {
+      "success": "Successfully deleted domain « {domain} ».",
+      "error": "Failed to delete domain « {domain} »!"
+    },
+    "domainRecordDelete": {
+      "success": "Successfully deleted domain record « {recordName} ».",
+      "error": "Failed to delete domain record « {recordName} »!"
+    },
+    "loadBalancerDelete": {
+      "success": "Successfully deleted load balancer « {loadBalancer} ».",
+      "error": "Failed to delete load balancer « {loadBalancer} »!"
     }
   },
   "sidepanel": {
+    "_core": {
+      "loadingDetails": "Loading details..."
+    },
     "signUp": {
       "title": "Sign Up"
     },
@@ -493,6 +535,33 @@
     "loadBalancerDetails": {
       "title": "Load Balancer Details",
       "pathPattern": "Path Pattern"
+    },
+    "domainDetails": {
+      "title": "Domain Details",
+      "table": {
+        "type": "Type",
+        "name": "Name",
+        "content": "Content",
+        "ttl": "TTL",
+        "attributes": "Attributes",
+        "comments": "Comments"
+      }
+    },
+    "domainRegistration": {
+      "title": "Register new domain",
+      "fieldDomain": { "title": "Domain" },
+      "fieldDescription": { "title": "Description" },
+      "fieldProvider": {
+        "title": "Provider",
+        "placeholder": "Select provider"
+      },
+      "providerData": { "title": "Provider Data" },
+      "fieldToken": { "title": "Token" },
+      "fieldZone": { "title": "Zone ID" },
+      "toaster": {
+        "success": "Domain registered successfully.",
+        "error": "Failed to register domain."
+      }
     }
   },
   "formErrors": {
@@ -506,7 +575,11 @@
     "usernameMustBeFilled": "Username must be filled",
     "invalidPassword": "Invalid Password",
     "confirmPasswordMustBeFilled": "Confirm password must be filled",
-    "confirmPasswordMismatch": "Password and confirm password don't match"
+    "confirmPasswordMismatch": "Password and confirm password don't match",
+    "parseDomain": {
+      "invalidTld": "Parse domain failed: unrecognized TLD.",
+      "invalidDomain": "Parse domain failed: invalid domain."
+    }
   },
   "sidebar": {
     "teamsWidget": {

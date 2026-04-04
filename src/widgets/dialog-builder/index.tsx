@@ -1,83 +1,105 @@
-import { registerModal } from '@/services/modal';
+import { useModalEmit } from '@/services/modal/model/event';
 
 import { iife, noop } from '@/shared/libs/browser/fn';
 import useHandler from '@/shared/libs/react-hooks/useHandler';
 
 import type {
-  BuildDialogReturnHook,
-  DialogActionUnit as DAUnit,
-  DialogActions,
-  DialogController,
-  DialogHookOnOpen,
-  BuildDialogParams as Params,
-} from './-rules';
+  ActionRegistry,
+  BuilderParams,
+  DialogOnOpen,
+  UseDialog,
+} from './-rules/types';
 import createDialogView from './-view';
 
-// prettier-ignore
-export default function buildDialog<AUnit extends DAUnit<'yes-no'>>(
-  params: Params<'yes-no'>,
-): BuildDialogReturnHook<'yes-no', AUnit>;
+export * as DialogBuilderRules from './-rules';
 
 // prettier-ignore
-export default function buildDialog<AUnit extends DAUnit<'ok-cancel'>>(
-  params: Params<'ok-cancel'>,
-): BuildDialogReturnHook<'ok-cancel', AUnit>;
+export default function buildDialog<A extends keyof ActionRegistry, X>(params: BuilderParams<A, X>): UseDialog<A, X> {
+  const { actionManualResolve } = params
 
-export default function buildDialog<AUnit extends DAUnit<'ok'>>(
-  params: Params<'ok'>,
-): BuildDialogReturnHook<'ok', AUnit>;
-
-export default function buildDialog<
-  A extends DialogActions,
-  AUnit extends DAUnit<A>,
->(params: Params<A>): BuildDialogReturnHook<A, AUnit> {
-  const useRegisteredModal = registerModal(createDialogView<A, AUnit>(params));
+  const DialogView = createDialogView<A, X>(params);
 
   return function useDialog() {
-    const [openModal, closeModal] = useRegisteredModal();
+    const modalEmit = useModalEmit();
+    
+    const handleOpen = useHandler((handleOpenParams) => {
+      return new Promise((resolveOuter) => {
+        let isUnresolved = true;
+        let currentResponse: ActionRegistry[A];
+        let yieldToParent = resolveOuter;
+        
+        const handleClickAction = async (actionUnit: ActionRegistry[A]) => {
+          currentResponse = actionUnit;
 
-    const handleOpen: DialogHookOnOpen<A, AUnit> = useHandler(
-      (handleOpenParams) => {
-        const { manualResolveOn } = handleOpenParams ?? {};
+          const shouldManualResolve = iife(() => {
+            if (actionManualResolve == null) {
+              return false;
+            }
 
-        return new Promise((resolveOuter) => {
-          openModal({
-            manualResolveOn,
-            onClickAction: async (actionUnit) => {
-              const shouldManualResolve = iife(() => {
-                if (manualResolveOn == null) {
-                  return false;
-                }
+            if (
+              Array.isArray(actionManualResolve) &&
+              actionManualResolve.includes(actionUnit)
+            ) {
+              return true;
+            }
 
-                if (
-                  Array.isArray(manualResolveOn) &&
-                  manualResolveOn.includes(actionUnit)
-                ) {
-                  return true;
-                }
-
-                return manualResolveOn === actionUnit;
-              });
-
-              if (!shouldManualResolve) {
-                resolveOuter([actionUnit, { resolve: noop, reject: noop }]);
-                return;
-              }
-
-              await new Promise<void>((innerResolve, innerReject) => {
-                const controller: DialogController = {
-                  resolve: () => innerResolve(),
-                  reject: (error: Error) => innerReject(error),
-                };
-
-                resolveOuter([actionUnit, controller]);
-              });
-            },
+            return actionManualResolve === actionUnit;
           });
-        });
-      },
-    );
 
-    return [handleOpen, closeModal];
-  };
+          if (!shouldManualResolve) {
+            isUnresolved = false;
+            yieldToParent({
+              get isUnresolved() {
+                return isUnresolved;
+              },
+              get response() {
+                return currentResponse;
+              },
+              resolve: noop,
+              reject: async () => {},
+            })
+            return;
+          }
+
+          await new Promise<void>((innerResolve, innerReject) => {
+            yieldToParent({
+              get isUnresolved() {
+                return isUnresolved;
+              },
+              get response() {
+                return currentResponse;
+              },
+              resolve: () => {
+                isUnresolved = false;
+                innerResolve();
+              },
+              reject: (error) => {
+                innerReject(error);
+
+                return new Promise((nextYield) => {
+                  yieldToParent = (_) => nextYield();
+                })
+              }
+            })
+          })
+        }
+
+        modalEmit('%%modal/open', {
+          content: (
+            <DialogView
+              {...handleOpenParams}
+              onClickAction={handleClickAction}
+              manualResolveOn={actionManualResolve}
+            />
+          ),
+        });
+      });
+    }) as DialogOnOpen<A, X>;
+    
+    const handleCloseModal = () => {
+      modalEmit('%%modal/close', null);
+    };
+
+    return [handleOpen, handleCloseModal];
+  }
 }

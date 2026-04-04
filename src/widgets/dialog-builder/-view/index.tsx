@@ -12,26 +12,28 @@ import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
 
 import type {
-  BuildDialogParams,
-  DialogActionUnit,
-  DialogActions,
-  DialogComponent,
-} from '../-rules';
+  ActionRegistry,
+  BuilderParams,
+  Extra,
+  Node,
+} from '../-rules/types';
 
 // prettier-ignore
-export interface DialogViewProps<A extends DialogActions, AUnit extends DialogActionUnit<A>> {
-  manualResolveOn?: AUnit | AUnit[];
-  onClickAction: (action: AUnit) => Promise<void>;
+export type DialogViewProps<A extends keyof ActionRegistry, X> = X & {
+  manualResolveOn?: ActionRegistry[A] | Array<ActionRegistry[A]>;
+  onClickAction: (action: ActionRegistry[A]) => Promise<void>;
 }
 
 // prettier-ignore
-export default function createDialogView<A extends DialogActions, AUnit extends DialogActionUnit<A>>(params: BuildDialogParams<A>) {
+export default function createDialogView<A extends keyof ActionRegistry, X>(
+  params: BuilderParams<A, X>
+) {
   const { variant, action, title, content } = params;
 
-  return function DialogView(props: DialogViewProps<A, AUnit>) {
-    const { onClickAction, manualResolveOn } = props;
+  return function DialogView(props: DialogViewProps<A, X>) {
+    const { onClickAction, manualResolveOn, ...rest } = props;
 
-    const [loadingOfAction, setLoadingOfAction] = useState<AUnit>();
+    const [loadingOfAction, setLoadingOfAction] = useState<ActionRegistry[A]>();
 
     const modalEmit = useModalEmit();
 
@@ -46,7 +48,7 @@ export default function createDialogView<A extends DialogActions, AUnit extends 
     }, [modalEmit]);
 
     const renderActions = () => {
-      const renderActionButton = (actionUnit: AUnit) => {
+      const renderActionButton = (actionUnit: ActionRegistry[A]) => {
         const handleClick = async () => {
           if (manualResolveOn == null) {
             onClickAction(actionUnit);
@@ -80,26 +82,26 @@ export default function createDialogView<A extends DialogActions, AUnit extends 
 
       const actionList = iife(() => {
         switch (action) {
-          case 'yes-no':
-            return ['yes', 'no'] as AUnit[];
+          case 'yesNo':
+            return ['yes', 'no'] as Array<ActionRegistry[A]>;
 
-          case 'ok-cancel':
-            return ['ok', 'cancel'] as AUnit[];
+          case 'okCancel':
+            return ['ok', 'cancel'] as Array<ActionRegistry[A]>;
 
           case 'ok':
-            return ['ok'] as AUnit[];
+            return ['ok'] as Array<ActionRegistry[A]>;
         }
       });
 
       return actionList.map(renderActionButton);
     };
 
-    const renderComponent = (Target: string | DialogComponent) => {
+    const renderComponent = (Target: string | Node<X>) => {
       if (typeof Target !== 'string') {
-        return <Target t={t} />;
+        return <Target {...rest as Extra<X>} t={t} />;
       }
 
-      if (Target[0] !== '@') {
+      if (!Target.startsWith('@')) {
         return Target;
       }
 
