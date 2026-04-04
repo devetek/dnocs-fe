@@ -21,7 +21,7 @@ export default function ToggleHero(props: Props) {
   );
 
   return (
-    <button className={cnRoot} onClick={onClick}>
+    <button type="button" className={cnRoot} onClick={onClick}>
       <div className={cnToggleDeco} />
 
       <div className="flex justify-between">

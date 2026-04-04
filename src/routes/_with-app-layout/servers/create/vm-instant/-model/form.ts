@@ -1,6 +1,9 @@
 import { z } from 'zod';
 
 export const formSchema = z.object({
+  provider: z //
+    .string()
+    .min(1, 'Please select a provider!'),
   cloud: z.object({
     projectID: z //
       .number({ message: 'Please select a cloud project!' }),
@@ -15,7 +18,7 @@ export const formSchema = z.object({
       subnet: z //
         .string()
         .min(1),
-      uuid: z //
+      id: z //
         .string()
         .min(1),
     },

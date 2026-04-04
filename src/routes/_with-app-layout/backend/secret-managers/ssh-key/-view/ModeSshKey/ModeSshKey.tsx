@@ -1,7 +1,6 @@
 import { useNavigate } from '@tanstack/react-router';
 import dayjs from 'dayjs';
 
-import { useAuthLoggedIn } from '@/services/auth';
 import { useDialog } from '@/services/dialog';
 import { useToaster } from '@/services/toaster';
 
@@ -18,7 +17,6 @@ import { AddNewCard, SshKeyInfoCard } from '../../-presentation';
 
 export default function ModeSshKey() {
   const navigate = useNavigate();
-  const { userProfile } = useAuthLoggedIn();
   const { searchQuery, pagination, setPagination } = useFilter();
 
   // const [deleteSSHKey] = useDeleteSSHKey();
@@ -29,7 +27,6 @@ export default function ModeSshKey() {
 
   const [responseSSHKey, refresh] = ApiSecret.SshKey.Find.useGet({
     searchQuery,
-    userId: userProfile.id,
     page: pagination,
   });
 

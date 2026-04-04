@@ -35,7 +35,7 @@ export default function SectionSubmit() {
       default_user: values.login.username,
       default_password: values.login.password,
       region_id: values.regionSlug,
-      vpc_id: values.vpcBulk.uuid,
+      vpc_id: values.vpcBulk.id,
       private_subnet: values.vpcBulk.subnet,
     };
 

@@ -17,7 +17,7 @@ export function recipe(params: RecipeParams): GetRequestRecipe {
   const { cloudProjectId } = params;
 
   return {
-    url: `/v1/cloud/regions/${cloudProjectId}`,
+    url: `/v1/cloud/project/detail/${cloudProjectId}/regions`,
   };
 }
 
@@ -25,16 +25,13 @@ export function recipe(params: RecipeParams): GetRequestRecipe {
 //   Method
 // =============================================================================
 
+export interface RegionItem {
+  id: string;
+  name: string;
+}
+
 export interface Dto {
-  display_name: string;
-  is_preferred: boolean;
-  is_default: boolean;
-  is_published: boolean;
-  description: string;
-  country_code: string;
-  order_nr: number;
-  create_resource_disabled: boolean;
-  slug: string;
+  items: RegionItem[];
 }
 
 export function useGet(params: WithApiGetOptions<RecipeParams>) {

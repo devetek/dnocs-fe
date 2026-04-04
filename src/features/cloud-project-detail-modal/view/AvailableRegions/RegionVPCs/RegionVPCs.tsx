@@ -30,7 +30,9 @@ export default function RegionVPCs(props: Props) {
   }
 
   if (response.$status === 'success') {
-    if (response.length === 0) {
+    const vpcs = response.items ?? [];
+
+    if (vpcs.length === 0) {
       content = (
         <div className="h-10 flex items-center">
           <em className="text-gray-500/70">No VPCs found.</em>
@@ -39,10 +41,10 @@ export default function RegionVPCs(props: Props) {
     } else {
       content = (
         <div className="grid grid-cols-1 sm:grid-cols-2 grid-rows-1 gap-2">
-          {response.map((vpc) => {
+          {vpcs.map((vpc) => {
             return (
               <VpcDetailCard
-                key={vpc.uuid}
+                key={vpc.id}
                 vpcName={vpc.name}
                 vpcSubnet={vpc.subnet}
               />

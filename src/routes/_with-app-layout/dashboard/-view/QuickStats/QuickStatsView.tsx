@@ -1,5 +1,3 @@
-import { useAuthLoggedIn } from '@/services/auth';
-
 import {
   ApiApplication,
   ApiCloud,
@@ -10,8 +8,6 @@ import {
 import QuickStats from '../../-presentation/QuickStats/QuickStats';
 
 export default function QuickStatsView() {
-  const userId = useAuthLoggedIn().userProfile.id;
-
   const [resServers] = ApiServer.Find.useGet({
     pageSize: 1,
   });
@@ -22,12 +18,10 @@ export default function QuickStatsView() {
   });
 
   const [resSsh] = ApiSecret.SshKey.Find.useGet({
-    userId,
     pageSize: 1,
   });
 
   const [resCloud] = ApiCloud.Project.Find.useGet({
-    userId,
     pageSize: 1,
   });
 

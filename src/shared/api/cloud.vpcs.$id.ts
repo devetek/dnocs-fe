@@ -1,4 +1,4 @@
-import { createQueryParams, useApiGet } from '@/shared/libs/api-client';
+import { useApiGet } from '@/shared/libs/api-client';
 import { apiClient } from '@/shared/libs/api-client/lib/client';
 import type {
   GetRequestRecipe,
@@ -11,18 +11,14 @@ import type {
 
 export interface RecipeParams {
   cloudProjectId: string;
-  regionSlug?: string | null;
+  regionSlug: string;
 }
 
 export function recipe(params: RecipeParams): GetRequestRecipe {
   const { cloudProjectId, regionSlug } = params;
 
-  const queryParams = createQueryParams({
-    region: regionSlug,
-  });
-
   return {
-    url: `/v1/cloud/vpcs/${cloudProjectId}?${queryParams.toString()}`,
+    url: `/v1/cloud/project/detail/${cloudProjectId}/vpcs/${regionSlug}`,
   };
 }
 
@@ -30,18 +26,14 @@ export function recipe(params: RecipeParams): GetRequestRecipe {
 //   Method
 // =============================================================================
 
-export interface Dto {
-  vlan_id: number;
-  subnet: string;
+export interface NetworkItem {
+  id: string;
   name: string;
-  created_at: string;
-  updated_at: string;
-  uuid: string;
-  type: string;
-  is_default: boolean;
-  vm_uuids: string[];
-  resources_count: number;
-  subnet_ipv6: string;
+  subnet: string;
+}
+
+export interface Dto {
+  items: NetworkItem[];
 }
 
 export function useGet(params: WithApiGetOptions<RecipeParams>) {
