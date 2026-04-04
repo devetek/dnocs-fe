@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { CloudIcon } from 'lucide-react';
 import { useController } from 'react-hook-form';
 
-import { useAuthLoggedIn } from '@/services/auth';
+
 
 import { ApiSecret } from '@/shared/api';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
@@ -60,11 +60,9 @@ const SubCloudProviderCbo = () => {
 };
 
 const SubCloudSshCbo = () => {
-  const userId = useAuthLoggedIn().userProfile.id;
-
   const { form, formErrors } = useForm();
 
-  const [response] = ApiSecret.SshKey.Find.useGet({ userId });
+  const [response] = ApiSecret.SshKey.Find.useGet({});
 
   const control = useController({
     control: form.control,

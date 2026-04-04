@@ -12,19 +12,17 @@ import type { DTOs } from '.';
 
 export interface RecipeParams {
   searchQuery?: string | null;
-  userId: string;
   page?: number;
   pageSize?: number;
 }
 
 export function recipe(params: RecipeParams): GetRequestRecipe {
-  const { userId, page, pageSize, searchQuery } = params;
+  const { page, pageSize, searchQuery } = params;
 
   const queryParams = createQueryParams({
     name: searchQuery,
     page,
     limit: pageSize,
-    user_id: userId,
   });
 
   return {

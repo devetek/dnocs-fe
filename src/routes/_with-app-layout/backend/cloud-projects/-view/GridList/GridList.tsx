@@ -1,7 +1,5 @@
 import dayjs from 'dayjs';
 
-import { useAuthLoggedIn } from '@/services/auth';
-
 import { useCloudProjectCreateModal } from '@/features/cloud-project-create-modal';
 import { useCloudProjectDetailModal } from '@/features/cloud-project-detail-modal';
 
@@ -17,12 +15,9 @@ import { AddNewCard } from '../../-presentation/AddNewCard';
 import { CloudProjectCard } from '../../-presentation/CloudProjectCard';
 
 export default function GridList() {
-  const userId = useAuthLoggedIn().userProfile.id;
-
   const { searchQuery, pagination, setPagination } = useFilter();
 
   const [response, refresh] = ApiCloud.Project.Find.useGet({
-    userId,
     page: 1,
     searchQuery,
   });

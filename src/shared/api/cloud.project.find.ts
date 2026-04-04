@@ -11,20 +11,20 @@ import type { DTOs } from '.';
 // =============================================================================
 
 export interface RecipeParams {
-  userId: string;
+  provider?: string;
   searchQuery?: string;
   page?: number;
   pageSize?: number;
 }
 
 export function recipe(params: RecipeParams): GetRequestRecipe {
-  const { userId, page, pageSize, searchQuery } = params;
+  const { provider, page, pageSize, searchQuery } = params;
 
   const queryParams = createQueryParams({
     name: searchQuery,
     page,
     limit: pageSize,
-    user_id: userId,
+    provider,
   });
 
   return {

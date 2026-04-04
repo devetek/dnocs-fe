@@ -1,7 +1,5 @@
 import { createContext, useContext, type ReactNode } from 'react';
 
-import { useAuthLoggedIn } from '@/services/auth';
-
 import { ApiSecret } from '@/shared/api';
 
 import { useFilter } from '../filters';
@@ -16,11 +14,9 @@ interface SshDataContextValue {
 const SshDataContext = createContext<SshDataContextValue | null>(null);
 
 export function SshDataProvider({ children }: { children: ReactNode }) {
-  const userId = useAuthLoggedIn().userProfile.id;
   const { searchQuery, pagination } = useFilter();
 
   const [response, refresh] = ApiSecret.SshKey.Find.useGet({
-    userId,
     page: pagination,
     searchQuery,
   });

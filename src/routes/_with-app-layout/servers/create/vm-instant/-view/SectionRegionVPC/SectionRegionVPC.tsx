@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 import { GlobeIcon } from 'lucide-react';
-import { useController } from 'react-hook-form';
+import { useController, useWatch } from 'react-hook-form';
 
 import { ApiCloud } from '@/shared/api';
 // import useGetCloudRegions from '@/shared/api/cloud/regions/get-cloud-regions';
@@ -15,10 +15,11 @@ import { Sectioned } from '../../../-presentation/Sectioned';
 
 const SubRegionCbo = () => {
   const { form, formErrors } = useForm();
-  const cloudProjectID: number | undefined = form.watch('cloud.projectID');
+  const cloudProjectID = useWatch({ control: form.control, name: 'cloud.projectID' }) as number | undefined;
 
   const [response] = ApiCloud.Regions.$Id.useGet({
     cloudProjectId: String(cloudProjectID),
+    options: { skip: !cloudProjectID },
   });
 
   const control = useController({
@@ -54,17 +55,17 @@ const SubRegionCbo = () => {
 
   const items: Array<{ label: ReactNode; value: string }> = [];
 
-  for (const region of response) {
-    if (!region.display_name || !region.slug) continue;
+  for (const region of response.items ?? []) {
+    if (!region.name || !region.id) continue;
 
     items.push({
       label: (
         <span>
-          <span>{region.display_name}</span>&nbsp;
-          <span className="opacity-50">({region.slug})</span>
+          <span>{region.name}</span>&nbsp;
+          <span className="opacity-50">({region.id})</span>
         </span>
       ),
-      value: region.slug,
+      value: region.id,
     });
   }
 
@@ -74,7 +75,8 @@ const SubRegionCbo = () => {
         classNameButton="bg-white w-full"
         placeholder="Select a Region"
         onChange={(value) => {
-          form.resetField('vpcBulk');
+          form.setValue('vpcBulk.id', '');
+          form.setValue('vpcBulk.subnet', '');
           control.field.onChange(value);
         }}
         value={control.field.value}
@@ -89,12 +91,13 @@ const SubRegionCbo = () => {
 const SubVPCCbo = () => {
   const { form, formErrors } = useForm();
 
-  const cloudProjectID: number | undefined = form.watch('cloud.projectID');
-  const regionSlug: string | undefined = form.watch('regionSlug');
+  const cloudProjectID = useWatch({ control: form.control, name: 'cloud.projectID' }) as number | undefined;
+  const regionSlug = useWatch({ control: form.control, name: 'regionSlug' }) as string | undefined;
 
   const [response] = ApiCloud.Vpcs.$Id.useGet({
     cloudProjectId: String(cloudProjectID),
-    regionSlug,
+    regionSlug: regionSlug ?? '',
+    options: { skip: !regionSlug },
   });
 
   const control = useController({
@@ -135,8 +138,8 @@ const SubVPCCbo = () => {
 
   const items: Array<{ label: ReactNode; value: string }> = [];
 
-  for (const vpc of response) {
-    if (!vpc.name || !vpc.subnet || !vpc.uuid) continue;
+  for (const vpc of response.items ?? []) {
+    if (!vpc.name || !vpc.subnet || !vpc.id) continue;
 
     items.push({
       label: (
@@ -145,12 +148,12 @@ const SubVPCCbo = () => {
           <span className="opacity-50">({vpc.subnet})</span>
         </span>
       ),
-      value: `${vpc.subnet} ${vpc.uuid}`,
+      value: `${vpc.subnet} ${vpc.id}`,
     });
   }
 
   const cboValue = control.field.value
-    ? `${control.field.value.subnet} ${control.field.value.uuid}`
+    ? `${control.field.value.subnet} ${control.field.value.id}`
     : undefined;
 
   return (
@@ -159,8 +162,8 @@ const SubVPCCbo = () => {
         classNameButton="bg-white w-full"
         placeholder="Select a VPC"
         onChange={(value) => {
-          const [subnet, uuid] = value.split(' ');
-          control.field.onChange({ subnet, uuid });
+          const [subnet, id] = value.split(' ');
+          control.field.onChange({ subnet, id });
         }}
         value={cboValue}
         items={items}

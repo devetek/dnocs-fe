@@ -30,16 +30,18 @@ export default function AvailableRegions() {
   }
 
   if (response.$status === 'success') {
+    const regions = response.items ?? [];
+
     content = (
       <>
-        {response.map((region) => {
+        {regions.map((region) => {
           return (
             <RegionAccordion
-              key={region.slug}
-              regionDisplayName={region.display_name}
-              regionSlug={region.slug}
+              key={region.id}
+              regionDisplayName={region.name}
+              regionSlug={region.id}
             >
-              <RegionVPCs regionSlug={region.slug} />
+              <RegionVPCs regionSlug={region.id} />
             </RegionAccordion>
           );
         })}

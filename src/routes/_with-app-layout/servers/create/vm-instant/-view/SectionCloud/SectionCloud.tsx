@@ -1,10 +1,10 @@
 import { CloudIcon } from 'lucide-react';
-import { useController } from 'react-hook-form';
-
-import { useAuthLoggedIn } from '@/services/auth';
+import { useController, useWatch } from 'react-hook-form';
 
 import { ApiCloud, ApiSecret } from '@/shared/api';
+import LogoGCP from '@/shared/assets/ico-gcloud.png';
 import LogoIDCloudHost from '@/shared/assets/ico-idcloudhost.svg';
+import LogoProxmox from '@/shared/assets/ico-proxmox.png';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
 import { Combobox } from '@/shared/presentation/molecules/Combobox';
 
@@ -13,31 +13,82 @@ import { ErrorInline } from '../../-presentation/ErrorInline';
 import { ToggleHero } from '../../-presentation/ToggleHero';
 import { Sectioned } from '../../../-presentation/Sectioned';
 
+const PROVIDERS = [
+  {
+    key: 'idcloudhost',
+    title: 'IDCloudHost',
+    icon: ({ className }: { className?: string }) => (
+      <img className={className} src={LogoIDCloudHost} alt="IDCloudHost" />
+    ),
+  },
+  {
+    key: 'proxmox',
+    title: 'Proxmox',
+    icon: ({ className }: { className?: string }) => (
+      <img className={className} src={LogoProxmox} alt="Proxmox" />
+    ),
+  },
+  {
+    key: 'gcp',
+    title: 'Google Cloud',
+    icon: ({ className }: { className?: string }) => (
+      <img className={className} src={LogoGCP} alt="Google Cloud" />
+    ),
+  },
+] as const;
+
 const SubCloudProviderCbo = () => {
+  const { form } = useForm();
+  const { field } = useController({
+    control: form.control,
+    name: 'provider',
+  });
+
+  const handleSelect = (providerKey: string) => {
+    field.onChange(providerKey);
+    form.setValue('cloud.projectID', undefined as unknown as number);
+    form.setValue('cloud.sshKeyID', undefined as unknown as number);
+    form.setValue('regionSlug', '');
+    form.setValue('vpcBulk.id', '');
+    form.setValue('vpcBulk.subnet', '');
+  };
+
   return (
-    <>
-      <ToggleHero
-        checked
-        icon={({ className }) => (
-          <img className={className} src={LogoIDCloudHost} alt="Logo" />
-        )}
-        title="IDCloudHost"
-      />
-    </>
+    <div className="grid grid-cols-3 gap-2">
+      {PROVIDERS.map((provider) => (
+        <ToggleHero
+          key={provider.key}
+          checked={field.value === provider.key}
+          icon={provider.icon}
+          title={provider.title}
+          onClick={() => handleSelect(provider.key)}
+        />
+      ))}
+    </div>
   );
 };
 
 const SubCloudProjectCbo = () => {
-  const userId = useAuthLoggedIn().userProfile.id;
-
   const { form, formErrors } = useForm();
+  const provider = useWatch({ control: form.control, name: 'provider' }) as string | undefined;
 
-  const [response] = ApiCloud.Project.Find.useGet({ userId });
+  const [response] = ApiCloud.Project.Find.useGet({
+    provider,
+    options: { skip: !provider },
+  });
 
   const control = useController({
     control: form.control,
     name: 'cloud.projectID',
   });
+
+  if (response.$status === 'initial') {
+    return (
+      <div className="h-10 flex items-center">
+        <em className="opacity-50">Please select a provider first.</em>
+      </div>
+    );
+  }
 
   if (response.$status === 'loading') {
     return (
@@ -47,7 +98,7 @@ const SubCloudProjectCbo = () => {
     );
   }
 
-  if (response.$status !== 'success') {
+  if (response.$status === 'failed') {
     return (
       <div className="h-10 flex items-center">
         <em className="text-red-500/70">
@@ -88,11 +139,9 @@ const SubCloudProjectCbo = () => {
 };
 
 const SubCloudSshCbo = () => {
-  const userId = useAuthLoggedIn().userProfile.id;
-
   const { form, formErrors } = useForm();
 
-  const [response] = ApiSecret.SshKey.Find.useGet({ userId });
+  const [response] = ApiSecret.SshKey.Find.useGet({});
 
   const control = useController({
     control: form.control,
