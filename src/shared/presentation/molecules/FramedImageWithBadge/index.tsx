@@ -49,7 +49,7 @@ export default function FramedImageWithBadge(props: Props) {
   const sizeCn = parseSizeUnit(sizeUnit);
 
   const cnWrapper = cn(
-    'shrink-0 overflow-hidden rounded-md bg-background border flex items-center justify-center relative',
+    'shrink-0 overflow-hidden rounded-md bg-background border inset-shadow-xs flex items-center justify-center relative',
     sizeCn.cnWrapperSize,
     classNameWrapper,
   );

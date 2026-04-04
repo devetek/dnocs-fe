@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { ArrowLeftIcon, XIcon } from 'lucide-react';
 
+import { useDevetekTranslations } from '@/services/i18n';
+
 import { cn } from '@/shared/libs/tailwind/cn';
 import Drawer from '@/shared/presentation/atoms/Drawer';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
@@ -66,6 +68,8 @@ SidepanelLayoutGeneral.Title = function Title(props: TitleProps) {
 
   const emit = useSidepanelEmit();
 
+  const t = useDevetekTranslations();
+
   useSidepanelSubscribe(
     '%%sidepanel/allow-trivial-close',
     setAllowTrivialClose,
@@ -75,12 +79,15 @@ SidepanelLayoutGeneral.Title = function Title(props: TitleProps) {
     emit('%%sidepanel/close', null);
   };
 
-  const cnHeader = cn('grid grid-cols-[1fr_auto] gap-4 p-4 pt-3', className);
+  const cnHeader = cn(
+    'grid grid-cols-[1fr_auto] gap-4 p-4 pt-3 items-center',
+    className,
+  );
 
   const elSubtitle = subtitleLoading ? (
     <span className="flex items-center gap-x-1">
       <Spinner classNameWrapper="w-max size-4" />
-      <em>Loading details...</em>
+      <em>{t('sidepanel._core.loadingDetails')}</em>
     </span>
   ) : (
     subtitle
@@ -88,7 +95,7 @@ SidepanelLayoutGeneral.Title = function Title(props: TitleProps) {
 
   return (
     <header className={cnHeader}>
-      <section className="flex flex-col">
+      <section className="flex flex-col min-h-8">
         <h3 className="text-lg font-bold">{title}</h3>
         <h6 className="text-sm text-primary/70">{elSubtitle}</h6>
       </section>

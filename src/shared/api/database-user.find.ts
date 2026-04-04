@@ -39,7 +39,7 @@ export function recipe(params: RecipeParams): GetRequestRecipe {
   }
 
   return {
-    url: `/v1/database/find?${queryParams.toString()}`,
+    url: `/v1/database-user/find?${queryParams.toString()}`,
   };
 }
 

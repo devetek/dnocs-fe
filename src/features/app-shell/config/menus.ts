@@ -87,7 +87,7 @@ export const MENUS: MenuGroup[] = [
         icon: IconGlobe,
         iconActive: IconGlobeActive,
         i18nKey: 'sidebar.dDns',
-        url: '/domain',
+        url: '/v2/backend/domain',
       },
       {
         id: 'cloudproj',

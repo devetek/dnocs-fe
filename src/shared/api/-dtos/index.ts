@@ -1,6 +1,7 @@
 export * from './organization';
 export * from './application';
 export * from './database';
+export * from './domain';
 export * from './artifact';
 export * from './deploy';
 export * from './machine';

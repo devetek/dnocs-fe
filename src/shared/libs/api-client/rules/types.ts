@@ -17,19 +17,26 @@ export type ApiClientResponse<D> =
 //   Response Unit
 // =============================================================================
 
-export type PureResponse<D> =
+export type PureResponse<D, E = ResponseError> =
   | ({ $status: 'success' } & D)
-  | ({ $status: 'failed' } & ResponseError);
+  | ({ $status: 'failed' } & E);
 
-export type Response<D> =
+export type Response<D, E = ResponseError> =
   | { $status: 'initial' }
-  | { $status: 'loading'; prevData?: D; prevError?: ResponseError }
-  | PureResponse<D>;
+  | { $status: 'loading'; prevData?: D; prevError?: E }
+  | PureResponse<D, E>;
 
 export type ResponseError =
   | { kind: 'api'; error: AxiosError | BaseResponseError }
   | { kind: 'adapter'; error: AdapterError }
   | { kind: 'general'; error: Error };
+
+export type ResponseErrors =
+  | ResponseError
+  | {
+      kind: 'aggregate';
+      errors: ResponseError[];
+    };
 
 export type Adapter<Raw, Data> = (raw: Raw) => Data;
 

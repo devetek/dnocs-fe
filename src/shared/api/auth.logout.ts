@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 
-import { apiDoPost, axiosClient } from '@/shared/libs/api-client';
+import { axiosClient } from '@/shared/libs/api-client';
 import type {
   GetRequestRecipe,
   PureResponse,

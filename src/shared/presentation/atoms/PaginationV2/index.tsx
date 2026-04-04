@@ -187,7 +187,7 @@ export default function PaginationV2(props: PaginationV2Props) {
       };
 
       const cnButton = cn(
-        'h-full border-l border-r px-3 flex items-center gap-x-1.75 transition-all',
+        'h-full! border-l border-r px-3 flex items-center gap-x-1.75 transition-all',
         isDisabled ? 'cursor-no-drop' : 'hover:bg-card',
       );
 
@@ -204,7 +204,7 @@ export default function PaginationV2(props: PaginationV2Props) {
   if (totalPage < 1) return null;
 
   return (
-    <div className="bg-card/30 border not-dark:border-transparent shadow rounded-[999px] w-ma flex">
+    <div className="bg-card/30 border not-dark:border-transparent shadow rounded-[999px] w-max grid grid-cols-[minmax(0,auto)_minmax(0,auto)_minmax(0,auto)]">
       <NavButton
         icon="back"
         isDisabled={currentPage === 1}

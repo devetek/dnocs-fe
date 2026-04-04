@@ -77,8 +77,10 @@
       "automaticView": "Tampilan Otomatis",
       "cardGridView": "Tampilan Grid Kartu",
       "cardListView": "Tampilan Daftar Kartu",
-      "xOfY": "{0} of {1}",
-      "forX": "untuk {0}"
+      "tableView": "Tampilkan Tabel",
+      "xOfY": "{0} dari {1}",
+      "forX": "untuk {0}",
+      "description": "Keterangan"
     },
     "actions": {
       "refresh": "Segarkan",
@@ -109,7 +111,8 @@
       "migrateOwnership": "Pindah Pemilik",
       "login": "Masuk",
       "signUp": "Daftar",
-      "back": "Kembali"
+      "back": "Kembali",
+      "create": "Buat"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -303,12 +306,29 @@
       "gatewayServerAndAddress": "Server & Alamat Gerbang",
       "enabledFeatures": "Fitur",
       "xUpstream": "{length} Upstream(s)",
-      "xPorts": "{length} Port(s)"
+      "xPorts": "{length} Port(s)",
+      "emptyState": {
+        "title": "Belum ada load balancer terdaftar.",
+        "message": "Kenapa tidak tambah baru untuk memulai?",
+        "cta": "Tambah load balancer"
+      }
     },
     "domain": {
       "headerTitle": "Domain & DNS",
       "headerDesc": "Lihat domain dan DNS anda yang telah teregistrasi di sini.",
-      "headerFootnote": "Kunjungi <a>kanal YouTube</a> kami untuk panduannya."
+      "headerFootnote": "Kunjungi <a>kanal YouTube</a> kami untuk panduannya.",
+      "emptyState": {
+        "title": "Belum ada domain terdaftar.",
+        "message": "Kenapa tidak tambah baru untuk memulai?",
+        "cta": "Tambah domain"
+      },
+      "table": {
+        "headers": {
+          "domain": "Domain",
+          "owner": "Pemilik",
+          "lastModified": "Terakhir Diubah"
+        }
+      }
     },
     "notFound": {
       "title": "Halaman Tidak Ditemukan",
@@ -405,6 +425,18 @@
     "confirmExit": {
       "title": "Yakin Keluar?",
       "message": "Anda memiliki beberapa perubahan belum tersimpan. Apakah anda yakin ingin tetap keluar?"
+    },
+    "domainDelete": {
+      "title": "Hapus Domain",
+      "message": "Apa anda yakin anda ingin menghapus domain « {domain} »?"
+    },
+    "domainRecordDelete": {
+      "title": "Hapus Catatan Domain",
+      "message": "Apa anda yakin anda ingin menghapus catatan domain « {recordName} »?"
+    },
+    "loadBalancerDelete": {
+      "title": "Hapus Load Balancer",
+      "message": "Apa anda yakin anda ingin menghapus load balancer « {loadBalancer} »?"
     }
   },
   "toaster": {
@@ -446,9 +478,24 @@
     "updateApplication": {
       "success": "Berhasil memperbarui aplikasi dengan id {id}.",
       "error": "Gagal memperbarui aplikasi dengan id {id}!"
+    },
+    "loadBalancerDelete": {
+      "success": "Berhasil menghapus load balancer « {loadBalancer} ».",
+      "error": "Gagal menghapus load balancer « {loadBalancer} »!"
+    },
+    "domainDelete": {
+      "success": "Berhasil menghapus domain « {domain} ».",
+      "error": "Gagal menghapus domain « {domain} »!"
+    },
+    "domainRecordDelete": {
+      "success": "Berhasil menghapus catatan domain « {recordName} ».",
+      "error": "Gagal menghapus catatan domain « {recordName} »!"
     }
   },
   "sidepanel": {
+    "_core": {
+      "loadingDetails": "Memuat detil..."
+    },
     "signUp": {
       "title": "Daftar"
     },
@@ -483,6 +530,33 @@
     "loadBalancerDetails": {
       "title": "Detil Load Balancer",
       "pathPattern": "Pola Jalur URL"
+    },
+    "domainDetails": {
+      "title": "Detil Domain",
+      "table": {
+        "type": "Tipe",
+        "name": "Nama",
+        "content": "Konten",
+        "ttl": "TTL",
+        "attributes": "Atribut",
+        "comments": "Komentar"
+      }
+    },
+    "domainRegistration": {
+      "title": "Daftarkan domain baru",
+      "fieldDomain": { "title": "Domain" },
+      "fieldDescription": { "title": "Deskripsi" },
+      "fieldProvider": {
+        "title": "Provider",
+        "placeholder": "Pilih provider"
+      },
+      "providerData": { "title": "Data Provider" },
+      "fieldToken": { "title": "Token" },
+      "fieldZone": { "title": "Zone ID" },
+      "toaster": {
+        "success": "Domain berhasil didaftarkan.",
+        "error": "Gagal mendaftarkan domain."
+      }
     }
   },
   "formErrors": {
@@ -496,7 +570,11 @@
     "usernameMustBeFilled": "Username perlu diisi",
     "invalidPassword": "Password tidak sah",
     "confirmPasswordMustBeFilled": "Konfirmasi password perlu diisi",
-    "confirmPasswordMismatch": "Password dan konfirmasi password tidak serupa"
+    "confirmPasswordMismatch": "Password dan konfirmasi password tidak serupa",
+    "parseDomain": {
+      "invalidTld": "Gagal memvalidasi domain: TLD tidak dikenal.",
+      "invalidDomain": "Gagal memvalidasi domain: Domain tidak sah."
+    }
   },
   "sidebar": {
     "teamsWidget": {

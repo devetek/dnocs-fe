@@ -1,6 +1,6 @@
 import { ZodError } from 'zod';
 
-import type { ResponseError } from '../rules/types';
+import type { ResponseError, ResponseErrors } from '../rules/types';
 
 import { AdapterError } from './error';
 
@@ -31,4 +31,15 @@ export function processError(error: unknown): ResponseError {
     kind: 'general',
     error: error instanceof Error ? error : Error(String(error)),
   };
+}
+
+export function processErrors(error: unknown): ResponseErrors {
+  if (Array.isArray(error)) {
+    return {
+      kind: 'aggregate',
+      errors: error.map(processError),
+    };
+  }
+
+  return processError(error);
 }

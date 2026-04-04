@@ -21,18 +21,26 @@ type Event = MouseEvent | TouchEvent;
  * @returns
  */
 function useClickOutside<T extends HTMLElement = HTMLElement>(
-  ref: RefObject<T | null>,
+  ref: RefObject<T | null> | Array<RefObject<T | null>>,
   handler: (event: Event) => void,
 ): void {
   const stableHandler = useHandler(handler);
 
   useEffect(() => {
     const listener = (event: Event) => {
-      // Do nothing if clicking ref's element or descendent elements
-      if (!ref.current || ref.current.contains(event.target as Node)) {
-        return;
+      const refs = Array.isArray(ref) ? ref : [ref];
+
+      if (!refs.some((r) => r.current)) return;
+
+      // Check if the click target is inside ANY of the provided refs
+      const isInside = refs.some((refItem) =>
+        refItem.current?.contains(event.target as Node),
+      );
+
+      // If it's not inside any of them, it's an "outside" click
+      if (!isInside) {
+        stableHandler(event);
       }
-      stableHandler(event);
     };
 
     document.addEventListener('mousedown', listener);

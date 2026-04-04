@@ -6,6 +6,7 @@ export { default as ApiCloud } from './cloud';
 export { default as ApiDatabase } from './database';
 export { default as ApiDatabaseUser } from './database-user';
 export { default as ApiDeploy } from './deploy';
+export { default as ApiDomain } from './domain';
 export { default as ApiFolder } from './folder';
 export { default as ApiGitBranch } from './git-branch';
 export { default as ApiGitFile } from './git-file';

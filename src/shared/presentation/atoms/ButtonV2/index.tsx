@@ -22,6 +22,9 @@ const STYLES_SIZE = {
   sm: 'h-8 rounded-md px-3',
   lg: 'h-11 rounded-md px-8',
   icon: 'h-10 w-10',
+  'icon-lg': 'h-11 w-11',
+  'icon-sm': 'h-8 w-8',
+  'icon-xs': 'h-6 w-6',
 };
 
 const STYLES_BTNCOLOR_BASE_FLAT = {
@@ -52,6 +55,18 @@ const STYLES_BTNCOLOR_BASE_OUTLINE = {
   ),
 };
 
+const STYLES_BTNCOLOR_BASE_GHOST = {
+  primary: cn(
+    'text-primary not-disabled:hover:bg-primary/90 not-disabled:hover:text-primary-foreground',
+  ),
+  secondary: cn(
+    'text-secondary-foreground not-disabled:hover:bg-accent not-disabled:hover:text-accent-foreground',
+  ),
+  danger: cn(
+    'text-destructive not-disabled:hover:text-destructive-foreground not-disabled:hover:bg-destructive/90',
+  ),
+};
+
 const STYLES_BTNCOLOR_BASE_3D_SHARED = cn(
   'rounded-xl border shadow/5 not-disabled:hover:shadow-lg/7 not-disabled:active:shadow-sm',
 );
@@ -77,7 +92,7 @@ const STYLES_BTNCOLOR_BASE_3D = {
   ),
   secondary: cn(
     STYLES_BTNCOLOR_BASE_3D_SHARED,
-    'bg-gradient-to-b',
+    'bg-linear-to-b',
     'from-card to-gray-100 dark:to-black/15',
     'not-disabled:hover:text-white not-disabled:hover:[background:linear-gradient(to_bottom,rgba(255,255,255,0.1),rgba(0,0,0,0.2)),var(--color-accent)]',
     'dark:not-disabled:hover:[background:linear-gradient(to_bottom,rgba(255,255,255,0.05),rgba(0,0,0,0.3)),var(--color-accent)]',
@@ -86,7 +101,7 @@ const STYLES_BTNCOLOR_BASE_3D = {
   ),
   secondaryDanger: cn(
     STYLES_BTNCOLOR_BASE_3D_SHARED,
-    'bg-gradient-to-b',
+    'bg-linear-to-b',
     'from-card to-gray-100 dark:to-black/15',
     'not-disabled:hover:[background:linear-gradient(to_bottom,rgba(255,255,255,0.2),rgba(0,0,0,0.2)),var(--color-red-500)]',
     'not-disabled:active:[background:linear-gradient(to_top,rgba(255,255,255,0.1),rgba(0,0,0,0.2)),var(--color-red-500)]',
@@ -111,10 +126,11 @@ const buttonVariants = iife(() => {
         flat: null,
         outline: null,
         '3d': null,
+        ghost: null,
       },
     },
     compoundVariants: [
-      // #region Flat
+      // #region flat
       {
         buttonStyle: 'flat',
         buttonColor: 'primary',
@@ -139,7 +155,7 @@ const buttonVariants = iife(() => {
         danger: true,
         className: STYLES_BTNCOLOR_BASE_FLAT.secondaryDanger,
       },
-      // #endregion Flat
+      // #endregion flat
 
       // #region 3d
       {
@@ -186,7 +202,27 @@ const buttonVariants = iife(() => {
         danger: true,
         className: STYLES_BTNCOLOR_BASE_OUTLINE.danger,
       },
-      // #endregion 3d
+      // #endregion outline
+
+      // #region ghost
+      {
+        buttonStyle: 'ghost',
+        buttonColor: 'primary',
+        danger: false,
+        className: STYLES_BTNCOLOR_BASE_GHOST.primary,
+      },
+      {
+        buttonStyle: 'ghost',
+        buttonColor: 'secondary',
+        danger: false,
+        className: STYLES_BTNCOLOR_BASE_GHOST.secondary,
+      },
+      {
+        buttonStyle: 'ghost',
+        danger: true,
+        className: STYLES_BTNCOLOR_BASE_GHOST.danger,
+      },
+      // #endregion ghost
     ],
     defaultVariants: {
       size: 'default',
