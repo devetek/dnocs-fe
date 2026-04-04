@@ -31,7 +31,7 @@ export const schemaLoadBalancerCard = z.intersection(
     features: z.set(feature),
     state,
     configuration,
-    gateway,
+    gateway: gateway.optional(),
     webserver,
   }),
 );
@@ -44,7 +44,7 @@ export const schemaLoadBalancerDetails = z.intersection(
     features: z.set(feature),
     state,
     configuration,
-    gateway,
+    gateway: gateway.optional(),
     webserver,
   }),
 );
