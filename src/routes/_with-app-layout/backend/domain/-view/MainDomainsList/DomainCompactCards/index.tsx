@@ -86,7 +86,7 @@ export default function DomainCompactCards(props: Props) {
 
   const emit = useEmit();
 
-  const handleClickDetails = (_: unknown, id: SchemaCommon.UnitId) => {
+  const handleClickDetails = (id: SchemaCommon.UnitId) => {
     emit('@domain-dns/open--details', id);
   };
 
@@ -109,7 +109,7 @@ export default function DomainCompactCards(props: Props) {
             label: t('common.actions.details'),
             icon: IconEye,
             iconActive: IconEyeActive,
-            onClick: handleClickDetails.intoEvent(null, item.id),
+            onClick: handleClickDetails.intoEvent(item.id),
           },
           {
             label: t('common.actions.migrateOwnership'),

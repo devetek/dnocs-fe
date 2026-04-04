@@ -45,7 +45,7 @@ export default function LbCard(props: LbCardProps) {
   const lbWebserver = LOAD_BALANCER_WEBSERVER_ENGINE[data.webserver.engine];
 
   const featuresEl: ReactNode = (
-    <span className="flex flex-wrap gap-1 py-0.25">
+    <span className="flex flex-wrap gap-1 py-px">
       {Array.from(data.features).map((feature) => {
         const metadata = LOAD_BALANCER_FEATURES[feature];
 
@@ -133,31 +133,17 @@ export default function LbCard(props: LbCardProps) {
             ]}
           />
         </ResourceCard.Compact.Main>
-        {/* <ResourceCard.Compact.TertiaryInfos
-          infos={[
-            {
-              infoLabel: t('page.loadBalancers.gatewayServerAndAddress'),
-              icon: IconServer,
-              value: data.gateway.server.hostname,
-            },
-            {
-              infoLabel: t('page.loadBalancers.gatewayAddress'),
-              icon: GlobeIcon,
-              value: data.gateway.address,
-            },
-          ]}
-        /> */}
         <ResourceCard.Compact.SecondaryInfos
           infos={[
             {
               infoLabel: t('page.loadBalancers.gatewayServerAndAddress'),
               icon: IconServer,
-              value: data.gateway.server.hostname,
+              value: data.gateway?.server.hostname || '-',
             },
             {
               infoLabel: t('page.loadBalancers.gatewayAddress'),
               icon: GlobeIcon,
-              value: data.gateway.address,
+              value: data.gateway?.address || '-',
             },
           ]}
         />
@@ -229,12 +215,12 @@ export default function LbCard(props: LbCardProps) {
             {
               infoLabel: t('page.loadBalancers.gatewayServer'),
               icon: IconServer,
-              value: data.gateway.server.hostname,
+              value: data.gateway?.server.hostname || '-',
             },
             {
               infoLabel: t('page.loadBalancers.gatewayAddress'),
               icon: GlobeIcon,
-              value: data.gateway.address,
+              value: data.gateway?.address || '-',
             },
           ]}
         />

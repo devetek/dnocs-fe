@@ -78,6 +78,8 @@ export function ctorWebserver(raw: DTOs.RouterV1) {
 }
 
 export function ctorGateway(raw: DTOs.RouterV1) {
+  if (raw.machine == null) return undefined;
+
   return {
     address: raw.machine?.address,
     server: {
