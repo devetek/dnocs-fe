@@ -1,33 +1,35 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { zodValidator } from '@tanstack/zod-adapter';
-import z from 'zod';
 
-import { PageHeader } from '@/shared/presentation/organisms/PageHeader';
-
-import { FilterProvider } from './-model';
-import { FilterBar, OrganizationPeople } from './-view';
-
-const qsSchema = z.object({
-  q: z.string().optional(),
-  page: z.number().default(1),
-});
+import EventController from './-EventController';
+import { FilterModelProvider } from './-model/filters';
+import { MembersDataModelProvider } from './-model/members-data';
+import { schemaQueryString } from './-rules/qs';
+import { Header, Layout, MainBottomActions, MainFilter, MainList } from './-view';
 
 export const Route = createFileRoute('/_with-app-layout/teams/$id/')({
-  component: OrganizationPeoplePage,
-  validateSearch: zodValidator(qsSchema),
+  component: TeamDetailPage,
+  validateSearch: zodValidator(schemaQueryString),
 });
 
-function OrganizationPeoplePage() {
+function TeamDetailPage() {
   const { id } = Route.useParams();
 
   return (
-    <>
-      <PageHeader title="Members" description="Manage team members" />
+    <FilterModelProvider>
+      <MembersDataModelProvider orgId={id}>
+        <EventController />
 
-      <FilterProvider>
-        <FilterBar />
-        <OrganizationPeople orgID={id} />
-      </FilterProvider>
-    </>
+        <Header />
+
+        <Layout>
+          <Layout.Main>
+            <MainFilter />
+            <MainList />
+            <MainBottomActions />
+          </Layout.Main>
+        </Layout>
+      </MembersDataModelProvider>
+    </FilterModelProvider>
   );
 }
