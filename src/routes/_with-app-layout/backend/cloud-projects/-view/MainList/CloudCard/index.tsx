@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 
-import { CloudIcon } from 'lucide-react';
+import { BuildingIcon, CloudIcon, UserIcon } from 'lucide-react';
 
 import IconGoogleCloudPlatform from '@/shared/assets/ico-gcloud.png';
 import IconIDCloudHost from '@/shared/assets/ico-idcloudhost.svg';
@@ -10,17 +10,11 @@ import IconEyeActive from '@/shared/presentation/icons/EyeActive';
 import IconLastDateActive from '@/shared/presentation/icons/LastDateActive';
 import { ResourceCard } from '@/widgets/resource-card';
 
-export interface CloudCardData {
-  name?: string | null;
-  provider?: string | null;
-  lastUpdated?: string | null;
-}
+import { useEmit } from '../../../-model/events';
+import type { CloudTableData } from '../CloudTable';
 
 export interface CloudCardProps {
-  data: CloudCardData;
-  variant: 'compact' | 'full';
-  onClickDetails: () => void;
-  onClickDelete: () => void;
+  data: CloudTableData;
 }
 
 const PROVIDER_META: Record<string, { src?: string; label: string }> = {
@@ -30,8 +24,10 @@ const PROVIDER_META: Record<string, { src?: string; label: string }> = {
 };
 
 export default function CloudCard(props: CloudCardProps) {
-  const { data, variant, onClickDetails, onClickDelete } = props;
-  const { name, provider, lastUpdated } = data;
+  const { data } = props;
+  const { id, name, provider, lastUpdated, ownerName, teamName } = data;
+
+  const emit = useEmit();
 
   const meta =
     PROVIDER_META[provider?.toLocaleLowerCase() ?? ''] ??
@@ -39,76 +35,69 @@ export default function CloudCard(props: CloudCardProps) {
 
   const heroImage: string | typeof CloudIcon = meta.src ?? CloudIcon;
 
-  type FullActions = ComponentProps<typeof ResourceCard.Full.Actions>['actions'];
-  const actions: FullActions = [
+  const handleClickDetails = () =>
+    emit('@cloud-projects/open--details', {
+      cloudProjectId: String(id),
+      cloudProjectName: name ?? '',
+    });
+
+  type Actions = ComponentProps<typeof ResourceCard.Compact.Actions>['actions'];
+  const actions: Actions = [
     {
       label: 'View Regions',
       icon: IconEye,
       iconActive: IconEyeActive,
-      onClick: onClickDetails,
+      onClick: handleClickDetails,
     },
     {
       variant: 'destructive',
       label: 'Delete',
-      onClick: onClickDelete,
+      onClick: () =>
+        emit('@cloud-projects/project--delete', {
+          id,
+          name: name ?? String(id),
+        }),
     },
   ];
 
-  if (variant === 'compact') {
-    return (
-      <ResourceCard.Compact>
-        <ResourceCard.Compact.Main>
+  const ownershipStatus = [
+    !!teamName && { icon: BuildingIcon, text: teamName },
+    !!ownerName && { icon: UserIcon, text: ownerName },
+  ].filter(Boolean) as { icon: typeof UserIcon; text: string }[];
+
+  return (
+    <ResourceCard.Compact>
+      <ResourceCard.Compact.Main>
+        <button
+          type="button"
+          className="flex items-start gap-x-2 w-full text-left cursor-pointer"
+          onClick={handleClickDetails}
+        >
           <ResourceCard.Compact.Main.Hero
             image={heroImage}
             tooltipMessage={meta.label}
           />
           <ResourceCard.Compact.Main.Content
             title={name ?? undefined}
-            status={[{ icon: CloudIcon, text: meta.label }]}
+            status={[
+              { icon: CloudIcon, text: meta.label },
+              ...ownershipStatus,
+            ]}
           />
-        </ResourceCard.Compact.Main>
-        <ResourceCard.Compact.Actions
-          visibleActionOnlyIcon
-          actions={actions}
-          labelMore="More"
-        />
-        <ResourceCard.Compact.Footnote>
-          <ResourceCard.Compact.Footnote.Item
-            icon={IconLastDateActive}
-            label="Last updated"
-            value={lastUpdated ?? undefined}
-          />
-        </ResourceCard.Compact.Footnote>
-      </ResourceCard.Compact>
-    );
-  }
-
-  return (
-    <ResourceCard.Full classNameCardWrapper="min-w-0 w-full">
-      <ResourceCard.Full.Main>
-        <ResourceCard.Full.Main.Hero
-          image={heroImage}
-          tooltipMessage={meta.label}
-        />
-        <ResourceCard.Full.Main.Content
-          title={name ?? undefined}
-          status={[{ icon: CloudIcon, text: meta.label }]}
-        />
-      </ResourceCard.Full.Main>
-
-      <ResourceCard.Full.Actions
+        </button>
+      </ResourceCard.Compact.Main>
+      <ResourceCard.Compact.Actions
         visibleActionOnlyIcon
-        labelMore="More"
         actions={actions}
+        labelMore="More"
       />
-
-      <ResourceCard.Full.Footnote>
-        <ResourceCard.Full.Footnote.Item
+      <ResourceCard.Compact.Footnote>
+        <ResourceCard.Compact.Footnote.Item
+          icon={IconLastDateActive}
           label="Last updated"
-          labelIcon={IconLastDateActive}
           value={lastUpdated ?? undefined}
         />
-      </ResourceCard.Full.Footnote>
-    </ResourceCard.Full>
+      </ResourceCard.Compact.Footnote>
+    </ResourceCard.Compact>
   );
 }

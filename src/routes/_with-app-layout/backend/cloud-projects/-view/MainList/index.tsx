@@ -1,78 +1,68 @@
 import dayjs from 'dayjs';
 
-import { useCloudProjectDetailModal } from '@/features/cloud-project-detail-modal';
-
-import { useBreakpoint } from '@/shared/libs/react-hooks/useBreakpoint';
 import LayoutAutoGridList from '@/shared/presentation/atoms/LayoutAutoGridList';
 import { EmptyState } from '@/shared/presentation/organisms/EmptyState';
+import { useDevetekTranslations } from '@/services/i18n';
+import { buildResponseView } from '@/widgets/response-view-builder';
 
-import useDeleteCloudProjectDialog from '../../-lib/useDeleteCloudProjectDialog';
-import { useCloudData } from '../../-model/cloud-data';
-import { useFilter } from '../../-model/filters';
+import { useCloudDataModel } from '../../-model/cloud-data';
+import { useFilterModel } from '../../-model/filters';
 import { CloudListState } from '../-presentation/CloudListState';
 
 import CloudCard from './CloudCard';
+import CloudTable from './CloudTable';
+import type { CloudTableData } from './CloudTable';
 
-export default function MainList() {
-  const { response, refresh } = useCloudData();
-  const { viewMode } = useFilter();
+export default buildResponseView({
+  useResponse: () => useCloudDataModel((s) => s.clouds),
+  fallbackError: CloudListState.Error,
+  fallbackLoading: CloudListState.Loading,
+  render: function Render(props) {
+    const { list } = props;
 
-  const isDesktop = useBreakpoint('lg');
-  const derivedViewMode: 'grid' | 'list' =
-    viewMode === 'auto' ? (isDesktop ? 'list' : 'grid') : viewMode;
+    const [derivedViewMode] = useFilterModel((s) => [s.derivedViewMode]);
+    const t = useDevetekTranslations();
 
-  const [openDetailModal] = useCloudProjectDetailModal();
-  const [handleClickDeleteCloudProject] = useDeleteCloudProjectDialog(() => {
-    refresh();
-  });
+    if (list.length < 1) {
+      return (
+        <EmptyState
+          title={t('page.cloudProjects.emptyState.title')}
+          message={t('page.cloudProjects.emptyState.message')}
+          ctaText={t('page.cloudProjects.emptyState.cta')}
+        />
+      );
+    }
 
-  if (response.$status === 'failed') {
-    return <CloudListState.Error error={response.error} />;
-  }
+    const tableData: CloudTableData[] = list.flatMap((cloud) => {
+      const { id, name, provider, updated_at, installer_status, user, organization } =
+        cloud;
+      if (!id) return [];
 
-  if (response.$status !== 'success') {
-    return <CloudListState.Loading />;
-  }
+      return [
+        {
+          id,
+          name,
+          provider,
+          installerStatus: installer_status,
+          lastUpdated: updated_at
+            ? dayjs(updated_at).format('YYYY-MM-DD HH:mm:ss')
+            : null,
+          ownerName: user?.fullname || user?.username || user?.email || null,
+          teamName: organization?.name || null,
+        },
+      ];
+    });
 
-  const { clouds } = response;
+    if (derivedViewMode === 'table') {
+      return <CloudTable data={tableData} />;
+    }
 
-  if (clouds.length < 1) {
     return (
-      <EmptyState
-        title="No cloud accounts connected"
-        message="Connect your first cloud provider account to start managing resources like virtual machines and networks directly from dNocs."
-        ctaText="Connect Cloud Account"
-      />
+      <LayoutAutoGridList viewMode={derivedViewMode as 'grid' | 'list'}>
+        {tableData.map((cloud) => (
+          <CloudCard key={cloud.id} data={cloud} />
+        ))}
+      </LayoutAutoGridList>
     );
-  }
-
-  return (
-    <LayoutAutoGridList viewMode={viewMode}>
-      {clouds.map((cloud) => {
-        const { id, name, provider, updated_at } = cloud;
-        if (!id) return null;
-
-        const lastUpdated = updated_at
-          ? dayjs(updated_at).format('YYYY-MM-DD HH:mm:ss')
-          : null;
-
-        return (
-          <CloudCard
-            key={id}
-            data={{ name, provider, lastUpdated }}
-            variant={derivedViewMode === 'grid' ? 'compact' : 'full'}
-            onClickDetails={() =>
-              openDetailModal({
-                cloudProjectId: String(id),
-                cloudProjectName: name ?? '',
-              })
-            }
-            onClickDelete={() =>
-              handleClickDeleteCloudProject(id, name ?? String(id))
-            }
-          />
-        );
-      })}
-    </LayoutAutoGridList>
-  );
-}
+  },
+});
