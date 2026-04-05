@@ -340,6 +340,16 @@
         "cta": "Hubungkan Akun"
       }
     },
+    "sshKeys": {
+      "headerTitle": "Kunci SSH",
+      "headerDesc": "Kelola kunci SSH Anda untuk mengakses mesin virtual secara aman tanpa harus memasukkan kata sandi setiap saat.",
+      "addKey": "Tambah Kunci SSH",
+      "emptyState": {
+        "title": "Belum ada kunci SSH ditambahkan",
+        "message": "Tambahkan kunci SSH untuk mengakses mesin virtual Anda secara aman tanpa memasukkan kata sandi setiap kali.",
+        "cta": "Tambah Kunci SSH"
+      }
+    },
     "notFound": {
       "title": "Halaman Tidak Ditemukan",
       "description": "Halaman yang kamu cari tidak tersedia atau mungkin sudah dipindahkan. Periksa kembali URL atau kembali ke halaman sebelumnya."

@@ -1,84 +1,66 @@
-import { ArrowLeftRightIcon, Grid2X2Icon, PlusIcon, Rows3Icon } from 'lucide-react';
+import { ArrowLeftRightIcon, Grid2X2Icon, RefreshCwIcon, TableIcon } from 'lucide-react';
 
-import { useSSHKeyCreateModal } from '@/features/ssh-create-modal';
-
-import { Button } from '@/shared/presentation/atoms/Button';
 import { Card } from '@/shared/presentation/atoms/Card';
 import SearchCollapsible from '@/shared/presentation/atoms/SearchCollapsible';
+import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { buildSegmentedControl } from '@/widgets/ui-atomic-builder/atom-segmented-control';
 
-import { useSshData } from '../../-model/ssh-data';
-import { useFilter } from '../../-model/filters';
+import { useEmit } from '../../-model/events';
+import { useFilterModel } from '../../-model/filters';
+import type { FilterRules } from '../../-rules';
 
-type ViewMode = 'auto' | 'list' | 'grid';
-
-const ViewModeSO = buildSegmentedControl<ViewMode>({
+const ViewModeSO = buildSegmentedControl<FilterRules.ViewMode>({
   options: [
-    {
-      id: 'auto',
-      icon: ArrowLeftRightIcon,
-      tooltipI18n: 'common.terms.automaticView',
-    },
-    {
-      id: 'list',
-      icon: Rows3Icon,
-      tooltipI18n: 'common.terms.cardListView',
-    },
-    {
-      id: 'grid',
-      icon: Grid2X2Icon,
-      tooltipI18n: 'common.terms.cardGridView',
-    },
+    { id: 'auto', icon: ArrowLeftRightIcon, tooltipI18n: 'common.terms.automaticView' },
+    { id: 'table', icon: TableIcon, tooltipI18n: 'common.terms.tableView' },
+    { id: 'grid', icon: Grid2X2Icon, tooltipI18n: 'common.terms.cardGridView' },
   ],
 });
 
 const SlotViewMode = () => {
-  const { viewMode, setViewMode } = useFilter();
+  const emit = useEmit();
+  const [viewMode] = useFilterModel((s) => [s.viewMode]);
 
   return (
     <ViewModeSO
       activeItemId={viewMode}
-      onClickOption={(newViewMode) => setViewMode(newViewMode)}
+      onClickOption={(newViewMode) =>
+        emit('@ssh-keys/filters/view-mode--change', newViewMode)
+      }
     />
   );
 };
 
 const SlotSearch = () => {
-  const { searchQuery, setSearchQuery, setPagination } = useFilter();
+  const emit = useEmit();
+  const [searchQuery] = useFilterModel((s) => [s.searchQuery]);
 
   return (
     <SearchCollapsible
       initialValue={searchQuery}
       onSubmit={(input) => {
-        setSearchQuery(input);
-        setPagination(1);
+        emit('@ssh-keys/filters/search--input', input);
+        emit('@ssh-keys/filters/pagination--set', 1);
       }}
       onClickClear={() => {
-        setSearchQuery('');
-        setPagination(1);
+        emit('@ssh-keys/filters/search--input', undefined);
+        emit('@ssh-keys/filters/pagination--set', 1);
       }}
       placeholderText="Search SSH keys..."
     />
   );
 };
 
-const SlotAddKey = () => {
-  const { refresh } = useSshData();
-  const [openSSHKeyCreateModal] = useSSHKeyCreateModal();
-
+const SlotRefresh = () => {
+  const emit = useEmit();
   return (
     <Button
-      size="sm"
-      onClick={() =>
-        openSSHKeyCreateModal({
-          onSubmitSuccess: () => {
-            refresh();
-          },
-        })
-      }
+      size="icon-sm"
+      buttonColor="secondary"
+      buttonStyle="ghost"
+      onClick={() => emit('@ssh-keys/data--refresh', null)}
     >
-      <PlusIcon className="w-4 h-4 mr-1.5" />
-      Add SSH Key
+      <RefreshCwIcon />
     </Button>
   );
 };
@@ -89,10 +71,9 @@ export default function MainFilter() {
       <div className="flex items-center">
         <SlotSearch />
       </div>
-
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-x-1">
+        <SlotRefresh />
         <SlotViewMode />
-        <SlotAddKey />
       </div>
     </Card>
   );

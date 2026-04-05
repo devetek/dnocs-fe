@@ -1,124 +1,66 @@
-import { useNavigate } from '@tanstack/react-router';
 import dayjs from 'dayjs';
 
-import { useDialog } from '@/services/dialog';
-import { useToaster } from '@/services/toaster';
-
-import { ApiSecret } from '@/shared/api';
-import { useBreakpoint } from '@/shared/libs/react-hooks/useBreakpoint';
 import LayoutAutoGridList from '@/shared/presentation/atoms/LayoutAutoGridList';
 import { EmptyState } from '@/shared/presentation/organisms/EmptyState';
+import { useDevetekTranslations } from '@/services/i18n';
+import { buildResponseView } from '@/widgets/response-view-builder';
 
-import { useSshData } from '../../-model/ssh-data';
-import { useFilter } from '../../-model/filters';
+import { useSshKeyDataModel } from '../../-model/ssh-key-data';
+import { useFilterModel } from '../../-model/filters';
 import { SshListState } from '../-presentation/SshListState';
 
 import SshCard from './SshCard';
+import SshTable from './SshTable';
+import type { SshTableData } from './SshTable';
 
-export default function MainList() {
-  const navigate = useNavigate();
-  const { response, refresh } = useSshData();
-  const { viewMode } = useFilter();
+export default buildResponseView({
+  useResponse: () => useSshKeyDataModel((s) => s.sshKeys),
+  fallbackError: SshListState.Error,
+  fallbackLoading: SshListState.Loading,
+  render: function Render(props) {
+    const { list } = props;
 
-  const isDesktop = useBreakpoint('lg');
-  const derivedViewMode: 'grid' | 'list' =
-    viewMode === 'auto' ? (isDesktop ? 'list' : 'grid') : viewMode;
+    const [derivedViewMode] = useFilterModel((s) => [s.derivedViewMode]);
+    const t = useDevetekTranslations();
 
-  const [openToaster] = useToaster();
-  const [openDialog] = useDialog();
+    if (list.length < 1) {
+      return (
+        <EmptyState
+          title={t('page.sshKeys.emptyState.title')}
+          message={t('page.sshKeys.emptyState.message')}
+          ctaText={t('page.sshKeys.emptyState.cta')}
+        />
+      );
+    }
 
-  const handleClickDelete = (sshKeyId: number, sshKeyName: string) => {
-    openDialog({
-      title: 'Delete SSH Key',
-      content: (
-        <>
-          Are you sure you want to delete <br />
-          <code>{sshKeyName}</code> (<code>id</code> <code>{sshKeyId}</code>)?
-        </>
-      ),
-      variant: 'warning',
-      actions: {
-        variant: 'YesNo',
-        yes: async () => {
-          const deleteResponse = await ApiSecret.SshKey.Delete.$Id.doDelete({
-            id: String(sshKeyId),
-          });
+    const tableData: SshTableData[] = list.flatMap((sshKey) => {
+      const { id, name, type, updated_at, user, organization } = sshKey;
+      if (!id) return [];
 
-          if (deleteResponse.$status === 'success') {
-            openToaster({
-              variant: 'success',
-              message: (
-                <>
-                  Successfully deleted SSH key <code>{sshKeyName}</code> (
-                  <code>{sshKeyId}</code>)
-                </>
-              ),
-            });
-            refresh();
-            return;
-          }
-
-          openToaster({
-            variant: 'error',
-            title: (
-              <>
-                Failed to delete SSH key <code>{sshKeyName}</code> (
-                <code>{sshKeyId}</code>)
-              </>
-            ),
-            message: deleteResponse.error.message,
-          });
+      return [
+        {
+          id,
+          name,
+          type,
+          lastUpdated: updated_at
+            ? dayjs(updated_at).format('YYYY-MM-DD HH:mm:ss')
+            : null,
+          ownerName: user?.fullname || user?.username || user?.email || null,
+          teamName: organization?.name || null,
         },
-      },
+      ];
     });
-  };
 
-  const handleClickDetails = (sshKeyId: number) => {
-    navigate({
-      to: '/backend/secret-managers/ssh-key/$id',
-      params: { id: String(sshKeyId) },
-    });
-  };
+    if (derivedViewMode === 'table') {
+      return <SshTable data={tableData} />;
+    }
 
-  if (response.$status === 'failed') {
-    return <SshListState.Error error={response.error} />;
-  }
-
-  if (response.$status !== 'success') {
-    return <SshListState.Loading />;
-  }
-
-  const secrets = response.secrets ?? [];
-
-  if (secrets.length < 1) {
     return (
-      <EmptyState
-        title="No SSH keys added yet"
-        message="Add an SSH key to securely access your virtual machines without entering a password each time."
-        ctaText="Add SSH Key"
-      />
+      <LayoutAutoGridList viewMode={derivedViewMode as 'grid' | 'list'}>
+        {tableData.map((sshKey) => (
+          <SshCard key={sshKey.id} data={sshKey} />
+        ))}
+      </LayoutAutoGridList>
     );
-  }
-
-  return (
-    <LayoutAutoGridList viewMode={viewMode}>
-      {secrets.map((sshkey) => {
-        if (!sshkey.id || !sshkey.name) return null;
-
-        const lastUpdated = sshkey.updated_at
-          ? dayjs(sshkey.updated_at).format('YYYY-MM-DD HH:mm:ss')
-          : null;
-
-        return (
-          <SshCard
-            key={sshkey.id}
-            data={{ name: sshkey.name, type: sshkey.type, lastUpdated }}
-            variant={derivedViewMode === 'grid' ? 'compact' : 'full'}
-            onClickDetails={() => handleClickDetails(sshkey.id!)}
-            onClickDelete={() => handleClickDelete(sshkey.id!, sshkey.name!)}
-          />
-        );
-      })}
-    </LayoutAutoGridList>
-  );
-}
+  },
+});

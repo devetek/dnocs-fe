@@ -1,28 +1,28 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { zodValidator } from '@tanstack/zod-adapter';
 
 import { Card } from '@/shared/presentation/atoms/Card';
 import { AsideHelpSupport } from '@/widgets/aside-help-support';
 
-import { SshDataProvider } from './-model/ssh-data';
-import { FilterProvider } from './-model/filters';
-import {
-  Header,
-  Layout,
-  MainBottomActions,
-  MainFilter,
-  MainList,
-} from './-view';
+import EventController from './-EventController';
+import { SshKeyDataModelProvider } from './-model/ssh-key-data';
+import { FilterModelProvider } from './-model/filters';
+import { schemaQueryString } from './-rules/qs';
+import { Header, Layout, MainBottomActions, MainFilter, MainList } from './-view';
 
 export const Route = createFileRoute(
   '/_with-app-layout/backend/secret-managers/ssh-key/',
 )({
   component: SshKeyPage,
+  validateSearch: zodValidator(schemaQueryString),
 });
 
-export default function SshKeyPage() {
+function SshKeyPage() {
   return (
-    <FilterProvider>
-      <SshDataProvider>
+    <FilterModelProvider>
+      <SshKeyDataModelProvider>
+        <EventController />
+
         <Header />
 
         <Layout>
@@ -38,7 +38,7 @@ export default function SshKeyPage() {
             </Card>
           </Layout.Aside>
         </Layout>
-      </SshDataProvider>
-    </FilterProvider>
+      </SshKeyDataModelProvider>
+    </FilterModelProvider>
   );
 }

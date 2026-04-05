@@ -345,6 +345,16 @@
         "cta": "Connect Account"
       }
     },
+    "sshKeys": {
+      "headerTitle": "SSH Keys",
+      "headerDesc": "Manage your SSH keys to securely access virtual machines without entering a password each time.",
+      "addKey": "Add SSH Key",
+      "emptyState": {
+        "title": "No SSH keys added yet",
+        "message": "Add an SSH key to securely access your virtual machines without entering a password each time.",
+        "cta": "Add SSH Key"
+      }
+    },
     "notFound": {
       "title": "Page Not Found",
       "description": "The page you are looking for is unavailable or may have been moved. Check the URL again or go back to the previous page."
