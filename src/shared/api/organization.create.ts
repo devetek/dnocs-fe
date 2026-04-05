@@ -9,10 +9,11 @@ import { apiDoPost } from '../libs/api-client';
 export interface RecipeParams {
   userId: string;
   organizationName: string;
+  description?: string;
 }
 
 export function recipe(params: RecipeParams): DoRequestRecipe {
-  const { organizationName, userId } = params;
+  const { organizationName, userId, description } = params;
 
   return {
     method: 'POST',
@@ -20,6 +21,7 @@ export function recipe(params: RecipeParams): DoRequestRecipe {
     data: {
       name: organizationName,
       user_id: userId,
+      description,
     },
   };
 }

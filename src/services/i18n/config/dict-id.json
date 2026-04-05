@@ -350,6 +350,32 @@
         "cta": "Tambah Kunci SSH"
       }
     },
+    "teams": {
+      "headerTitle": "Tim",
+      "headerDesc": "Buat tim untuk mengorganisir resource dan aplikasi",
+      "addTeam": "Tambah Tim",
+      "searchPlaceholder": "Cari tim...",
+      "emptyState": {
+        "title": "Tidak ada tim ditemukan",
+        "message": "Buat tim untuk mengorganisir resource dan aplikasi.",
+        "cta": "Tambah Tim"
+      }
+    },
+    "teamDetail": {
+      "addMember": "Tambah Anggota",
+      "loadingData": "Memuat data tim\u2026",
+      "memberCount": "{count, plural, one {# anggota} other {# anggota}} dalam tim ini",
+      "memberColumn": "Anggota",
+      "joinedColumn": "Bergabung",
+      "joinedLabel": "Bergabung",
+      "remove": "Hapus",
+      "removeFromTeam": "Hapus dari tim",
+      "emptyState": {
+        "title": "Belum ada anggota",
+        "message": "Tambahkan anggota ke tim ini untuk memulai.",
+        "cta": "Tambah Anggota"
+      }
+    },
     "notFound": {
       "title": "Halaman Tidak Ditemukan",
       "description": "Halaman yang kamu cari tidak tersedia atau mungkin sudah dipindahkan. Periksa kembali URL atau kembali ke halaman sebelumnya."
@@ -456,8 +482,14 @@
     },
     "loadBalancerDelete": {
       "title": "Hapus Load Balancer",
-      "message": "Apa anda yakin anda ingin menghapus load balancer « {loadBalancer} »?"
-    }
+      "message": "Apa anda yakin anda ingin menghapus load balancer « {loadBalancer} »?"    },
+    "teamDelete": {
+      "title": "Hapus Tim",
+      "message": "Apakah Anda yakin ingin menghapus \"{name}\" ({id})?"
+    },
+    "teamMemberRemove": {
+      "title": "Hapus Anggota",
+      "message": "Apakah Anda yakin ingin menghapus \"{name}\" dari tim ini?"    }
   },
   "toaster": {
     "loginByEmail": {
@@ -509,8 +541,14 @@
     },
     "domainRecordDelete": {
       "success": "Berhasil menghapus catatan domain « {recordName} ».",
-      "error": "Gagal menghapus catatan domain « {recordName} »!"
-    }
+      "error": "Gagal menghapus catatan domain « {recordName} »!"    },
+    "teamDelete": {
+      "success": "Berhasil menghapus tim \"{name}\"",
+      "error": "Gagal menghapus tim \"{name}\""
+    },
+    "teamMemberRemove": {
+      "success": "Berhasil menghapus \"{name}\" dari tim",
+      "error": "Gagal menghapus \"{name}\" dari tim"    }
   },
   "sidepanel": {
     "_core": {
@@ -577,6 +615,33 @@
         "success": "Domain berhasil didaftarkan.",
         "error": "Gagal mendaftarkan domain."
       }
+    },
+    "editTeam": {
+      "title": "Ubah Tim",
+      "fieldName": "Nama Tim",
+      "namePlaceholder": "Tim Saya",
+      "descPlaceholder": "Deskripsi singkat tim ini\u2026"
+    }
+  },
+  "modal": {
+    "createTeam": {
+      "title": "Buat Tim",
+      "fieldName": "Nama Tim",
+      "namePlaceholder": "mis. Tim Backend",
+      "descPlaceholder": "Apa yang dikerjakan tim ini?",
+      "submit": "Buat Tim",
+      "toaster": {
+        "success": "Tim \"{name}\" berhasil dibuat",
+        "error": "Gagal membuat tim \"{name}\""
+      }
+    },
+    "addTeamMember": {
+      "title": "Tambah Anggota Baru",
+      "selectUser": "Pilih pengguna\u2026",
+      "searchByUsername": "Cari berdasarkan username\u2026",
+      "loading": "Memuat\u2026",
+      "noUsersFound": "Pengguna tidak ditemukan",
+      "pageInfo": "Halaman {page} / {totalPage}"
     }
   },
   "formErrors": {

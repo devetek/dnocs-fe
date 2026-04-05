@@ -355,6 +355,32 @@
         "cta": "Add SSH Key"
       }
     },
+    "teams": {
+      "headerTitle": "Teams",
+      "headerDesc": "Create a team to organize resources and applications",
+      "addTeam": "Add Team",
+      "searchPlaceholder": "Search teams...",
+      "emptyState": {
+        "title": "No teams found",
+        "message": "Create a team to organize resources and applications.",
+        "cta": "Add Team"
+      }
+    },
+    "teamDetail": {
+      "addMember": "Add Member",
+      "loadingData": "Loading team data\u2026",
+      "memberCount": "{count, plural, one {# member} other {# members}} in this team",
+      "memberColumn": "Member",
+      "joinedColumn": "Joined",
+      "joinedLabel": "Joined",
+      "remove": "Remove",
+      "removeFromTeam": "Remove from team",
+      "emptyState": {
+        "title": "No members yet",
+        "message": "Add members to this team to get started.",
+        "cta": "Add Member"
+      }
+    },
     "notFound": {
       "title": "Page Not Found",
       "description": "The page you are looking for is unavailable or may have been moved. Check the URL again or go back to the previous page."
@@ -461,8 +487,14 @@
     },
     "domainRecordDelete": {
       "title": "Delete Domain Record",
-      "message": "Are you sure you want to delete domain record « {recordName} »?"
-    }
+      "message": "Are you sure you want to delete domain record « {recordName} »?"    },
+    "teamDelete": {
+      "title": "Delete Team",
+      "message": "Are you sure you want to delete \"{name}\" ({id})?"
+    },
+    "teamMemberRemove": {
+      "title": "Remove Member",
+      "message": "Are you sure you want to remove \"{name}\" from this team?"    }
   },
   "toaster": {
     "loginByEmail": {
@@ -514,8 +546,14 @@
     },
     "loadBalancerDelete": {
       "success": "Successfully deleted load balancer « {loadBalancer} ».",
-      "error": "Failed to delete load balancer « {loadBalancer} »!"
-    }
+      "error": "Failed to delete load balancer « {loadBalancer} »!"    },
+    "teamDelete": {
+      "success": "Successfully deleted team \"{name}\"",
+      "error": "Failed to delete team \"{name}\""
+    },
+    "teamMemberRemove": {
+      "success": "Successfully removed \"{name}\" from the team",
+      "error": "Failed to remove \"{name}\" from the team"    }
   },
   "sidepanel": {
     "_core": {
@@ -582,6 +620,33 @@
         "success": "Domain registered successfully.",
         "error": "Failed to register domain."
       }
+    },
+    "editTeam": {
+      "title": "Edit Team",
+      "fieldName": "Team Name",
+      "namePlaceholder": "My Team",
+      "descPlaceholder": "A short description of this team\u2026"
+    }
+  },
+  "modal": {
+    "createTeam": {
+      "title": "Create a Team",
+      "fieldName": "Team Name",
+      "namePlaceholder": "e.g. Backend Squad",
+      "descPlaceholder": "What does this team do?",
+      "submit": "Create Team",
+      "toaster": {
+        "success": "Team \"{name}\" created successfully",
+        "error": "Failed to create team \"{name}\""
+      }
+    },
+    "addTeamMember": {
+      "title": "Add New People",
+      "selectUser": "Select a user\u2026",
+      "searchByUsername": "Search by username\u2026",
+      "loading": "Loading\u2026",
+      "noUsersFound": "No users found",
+      "pageInfo": "Page {page} / {totalPage}"
     }
   },
   "formErrors": {

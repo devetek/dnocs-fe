@@ -1,26 +1,33 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { zodValidator } from '@tanstack/zod-adapter';
 
-import { PageHeader } from '@/shared/presentation/organisms/PageHeader';
-
-import { FilterProvider } from './-model/filter';
-import { FilterBar, Organizations } from './-view';
+import EventController from './-EventController';
+import { FilterModelProvider } from './-model/filters';
+import { OrgDataModelProvider } from './-model/org-data';
+import { schemaQueryString } from './-rules/qs';
+import { Header, Layout, MainBottomActions, MainFilter, MainList } from './-view';
 
 export const Route = createFileRoute('/_with-app-layout/teams/')({
-  component: OrganizationsPage,
+  component: TeamsPage,
+  validateSearch: zodValidator(schemaQueryString),
 });
 
-function OrganizationsPage() {
+function TeamsPage() {
   return (
-    <>
-      <PageHeader
-        title="Teams"
-        description="Create a team to organize resources and applications"
-      />
+    <FilterModelProvider>
+      <OrgDataModelProvider>
+        <EventController />
 
-      <FilterProvider>
-        <FilterBar />
-        <Organizations />
-      </FilterProvider>
-    </>
+        <Header />
+
+        <Layout>
+          <Layout.Main>
+            <MainFilter />
+            <MainList />
+            <MainBottomActions />
+          </Layout.Main>
+        </Layout>
+      </OrgDataModelProvider>
+    </FilterModelProvider>
   );
 }
