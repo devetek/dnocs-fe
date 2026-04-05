@@ -2,6 +2,7 @@ import LayoutAutoGridList from '@/shared/presentation/atoms/LayoutAutoGridList';
 import { EmptyState } from '@/shared/presentation/organisms/EmptyState';
 import { buildResponseView } from '@/widgets/response-view-builder';
 
+import { useDevetekTranslations } from '@/services/i18n';
 import { useMembersDataModel } from '../../-model/members-data';
 import { useFilterModel } from '../../-model/filters';
 import { MemberListState } from '../-presentation/MemberListState';
@@ -18,13 +19,14 @@ export default buildResponseView({
     const { list } = props;
 
     const [derivedViewMode] = useFilterModel((s) => [s.derivedViewMode]);
+    const t = useDevetekTranslations();
 
     if (list.length < 1) {
       return (
         <EmptyState
-          title="No members yet"
-          message="Add members to this team to get started."
-          ctaText="Add Member"
+          title={t('page.teamDetail.emptyState.title')}
+          message={t('page.teamDetail.emptyState.message')}
+          ctaText={t('page.teamDetail.emptyState.cta')}
         />
       );
     }

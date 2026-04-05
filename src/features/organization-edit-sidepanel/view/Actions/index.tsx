@@ -1,5 +1,6 @@
 import { LoaderCircleIcon } from 'lucide-react';
 
+import { useDevetekTranslations } from '@/services/i18n';
 import { cn } from '@/shared/libs/tailwind/cn';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 
@@ -8,6 +9,7 @@ import { useEmit } from '../../model/events';
 
 export default function Actions() {
   const { isSubmitting, hasChanges } = useOrgEditModel();
+  const t = useDevetekTranslations();
 
   const emit = useEmit();
 
@@ -25,7 +27,7 @@ export default function Actions() {
         onClick={handleClickSubmit}
         disabled={isSubmitting || !hasChanges}
       >
-        {isSubmitting ? <LoaderCircleIcon className="animate-spin" /> : 'Save'}
+        {isSubmitting ? <LoaderCircleIcon className="animate-spin" /> : t('common.actions.save')}
       </Button>
       <Button
         className={cn(hasChanges && 'border-yellow-500 border-dashed')}
@@ -33,7 +35,7 @@ export default function Actions() {
         buttonColor="secondary"
         onClick={handleClickCancel}
       >
-        Cancel
+        {t('common.actions.cancel')}
       </Button>
     </>
   );

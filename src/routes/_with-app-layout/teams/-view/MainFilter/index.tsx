@@ -1,5 +1,6 @@
 import { ArrowLeftRightIcon, Grid2X2Icon, RefreshCwIcon, TableIcon } from 'lucide-react';
 
+import { useDevetekTranslations } from '@/services/i18n';
 import { Card } from '@/shared/presentation/atoms/Card';
 import SearchCollapsible from '@/shared/presentation/atoms/SearchCollapsible';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
@@ -33,6 +34,7 @@ const SlotViewMode = () => {
 
 const SlotSearch = () => {
   const emit = useEmit();
+  const t = useDevetekTranslations();
   const [searchQuery] = useFilterModel((s) => [s.searchQuery]);
 
   return (
@@ -46,7 +48,7 @@ const SlotSearch = () => {
         emit('@teams/filters/search--input', undefined);
         emit('@teams/filters/pagination--set', 1);
       }}
-      placeholderText="Search teams..."
+      placeholderText={t('page.teams.searchPlaceholder')}
     />
   );
 };

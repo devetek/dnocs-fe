@@ -2,8 +2,7 @@ import type { ComponentProps } from 'react';
 
 import { MailIcon, UserIcon } from 'lucide-react';
 
-import IconEye from '@/shared/presentation/icons/Eye';
-import IconEyeActive from '@/shared/presentation/icons/EyeActive';
+import { useDevetekTranslations } from '@/services/i18n';
 import IconLastDateActive from '@/shared/presentation/icons/LastDateActive';
 import { ResourceCard } from '@/widgets/resource-card';
 
@@ -19,6 +18,7 @@ export default function MemberCard(props: MemberCardProps) {
   const { id, fullname, username, email, avatarUrl, joinedAt } = data;
 
   const emit = useEmit();
+  const t = useDevetekTranslations();
 
   const displayName = fullname || username || '—';
 
@@ -26,7 +26,7 @@ export default function MemberCard(props: MemberCardProps) {
   const actions: Actions = [
     {
       variant: 'destructive',
-      label: 'Remove',
+      label: t('page.teamDetail.remove'),
       onClick: () =>
         emit('@team-members/member--delete', {
           id,
@@ -64,13 +64,13 @@ export default function MemberCard(props: MemberCardProps) {
       <ResourceCard.Compact.Actions
         visibleActionOnlyIcon
         actions={actions}
-        labelMore="More"
+        labelMore={t('common.actions.more')}
       />
       {joinedAt && (
         <ResourceCard.Compact.Footnote>
           <ResourceCard.Compact.Footnote.Item
             icon={IconLastDateActive}
-            label="Joined"
+            label={t('page.teamDetail.joinedLabel')}
             value={joinedAt}
           />
         </ResourceCard.Compact.Footnote>

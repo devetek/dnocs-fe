@@ -2,6 +2,7 @@ import LayoutAutoGridList from '@/shared/presentation/atoms/LayoutAutoGridList';
 import { EmptyState } from '@/shared/presentation/organisms/EmptyState';
 import { buildResponseView } from '@/widgets/response-view-builder';
 
+import { useDevetekTranslations } from '@/services/i18n';
 import { useOrgDataModel } from '../../-model/org-data';
 import { useFilterModel } from '../../-model/filters';
 import { OrgListState } from '../-presentation/OrgListState';
@@ -18,13 +19,14 @@ export default buildResponseView({
     const { list } = props;
 
     const [derivedViewMode] = useFilterModel((s) => [s.derivedViewMode]);
+    const t = useDevetekTranslations();
 
     if (list.length < 1) {
       return (
         <EmptyState
-          title="No teams found"
-          message="Create a team to organize resources and applications."
-          ctaText="Add Team"
+          title={t('page.teams.emptyState.title')}
+          message={t('page.teams.emptyState.message')}
+          ctaText={t('page.teams.emptyState.cta')}
         />
       );
     }

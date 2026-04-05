@@ -1,4 +1,5 @@
 import { useDialog } from '@/services/dialog';
+import { useDevetekTranslations } from '@/services/i18n';
 import { useToaster } from '@/services/toaster';
 
 import { ApiOrganizationPeople } from '@/shared/api';
@@ -15,13 +16,14 @@ export default function useDeleteMemberUsecase(params: Params) {
 
   const [openToaster] = useToaster();
   const [openDialog] = useDialog();
+  const t = useDevetekTranslations();
 
   const handleUsecase = useHandler((payload: Payload) => {
     const { id, name } = payload;
 
     openDialog({
-      title: 'Remove Member',
-      content: `Are you sure you want to remove "${name}" from this team?`,
+      title: t('dialog.teamMemberRemove.title'),
+      content: t('dialog.teamMemberRemove.message', { name }),
       variant: 'warning',
       actions: {
         variant: 'YesNo',
@@ -33,13 +35,13 @@ export default function useDeleteMemberUsecase(params: Params) {
           if (response.$status === 'success') {
             openToaster({
               variant: 'success',
-              message: `Successfully removed "${name}" from the team`,
+              message: t('toaster.teamMemberRemove.success', { name }),
             });
             onSuccess();
           } else {
             openToaster({
               variant: 'error',
-              message: `Failed to remove "${name}" from the team`,
+              message: t('toaster.teamMemberRemove.error', { name }),
             });
           }
         },

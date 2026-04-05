@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import dayjs from 'dayjs';
 import { MailIcon, UserIcon } from 'lucide-react';
 
-import { useDevetekLocale } from '@/services/i18n';
+import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
 import { getDistanceFromNow } from '@/shared/libs/browser/date';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import IconThreeDots from '@/shared/presentation/icons/ThreeDots';
@@ -53,7 +53,7 @@ const Table = buildResourceTable<MemberTableData>({
     {
       key: 'name',
       width: '2fr',
-      header: 'Member',
+      header: '@page.teamDetail.memberColumn',
       content: ({ row }) => (
         <div className="flex flex-col justify-center">
           <p className="text-primary tracking-tight text-sm font-medium">
@@ -73,7 +73,7 @@ const Table = buildResourceTable<MemberTableData>({
     },
     {
       key: 'joinedAt',
-      header: 'Joined',
+      header: '@page.teamDetail.joinedColumn',
       content: function Content({ row }) {
         const locale = useDevetekLocale();
 
@@ -97,12 +97,13 @@ const Table = buildResourceTable<MemberTableData>({
       key: 'actions',
       content: function Content({ row }) {
         const emit = useEmit();
+        const t = useDevetekTranslations();
 
         type Actions = ComponentProps<typeof ActionPopover>['actions'];
         const actions: Actions = [
           {
             variant: 'danger',
-            label: 'Remove from team',
+            label: t('page.teamDetail.removeFromTeam'),
             onClick: () => {
               emit('@team-members/member--delete', {
                 id: row.id,

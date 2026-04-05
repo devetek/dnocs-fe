@@ -2,6 +2,7 @@ import type { ComponentProps } from 'react';
 
 import { UsersIcon } from 'lucide-react';
 
+import { useDevetekTranslations } from '@/services/i18n';
 import IconEye from '@/shared/presentation/icons/Eye';
 import IconEyeActive from '@/shared/presentation/icons/EyeActive';
 import IconLastDateActive from '@/shared/presentation/icons/LastDateActive';
@@ -19,6 +20,7 @@ export default function OrgCard(props: OrgCardProps) {
   const { id, name, description, updatedAt } = data;
 
   const emit = useEmit();
+  const t = useDevetekTranslations();
 
   const handleClickDetails = () =>
     emit('@teams/open--details', {
@@ -29,14 +31,14 @@ export default function OrgCard(props: OrgCardProps) {
   type Actions = ComponentProps<typeof ResourceCard.Compact.Actions>['actions'];
   const actions: Actions = [
     {
-      label: 'Details',
+      label: t('common.actions.details'),
       icon: IconEye,
       iconActive: IconEyeActive,
       onClick: handleClickDetails,
     },
     {
       variant: 'destructive',
-      label: 'Delete',
+      label: t('common.actions.delete'),
       onClick: () =>
         emit('@teams/org--delete', {
           id,
@@ -69,12 +71,12 @@ export default function OrgCard(props: OrgCardProps) {
       <ResourceCard.Compact.Actions
         visibleActionOnlyIcon
         actions={actions}
-        labelMore="More"
+        labelMore={t('common.actions.more')}
       />
       <ResourceCard.Compact.Footnote>
         <ResourceCard.Compact.Footnote.Item
           icon={IconLastDateActive}
-          label="Last updated"
+          label={t('common.terms.lastUpdated')}
           value={updatedAt ?? undefined}
         />
       </ResourceCard.Compact.Footnote>

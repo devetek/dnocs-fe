@@ -1,5 +1,6 @@
 import { PencilIcon, PlusCircleIcon, UsersIcon } from 'lucide-react';
 
+import { useDevetekTranslations } from '@/services/i18n';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { Breadcrumb } from '@/shared/presentation/molecules/Breadcrumb';
 import { PageHeader } from '@/shared/presentation/organisms/PageHeader';
@@ -8,12 +9,14 @@ import { useEmit } from '../../-model/events';
 import { useMembersDataModel } from '../../-model/members-data';
 
 const Headnote = () => {
+  const t = useDevetekTranslations();
+
   return (
     <span className="flex items-center justify-between">
       <Breadcrumb
         items={[
-          { text: 'Dashboard', url: '/dashboard' },
-          { text: 'Teams', url: '/teams' },
+          { text: t('sidebar.dashboard'), url: '/dashboard' },
+          { text: t('common.terms.teams'), url: '/teams' },
         ]}
       />
     </span>
@@ -22,6 +25,7 @@ const Headnote = () => {
 
 export default function Header() {
   const emit = useEmit();
+  const t = useDevetekTranslations();
   const { members, orgId } = useMembersDataModel();
 
   const orgName =
@@ -32,8 +36,8 @@ export default function Header() {
 
   const memberCount =
     members.$status === 'success'
-      ? `${members.list.length} member${members.list.length !== 1 ? 's' : ''} in this team`
-      : 'Loading team data…';
+      ? t('page.teamDetail.memberCount', { count: members.list.length })
+      : t('page.teamDetail.loadingData');
 
   const description = orgDescription
     ? `${orgDescription} · ${memberCount}`
@@ -52,14 +56,14 @@ export default function Header() {
             buttonColor="secondary"
             onClick={() => emit('@team-members/edit-team', undefined)}
           >
-            <PencilIcon /> Edit
+            <PencilIcon /> {t('common.actions.edit')}
           </Button>
           <Button
             buttonStyle="outline"
             buttonColor="secondary"
             onClick={() => emit('@team-members/add-member', undefined)}
           >
-            <PlusCircleIcon /> Add Member
+            <PlusCircleIcon /> {t('page.teamDetail.addMember')}
           </Button>
         </div>
       }

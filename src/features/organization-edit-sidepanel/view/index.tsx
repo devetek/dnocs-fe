@@ -1,4 +1,5 @@
 import Layout from '@/services/sidepanel/ui/presentation/Layout/General';
+import { useDevetekTranslations } from '@/services/i18n';
 
 import { DisclaimersLabel } from '@/widgets/disclaimers-label';
 
@@ -19,6 +20,7 @@ const Controller = () => {
 
 export default function OrgEditSidepanel(props: Props) {
   const { orgId, name } = props;
+  const t = useDevetekTranslations();
 
   return (
     <ModelProvider {...props}>
@@ -26,7 +28,7 @@ export default function OrgEditSidepanel(props: Props) {
 
       <Layout>
         <Layout.Title
-          title="Edit Team"
+          title={t('sidepanel.editTeam.title')}
           subtitle={name || `Id: ${orgId}`}
           hasCloseButton
         />

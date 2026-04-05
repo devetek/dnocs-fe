@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 
 import { ApiUser } from '@/shared/api';
+import { useDevetekTranslations } from '@/services/i18n';
 import { cn } from '@/shared/libs/tailwind/cn';
 import { ErrorInline } from '@/shared/presentation/atoms/ErrorInline';
 import {
@@ -26,6 +27,7 @@ const PAGE_SIZE = 3;
 
 export default function FindUsers() {
   const { form } = useDcContext();
+  const t = useDevetekTranslations();
 
   const [open, setOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
@@ -67,7 +69,7 @@ export default function FindUsers() {
 
   return (
     <section className="flex flex-col gap-1">
-      <p className="text-sm font-medium">User</p>
+      <p className="text-sm font-medium">{t('common.terms.user')}</p>
 
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
@@ -82,7 +84,7 @@ export default function FindUsers() {
             <span className="flex items-center gap-2">
               <UserIcon className="size-3.5 shrink-0 text-primary/60" />
               <span className="truncate">
-                {selectedLabel || 'Select a user…'}
+                {selectedLabel || t('modal.addTeamMember.selectUser')}
               </span>
             </span>
             <ChevronDownIcon className="size-4 shrink-0 opacity-50 ml-2" />
@@ -101,7 +103,7 @@ export default function FindUsers() {
                 <SearchIcon className="size-3.5 text-primary/40 shrink-0" />
                 <input
                   className="flex-1 bg-transparent text-sm outline-none placeholder:text-primary/40 min-w-0"
-                  placeholder="Search by username…"
+                  placeholder={t('modal.addTeamMember.searchByUsername')}
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   // eslint-disable-next-line jsx-a11y/no-autofocus
@@ -118,12 +120,12 @@ export default function FindUsers() {
               {isLoading ? (
                 <div className="flex items-center justify-center h-36 gap-2 text-sm text-primary/50">
                   <Loader2Icon className="size-4 animate-spin" />
-                  Loading…
+                  {t('modal.addTeamMember.loading')}
                 </div>
               ) : users.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-36 gap-1 text-sm text-primary/50">
                   <UserIcon className="size-6 opacity-40" />
-                  <span>No users found</span>
+                  <span>{t('modal.addTeamMember.noUsersFound')}</span>
                 </div>
               ) : (
                 <ul className="py-1">
@@ -185,7 +187,7 @@ export default function FindUsers() {
             {totalPage > 1 && (
               <div className="flex items-center justify-between px-3 py-2 border-t bg-card/30">
                 <span className="text-xs text-primary/50">
-                  Page {page} / {totalPage}
+                  {t('modal.addTeamMember.pageInfo', { page, totalPage })}
                 </span>
                 <div className="flex items-center gap-1">
                   <button

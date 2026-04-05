@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import dayjs from 'dayjs';
 import { CalendarIcon, UsersIcon } from 'lucide-react';
 
-import { useDevetekLocale } from '@/services/i18n';
+import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
 import { getDistanceFromNow } from '@/shared/libs/browser/date';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import IconThreeDots from '@/shared/presentation/icons/ThreeDots';
@@ -44,7 +44,7 @@ const Table = buildResourceTable<OrgTableData>({
     {
       key: 'name',
       width: '2fr',
-      header: 'Team',
+      header: '@common.terms.team',
       content: function Content({ row }) {
         const emit = useEmit();
 
@@ -73,7 +73,7 @@ const Table = buildResourceTable<OrgTableData>({
     },
     {
       key: 'updatedAt',
-      header: 'Last Modified',
+      header: '@common.terms.lastUpdated',
       content: function Content({ row }) {
         const locale = useDevetekLocale();
 
@@ -97,11 +97,12 @@ const Table = buildResourceTable<OrgTableData>({
       key: 'actions',
       content: function Content({ row }) {
         const emit = useEmit();
+        const t = useDevetekTranslations();
 
         type Actions = ComponentProps<typeof ActionPopover>['actions'];
         const actions: Actions = [
           {
-            label: 'View Details',
+            label: t('common.actions.details'),
             onClick: () => {
               emit('@teams/open--details', {
                 orgId: row.id,
@@ -111,7 +112,7 @@ const Table = buildResourceTable<OrgTableData>({
           },
           {
             variant: 'danger',
-            label: 'Delete',
+            label: t('common.actions.delete'),
             onClick: () => {
               emit('@teams/org--delete', {
                 id: row.id,
