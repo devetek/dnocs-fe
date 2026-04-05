@@ -8,4 +8,17 @@ export interface CloudProjectV1 {
   credential?: Record<string, string>;
   created_at?: string;
   updated_at?: string;
+  user?: {
+    id?: number;
+    fullname?: string;
+    username?: string;
+    email?: string;
+    avatar_url?: string;
+  };
+  organization?: {
+    id?: string;
+    name?: string;
+  };
+  organization_id?: string;
+  user_id?: number;
 }

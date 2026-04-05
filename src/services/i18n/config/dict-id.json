@@ -330,6 +330,16 @@
         }
       }
     },
+    "cloudProjects": {
+      "headerTitle": "Akun Cloud",
+      "headerDesc": "Hubungkan penyedia cloud Anda untuk mengelola VM dan jaringan langsung dari dNocs.",
+      "connectAccount": "Hubungkan Akun",
+      "emptyState": {
+        "title": "Belum ada akun cloud terhubung",
+        "message": "Hubungkan penyedia cloud untuk mulai mengelola sumber daya Anda di sini.",
+        "cta": "Hubungkan Akun"
+      }
+    },
     "notFound": {
       "title": "Halaman Tidak Ditemukan",
       "description": "Halaman yang kamu cari tidak tersedia atau mungkin sudah dipindahkan. Periksa kembali URL atau kembali ke halaman sebelumnya."

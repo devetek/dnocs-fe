@@ -335,6 +335,16 @@
         }
       }
     },
+    "cloudProjects": {
+      "headerTitle": "Cloud Accounts",
+      "headerDesc": "Connect your cloud provider to manage VMs and networks directly from dNocs.",
+      "connectAccount": "Connect Account",
+      "emptyState": {
+        "title": "No cloud accounts connected",
+        "message": "Connect a cloud provider to start managing your resources here.",
+        "cta": "Connect Account"
+      }
+    },
     "notFound": {
       "title": "Page Not Found",
       "description": "The page you are looking for is unavailable or may have been moved. Check the URL again or go back to the previous page."

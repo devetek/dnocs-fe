@@ -1,35 +1,30 @@
-import { createContext, useContext, type ReactNode } from 'react';
-
 import { ApiCloud } from '@/shared/api';
+import { useAdapter } from '@/shared/libs/api-client';
+import buildSelector from '@/shared/libs/react-factories/buildSelector';
 
-import { useFilter } from '../filters';
+import { useSubscribe } from '../events';
+import { useFilterModel } from '../filters';
 
-type ApiResponse = ReturnType<typeof ApiCloud.Project.Find.useGet>[0];
-
-interface CloudDataContextValue {
-  response: ApiResponse;
-  refresh: () => void;
-}
-
-const CloudDataContext = createContext<CloudDataContextValue | null>(null);
-
-export function CloudDataProvider({ children }: { children: ReactNode }) {
-  const { searchQuery, pagination } = useFilter();
+export const [CloudDataModelProvider, useCloudDataModel] = buildSelector(
+  'CloudDataModel',
+)(() => {
+  const { searchQuery, currentPage } = useFilterModel();
 
   const [response, refresh] = ApiCloud.Project.Find.useGet({
-    page: pagination,
+    page: currentPage,
+    pageSize: 8,
     searchQuery,
   });
 
-  return (
-    <CloudDataContext.Provider value={{ response, refresh }}>
-      {children}
-    </CloudDataContext.Provider>
-  );
-}
+  useSubscribe('@cloud-projects/data--refresh', () => {
+    refresh();
+  });
 
-export function useCloudData() {
-  const ctx = useContext(CloudDataContext);
-  if (!ctx) throw new Error('useCloudData must be used within CloudDataProvider');
-  return ctx;
-}
+  return {
+    clouds: useAdapter(response, (raw) => ({
+      list: raw.clouds ?? [],
+      pagination: raw.pagination,
+    })),
+    refresh,
+  };
+});

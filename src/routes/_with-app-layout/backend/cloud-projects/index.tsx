@@ -1,28 +1,28 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { zodValidator } from '@tanstack/zod-adapter';
 
 import { Card } from '@/shared/presentation/atoms/Card';
 import { AsideHelpSupport } from '@/widgets/aside-help-support';
 
-import { CloudDataProvider } from './-model/cloud-data';
-import { FilterProvider } from './-model/filters';
-import {
-  Header,
-  Layout,
-  MainBottomActions,
-  MainFilter,
-  MainList,
-} from './-view';
+import EventController from './-EventController';
+import { CloudDataModelProvider } from './-model/cloud-data';
+import { FilterModelProvider } from './-model/filters';
+import { schemaQueryString } from './-rules/qs';
+import { Header, Layout, MainBottomActions, MainFilter, MainList } from './-view';
 
 export const Route = createFileRoute(
   '/_with-app-layout/backend/cloud-projects/',
 )({
-  component: DatabasePage,
+  component: CloudProjectsPage,
+  validateSearch: zodValidator(schemaQueryString),
 });
 
-function DatabasePage() {
+function CloudProjectsPage() {
   return (
-    <FilterProvider>
-      <CloudDataProvider>
+    <FilterModelProvider>
+      <CloudDataModelProvider>
+        <EventController />
+
         <Header />
 
         <Layout>
@@ -38,8 +38,8 @@ function DatabasePage() {
             </Card>
           </Layout.Aside>
         </Layout>
-      </CloudDataProvider>
-    </FilterProvider>
+      </CloudDataModelProvider>
+    </FilterModelProvider>
   );
 }
 
