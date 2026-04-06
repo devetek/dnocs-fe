@@ -18,7 +18,9 @@ export default function SectionMachine() {
 
   const navigate = useNavigate();
 
-  const [response, getServerFind] = ApiServer.Find.useGet({});
+  const [response, getServerFind] = ApiServer.Find.useGet({
+    pageSize: 3,
+  });
 
   let elMachineList = (
     <div className="h-20 flex items-center justify-center">
@@ -44,8 +46,17 @@ export default function SectionMachine() {
     const machines = response.machines ?? [];
     const elCollectedMachines = machines
       .map((machine) => {
-        const { id, address: publicIP, hostname: hostName } = machine;
+        const { id, address: publicIP, hostname: hostName, status } = machine;
         if (!id || !publicIP || !hostName) return null;
+
+        const statusState: 'ready' | 'progress' | 'failed' | 'other' =
+          status === 'ready'
+            ? 'ready'
+            : status === 'progress'
+              ? 'progress'
+              : status === 'failed'
+                ? 'failed'
+                : 'other';
 
         const handleClickDetails = () => {
           navigate({
@@ -58,6 +69,7 @@ export default function SectionMachine() {
             key={id}
             serverName={hostName}
             serverHostAddress={publicIP}
+            statusState={statusState}
             onClickDetails={handleClickDetails}
           />
         );
@@ -90,7 +102,7 @@ export default function SectionMachine() {
     return (
       <SectionWrapper
         sectionTitle={t('common.terms.machines')}
-        count={machines.length}
+        count={response.pagination?.total_item}
         viewAllTo="/servers"
       >
         {elMachineList}

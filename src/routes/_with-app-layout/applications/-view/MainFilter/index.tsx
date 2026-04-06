@@ -1,12 +1,14 @@
-import { ArrowLeftRightIcon, Grid2X2Icon, Rows3Icon } from 'lucide-react';
+import { ArrowLeftRightIcon, Grid2X2Icon, RefreshCwIcon, Rows3Icon } from 'lucide-react';
 
 import { useDevetekTranslations } from '@/services/i18n';
 
+import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { Card } from '@/shared/presentation/atoms/Card';
 import SearchCollapsible from '@/shared/presentation/atoms/SearchCollapsible';
 import { Combobox } from '@/shared/presentation/molecules/Combobox';
 import { buildSegmentedControl } from '@/widgets/ui-atomic-builder/atom-segmented-control';
 
+import { useEmit } from '../../-model/events';
 import { useFilterModel } from '../../-model/filters';
 
 const ViewModeSO = buildSegmentedControl<'auto' | 'list' | 'grid'>({
@@ -37,6 +39,21 @@ const SlotViewMode = () => {
       activeItemId={viewMode}
       onClickOption={(newViewMode) => setViewMode(newViewMode)}
     />
+  );
+};
+
+const SlotRefresh = () => {
+  const emit = useEmit();
+
+  return (
+    <Button
+      size="icon-sm"
+      buttonColor="secondary"
+      buttonStyle="ghost"
+      onClick={() => emit('@applications/application-refresh', null)}
+    >
+      <RefreshCwIcon />
+    </Button>
   );
 };
 
@@ -102,7 +119,8 @@ export default function MainFilter() {
         <SlotOwnership />
       </div>
 
-      <div className="flex items-center">
+      <div className="flex items-center gap-x-1">
+        <SlotRefresh />
         <SlotViewMode />
       </div>
     </Card>
