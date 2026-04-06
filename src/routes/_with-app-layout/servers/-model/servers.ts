@@ -1,7 +1,6 @@
 import { useAuthLoggedIn } from '@/services/auth';
 
 import { AdapterServerFromDto } from '@/entities/server/adapter';
-import { POLL_INTERVAL_MS__LIST } from '@/entities/server/config';
 
 import { ApiServer } from '@/shared/api';
 import { useAdapter } from '@/shared/libs/api-client';
@@ -24,9 +23,6 @@ export const [ServersModelProvider, useServersModel] = buildSelector(
     pageSize: 4,
     page: pagination,
     searchQuery,
-    options:{
-      refreshIntervalMs: POLL_INTERVAL_MS__LIST,
-    }
   });
 
   useSubscribe('@resources::servers/servers-refresh', () => refresh());

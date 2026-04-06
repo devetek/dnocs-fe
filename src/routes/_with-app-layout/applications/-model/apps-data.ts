@@ -1,7 +1,6 @@
 import { useAuthLoggedIn } from '@/services/auth';
 
 import { AdapterApplicationFromDto } from '@/entities/application/adapter';
-import { POLL_INTERVAL_MS__LIST } from '@/entities/server/config';
 
 import { ApiApplication } from '@/shared/api';
 import { useAdapter } from '@/shared/libs/api-client';
@@ -24,9 +23,6 @@ export const [AppsDataModelProvider, useAppsDataModel] = buildSelector(
     name: searchQuery,
     forceMine: ownership === 'mine' ? 'true' : undefined,
     userId: ownership === 'mine' ? userProfile.id : undefined,
-    options: {
-      refreshIntervalMs: POLL_INTERVAL_MS__LIST,
-    }
   });
 
   useSubscribe('@applications/application-refresh', () => refresh());
