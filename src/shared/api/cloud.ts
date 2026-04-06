@@ -1,6 +1,7 @@
 import * as ProjectCreate from './cloud.project.create';
 import * as ProjectDelete$Id from './cloud.project.delete.$id';
 import * as ProjectFind from './cloud.project.find';
+import * as ProjectOstemplates$Id from './cloud.project.ostemplates.$id';
 import * as Regions$Id from './cloud.regions.$id';
 import * as Vpcs$Id from './cloud.vpcs.$id';
 
@@ -11,6 +12,9 @@ const Root = {
       $Id: ProjectDelete$Id,
     },
     Find: ProjectFind,
+    Ostemplates: {
+      $Id: ProjectOstemplates$Id,
+    },
   },
   Regions: {
     $Id: Regions$Id,

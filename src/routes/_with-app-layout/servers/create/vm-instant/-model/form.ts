@@ -27,6 +27,9 @@ export const formSchema = z.object({
     },
   ),
   spec: z.object({
+    osTemplate: z //
+      .string({ message: 'Please select an OS template!' })
+      .min(1, 'Please select an OS template!'),
     cpuCore: z //
       .number({ message: 'Please select a CPU core!' })
       .min(2)

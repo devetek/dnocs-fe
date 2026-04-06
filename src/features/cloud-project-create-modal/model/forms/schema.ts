@@ -81,8 +81,7 @@ export const schemaProxmoxUpload = z.object({
       api_timeout: z.number().optional(),
     }),
     config: z.object({
-      node: z.string(),
-      netif: z.record(z.string(), z.string()).optional(),
+      ostemplates: z.array(z.object({ id: z.string(), name: z.string() })),
     }),
     gateway: z.object({ id: z.string() }).optional(),
   }),
@@ -116,13 +115,9 @@ export const schemaProxmoxForm = z.object({
     }),
 
     config: z.object({
-      node: z //
-        .string()
-        .min(1, 'node is required'),
-
-      netif: z //
-        .record(z.string(), z.string())
-        .optional(),
+      ostemplates: z //
+        .array(z.object({ id: z.string(), name: z.string() }))
+        .min(1, 'ostemplates is required'),
     }),
 
     gateway: z

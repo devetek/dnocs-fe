@@ -29,6 +29,7 @@ export default function SectionSubmit() {
     const constructedValues = {
       cloud_id: String(values.cloud.projectID),
       secret_id: String(values.cloud.sshKeyID),
+      os_template: values.spec.osTemplate,
       cpu_core: values.spec.cpuCore,
       ram: values.spec.ramSizeGB,
       disk: values.spec.diskSizeGB,

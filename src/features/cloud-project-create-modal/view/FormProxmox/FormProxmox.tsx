@@ -36,7 +36,7 @@ const SummaryRow = ({ label, value, hidden }: { label: string; value?: string | 
 
 const CredentialSummary = ({ values }: { values: SchemaProxmoxUpload }) => {
   const auth = values.credential.auth;
-  const config = values.credential.config;
+  const ostemplates = values.credential.config.ostemplates;
 
   return (
     <div className="flex flex-col gap-4 mb-4 p-3 border rounded-lg bg-muted/30">
@@ -49,11 +49,10 @@ const CredentialSummary = ({ values }: { values: SchemaProxmoxUpload }) => {
       </div>
 
       <div className="flex flex-col gap-2">
-        <p className="text-xs font-semibold text-primary/50 uppercase tracking-wide">Config</p>
-        <SummaryRow label="node" value={config.node} />
-        {config.netif && (
-          <SummaryRow label="netif" value={JSON.stringify(config.netif)} />
-        )}
+        <p className="text-xs font-semibold text-primary/50 uppercase tracking-wide">OS Templates</p>
+        {ostemplates.map((t) => (
+          <SummaryRow key={t.id} label={t.name} value={t.id} />
+        ))}
       </div>
     </div>
   );
