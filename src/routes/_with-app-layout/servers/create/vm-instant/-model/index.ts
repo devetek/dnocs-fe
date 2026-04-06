@@ -24,6 +24,7 @@ export const [FormProvider, useForm] = buildContext('Form', () => {
       },
       regionSlug: undefined,
       spec: {
+        osTemplate: undefined,
         cpuCore: undefined,
         diskSizeGB: undefined,
         ramSizeGB: undefined,
