@@ -21,6 +21,7 @@ export default function SectionApp() {
 
   const [response, refresh] = ApiApplication.Find.useGet({
     page: 1,
+    limit: 3,
   });
 
   let elAppList = (
@@ -86,7 +87,7 @@ export default function SectionApp() {
       navigate({ to: '/applications/create' });
     };
 
-    const appCount = collectedMachineEls.length;
+    const appCount = response.pagination?.total_item;
 
     elAppList = (
       <Card className="rounded-2xl overflow-hidden divide-y divide-border/50 p-0">
