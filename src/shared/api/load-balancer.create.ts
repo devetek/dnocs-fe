@@ -67,7 +67,7 @@ export function recipe(params: RecipeParams): DoRequestRecipe {
       machine_id: serverId,
       advance_mode: true,
       config: {
-        dommain: {
+        domain: {
           cloudflare: internalDomainMetadata?.cloudflare
             ? {
                 proxied: internalDomainMetadata.cloudflare.proxied,
