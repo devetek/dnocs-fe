@@ -3,6 +3,7 @@ import { ArrowLeftRightIcon, Grid2X2Icon, RefreshCwIcon, TableIcon } from 'lucid
 import { useDevetekTranslations } from '@/services/i18n';
 import { Card } from '@/shared/presentation/atoms/Card';
 import SearchCollapsible from '@/shared/presentation/atoms/SearchCollapsible';
+import SearchKeywordBadge from '@/shared/presentation/atoms/SearchKeywordBadge';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { buildSegmentedControl } from '@/widgets/ui-atomic-builder/atom-segmented-control';
 
@@ -67,16 +68,34 @@ const SlotRefresh = () => {
   );
 };
 
+const SlotKeywordBadge = () => {
+  const emit = useEmit();
+  const [searchQuery] = useFilterModel((s) => [s.searchQuery]);
+
+  return (
+    <SearchKeywordBadge
+      keyword={searchQuery}
+      onClear={() => {
+        emit('@teams/filters/search--input', undefined);
+        emit('@teams/filters/pagination--set', 1);
+      }}
+    />
+  );
+};
+
 export default function MainFilter() {
   return (
-    <Card className="bg-card/30 rounded-xl p-1.5 grid grid-cols-[1fr_auto] gap-x-2">
-      <div className="flex items-center">
-        <SlotSearch />
-      </div>
-      <div className="flex items-center gap-x-1">
-        <SlotRefresh />
-        <SlotViewMode />
-      </div>
-    </Card>
+    <>
+      <Card className="bg-card/30 rounded-xl p-1.5 grid grid-cols-[1fr_auto] gap-x-2">
+        <div className="flex items-center">
+          <SlotSearch />
+        </div>
+        <div className="flex items-center gap-x-1">
+          <SlotRefresh />
+          <SlotViewMode />
+        </div>
+      </Card>
+      <SlotKeywordBadge />
+    </>
   );
 }

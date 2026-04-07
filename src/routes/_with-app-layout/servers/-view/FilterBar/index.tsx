@@ -5,6 +5,7 @@ import { useDevetekTranslations } from '@/services/i18n';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { Card } from '@/shared/presentation/atoms/Card';
 import SearchCollapsible from '@/shared/presentation/atoms/SearchCollapsible';
+import SearchKeywordBadge from '@/shared/presentation/atoms/SearchKeywordBadge';
 import { Combobox } from '@/shared/presentation/molecules/Combobox';
 import { buildSegmentedControl } from '@/widgets/ui-atomic-builder/atom-segmented-control';
 
@@ -95,10 +96,6 @@ const SlotOwnership = () => {
             label: t('common.terms.teamResource'),
             value: 'team',
           },
-          {
-            label: t('common.terms.publicResource'),
-            value: 'public-resource',
-          },
         ] as const
       }
       value={ownership}
@@ -110,33 +107,15 @@ const SlotOwnership = () => {
   );
 };
 
-const SlotModules = () => {
-  const { hasModules, setPagination, setHasModules } = useFilterModel();
+const SlotKeywordBadge = () => {
+  const { searchQuery, setSearchQuery, setPagination } = useFilterModel();
 
   return (
-    <Combobox
-      classNameButton="bg-card w-40"
-      placeholder="Modules"
-      items={
-        [
-          {
-            label: 'All',
-            value: null,
-          },
-          {
-            label: 'Has Database',
-            value: 'db',
-          },
-          {
-            label: 'Has Memstore',
-            value: 'memstore',
-          },
-        ] as const
-      }
-      value={hasModules}
-      onChange={(value) => {
+    <SearchKeywordBadge
+      keyword={searchQuery}
+      onClear={() => {
         setPagination(1);
-        setHasModules(value);
+        setSearchQuery('');
       }}
     />
   );
@@ -144,17 +123,19 @@ const SlotModules = () => {
 
 export default function MainFilter() {
   return (
-    <Card className="bg-card/30 rounded-xl p-1.5 grid grid-cols-[1fr_auto] gap-x-2">
-      <div className="flex items-center gap-2 flex-wrap">
-        <SlotSearch />
-        <SlotOwnership />
-        <SlotModules />
-      </div>
+    <>
+      <Card className="bg-card/30 rounded-xl p-1.5 grid grid-cols-[1fr_auto] gap-x-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <SlotSearch />
+          <SlotOwnership />
+        </div>
 
-      <div className="flex items-center gap-x-1">
-        <SlotRefresh />
-        <SlotViewMode />
-      </div>
-    </Card>
+        <div className="flex items-center gap-x-1">
+          <SlotRefresh />
+          <SlotViewMode />
+        </div>
+      </Card>
+      <SlotKeywordBadge />
+    </>
   );
 }

@@ -75,6 +75,7 @@
       "rules": "Aturan",
       "pending": "Tertunda",
       "searchPlaceholder": "Cari...",
+      "searchResultsFor": "Hasil pencarian untuk",
       "automaticView": "Tampilan Otomatis",
       "cardGridView": "Tampilan Grid Kartu",
       "cardListView": "Tampilan Daftar Kartu",

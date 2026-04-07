@@ -4,6 +4,7 @@ import { useDevetekTranslations } from '@/services/i18n';
 
 import { Card } from '@/shared/presentation/atoms/Card';
 import SearchCollapsible from '@/shared/presentation/atoms/SearchCollapsible';
+import SearchKeywordBadge from '@/shared/presentation/atoms/SearchKeywordBadge';
 import { buildSegmentedControl } from '@/widgets/ui-atomic-builder/atom-segmented-control';
 
 import { useEmit } from '../../-models/events';
@@ -68,16 +69,31 @@ const SlotSearchCollapsible = () => {
   );
 };
 
+const SlotKeywordBadge = () => {
+  const emit = useEmit();
+  const [searchQuery] = useFilterModel((s) => [s.searchQuery]);
+
+  return (
+    <SearchKeywordBadge
+      keyword={searchQuery}
+      onClear={() => emit('@load-balancers/filters/search--input')}
+    />
+  );
+};
+
 export default function MainFilter() {
   return (
-    <Card className="bg-card/30 rounded-xl p-1.5 grid grid-cols-[1fr_auto] gap-x-2">
-      <div className="flex items-center">
-        <SlotSearchCollapsible />
-      </div>
+    <>
+      <Card className="bg-card/30 rounded-xl p-1.5 grid grid-cols-[1fr_auto] gap-x-2">
+        <div className="flex items-center">
+          <SlotSearchCollapsible />
+        </div>
 
-      <div className="flex items-center">
-        <SlotViewMode />
-      </div>
-    </Card>
+        <div className="flex items-center">
+          <SlotViewMode />
+        </div>
+      </Card>
+      <SlotKeywordBadge />
+    </>
   );
 }

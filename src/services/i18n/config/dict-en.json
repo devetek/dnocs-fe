@@ -75,6 +75,7 @@
       "rules": "Rules",
       "pending": "Pending",
       "searchPlaceholder": "Search...",
+      "searchResultsFor": "Search results for",
       "automaticView": "Automatic View",
       "cardGridView": "Card Grid View",
       "cardListView": "Card List View",
