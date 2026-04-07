@@ -31,9 +31,13 @@ export default function useFormSubmissionUsecase() {
       if (lbKind === 'l7' && l7rules) {
         return l7rules.map((l7rule) => {
           const hasWildcard = /\/\*$/.test(l7rule.pathMatch);
-          const pathMatch = hasWildcard
-            ? l7rule.pathMatch.slice(0, -2)
-            : l7rule.pathMatch;
+          const pathMatch = iife(() => {
+            if (l7rule.pathMatch === '/*') return '/';
+
+            return hasWildcard
+              ? l7rule.pathMatch.slice(0, -2)
+              : l7rule.pathMatch;
+          });
 
           return {
             wildcard: hasWildcard,

@@ -61,9 +61,9 @@ export const schemaCreationForm = z
       })
       .optional(),
     description: z.string(),
-    serverId: SchemaCommon.unitId,
+    serverId: SchemaCommon.unitId.min(1, 'formErrors.required'),
     lbKind: z.enum(['l7', 'l4']),
-    engine: z.enum(engine).default('nginx'),
+    engine: z.enum(engine),
     features: z.object({
       protocol: z.enum(protocols).optional(),
       sslEnabled: z.boolean().default(true),

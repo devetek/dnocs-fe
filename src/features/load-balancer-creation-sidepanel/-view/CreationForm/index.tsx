@@ -84,6 +84,10 @@ function SectionIdentity() {
           {t('sidepanel.loadBalancerCreation.fieldDescription.title')}
         </p>
         <Input {...description.field} />
+        <ErrorInline
+          t={t}
+          message={form.formState.errors.description?.message}
+        />
       </div>
 
       <div className="grid grid-cols-[3.5fr_2.5fr] gap-x-2 px-4 pb-4">
@@ -149,6 +153,7 @@ function SectionIdentity() {
 function FieldDomain() {
   const [domains] = useResourcesModel((s) => [s.domains]);
 
+  const tAll = useDevetekTranslations();
   const t = useDevetekTranslations(
     'sidepanel.loadBalancerCreation.fieldDomain',
   );
@@ -228,7 +233,7 @@ function FieldDomain() {
         </div>
       )}
 
-      <ErrorInline t={t} message={form.formState.errors.domain?.message} />
+      <ErrorInline t={tAll} message={form.formState.errors.domain?.message} />
     </div>
   );
 }

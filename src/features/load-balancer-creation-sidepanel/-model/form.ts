@@ -22,9 +22,6 @@ export const lbCreationFormProps = createFormControl({
         applicationIdIfProxyPassApp: '',
       },
     ],
-    l4rule: {
-      upstreams: [{ address: '', port: 80 }],
-    },
   },
 });
 
