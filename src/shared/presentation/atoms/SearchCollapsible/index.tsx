@@ -70,7 +70,7 @@ export default function SearchCollapsible(props: SearchCollapsibleProps) {
   );
 
   const cnInput = cn(
-    'h-10 w-full rounded-lg border border-gray-200 bg-white pl-10 pr-4 text-sm outline-none transition-all duration-300',
+    'h-10 w-full rounded-lg border border-gray-200 bg-white pl-10 pr-4 text-base sm:text-sm outline-none transition-all duration-300',
     'focus:border-blue-500 focus:ring-2 focus:ring-blue-200',
     'dark:border-secondary dark:bg-secondary/30 dark:text-gray-100 dark:focus:border-blue-400 dark:focus:ring-blue-900',
     showInput ? 'opacity-100' : 'w-0 opacity-0 p-0 border-none',
