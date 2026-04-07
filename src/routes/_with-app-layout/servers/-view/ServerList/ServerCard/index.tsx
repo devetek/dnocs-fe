@@ -96,7 +96,7 @@ export default function ServerCard(props: ServerCardProps) {
 
   if (variant === 'compact') {
     return (
-      <ResourceCard.Compact classNameCardWrapper={cnCardWrapper}>
+      <ResourceCard.Compact classNameCardWrapper={cnCardWrapper} onClickBody={onClickDetails}>
         <ResourceCard.Compact.Main>
           <ResourceCard.Compact.Main.Hero
             image={serverIconSrc}
@@ -186,7 +186,7 @@ export default function ServerCard(props: ServerCardProps) {
   }
 
   return (
-    <ResourceCard.Full classNameCardWrapper={cnCardWrapper}>
+    <ResourceCard.Full classNameCardWrapper={cnCardWrapper} onClickBody={onClickDetails}>
       <ResourceCard.Full.Main>
         <ResourceCard.Full.Main.Hero
           image={serverIconSrc}

@@ -52,10 +52,7 @@ export default buildResponseView({
         {list.map((application: ApplicationCard) => {
           const handleClickDetails = () => {
             const { id } = application;
-            window.open(
-              `${import.meta.env.VITE_FRONTEND}${`/applications/${id}`}`,
-              '_blank',
-            );
+            navigate({ to: '/applications/$id', params: { id: String(id) } });
           };
 
           const handleClickEdit = () => {

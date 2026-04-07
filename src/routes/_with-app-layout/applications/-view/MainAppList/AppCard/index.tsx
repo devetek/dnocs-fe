@@ -96,34 +96,31 @@ export default function AppCard(props: AppCardProps) {
     const { icon: ServiceStateIcon, color: serviceStateColor } = serviceState;
 
     return (
-      <ResourceCard.Compact classNameCardWrapper={cnCardWrapper}>
+      <ResourceCard.Compact classNameCardWrapper={cnCardWrapper} onClickBody={onClickDetails}>
         <ResourceCard.Compact.Main>
-          <ResourceCard.Compact.Main.Hero
-            image={getBundleIcon(data.identity.bundleType)}
-            badge={getSourceBadge(data.identity)}
-            badgeTooltipMessage={getBadgeTooltip()}
-          />
-          <ResourceCard.Compact.Main.Content
-            title={data.identity.name}
-            status={[
-              !!data.ownership.team && {
-                icon: BuildingIcon,
-                text: data.ownership.team,
-              },
-              {
-                icon: UserIcon,
-                text: data.ownership.owner,
-              },
-            ]}
-          />
+          <div className="flex items-start gap-x-2 w-full text-left">
+            <ResourceCard.Compact.Main.Hero
+              image={getBundleIcon(data.identity.bundleType)}
+              badge={getSourceBadge(data.identity)}
+              badgeTooltipMessage={getBadgeTooltip()}
+            />
+            <ResourceCard.Compact.Main.Content
+              title={data.identity.name}
+              status={[
+                !!data.ownership.team && {
+                  icon: BuildingIcon,
+                  text: data.ownership.team,
+                },
+                {
+                  icon: UserIcon,
+                  text: data.ownership.owner,
+                },
+              ]}
+            />
+          </div>
         </ResourceCard.Compact.Main>
         <ResourceCard.Compact.SecondaryInfos
           infos={[
-            {
-              icon: GlobeIcon,
-              infoLabel: t('common.terms.domain'),
-              value: data.additionalInfo.domain,
-            },
             {
               icon: IconServer,
               infoLabel: t('common.terms.server'),
@@ -166,7 +163,7 @@ export default function AppCard(props: AppCardProps) {
   }
 
   return (
-    <ResourceCard.Full classNameCardWrapper={cnCardWrapper}>
+    <ResourceCard.Full classNameCardWrapper={cnCardWrapper} onClickBody={onClickDetails}>
       <ResourceCard.Full.Main>
         <ResourceCard.Full.Main.Hero
           image={getBundleIcon(data.identity.bundleType)}
@@ -188,12 +185,6 @@ export default function AppCard(props: AppCardProps) {
         />
       </ResourceCard.Full.Main>
       <ResourceCard.Full.Additionals slots={2}>
-        <ResourceCard.Full.Additionals.PrimeInfo
-          title={t('common.terms.domain')}
-          titleIcon={GlobeIcon}
-          value={data.additionalInfo.domain}
-          onClick={handleClickAppDomain}
-        />
         <ResourceCard.Full.Additionals.PrimeInfo
           title={t('common.terms.server')}
           titleIcon={IconServer}
