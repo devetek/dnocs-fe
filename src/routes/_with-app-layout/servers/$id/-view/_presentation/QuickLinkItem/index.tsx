@@ -9,19 +9,19 @@ export default function QuickLinkItem(props: Props) {
     <button
       disabled={isDisabled}
       className={cn(
-        'cursor-pointer w-full h-full flex flex-col items-center justify-center gap-2 rounded-xl border border-border/50 bg-card',
-        'px-3 py-4 min-h-24 text-center transition-all',
+        'cursor-pointer w-full h-full flex flex-col items-center justify-center gap-1.5 rounded-xl border border-border/50 bg-card',
+        'px-2 py-2 min-h-16 text-center transition-all',
         'hover:bg-accent/50 hover:border-primary/30 hover:shadow-sm',
         'active:scale-95',
         'disabled:opacity-60 disabled:cursor-default disabled:hover:bg-card disabled:hover:border-border/50 disabled:active:scale-100',
       )}
       onClick={onClick}
     >
-      <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary shrink-0">
+      <div className="flex items-center justify-center size-8 rounded-lg bg-primary/10 text-primary shrink-0">
         {Icon ? (
-          <Icon className="size-5" />
+          <Icon className="size-4" />
         ) : (
-          <img className="size-5 object-contain" src={logoUrl} alt={label} />
+          <img className="size-4 object-contain" src={logoUrl} alt={label} />
         )}
       </div>
 

@@ -13,7 +13,7 @@ import CompactTertiaryInfos from './_TertiaryInfos';
 const slotted = createScopeForSlot('@@ResourceCardCompact');
 
 export default function ResourceCardCompact(props: Props) {
-  const { classNameCardWrapper, classNameCardInner, children } = props;
+  const { classNameCardWrapper, classNameCardInner, onClickBody, children } = props;
 
   const [
     slotMain,
@@ -43,7 +43,7 @@ export default function ResourceCardCompact(props: Props) {
   return (
     <Card className={cnCardWrapper}>
       <Card className={cnCardInner}>
-        <div className="grow">
+        <div className={cn('grow', onClickBody && 'cursor-pointer')} onClick={onClickBody}>
           <section>{slotMain}</section>
           <section>{slotTertiaryInfos}</section>
           <section>{slotSecondaryInfos}</section>

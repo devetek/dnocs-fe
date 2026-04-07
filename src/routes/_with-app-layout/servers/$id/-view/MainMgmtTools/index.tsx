@@ -92,7 +92,7 @@ export default function MainMgmtTools() {
       title={t('common.terms.managementTools')}
       icon={BoltIcon}
     >
-      <FlexGrid gridItemsMax={4}>
+      <FlexGrid gridItemsMax={5}>
         <QuickLinkItem
           label="Services"
           icon={ActivityIcon}

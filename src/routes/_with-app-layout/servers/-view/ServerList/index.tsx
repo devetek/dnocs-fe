@@ -53,11 +53,9 @@ export default guard(function ServerList() {
   return (
     <LayoutAutoGridList viewMode={viewMode}>
       {servers.map((server: any) => {
-        const handleClickDetails = () => {
-          if (!server.host.name) return undefined;
-
-          return () => window.open(`/servers/${server.id}`, '_blank');
-        };
+        const handleClickDetails = server.host.name
+          ? () => navigate({ to: '/servers/$id', params: { id: server.id } })
+          : undefined;
 
         const handleClickEdit = () => {
           emit('@resources::servers/server-edit-sidepanel', server);
@@ -97,7 +95,7 @@ export default guard(function ServerList() {
             variant={derivedViewMode === 'list' ? 'full' : 'compact'}
             data={server}
             onClickEdit={handleClickEdit}
-            onClickDetails={handleClickDetails()}
+            onClickDetails={handleClickDetails}
             onClickReinstall={handleClickReinstall}
             onClickClaimToOrganization={handleClickClaim()}
             onClickDelete={handleClickDelete}

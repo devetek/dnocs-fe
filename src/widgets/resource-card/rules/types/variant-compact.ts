@@ -5,6 +5,7 @@ import type { AdditionalsInfo, CommonIcon, MainContentStatus } from './shared';
 export interface ResourceCardCompactProps {
   classNameCardWrapper?: string;
   classNameCardInner?: string;
+  onClickBody?: () => void;
   children: ReactNode;
 }
 

@@ -17,7 +17,7 @@ export default function CompactSecondaryInfos(props: Props) {
       {infos.map((info, index) => {
         const { icon: Icon, infoLabel, value } = info;
 
-        const cnValue = cn('text-wrap leading-5 line-clamp-2 break-all');
+        const cnValue = cn('leading-5 line-clamp-1 truncate');
 
         return (
           <div key={index} className="flex flex-col cursor-default">

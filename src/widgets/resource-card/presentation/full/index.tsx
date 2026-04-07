@@ -12,7 +12,7 @@ import RCDMain from './_Main';
 const slotted = createScopeForSlot('@@ResourceCardFull');
 
 export default function ResourceCardFull(props: Props) {
-  const { classNameCardWrapper, classNameCardInner, children } = props;
+  const { classNameCardWrapper, classNameCardInner, onClickBody, children } = props;
 
   const [slotMain, slotAdditionals, slotActions, slotFootnote] = extractSlots(
     children,
@@ -35,8 +35,8 @@ export default function ResourceCardFull(props: Props) {
   return (
     <Card className={cnCardWrapper}>
       <Card className={cnCardInner}>
-        <section>{slotMain}</section>
-        <section>{slotAdditionals}</section>
+        <section className={cn(onClickBody && 'cursor-pointer')} onClick={onClickBody}>{slotMain}</section>
+        <section className={cn(onClickBody && 'cursor-pointer')} onClick={onClickBody}>{slotAdditionals}</section>
         <section>{slotActions}</section>
       </Card>
 

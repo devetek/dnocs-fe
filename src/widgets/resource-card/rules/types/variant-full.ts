@@ -10,6 +10,7 @@ import type {
 export interface ResourceCardFullProps {
   classNameCardWrapper?: string;
   classNameCardInner?: string;
+  onClickBody?: () => void;
   children: ReactNode;
 }
 
