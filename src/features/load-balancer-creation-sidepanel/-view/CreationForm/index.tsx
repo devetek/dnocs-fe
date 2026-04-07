@@ -153,7 +153,6 @@ function SectionIdentity() {
 function FieldDomain() {
   const [domains] = useResourcesModel((s) => [s.domains]);
 
-  const tAll = useDevetekTranslations();
   const t = useDevetekTranslations(
     'sidepanel.loadBalancerCreation.fieldDomain',
   );
@@ -233,7 +232,7 @@ function FieldDomain() {
         </div>
       )}
 
-      <ErrorInline t={tAll} message={form.formState.errors.domain?.message} />
+      <ErrorInline t={t} message={form.formState.errors.domain?.message} />
     </div>
   );
 }

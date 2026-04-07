@@ -16,11 +16,13 @@ export default function useFormSubmissionUsecase() {
   const t = useDevetekTranslations('toaster.loadBalancerCreate');
 
   const handleSubmit = form.handleSubmit(async (values) => {
+    let defaultUpstream = '';
     const {
       domain,
       description,
       engine,
       serverId,
+      internalDomainMetadata,
       lbKind,
       features,
       l4rule,
@@ -38,15 +40,19 @@ export default function useFormSubmissionUsecase() {
               ? l7rule.pathMatch.slice(0, -2)
               : l7rule.pathMatch;
           });
+          if (pathMatch === '/') {
+            defaultUpstream =
+              `${l7rule.upstreamsIfProxyPass?.[0]?.address ?? 'localhost'}:${l7rule.upstreamsIfProxyPass?.[0]?.port ?? '80'}`;
+          }
 
           return {
             wildcard: hasWildcard,
             pathMatch,
-            type: 'proxy-pass',
+            type: 'proxy_pass',
             applicationId: l7rule.applicationIdIfProxyPassApp,
             upstreams: l7rule.upstreamsIfProxyPass?.map((u) => ({
               address: u.address,
-              port: u.port,
+              port: u.port.toString(),
             })),
           };
         });
@@ -55,11 +61,11 @@ export default function useFormSubmissionUsecase() {
       if (lbKind === 'l4' && l4rule) {
         return [
           {
-            type: 'proxy-pass',
+            type: 'proxy_pass',
             pathMatch: '/',
             upstreams: l4rule.upstreams.map((u) => ({
               address: u.address,
-              port: u.port,
+              port: u.port.toString(),
             })),
           },
         ];
@@ -73,9 +79,13 @@ export default function useFormSubmissionUsecase() {
       name: description,
       engine,
       serverId,
+      internalDomainMetadata: internalDomainMetadata?.id
+        ? internalDomainMetadata
+        : undefined,
       lbKind,
       protocol: features.protocol ?? 'http',
       sslEnabled: features.sslEnabled,
+      defaultUpstream,
       rules,
     });
 

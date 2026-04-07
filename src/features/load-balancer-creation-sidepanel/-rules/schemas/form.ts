@@ -22,13 +22,13 @@ const upstream = z.object({
 const l7Rule = z
   .object({
     pathMatch: z.string().min(1, 'formErrors.required'),
-    type: z.enum(['proxy-pass', 'proxy-pass-app']),
+    type: z.enum(['proxy_pass', 'proxy-pass', 'proxy-pass-app']),
     upstreamsIfProxyPass: z.array(upstream).optional(),
     applicationIdIfProxyPassApp: SchemaCommon.unitId.optional(),
   })
   .superRefine((data, ctx) => {
     if (
-      data.type === 'proxy-pass' &&
+      (data.type === 'proxy-pass' || data.type === 'proxy_pass') &&
       (!data.upstreamsIfProxyPass || data.upstreamsIfProxyPass.length === 0)
     ) {
       ctx.addIssue({
@@ -56,8 +56,12 @@ export const schemaCreationForm = z
     domain: z.string().min(1, 'formErrors.required'),
     internalDomainMetadata: z
       .object({
+        cloudflare: z.object({
+          proxied: z.boolean().default(true).optional(),
+        }).optional(),
         id: SchemaCommon.unitId,
         subdomain: z.string(),
+        ttl: z.number().int().positive().optional(),
       })
       .optional(),
     description: z.string(),

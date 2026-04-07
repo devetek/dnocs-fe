@@ -8,7 +8,15 @@ import { apiDoPost } from '../libs/api-client';
 
 export interface RecipeUpstream {
   address: string;
-  port: number;
+  port: string;
+}
+
+export interface RecipeInternalDomainMetadata {
+  cloudflare?: {
+    proxied?: boolean;
+  };
+  id: string;
+  subdomain: string;
 }
 
 export interface RecipeRule {
@@ -22,13 +30,15 @@ export interface RecipeRule {
 export interface RecipeParams {
   name: string;
   domain: string;
+  internalDomainMetadata?: RecipeInternalDomainMetadata;
   engine: string;
+  defaultUpstream: string;
   serverId: string;
   lbKind: string;
   protocol: string;
   sslEnabled: boolean;
   rules?: RecipeRule[];
-  port?: number;
+  port?: string;
 }
 
 export function recipe(params: RecipeParams): DoRequestRecipe {
@@ -36,7 +46,9 @@ export function recipe(params: RecipeParams): DoRequestRecipe {
     name,
     domain,
     engine,
+    defaultUpstream,
     serverId,
+    internalDomainMetadata,
     lbKind,
     protocol,
     sslEnabled,
@@ -50,9 +62,20 @@ export function recipe(params: RecipeParams): DoRequestRecipe {
       name,
       domain,
       engine,
+      type: 'proxy_pass',
+      upstream: defaultUpstream,
       machine_id: serverId,
       advance_mode: true,
       config: {
+        dommain: {
+          cloudflare: internalDomainMetadata?.cloudflare
+            ? {
+                proxied: internalDomainMetadata.cloudflare.proxied,
+              }
+            : undefined,
+          id: internalDomainMetadata?.id,
+          subdomain: internalDomainMetadata?.subdomain,
+        },
         lb_kind: lbKind,
         protocol,
         ssl_enabled: sslEnabled,

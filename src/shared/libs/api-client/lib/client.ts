@@ -14,19 +14,17 @@ export const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use((config) => {
-  if (config.url?.includes('v1/')) {
-    const organizationId = iife(() => {
-      if (!isBrowser()) return null;
+  const organizationId = iife(() => {
+    if (!isBrowser()) return null;
 
-      return localStorage.getItem(LS_ORGANIZATION_ID) || null;
+    return localStorage.getItem(LS_ORGANIZATION_ID) || null;
+  });
+
+  if (organizationId) {
+    config.headers = new AxiosHeaders({
+      ...config.headers,
+      [X_AUTH_ORGANIZATION_ID]: organizationId,
     });
-
-    if (organizationId) {
-      config.headers = new AxiosHeaders({
-        ...config.headers,
-        [X_AUTH_ORGANIZATION_ID]: organizationId,
-      });
-    }
   }
 
   return config;

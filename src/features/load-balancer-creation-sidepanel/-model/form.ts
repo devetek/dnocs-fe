@@ -8,6 +8,10 @@ export const lbCreationFormProps = createFormControl({
   defaultValues: {
     description: '',
     domain: '',
+    internalDomainMetadata: {
+      id: '',
+      subdomain: '',
+    },
     serverId: '',
     lbKind: 'l7' as const,
     features: {

@@ -185,6 +185,7 @@ function ProxyPassDestinationsList(props: DestinationsListProps) {
                 max={65_535}
                 {...form.control.register(
                   `l7rules.${ruleIndex}.upstreamsIfProxyPass.${upstreamIndex}.port` as const,
+                  { valueAsNumber: true },
                 )}
               />
             </div>
