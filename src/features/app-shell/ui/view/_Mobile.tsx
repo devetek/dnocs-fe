@@ -28,7 +28,11 @@ export default function Mobile() {
           </Button>
         </div>
 
-        <BrandLogo />
+        <div />
+
+        <div className="flex items-center justify-end">
+          <BrandLogo />
+        </div>
       </div>
 
       <Drawer onClickOverlay={toggleSidebar}>
