@@ -60,7 +60,7 @@ export default function SearchCollapsible(props: SearchCollapsibleProps) {
 
   const cnRoot = cn(
     'relative flex items-center transition-all duration-300 ease-in-out',
-    showInput ? 'w-64' : 'w-10',
+    showInput ? 'w-36 sm:w-64' : 'w-10',
   );
 
   const cnBtnSearch = cn(
