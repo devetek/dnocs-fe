@@ -64,6 +64,7 @@
       "information": "Information",
       "repository": "Repository",
       "lastUpdated": "Last updated",
+      "createdAt": "Created",
       "selectBranch": "Select Branch",
       "selectWorker": "Select Worker",
       "deleting": "Deleting",
@@ -373,6 +374,7 @@
       "memberColumn": "Member",
       "joinedColumn": "Joined",
       "joinedLabel": "Joined",
+      "joinedDateLabel": "Join date",
       "remove": "Remove",
       "removeFromTeam": "Remove from team",
       "emptyState": {

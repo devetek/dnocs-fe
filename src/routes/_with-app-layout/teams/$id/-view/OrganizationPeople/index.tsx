@@ -6,7 +6,7 @@ import { useToaster } from '@/services/toaster';
 
 import { useOrganizationPeopleCreateModal } from '@/features/organization-people-create-modal';
 
-import { ApiOrganizationPeople } from '@/shared/api';
+import { ApiOrganization, ApiOrganizationPeople } from '@/shared/api';
 import { Button } from '@/shared/presentation/atoms/Button';
 import { Pagination } from '@/shared/presentation/atoms/Pagination';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
@@ -36,8 +36,8 @@ export default function OrganizationPeople({ orgID }: Props) {
     useOrganizationPeopleCreateModal();
   const { pagination, setPagination } = useFilter();
 
-  const [response, refresh] = ApiOrganizationPeople.Find.useGet({
-    organizationId: orgID,
+  const [response, refresh] = ApiOrganization.Detail.$Id.Members.useGet({
+    id: orgID,
     page: pagination,
   });
 

@@ -1,5 +1,8 @@
 import { ExternalLink, MoreVertical, Settings, Trash2 } from 'lucide-react';
 
+import { useDevetekLocale } from '@/services/i18n';
+
+import { getDistanceFromNow } from '@/shared/libs/browser/date';
 import { Button } from '@/shared/presentation/atoms/Button';
 import {
   Card,
@@ -21,39 +24,40 @@ const applications = [
     name: 'Portfolio Website',
     type: 'Next.js',
     url: 'portfolio.devetek.com',
-    lastDeployed: '2 hours ago',
+    created_at: '2025-07-29 22:00:00.000000 +0700 WIB',
   },
   {
     id: 2,
     name: 'API Gateway',
     type: 'Node.js',
     url: 'api.devetek.com',
-    lastDeployed: '1 day ago',
+    created_at: '2025-07-28 12:00:00.000000 +0700 WIB',
   },
   {
     id: 3,
     name: 'Admin Dashboard',
     type: 'React',
     url: 'admin.devetek.com',
-    lastDeployed: '3 days ago',
+    created_at: '2025-07-26 10:00:00.000000 +0700 WIB',
   },
   {
     id: 4,
     name: 'Blog Platform',
     type: 'WordPress',
     url: 'blog.devetek.com',
-    lastDeployed: '5 days ago',
+    created_at: '2025-07-24 08:00:00.000000 +0700 WIB',
   },
   {
     id: 5,
     name: 'E-commerce Store',
     type: 'Vue.js',
     url: 'store.devetek.com',
-    lastDeployed: '1 week ago',
+    created_at: '2025-07-22 09:00:00.000000 +0700 WIB',
   },
 ];
 
 export default function MyApplications() {
+  const locale = useDevetekLocale();
   return (
     <Card className="rounded-2xl flex flex-col">
       <CardHeader>
@@ -99,7 +103,7 @@ export default function MyApplications() {
 
             <div className="text-xs text-gray-500 mb-2">{app.url}</div>
             <div className="text-xs text-gray-500">
-              Last deployed: {app.lastDeployed}
+              Created: {getDistanceFromNow(app.created_at, locale)}
             </div>
           </div>
         ))}
