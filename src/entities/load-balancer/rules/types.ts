@@ -1,7 +1,9 @@
-import type { LucideIcon } from 'lucide-react';
+import type { ComponentType } from 'react';
+
+import type { LucideProps } from 'lucide-react';
 
 export interface LoadBalancerStatusMetadata {
-  icon: LucideIcon;
+  icon: ComponentType<LucideProps>;
   color: string;
   i18n: {
     statusLabel: string;
@@ -9,7 +11,7 @@ export interface LoadBalancerStatusMetadata {
 }
 
 export interface LoadBalancerWebserver {
-  icon: string | LucideIcon;
+  icon: ComponentType<LucideProps>;
   i18n: {
     brandName: string;
   };

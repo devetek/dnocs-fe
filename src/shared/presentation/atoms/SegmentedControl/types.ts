@@ -2,6 +2,7 @@ import type { LucideIcon } from 'lucide-react';
 
 export interface SegmentedControlProps<Id extends string> {
   options: Array<SegmentedControlOption<Id>>;
+  segmentSizing?: 'default' | 'uniform';
 
   activeItemId: Id;
   onClickOption?: (id: Id) => void;

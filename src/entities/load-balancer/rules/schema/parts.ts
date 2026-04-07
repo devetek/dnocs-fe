@@ -3,9 +3,17 @@ import { z } from 'zod';
 import { schemaServerMinimal } from '@/entities/server/rules/schema';
 import { SchemaCommon } from '@/entities/shared/rules/schema';
 
+export const KNOWN_WEBSERVER_ENGINES = [
+  'caddy',
+  'nginx',
+  'traefik',
+  'haproxy',
+  'envoy',
+] as const;
+
 export type Webserver = z.output<typeof webserver>;
 export const webserver = z.object({
-  engine: z.enum(['caddy', 'unknown']),
+  engine: z.enum([...KNOWN_WEBSERVER_ENGINES, 'unknown']),
 });
 
 export type State = z.output<typeof state>;

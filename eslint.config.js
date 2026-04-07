@@ -40,7 +40,7 @@ const eslintConfig = [
         },
       ],
       'eslintPluginImport/order': [
-        'warning',
+        'warn',
         {
           groups: [
             'builtin',

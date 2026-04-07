@@ -1,5 +1,6 @@
 import { useEmit, useSubscribe } from './-models/events';
 import useLbDeleteUsecase from './-usecase/lb-delete';
+import useLbOpenCreateUsecase from './-usecase/open-create';
 import useLbOpenDetailsUsecase from './-usecase/open-details';
 import useLbOpenMigrateOwnershipUsecase from './-usecase/open-migrate-ownership';
 
@@ -9,6 +10,8 @@ export default function EventController() {
   const handleDefaultSuccess = () => {
     emit('@load-balancers/data--refresh', null);
   };
+
+  const [handleOpenCreate] = useLbOpenCreateUsecase();
 
   const [handleDelete] = useLbDeleteUsecase({
     onSuccess: handleDefaultSuccess,
@@ -20,6 +23,7 @@ export default function EventController() {
     onSuccess: handleDefaultSuccess,
   });
 
+  useSubscribe('@load-balancers/open--create', handleOpenCreate);
   useSubscribe('@load-balancers/lb--delete', handleDelete);
   useSubscribe('@load-balancers/open--details', handleOpenDetails);
   useSubscribe(

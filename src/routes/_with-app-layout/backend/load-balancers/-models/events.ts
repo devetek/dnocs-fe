@@ -16,6 +16,7 @@ type EventsRegistry = Rescope<
     'filters/pagination--set': number;
     'data--refresh': null;
     'lb--delete': LbDeletePayload;
+    'open--create': null;
     'open--migrate-ownership': LbMigrateOwnershipPayload;
     'open--details': LbOpenDetailsPayload;
   }

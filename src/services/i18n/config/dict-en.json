@@ -121,6 +121,10 @@
       "idCloudHost": "IDCloudHost",
       "digitalOcean": "DigitalOcean",
       "caddy": "Caddy",
+      "nginx": "Nginx",
+      "haproxy": "HAProxy",
+      "envoy": "Envoy",
+      "traefik": "Traefik",
       "http": "HTTP",
       "http2": "HTTP/2",
       "quic": "QUIC",
@@ -490,14 +494,16 @@
     },
     "domainRecordDelete": {
       "title": "Delete Domain Record",
-      "message": "Are you sure you want to delete domain record « {recordName} »?"    },
+      "message": "Are you sure you want to delete domain record « {recordName} »?"
+    },
     "teamDelete": {
       "title": "Delete Team",
       "message": "Are you sure you want to delete \"{name}\" ({id})?"
     },
     "teamMemberRemove": {
       "title": "Remove Member",
-      "message": "Are you sure you want to remove \"{name}\" from this team?"    }
+      "message": "Are you sure you want to remove \"{name}\" from this team?"
+    }
   },
   "toaster": {
     "loginByEmail": {
@@ -549,14 +555,20 @@
     },
     "loadBalancerDelete": {
       "success": "Successfully deleted load balancer « {loadBalancer} ».",
-      "error": "Failed to delete load balancer « {loadBalancer} »!"    },
+      "error": "Failed to delete load balancer « {loadBalancer} »!"
+    },
+    "loadBalancerCreate": {
+      "success": "Load balancer created successfully.",
+      "error": "Failed to create load balancer."
+    },
     "teamDelete": {
       "success": "Successfully deleted team \"{name}\"",
       "error": "Failed to delete team \"{name}\""
     },
     "teamMemberRemove": {
       "success": "Successfully removed \"{name}\" from the team",
-      "error": "Failed to remove \"{name}\" from the team"    }
+      "error": "Failed to remove \"{name}\" from the team"
+    }
   },
   "sidepanel": {
     "_core": {
@@ -610,15 +622,25 @@
     },
     "domainRegistration": {
       "title": "Register new domain",
-      "fieldDomain": { "title": "Domain" },
-      "fieldDescription": { "title": "Description" },
+      "fieldDomain": {
+        "title": "Domain"
+      },
+      "fieldDescription": {
+        "title": "Description"
+      },
       "fieldProvider": {
         "title": "Provider",
         "placeholder": "Select provider"
       },
-      "providerData": { "title": "Provider Data" },
-      "fieldToken": { "title": "Token" },
-      "fieldZone": { "title": "Zone ID" },
+      "providerData": {
+        "title": "Provider Data"
+      },
+      "fieldToken": {
+        "title": "Token"
+      },
+      "fieldZone": {
+        "title": "Zone ID"
+      },
       "toaster": {
         "success": "Domain registered successfully.",
         "error": "Failed to register domain."
@@ -629,6 +651,70 @@
       "fieldName": "Team Name",
       "namePlaceholder": "My Team",
       "descPlaceholder": "A short description of this team\u2026"
+    },
+
+    "loadBalancerCreation": {
+      "title": "Create Load Balancer",
+      "sectionLbKind": "LB Type Allocation",
+      "sectionFeatures": "Protocol & Features",
+      "fieldDescription": {
+        "title": "Name"
+      },
+      "fieldDomain": {
+        "title": "Domain Name",
+        "placeholder": "e.g. lb-alpha.internal.net",
+        "useInternalDomain": "Use Internal Domain",
+        "useExternalDomain": "Use External Domain"
+      },
+      "fieldServer": {
+        "title": "Gateway Server",
+        "placeholder": "Select a server",
+        "onError": "Failed to load servers."
+      },
+      "fieldEngine": {
+        "title": "Web Server Engine",
+        "placeholder": "Select engine"
+      },
+      "fieldLbKind": {
+        "hintL7": "L7 allocation enables HTTP/HTTPS protocol inspection and URI-based path routing.",
+        "hintL4": "L4 allocation enables TCP/UDP port-based forwarding without protocol inspection."
+      },
+      "fieldProtocol": {
+        "title": "Protocol",
+        "placeholder": "Select protocol"
+      },
+      "fieldSslEnabled": {
+        "title": "SSL Enabled"
+      },
+      "l4rule": {
+        "title": "L4 Destination",
+        "matchingPath": "Matching Path",
+        "fieldDestination": {
+          "title": "Destination",
+          "add": "Add Destination"
+        }
+      },
+      "upstreamRules": {
+        "title": "Upstream Rules Configuration",
+        "addRule": "Add New Rule",
+        "removeRule": "Remove",
+        "ruleLabel": "Rule",
+        "fieldPath": {
+          "title": "Matching Path"
+        },
+        "fieldType": {
+          "title": "Type"
+        },
+        "fieldDestination": {
+          "title": "Destination",
+          "add": "Add Destination"
+        },
+        "fieldApp": {
+          "title": "Application",
+          "placeholder": "Select an application",
+          "onError": "Failed to load applications."
+        }
+      }
     }
   },
   "modal": {
