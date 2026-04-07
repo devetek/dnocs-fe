@@ -64,6 +64,7 @@
       "information": "Informasi",
       "repository": "Repositori",
       "lastUpdated": "Terakhir diperbarui",
+      "createdAt": "Dibuat",
       "selectBranch": "Pilih Branch",
       "selectWorker": "Pilih Worker",
       "deleting": "Menghapus",
@@ -368,6 +369,7 @@
       "memberColumn": "Anggota",
       "joinedColumn": "Bergabung",
       "joinedLabel": "Bergabung",
+      "joinedDateLabel": "Tanggal bergabung",
       "remove": "Hapus",
       "removeFromTeam": "Hapus dari tim",
       "emptyState": {

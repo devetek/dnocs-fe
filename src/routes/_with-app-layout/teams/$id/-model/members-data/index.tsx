@@ -1,4 +1,4 @@
-import { ApiOrganizationPeople } from '@/shared/api';
+import { ApiOrganization } from '@/shared/api';
 import { useAdapter } from '@/shared/libs/api-client';
 import buildSelector from '@/shared/libs/react-factories/buildSelector';
 
@@ -11,8 +11,8 @@ export const [MembersDataModelProvider, useMembersDataModel] = buildSelector(
   const { orgId } = props;
   const { currentPage } = useFilterModel();
 
-  const [response, refresh] = ApiOrganizationPeople.Find.useGet({
-    organizationId: orgId,
+  const [response, refresh] = ApiOrganization.Detail.$Id.Members.useGet({
+    id: orgId,
     page: currentPage,
     pageSize: 10,
   });

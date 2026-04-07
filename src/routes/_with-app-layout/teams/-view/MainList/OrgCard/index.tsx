@@ -2,7 +2,9 @@ import type { ComponentProps } from 'react';
 
 import { UsersIcon } from 'lucide-react';
 
-import { useDevetekTranslations } from '@/services/i18n';
+import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
+
+import { getDistanceFromNow } from '@/shared/libs/browser/date';
 import IconEye from '@/shared/presentation/icons/Eye';
 import IconEyeActive from '@/shared/presentation/icons/EyeActive';
 import IconLastDateActive from '@/shared/presentation/icons/LastDateActive';
@@ -17,10 +19,13 @@ export interface OrgCardProps {
 
 export default function OrgCard(props: OrgCardProps) {
   const { data } = props;
-  const { id, name, description, updatedAt } = data;
+  const { id, name, description, createdAt } = data;
 
   const emit = useEmit();
   const t = useDevetekTranslations();
+  const locale = useDevetekLocale();
+
+  const createdAtRelative = createdAt ? getDistanceFromNow(createdAt, locale) : null;
 
   const handleClickDetails = () =>
     emit('@teams/open--details', {
@@ -76,8 +81,8 @@ export default function OrgCard(props: OrgCardProps) {
       <ResourceCard.Compact.Footnote>
         <ResourceCard.Compact.Footnote.Item
           icon={IconLastDateActive}
-          label={t('common.terms.lastUpdated')}
-          value={updatedAt ?? undefined}
+          label={t('common.terms.createdAt')}
+          value={createdAtRelative ? `${t('common.terms.createdAt')}: ${createdAtRelative}` : undefined}
         />
       </ResourceCard.Compact.Footnote>
     </ResourceCard.Compact>
