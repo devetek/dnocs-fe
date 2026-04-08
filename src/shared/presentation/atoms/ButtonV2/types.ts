@@ -3,7 +3,7 @@ import type { HTMLAttributes, RefObject } from 'react';
 import type { VariantProps } from 'class-variance-authority';
 
 export interface ButtonExtraProps {
-  ref?: RefObject<HTMLButtonElement>;
+  ref?: RefObject<HTMLButtonElement | null>;
   asChild?: boolean;
   disabled?: boolean;
   bubbleUpClick?: boolean;

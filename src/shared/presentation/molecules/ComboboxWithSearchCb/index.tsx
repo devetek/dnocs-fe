@@ -5,7 +5,7 @@ import { Check, ChevronsUpDown } from 'lucide-react';
 
 import useResizeObserver from '@/shared/libs/react-hooks/useResizeObserver';
 import { cn } from '@/shared/libs/tailwind/cn';
-import { Button } from '@/shared/presentation/atoms/Button';
+import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import {
   Popover,
   PopoverContent,
@@ -50,7 +50,8 @@ export function ComboboxWithSearchCb<V>(props: ComboboxProps<V>) {
       <PopoverTrigger asChild>
         <Button
           ref={refButton}
-          variant="outline"
+          buttonStyle="outline"
+          buttonColor="secondary"
           role="combobox"
           aria-expanded={open}
           className={cnButton}
@@ -73,7 +74,8 @@ export function ComboboxWithSearchCb<V>(props: ComboboxProps<V>) {
               <Button
                 className="min-h-8 h-max py-1"
                 key={String(item.value)}
-                variant="ghost"
+                buttonStyle="ghost"
+                buttonColor="secondary"
                 size="sm"
                 onClick={() => {
                   onChange?.(item.value);
@@ -83,7 +85,9 @@ export function ComboboxWithSearchCb<V>(props: ComboboxProps<V>) {
                 <p className="w-full text-start flex flex-col">
                   <span>{item.label}</span>
 
-                  {item.description && <span>{item.description}</span>}
+                  {item.description && (
+                    <span className="opacity-60">{item.description}</span>
+                  )}
                 </p>
                 <Check
                   className={cn(

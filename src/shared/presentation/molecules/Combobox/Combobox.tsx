@@ -5,7 +5,7 @@ import { Check, ChevronsUpDown } from 'lucide-react';
 
 import useResizeObserver from '@/shared/libs/react-hooks/useResizeObserver';
 import { cn } from '@/shared/libs/tailwind/cn';
-import { Button } from '@/shared/presentation/atoms/Button';
+import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import {
   Popover,
   PopoverContent,
@@ -13,7 +13,14 @@ import {
 } from '@/shared/presentation/atoms/Popover';
 
 export default function Combobox<V>(props: ComboboxProps<V>) {
-  const { classNameButton, items, placeholder, value, onChange } = props;
+  const {
+    classNameButton,
+    items,
+    placeholder,
+    value,
+    size = 'default',
+    onChange,
+  } = props;
 
   const [popoverWidth, setPopoverWidth] = useState(0);
 
@@ -29,6 +36,7 @@ export default function Combobox<V>(props: ComboboxProps<V>) {
   );
   const cnButtonText = cn({
     'opacity-50': !value,
+    'text-xs': size === 'sm',
   });
 
   const selectedItemLabel = items?.find(
@@ -40,7 +48,9 @@ export default function Combobox<V>(props: ComboboxProps<V>) {
       <PopoverTrigger asChild>
         <Button
           ref={refButton}
-          variant="outline"
+          buttonStyle="outline"
+          buttonColor="secondary"
+          size={size === 'sm' ? 'sm' : 'default'}
           role="combobox"
           aria-expanded={open}
           className={cnButton}
@@ -58,7 +68,8 @@ export default function Combobox<V>(props: ComboboxProps<V>) {
               <Button
                 className="min-h-8 h-max py-1"
                 key={String(item.value)}
-                variant="ghost"
+                buttonStyle="ghost"
+                buttonColor="secondary"
                 size="sm"
                 onClick={() => {
                   onChange?.(item.value);
@@ -91,6 +102,7 @@ interface ComboboxProps<V> {
   placeholder?: string;
   value?: V;
   onChange?: (value: V) => void;
+  size?: 'default' | 'sm';
 }
 
 export interface ComboboxItem<V> {

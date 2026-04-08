@@ -81,10 +81,10 @@ export function ctorGateway(raw: DTOs.RouterV1) {
   if (raw.machine == null) return undefined;
 
   return {
-    address: raw.machine?.address,
+    address: raw.machine.address,
     server: {
       id: String(raw.machine_id),
-      hostname: raw.machine?.hostname,
+      hostname: raw.machine.hostname,
     },
   } as KeysOnlyDeep<z.input<typeof gateway>>;
 }

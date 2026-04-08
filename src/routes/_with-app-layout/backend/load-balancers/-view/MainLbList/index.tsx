@@ -33,6 +33,7 @@ export default buildResponseView({
           title={t('page.loadBalancers.emptyState.title')}
           message={t('page.loadBalancers.emptyState.message')}
           ctaText={t('page.loadBalancers.emptyState.cta')}
+          ctaOnClick={() => emit('@load-balancers/open--create', null)}
         />
       );
     }

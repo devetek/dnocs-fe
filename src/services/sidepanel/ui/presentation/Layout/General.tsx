@@ -95,7 +95,7 @@ SidepanelLayoutGeneral.Title = function Title(props: TitleProps) {
 
   return (
     <header className={cnHeader}>
-      <section className="flex flex-col min-h-8">
+      <section className="flex flex-col justify-center min-h-8">
         <h3 className="text-lg font-bold">{title}</h3>
         <h6 className="text-sm text-primary/70">{elSubtitle}</h6>
       </section>

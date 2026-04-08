@@ -485,14 +485,16 @@
     },
     "loadBalancerDelete": {
       "title": "Hapus Load Balancer",
-      "message": "Apa anda yakin anda ingin menghapus load balancer « {loadBalancer} »?"    },
+      "message": "Apa anda yakin anda ingin menghapus load balancer « {loadBalancer} »?"
+    },
     "teamDelete": {
       "title": "Hapus Tim",
       "message": "Apakah Anda yakin ingin menghapus \"{name}\" ({id})?"
     },
     "teamMemberRemove": {
       "title": "Hapus Anggota",
-      "message": "Apakah Anda yakin ingin menghapus \"{name}\" dari tim ini?"    }
+      "message": "Apakah Anda yakin ingin menghapus \"{name}\" dari tim ini?"
+    }
   },
   "toaster": {
     "loginByEmail": {
@@ -544,14 +546,20 @@
     },
     "domainRecordDelete": {
       "success": "Berhasil menghapus catatan domain « {recordName} ».",
-      "error": "Gagal menghapus catatan domain « {recordName} »!"    },
+      "error": "Gagal menghapus catatan domain « {recordName} »!"
+    },
     "teamDelete": {
       "success": "Berhasil menghapus tim \"{name}\"",
       "error": "Gagal menghapus tim \"{name}\""
     },
     "teamMemberRemove": {
       "success": "Berhasil menghapus \"{name}\" dari tim",
-      "error": "Gagal menghapus \"{name}\" dari tim"    }
+      "error": "Gagal menghapus \"{name}\" dari tim"
+    },
+    "loadBalancerCreate": {
+      "success": "Load balancer berhasil dibuat.",
+      "error": "Gagal membuat load balancer."
+    }
   },
   "sidepanel": {
     "_core": {
@@ -605,18 +613,91 @@
     },
     "domainRegistration": {
       "title": "Daftarkan domain baru",
-      "fieldDomain": { "title": "Domain" },
-      "fieldDescription": { "title": "Deskripsi" },
+      "fieldDomain": {
+        "title": "Domain"
+      },
+      "fieldDescription": {
+        "title": "Deskripsi"
+      },
       "fieldProvider": {
         "title": "Provider",
         "placeholder": "Pilih provider"
       },
-      "providerData": { "title": "Data Provider" },
-      "fieldToken": { "title": "Token" },
-      "fieldZone": { "title": "Zone ID" },
+      "providerData": {
+        "title": "Data Provider"
+      },
+      "fieldToken": {
+        "title": "Token"
+      },
+      "fieldZone": {
+        "title": "Zone ID"
+      },
       "toaster": {
         "success": "Domain berhasil didaftarkan.",
         "error": "Gagal mendaftarkan domain."
+      }
+    },
+    "loadBalancerCreation": {
+      "title": "Buat Load Balancer",
+      "sectionLbKind": "Alokasi Jenis LB",
+      "sectionFeatures": "Protokol & Fitur",
+      "fieldDescription": {
+        "title": "Nama"
+      },
+      "fieldDomain": {
+        "title": "Nama Domain",
+        "placeholder": "mis. lb-alpha.internal.net",
+        "useInternalDomain": "Gunakan Domain Internal",
+        "useExternalDomain": "Gunakan Domain Eksternal"
+      },
+      "fieldServer": {
+        "title": "Server Gateway",
+        "placeholder": "Pilih server",
+        "onError": "Gagal memuat daftar server."
+      },
+      "fieldEngine": {
+        "title": "Mesin Web Server",
+        "placeholder": "Pilih mesin"
+      },
+      "fieldLbKind": {
+        "hintL7": "Alokasi L7 mengaktifkan inspeksi protokol HTTP/HTTPS dan routing berbasis URI.",
+        "hintL4": "Alokasi L4 mengaktifkan penerusan berbasis port TCP/UDP tanpa inspeksi protokol."
+      },
+      "fieldProtocol": {
+        "title": "Protokol",
+        "placeholder": "Pilih protokol"
+      },
+      "fieldSslEnabled": {
+        "title": "SSL Diaktifkan"
+      },
+      "l4rule": {
+        "title": "Tujuan L4",
+        "matchingPath": "Pola Jalur",
+        "fieldDestination": {
+          "title": "Tujuan",
+          "add": "Tambah Tujuan"
+        }
+      },
+      "upstreamRules": {
+        "title": "Konfigurasi Aturan Upstream",
+        "addRule": "Tambah Aturan Baru",
+        "removeRule": "Hapus",
+        "ruleLabel": "Aturan",
+        "fieldPath": {
+          "title": "Pola Jalur URL"
+        },
+        "fieldType": {
+          "title": "Tipe"
+        },
+        "fieldDestination": {
+          "title": "Tujuan",
+          "add": "Tambah Tujuan"
+        },
+        "fieldApp": {
+          "title": "Aplikasi",
+          "placeholder": "Pilih aplikasi",
+          "onError": "Gagal memuat daftar aplikasi."
+        }
       }
     },
     "editTeam": {
