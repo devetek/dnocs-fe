@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Copy env example to .env before implement dPanel env variables
-mv .env.example .env
+mv .env.${ENV} .env
 
 # Check condition, to determine build new or not
 CURRENT_VERSION=""
