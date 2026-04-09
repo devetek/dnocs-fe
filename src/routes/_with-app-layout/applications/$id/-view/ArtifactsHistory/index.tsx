@@ -6,6 +6,7 @@ import {
   guardedSelects,
 } from '@/shared/libs/react-factories/guardedSelect';
 import { Pagination } from '@/shared/presentation/atoms/Pagination';
+import { Card } from '@/shared/presentation/atoms/Card';
 import {
   Tabs,
   TabsContent,
@@ -27,7 +28,7 @@ const [guard, useAppDetail] = guardedSelects({
   fallbackError: UIStates.Loading,
 })(couple(useAppDataModel, (s) => s.appDetail));
 
-const Content = guard(() => {
+const ArtifactsTabContent = guard(() => {
   const emit = useEmit();
 
   const [appSource, appOwner] = useAppDetail((s) => [
@@ -35,10 +36,9 @@ const Content = guard(() => {
     s.ownership.owner,
   ]);
 
-  const [artifactHistory, deploymentHistory, artifactPage, setArtifactPage] =
+  const [artifactHistory, artifactPage, setArtifactPage] =
     useArtifactHistoryModel((s) => [
       s.artifactHistory,
-      s.deploymentHistory,
       s.artifactPage,
       s.setArtifactPage,
     ]);
@@ -77,18 +77,48 @@ const Content = guard(() => {
     return <List appOwner={appOwner} list={list} />;
   });
 
+  const pag = iife(() => {
+    if (artifactHistory.$status === 'success') return artifactHistory.pagination;
+    if (artifactHistory.$status === 'loading' && artifactHistory.prevData)
+      return artifactHistory.prevData.pagination;
+    return null;
+  });
+
+  return (
+    <>
+      {artifactsContent}
+      {pag && pag.total_page > 1 && (
+        <div className="flex justify-end pt-1">
+          <Pagination
+            currentPage={artifactPage}
+            maxPage={pag.total_page}
+            onPageChange={setArtifactPage}
+          />
+        </div>
+      )}
+    </>
+  );
+});
+
+const DeploymentsTabContent = guard(() => {
+  const emit = useEmit();
+
+  const [appSource] = useAppDetail((s) => [s.identity.source]);
+
+  const [artifactHistory, deploymentHistory] =
+    useArtifactHistoryModel((s) => [
+      s.artifactHistory,
+      s.deploymentHistory,
+    ]);
+
+  if (appSource !== 'repository') {
+    return null;
+  }
+
   const deploymentList = iife(() => {
-    if (deploymentHistory.$status === 'success') {
-      return deploymentHistory.list;
-    }
-
-    if (
-      deploymentHistory.$status === 'loading' &&
-      deploymentHistory.prevData
-    ) {
+    if (deploymentHistory.$status === 'success') return deploymentHistory.list;
+    if (deploymentHistory.$status === 'loading' && deploymentHistory.prevData)
       return deploymentHistory.prevData.list;
-    }
-
     return null;
   });
 
@@ -99,7 +129,7 @@ const Content = guard(() => {
     return [];
   });
 
-  const deploymentsContent = iife(() => {
+  const content = iife(() => {
     if (deploymentHistory.$status === 'failed') {
       return (
         <UIStates.Failed
@@ -123,47 +153,9 @@ const Content = guard(() => {
   });
 
   return (
-    <Tabs defaultValue="artifacts">
-      <TabsList className="mb-2">
-        <TabsTrigger value="artifacts">Artifacts</TabsTrigger>
-        <TabsTrigger value="deployments">Deployments</TabsTrigger>
-      </TabsList>
-
-      <TabsContent value="artifacts" className="flex flex-col gap-2 mt-0">
-        <div className="flex flex-col mb-1">
-          <h3 className="text-xl font-bold">Artifacts History</h3>
-          <h6 className="text-sm text-primary/70">Recent artifacts and rollback options</h6>
-        </div>
-        {artifactsContent}
-        {(() => {
-          const pag = artifactHistory.$status === 'success'
-            ? artifactHistory.pagination
-            : artifactHistory.$status === 'loading' && artifactHistory.prevData
-              ? artifactHistory.prevData.pagination
-              : null;
-
-          if (!pag || pag.total_page <= 1) return null;
-
-          return (
-            <div className="flex justify-end pt-1">
-              <Pagination
-                currentPage={artifactPage}
-                maxPage={pag.total_page}
-                onPageChange={setArtifactPage}
-              />
-            </div>
-          );
-        })()}
-      </TabsContent>
-
-      <TabsContent value="deployments" className="flex flex-col gap-2 mt-0">
-        <div className="flex flex-col mb-1">
-          <h3 className="text-xl font-bold">Deployments</h3>
-          <h6 className="text-sm text-primary/70">Recent deployments</h6>
-        </div>
-        {deploymentsContent}
-      </TabsContent>
-    </Tabs>
+    <Card className="rounded-2xl">
+      <div className="p-4 flex flex-col gap-2">{content}</div>
+    </Card>
   );
 });
 
@@ -211,11 +203,24 @@ export default function ArtifactsHistory() {
   });
 
   return (
-    <ArtifactsSection
-      ctaNewState={ctaNewState}
-      ctaNewOnClick={handleClickNewArtifact}
-    >
-      <Content />
-    </ArtifactsSection>
+    <Tabs defaultValue="artifacts">
+      <TabsList className="mb-2 w-full bg-white dark:bg-muted">
+        <TabsTrigger className="flex-1" value="artifacts">Artifacts</TabsTrigger>
+        <TabsTrigger className="flex-1" value="deployments">Deployments</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="artifacts" className="flex flex-col gap-2 mt-0">
+        <ArtifactsSection
+          ctaNewState={ctaNewState}
+          ctaNewOnClick={handleClickNewArtifact}
+        >
+          <ArtifactsTabContent />
+        </ArtifactsSection>
+      </TabsContent>
+
+      <TabsContent value="deployments" className="mt-0">
+        <DeploymentsTabContent />
+      </TabsContent>
+    </Tabs>
   );
 }
