@@ -8,7 +8,12 @@ import {
   HashIcon,
   LoaderCircle,
   OctagonAlertIcon,
+  PlayIcon,
+  RotateCcwIcon,
   ServerIcon,
+  SquareIcon,
+  Trash2Icon,
+  UndoIcon,
   UserCogIcon,
   XIcon,
 } from 'lucide-react';
@@ -26,6 +31,12 @@ import { cn } from '@/shared/libs/tailwind/cn';
 import { Card } from '@/shared/presentation/atoms/Card';
 import Shimmer from '@/shared/presentation/atoms/Shimmer';
 
+import usePushServiceActivityUsecase from '@/entities/os-service/usecase/push-activity';
+import { ServiceState } from '@/entities/os-service/ui/presentation/ServiceState';
+
+import { Button } from '@/shared/presentation/atoms/Button';
+
+import { useEmit } from '../../-model/events';
 import { ArtifactCardPartials as Partials } from './_presentation/ArtifactCard/_Partials';
 
 type DeployStatus = CicdDeployment['state']['status'];
@@ -86,9 +97,12 @@ function DeploymentStatusBadge({ status }: { status: DeployStatus }) {
 interface DeploymentCardProps {
   data: CicdDeployment;
   artifact: CicdArtifact | undefined;
+  onClickActivity: (activity: 'start' | 'stop' | 'restart') => void;
+  onClickDelete: () => void;
+  onClickRestore: () => void;
 }
 
-function DeploymentCard({ data, artifact }: DeploymentCardProps) {
+function DeploymentCard({ data, artifact, onClickActivity, onClickDelete, onClickRestore }: DeploymentCardProps) {
   const locale = useDevetekLocale();
   const updatedAt = getDistanceFromNow(data.timestamp.updated, locale);
 
@@ -163,6 +177,15 @@ function DeploymentCard({ data, artifact }: DeploymentCardProps) {
             <p className="text-xs text-primary/70 flex items-center gap-0.5">
               <AppWindowIcon className="size-3" />
               {data.osService.serviceName}
+              <ServiceState.Badge
+                className="size-3 ml-0.5"
+                serviceState={data.osService.serviceState}
+              />
+              <ServiceState.Label
+                as="span"
+                className="text-xs"
+                serviceState={data.osService.serviceState}
+              />
             </p>
           )}
 
@@ -184,6 +207,57 @@ function DeploymentCard({ data, artifact }: DeploymentCardProps) {
             {data.state.message}
           </p>
         )}
+
+        {data.osService && (
+          <div className="flex justify-end gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onClickActivity('start')}
+            >
+              <PlayIcon className="size-3" />
+              Start
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onClickActivity('restart')}
+            >
+              <RotateCcwIcon className="size-3" />
+              Restart
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onClickActivity('stop')}
+            >
+              <SquareIcon className="size-3" />
+              Stop
+            </Button>
+          </div>
+        )}
+
+        <div className="flex justify-end gap-2">
+          {data.state.status === 'deleted' && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onClickRestore}
+            >
+              <UndoIcon className="size-3" />
+              Restore
+            </Button>
+          )}
+          <Button
+            variant="outline"
+            size="sm"
+            className="text-destructive hover:text-destructive"
+            onClick={onClickDelete}
+          >
+            <Trash2Icon className="size-3" />
+            {data.state.status === 'deleted' ? 'Permanently Delete' : 'Delete'}
+          </Button>
+        </div>
       </div>
     </Card>
   );
@@ -213,6 +287,11 @@ export interface DeploymentListProps {
 
 export function DeploymentList({ list, artifactList }: DeploymentListProps) {
   const artifactMap = new Map(artifactList.map((a) => [a.id, a]));
+  const emit = useEmit();
+
+  const [handleActivity] = usePushServiceActivityUsecase({
+    onSuccess: () => emit('@applications::detail/deployment-history-refresh', null),
+  });
 
   return (
     <>
@@ -221,6 +300,25 @@ export function DeploymentList({ list, artifactList }: DeploymentListProps) {
           key={deployment.id}
           data={deployment}
           artifact={artifactMap.get(deployment.pointerIds.artifact)}
+          onClickActivity={(activity) =>
+            handleActivity({
+              activity,
+              serviceName: deployment.osService!.serviceName,
+              targetServerId: deployment.serverSnapshot.id,
+            })
+          }
+          onClickDelete={() =>
+            emit('@applications::detail/deployment-delete', {
+              deploymentId: deployment.id,
+            })
+          }
+          onClickRestore={() =>
+            emit('@applications::detail/deployment-restore', {
+              applicationId: deployment.pointerIds.application,
+              artifactId: deployment.pointerIds.artifact,
+              workerId: deployment.pointerIds.machine,
+            })
+          }
         />
       ))}
     </>

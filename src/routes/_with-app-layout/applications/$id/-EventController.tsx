@@ -3,6 +3,7 @@ import useArtifactDeleteUsecase from './-usecase/artifact-delete';
 import useArtifactProgressCancelUsecase from './-usecase/artifact-progress-cancel';
 import useArtifactRollbackUsecase from './-usecase/artifact-rollback';
 import useDeploymentDeleteUsecase from './-usecase/deployment-delete';
+import useDeploymentRestoreUsecase from './-usecase/deployment-restore';
 import useGithubLoginUsecase from './-usecase/github-login';
 import useLogsDownloadUsecase from './-usecase/logs-download';
 
@@ -32,6 +33,10 @@ export default function EventController() {
     onSuccess: handleDefaultSuccess,
   });
 
+  const [handleDeploymentRestore] = useDeploymentRestoreUsecase({
+    onSuccess: handleDefaultSuccess,
+  });
+
   const [handleGithubLogin] = useGithubLoginUsecase();
 
   useSubscribe('@applications::detail/logs-download', handleLogsDownload);
@@ -51,6 +56,11 @@ export default function EventController() {
   useSubscribe(
     '@applications::detail/deployment-delete',
     handleDeploymentDelete,
+  );
+
+  useSubscribe(
+    '@applications::detail/deployment-restore',
+    handleDeploymentRestore,
   );
 
   useSubscribe('@applications::detail/github-login', handleGithubLogin);

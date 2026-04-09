@@ -5,13 +5,13 @@ import {
   couple,
   guardedSelects,
 } from '@/shared/libs/react-factories/guardedSelect';
+import { Pagination } from '@/shared/presentation/atoms/Pagination';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '@/shared/presentation/atoms/Tabs';
-import { Pagination } from '@/shared/presentation/atoms/Pagination';
 
 import { useAppDataModel } from '../../-model/app-data';
 import { useArtifactHistoryModel } from '../../-model/artifact-history';
