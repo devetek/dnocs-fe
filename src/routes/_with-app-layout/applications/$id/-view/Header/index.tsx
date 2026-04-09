@@ -1,4 +1,4 @@
-import { BuildingIcon, CalendarIcon, Trash2Icon, UserIcon } from 'lucide-react';
+import { BuildingIcon, CalendarIcon, RefreshCwIcon, Trash2Icon, UserIcon } from 'lucide-react';
 import { useMetaTags } from 'react-metatags-hook';
 
 import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
@@ -119,6 +119,20 @@ const HeaderFootnote = () => {
   );
 };
 
+const RefreshButton = () => {
+  const emit = useEmit();
+
+  const handleRefresh = () => {
+    emit('@applications::detail/app-detail-refresh', null);
+  };
+
+  return (
+    <Button variant="outline" size="icon" onClick={handleRefresh}>
+      <RefreshCwIcon />
+    </Button>
+  );
+};
+
 const DeleteButton = () => {
   const emit = useEmit();
   const [appId, appName] = useAppDetail((s) => [s.id, s.identity.name]);
@@ -149,7 +163,12 @@ export default guard(function Header() {
       statuses={headerStatus}
       footnote={<HeaderFootnote />}
       footnoteAs="div"
-      rightAppend={<DeleteButton />}
+      rightAppend={
+        <div className="flex items-center gap-2">
+          <RefreshButton />
+          <DeleteButton />
+        </div>
+      }
     />
   );
 });
