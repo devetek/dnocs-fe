@@ -1,5 +1,4 @@
 import { AdapterLoadBalancerFromDto } from '@/entities/load-balancer/adapter';
-import { POLL_INTERVAL_MS__LIST } from '@/entities/load-balancer/config';
 
 import { ApiRouter } from '@/shared/api';
 import { useAdapter } from '@/shared/libs/api-client';
@@ -18,9 +17,6 @@ export const [LbDataModelProvider, useLbDataModel] = buildSelector(
     pageSize: 4,
     searchQuery,
     forceMine: localStorage.getItem('organization_id') == null,
-    options: {
-      refreshIntervalMs: POLL_INTERVAL_MS__LIST,
-    },
   });
 
   useSubscribe('@load-balancers/data--refresh', () => {
