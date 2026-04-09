@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { SchemaCommon } from '@/entities/shared/rules/schema';
 
@@ -24,29 +24,29 @@ export const [AppLogsModelProvider, useAppLogsModel] = buildSelector(
     appName: string;
   }>();
 
-  if (
-    appDetail.$status === 'success' &&
-    artifactHistory.$status === 'success'
-  ) {
+  useEffect(() => {
+    if (
+      appDetail.$status !== 'success' ||
+      artifactHistory.$status !== 'success'
+    )
+      return;
+
     const serverId = lastDeployment?.pointerIds.machine;
     const userName = appDetail.ownership.owner;
-    const appName: string | undefined =
+    const appName =
       artifactHistory.list[0]?.configSnapshot.lifecycle.run.name;
 
-    if (!logFilename && logMetadata) {
+    if (!logFilename) {
       setLogMetadata(undefined);
-    } else if (logFilename && !logMetadata) {
-      if (appName && serverId && userName) {
-        setLogMetadata({
-          serverId,
-          userName,
-          appName,
-        });
-      }
+      return;
     }
-  }
 
-  const [responseLog] = ApiServer.Detail.$Id.Log.useGet({
+    if (appName && serverId && userName) {
+      setLogMetadata({ serverId, userName, appName });
+    }
+  }, [logFilename, appDetail, lastDeployment, artifactHistory]);
+
+  const [responseLog, refreshLog] = ApiServer.Detail.$Id.Log.useGet({
     serverId: logMetadata?.serverId,
     file: logMetadata
       ? `/home/${logMetadata.userName}/logs/${logMetadata.appName}/${logFilename}`
@@ -60,6 +60,7 @@ export const [AppLogsModelProvider, useAppLogsModel] = buildSelector(
 
   return {
     log: responseLog,
+    refreshLog,
     logMetadata,
     logFilename,
     setLogFilename,

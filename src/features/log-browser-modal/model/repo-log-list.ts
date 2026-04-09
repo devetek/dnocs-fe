@@ -9,12 +9,13 @@ import type { LogBrowserModalProps } from './types';
 export const [LogListRepoProvider, useLogListRepo] = buildContext(
   'LogListRepo',
   (props: LogBrowserModalProps) => {
-    const { machineID, appName, userName } = props;
+    const { machineID: initialMachineID, appName, userName } = props;
 
     const [searchQuery, setSearchQuery] = useState('');
+    const [selectedMachineID, setSelectedMachineID] = useState(initialMachineID);
 
     const [responseFolderOrigin] = ApiFolder.Origin.$ServerId.useGet({
-      serverId: String(machineID),
+      serverId: String(selectedMachineID),
       basePath: `/home/${userName}/logs/${appName}`,
     });
 
@@ -34,6 +35,12 @@ export const [LogListRepoProvider, useLogListRepo] = buildContext(
         .filter(excludeNully);
     }, [responseFolderOrigin, searchQuery]);
 
-    return { searchQuery, setSearchQuery, logFiles };
+    return {
+      searchQuery,
+      setSearchQuery,
+      logFiles,
+      selectedMachineID,
+      setSelectedMachineID,
+    };
   },
 );

@@ -2,8 +2,6 @@ import type { ReactNode } from 'react';
 
 import { PlusCircleIcon } from 'lucide-react';
 
-import { useDevetekTranslations } from '@/services/i18n';
-
 import { Button } from '@/shared/presentation/atoms/Button';
 import { Card } from '@/shared/presentation/atoms/Card';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
@@ -18,20 +16,12 @@ interface ArtifactsSectionProps {
 export default function ArtifactsSection(props: ArtifactsSectionProps) {
   const { ctaNewState, ctaNewOnClick, children } = props;
 
-  const t = useDevetekTranslations('page.applicationDetail.artifactsHistory');
-  const tAll = useDevetekTranslations();
-
   return (
     <Card className="rounded-2xl">
-      <div className="px-4 py-3 flex items-center justify-between gap-4">
-        <div className="flex flex-col">
-          <h3 className="text-xl font-bold">{t('title')}</h3>
-          <h6 className="text-sm text-primary/70">{t('subtitle')}</h6>
-        </div>
+      <div className="px-4 py-3 flex items-center justify-end gap-4">
 
         <div className="flex items-center gap-2">
           <Button
-            className="w-22"
             disabled={!!ctaNewState}
             variant="outline"
             size="sm"
@@ -44,7 +34,7 @@ export default function ArtifactsSection(props: ArtifactsSectionProps) {
             ) : (
               <>
                 <PlusCircleIcon className="w-4 h-4" />
-                {tAll('common.actions.new')}
+                New Artifact
               </>
             )}
           </Button>

@@ -11,7 +11,6 @@ export interface ArtifactCardProps {
   onClickLogs?: () => void;
   onClickRollback?: () => void;
   onClickDelete?: () => void;
-  onClickCancel?: () => void;
   onClickStatus?: () => void;
 }
 

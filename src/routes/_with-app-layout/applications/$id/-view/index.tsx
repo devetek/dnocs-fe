@@ -5,7 +5,6 @@ import AppLogs from './AppLogs';
 import ArtifactsHistory from './ArtifactsHistory';
 import BannerGithubLogin from './BannerGithubLogin';
 import Header from './Header';
-import ServerStats from './ServerStats';
 import ServiceActions from './ServiceActions';
 
 export default function ApplicationsDetailView() {
@@ -24,7 +23,6 @@ export default function ApplicationsDetailView() {
           <Layout.Aside>
             <ServiceActions />
             <AppInformation />
-            <ServerStats />
           </Layout.Aside>
         </Layout.Content>
       </Layout>

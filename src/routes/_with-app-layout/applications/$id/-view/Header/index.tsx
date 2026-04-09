@@ -78,73 +78,6 @@ const HeroIcon = () => {
   );
 };
 
-const useServerAvailability = (): PageHeaderStatuses[number] | null => {
-  const t = useDevetekTranslations('page.applicationDetail.header');
-
-  const [deploymentTargets] = useAppDetail((s) => [s.deploymentTargets]);
-
-  const [setSelectedServerId, selectedServerId] = useAppDataModel((s) => [
-    s.setSelectedServerId,
-    s.selectedServerId,
-  ]);
-
-  const [deploymentHistory, lastDeployment] = useArtifactHistoryModel((s) => [
-    s.deploymentHistory,
-    s.lastDeployment,
-  ]);
-
-  if (lastDeployment) {
-    if (deploymentTargets.length > 1) {
-      return {
-        kind: 'dropdown',
-        icon: IconServer,
-        text: lastDeployment.serverSnapshot.hostName,
-        dropdownItems: deploymentTargets.map((deployment) => {
-          const { id: serverId, hostname: serverHostname } = deployment;
-
-          return {
-            label: <>{serverHostname}</>,
-            isActive: lastDeployment.pointerIds.machine === serverId,
-            onClick: () => {
-              setSelectedServerId(serverId);
-            },
-          };
-        }),
-      };
-    }
-
-    if (deploymentTargets.length > 0) {
-      return {
-        kind: 'status',
-        icon: IconServer,
-        text: lastDeployment.serverSnapshot.hostName,
-      };
-    }
-  }
-
-  if (
-    !selectedServerId &&
-    !lastDeployment &&
-    deploymentHistory.$status === 'initial'
-  ) {
-    return {
-      kind: 'status',
-      icon: (props) => (
-        <IconServer {...props} className={cn(props.className, 'opacity-50')} />
-      ),
-      text: (
-        <span className="text-primary/50 italic">{t('noDeployments')}</span>
-      ),
-    };
-  }
-
-  return {
-    kind: 'status',
-    icon: IconServer,
-    text: <span className="block h-5 w-20 rounded bg-black/5 animate-pulse" />,
-  };
-};
-
 const useServiceStatus = (): PageHeaderStatuses[number] => {
   const [selectedServerId] = useAppDataModel((s) => [s.selectedServerId]);
   const [lastDeployment, deploymentHistory] = useArtifactHistoryModel((s) => [
@@ -186,22 +119,9 @@ const useServiceStatus = (): PageHeaderStatuses[number] => {
 };
 
 const useHeaderStatus = (): PageHeaderStatuses => {
-  const serverAvailability = useServerAvailability();
   const serviceStatus = useServiceStatus();
 
-  const statuses: PageHeaderStatuses = [];
-
-  if (serverAvailability) {
-    statuses.push(serverAvailability);
-  }
-
-  if (statuses.length > 0) {
-    statuses.push({ kind: 'separator' });
-  }
-
-  statuses.push(serviceStatus);
-
-  return statuses;
+  return [serviceStatus];
 };
 
 export default guard(function Header() {

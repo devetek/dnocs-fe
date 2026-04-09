@@ -1,26 +1,22 @@
 import { useArtifactLogsModal } from '@/features/artifact-logs-modal';
 import { useItemStatusLogModal } from '@/features/item-status-log-modal';
 
+import { useAppDataModel } from '../../-model/app-data';
 import { useEmit } from '../../-model/events';
 
-import { mapDeploymentStatus } from './_lib';
 import { ArtifactCard } from './_presentation';
 import type { ArtifactsHistoryListProps } from './types';
 
 export function ArtifactsHistoryList(props: ArtifactsHistoryListProps) {
-  const { appOwner, list, lastDeployment, selectedServerId } = props;
+  const { appOwner, list } = props;
 
   const emit = useEmit();
+  const selectedServerId = useAppDataModel((s) => s.selectedServerId);
 
   const [openArtifactLogsModal] = useArtifactLogsModal();
   const [openItemStatusLogModal] = useItemStatusLogModal();
 
   return list.map((artifact) => {
-    const deploymentStatus = mapDeploymentStatus({
-      artifact,
-      lastDeployment,
-    });
-
     const handleClickLogs = () => {
       openArtifactLogsModal({
         artifactId: artifact.id,
@@ -35,27 +31,14 @@ export function ArtifactsHistoryList(props: ArtifactsHistoryListProps) {
       openItemStatusLogModal({
         logTopicTitle: 'Artifact',
         logTopicMessage: `Commit ${artifact.commitMetadata.head.slice(0, 7)}`,
-        mainLogs: `Status: ${deploymentStatus}`,
+        mainLogs: `Status: ${artifact.state.status}`,
         additionalLogs: artifact.state.message,
       });
     };
 
     const handleClickDelete = () => {
-      if (lastDeployment.pointerIds.artifact === artifact.id) {
-        emit('@applications::detail/deployment-delete', {
-          deploymentId: lastDeployment.id,
-        });
-      } else {
-        emit('@applications::detail/artifact-delete', {
-          artifactId: artifact.id,
-        });
-      }
-    };
-
-    const handleClickCancel = () => {
-      emit('@applications::detail/artifact-progress-cancel', {
-        commitHead: artifact.commitMetadata.head,
-        serverId: selectedServerId,
+      emit('@applications::detail/artifact-delete', {
+        artifactId: artifact.id,
       });
     };
 
@@ -70,11 +53,9 @@ export function ArtifactsHistoryList(props: ArtifactsHistoryListProps) {
       <ArtifactCard
         key={artifact.id}
         data={artifact}
-        deploymentStatus={deploymentStatus}
         onClickLogs={handleClickLogs}
         onClickStatus={handleClickStatus}
         onClickDelete={handleClickDelete}
-        onClickCancel={handleClickCancel}
         onClickRollback={handleClickRollback}
       />
     );
