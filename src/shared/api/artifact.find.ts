@@ -10,17 +10,17 @@ export interface RecipeParams {
   applicationId: string;
   serverId?: string;
   page?: number;
-  perPage?: number;
+  limit?: number;
 }
 
 export function recipe(params: RecipeParams): GetRequestRecipe {
-  const { applicationId, serverId, page = 1, perPage = 5 } = params;
+  const { applicationId, serverId, page = 1, limit = 5 } = params;
 
   const queryParams = createQueryParams({
     application_id: applicationId,
     machine_id: serverId,
     page,
-    per_page: perPage,
+    limit,
   });
 
   return {

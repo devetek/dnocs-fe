@@ -29,7 +29,7 @@ export const [ArtifactHistoryModelProvider, useArtifactHistoryModel] =
       ApiArtifact.Find.useGet({
         applicationId: applicationId,
         page: artifactPage,
-        perPage: 3,
+        limit: 3,
         options: {
           refreshIntervalMs: 3000,
         },
