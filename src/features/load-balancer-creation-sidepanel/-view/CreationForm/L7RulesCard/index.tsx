@@ -142,6 +142,7 @@ interface DestinationsListProps {
 function ProxyPassDestinationsList(props: DestinationsListProps) {
   const { ruleIndex } = props;
   const form = useLbCreationForm();
+  const tAll = useDevetekTranslations();
   const t = useDevetekTranslations(
     'sidepanel.loadBalancerCreation.upstreamRules',
   );
@@ -152,8 +153,11 @@ function ProxyPassDestinationsList(props: DestinationsListProps) {
   });
 
   const handleAddDestination = () => {
-    upstreamsFieldArray.append({ address: '', port: 80 });
+    upstreamsFieldArray.append({ address: 'localhost', port: 80 });
   };
+
+  const upstreamErrors =
+    form.formState.errors.l7rules?.[ruleIndex]?.upstreamsIfProxyPass;
 
   return (
     <div className="flex flex-col gap-y-1">
@@ -162,43 +166,53 @@ function ProxyPassDestinationsList(props: DestinationsListProps) {
       </p>
 
       {upstreamsFieldArray.fields.map((field, upstreamIndex) => {
+        const entryErrors = upstreamErrors?.[upstreamIndex];
+
         return (
-          <div
-            key={field.id}
-            className="grid data-[multiple=true]:grid-cols-[1fr_auto] gap-x-1 items-center"
-            data-multiple={upstreamsFieldArray.fields.length > 1}
-          >
-            <div className="grid grid-cols-[1fr_auto_96px] items-center">
-              <Input
-                inputSize="sm"
-                className="font-mono"
-                {...form.control.register(
-                  `l7rules.${ruleIndex}.upstreamsIfProxyPass.${upstreamIndex}.address` as const,
-                )}
-              />
-              <span className="font-mono px-1">:</span>
-              <Input
-                type="number"
-                inputSize="sm"
-                className="font-mono"
-                min={1}
-                max={65_535}
-                {...form.control.register(
-                  `l7rules.${ruleIndex}.upstreamsIfProxyPass.${upstreamIndex}.port` as const,
-                  { valueAsNumber: true },
-                )}
-              />
+          <div key={field.id} className="flex flex-col gap-y-0.5">
+            <div
+              className="grid data-[multiple=true]:grid-cols-[1fr_auto] gap-x-1 items-center"
+              data-multiple={upstreamsFieldArray.fields.length > 1}
+            >
+              <div className="grid grid-cols-[1fr_auto_96px] items-center">
+                <Input
+                  inputSize="sm"
+                  className="font-mono"
+                  {...form.control.register(
+                    `l7rules.${ruleIndex}.upstreamsIfProxyPass.${upstreamIndex}.address` as const,
+                  )}
+                />
+                <span className="font-mono px-1">:</span>
+                <Input
+                  type="number"
+                  inputSize="sm"
+                  className="font-mono"
+                  min={1}
+                  max={65_535}
+                  {...form.control.register(
+                    `l7rules.${ruleIndex}.upstreamsIfProxyPass.${upstreamIndex}.port` as const,
+                    { valueAsNumber: true },
+                  )}
+                />
+              </div>
+
+              {upstreamsFieldArray.fields.length > 1 && (
+                <Button
+                  danger
+                  size="icon-xs"
+                  buttonStyle="ghost"
+                  onClick={() => upstreamsFieldArray.remove(upstreamIndex)}
+                >
+                  <TrashIcon className="size-3.5" />
+                </Button>
+              )}
             </div>
 
-            {upstreamsFieldArray.fields.length > 1 && (
-              <Button
-                danger
-                size="icon-xs"
-                buttonStyle="ghost"
-                onClick={() => upstreamsFieldArray.remove(upstreamIndex)}
-              >
-                <TrashIcon className="size-3.5" />
-              </Button>
+            {(entryErrors?.address || entryErrors?.port) && (
+              <div className="grid grid-cols-[1fr_96px] gap-x-2">
+                <ErrorInline t={tAll} message={entryErrors?.address?.message} />
+                <ErrorInline t={tAll} message={entryErrors?.port?.message} />
+              </div>
             )}
           </div>
         );

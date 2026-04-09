@@ -374,7 +374,7 @@ function SectionL7UpstreamRules() {
     rules.append({
       pathMatch: '/*',
       type: 'proxy-pass',
-      upstreamsIfProxyPass: [{ address: '', port: 80 }],
+      upstreamsIfProxyPass: [{ address: 'localhost', port: 80 }],
       applicationIdIfProxyPassApp: '',
     });
   };

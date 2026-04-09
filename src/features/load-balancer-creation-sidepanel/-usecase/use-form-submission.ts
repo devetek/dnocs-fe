@@ -103,6 +103,7 @@ export default function useFormSubmissionUsecase() {
       message: t('success'),
     });
 
+    form.reset();
     emit('#load-balancer-creation-sidepanel/on-success');
     sidepanelEmit('%%sidepanel/close', null);
   });
