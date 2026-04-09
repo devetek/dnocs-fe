@@ -1,7 +1,8 @@
-import { ArrowLeftRightIcon, Grid2X2Icon, TableIcon } from 'lucide-react';
+import { ArrowLeftRightIcon, Grid2X2Icon, RefreshCwIcon, TableIcon } from 'lucide-react';
 
 import { useDevetekTranslations } from '@/services/i18n';
 
+import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { Card } from '@/shared/presentation/atoms/Card';
 import SearchCollapsible from '@/shared/presentation/atoms/SearchCollapsible';
 import SearchKeywordBadge from '@/shared/presentation/atoms/SearchKeywordBadge';
@@ -81,6 +82,21 @@ const SlotKeywordBadge = () => {
   );
 };
 
+const SlotRefresh = () => {
+  const emit = useEmit();
+
+  return (
+    <Button
+      size="icon-sm"
+      buttonColor="secondary"
+      buttonStyle="ghost"
+      onClick={() => emit('@domain-dns/data--refresh', null)}
+    >
+      <RefreshCwIcon />
+    </Button>
+  );
+};
+
 export default function MainFilter() {
   return (
     <>
@@ -90,6 +106,7 @@ export default function MainFilter() {
         </div>
 
         <div className="flex items-center">
+          <SlotRefresh />
           <SlotViewMode />
         </div>
       </Card>
