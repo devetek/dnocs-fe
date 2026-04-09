@@ -11,13 +11,14 @@ import { Card } from '@/shared/presentation/atoms/Card';
 interface AppLogsSectionProps {
   children?: ReactNode;
   selectedLogs?: string;
+  ctaLogsDisabled?: boolean;
 
   onClickLogs?: () => void;
   onClickDownloadLog?: () => void;
 }
 
 export default function AppLogsSection(props: AppLogsSectionProps) {
-  const { children, selectedLogs, onClickDownloadLog, onClickLogs } = props;
+  const { children, selectedLogs, ctaLogsDisabled, onClickDownloadLog, onClickLogs } = props;
 
   const t = useDevetekTranslations();
 
@@ -42,6 +43,7 @@ export default function AppLogsSection(props: AppLogsSectionProps) {
 
           <Button
             variant="outline"
+            disabled={ctaLogsDisabled}
             className="min-w-30 max-w-40 flex overflow-hidden items-center justify-between gap-2"
             onClick={onClickLogs}
           >

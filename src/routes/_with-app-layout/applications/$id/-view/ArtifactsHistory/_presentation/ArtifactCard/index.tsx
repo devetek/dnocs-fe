@@ -31,7 +31,6 @@ export default function ArtifactCard(props: ArtifactCardProps) {
     deploymentStatus,
     data,
     onClickLogs,
-    onClickCancel,
     onClickDelete,
     onClickRollback,
     onClickStatus,
@@ -46,27 +45,14 @@ export default function ArtifactCard(props: ArtifactCardProps) {
     <Button key="logs" variant="outline" size="sm" onClick={onClickLogs}>
       Logs
     </Button>,
-    deploymentStatus === 'inactive' && (
-      <Button
-        key="rollback"
-        variant="outline"
-        size="sm"
-        onClick={onClickRollback}
-      >
-        Rollback
-      </Button>
-    ),
-    deploymentStatus === 'progress' && (
-      <Button
-        key="cancel"
-        className="text-red-500"
-        variant="outline"
-        size="sm"
-        onClick={onClickCancel}
-      >
-        {t('common.actions.cancel')}
-      </Button>
-    ),
+    <Button
+      key="rollback"
+      variant="outline"
+      size="sm"
+      onClick={onClickRollback}
+    >
+      Rollback
+    </Button>,
     <Button
       key="delete"
       className="text-red-500"

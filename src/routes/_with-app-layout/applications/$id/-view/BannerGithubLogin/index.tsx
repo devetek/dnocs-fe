@@ -16,7 +16,7 @@ export default function BannerGithubLogin() {
 
   const t = useDevetekTranslations();
 
-  const [appDetail] = useAppDataModel((s) => [s.appDetail, s.applicationId]);
+  const [appDetail] = useAppDataModel((s) => [s.appDetail]);
 
   if (
     gitProfile ||

@@ -13,12 +13,18 @@ import { useEmit } from '../../-model/events';
 import AppLogsSection from './_presentation/AppLogsSection';
 import LogViewer from './_presentation/LogViewer';
 
-const [guardLogs, useLogs] = guardedSelects({
-  fallbackError: () => (
-    <div className="pb-4">
-      <FailedState.WallCentered />
+const LogError = () => {
+  const [refreshLog] = useAppLogsModel((s) => [s.refreshLog]);
+
+  return (
+    <div className="p-4 pt-0">
+      <FailedState.BannerRetryable onClickRetry={refreshLog} />
     </div>
-  ),
+  );
+};
+
+const [guardLogs, useLogs] = guardedSelects({
+  fallbackError: LogError,
 })(couple(useAppLogsModel, (s) => s.log));
 
 const LogView = guardLogs(() => {
@@ -58,6 +64,7 @@ export default guardAppDetail(function AppLogs() {
       appName: appDetail.configDefs.lifecycle.run.name,
       userName: appDetail.ownership.owner,
       machineID: Number(selectedServerId),
+      deploymentTargets: appDetail.deploymentTargets,
       onClickLogFile: (newLogFilename) => {
         setLogFilename(newLogFilename);
       },
@@ -69,9 +76,9 @@ export default guardAppDetail(function AppLogs() {
   };
 
   return (
-    // TODO: appDetail.configDefs.lifecycle can be null, need fallback UI
     <AppLogsSection
       selectedLogs={logFilename}
+      ctaLogsDisabled={!appDetail.configDefs.lifecycle}
       onClickLogs={handleClickLogs}
       onClickDownloadLog={handleClickDownloadLog}
     >

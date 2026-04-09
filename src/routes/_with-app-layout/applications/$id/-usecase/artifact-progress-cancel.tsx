@@ -46,7 +46,7 @@ export default function useArtifactProgressCancelUsecase(params: Params) {
 
       openToaster({
         variant: 'error',
-        title: `Failed to delete deployment id "${commitHead}"!`,
+        title: `Failed to cancel deployment "${commitHead}"!`,
         message: response.error.message,
       });
     };

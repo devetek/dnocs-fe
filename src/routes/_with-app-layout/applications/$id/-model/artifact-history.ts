@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { AdapterCicdArtifactFromDto } from '@/entities/cicd-artifact/adapter';
 import { AdapterCicdDeploymentFromDto } from '@/entities/cicd-deployment/adapter';
@@ -23,12 +23,14 @@ export const [ArtifactHistoryModelProvider, useArtifactHistoryModel] =
 
     const selectedServerId = useAppDataModel((s) => s.selectedServerId);
 
+    const [artifactPage, setArtifactPage] = useState(1);
+
     const [responseArtifactHistory, refreshArtifactHistory] =
       ApiArtifact.Find.useGet({
         applicationId: applicationId,
-        serverId: selectedServerId,
+        page: artifactPage,
+        perPage: 3,
         options: {
-          skip: !selectedServerId,
           refreshIntervalMs: 3000,
         },
       });
@@ -36,9 +38,7 @@ export const [ArtifactHistoryModelProvider, useArtifactHistoryModel] =
     const [responseDeployHistory, refreshDeployHistory] = ApiDeploy.Find.useGet(
       {
         applicationId: applicationId,
-        serverId: selectedServerId,
         options: {
-          skip: !selectedServerId,
           refreshIntervalMs: 3000,
         },
       },
@@ -99,5 +99,7 @@ export const [ArtifactHistoryModelProvider, useArtifactHistoryModel] =
       }),
       deploymentHistory,
       lastDeployment,
+      artifactPage,
+      setArtifactPage,
     };
   });

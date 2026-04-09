@@ -1,16 +1,31 @@
+import { ServerIcon } from 'lucide-react';
+
 import { useModalEmit } from '@/services/modal/model/event';
 import { ModalLayoutGeneral } from '@/services/modal/ui/presentation';
 
 import { Button } from '@/shared/presentation/atoms/Button';
 import { SearchInput } from '@/shared/presentation/atoms/SearchInput';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/shared/presentation/atoms/Select';
 
 import { LogListRepoProvider, useLogListRepo } from '../model/repo-log-list';
 import type { LogBrowserModalProps } from '../model/types';
 
 const Content = (props: LogBrowserModalProps) => {
-  const { onClickLogFile } = props;
+  const { onClickLogFile, deploymentTargets } = props;
 
-  const { searchQuery, setSearchQuery, logFiles } = useLogListRepo();
+  const {
+    searchQuery,
+    setSearchQuery,
+    logFiles,
+    selectedMachineID,
+    setSelectedMachineID,
+  } = useLogListRepo();
 
   const emitModal = useModalEmit();
 
@@ -22,7 +37,29 @@ const Content = (props: LogBrowserModalProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
+      {deploymentTargets && deploymentTargets.length > 1 && (
+        <div className="flex flex-col gap-1.5">
+          <p className="text-xs text-muted-foreground font-medium">Server</p>
+          <Select
+            value={String(selectedMachineID)}
+            onValueChange={(val) => setSelectedMachineID(Number(val))}
+          >
+            <SelectTrigger className="w-full">
+              <ServerIcon className="size-3.5 shrink-0" />
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {deploymentTargets.map((target) => (
+                <SelectItem key={target.id} value={String(target.id)}>
+                  {target.hostname}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
       <SearchInput onEnter={setSearchQuery} defaultValue={searchQuery} />
 
       <div className="overflow-hidden border rounded-lg">

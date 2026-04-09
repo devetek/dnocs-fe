@@ -17,7 +17,7 @@ export default function useLogsDownloadUsecase() {
     const workdir = `/home/${userName}/logs/${appName}`;
 
     window.open(
-      `${import.meta.env.VITE_BACKEND}/v1/folder/origin/${serverId}/download?workdir=${workdir}&file=${logFilename}&organization_id=${orgId}`,
+      `${import.meta.env.VITE_BACKEND}/v1/folder/origin/${serverId}/download?workdir=${encodeURIComponent(workdir)}&file=${encodeURIComponent(logFilename)}&organization_id=${encodeURIComponent(orgId)}`,
     );
   });
 

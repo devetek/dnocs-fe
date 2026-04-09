@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { useAuthLoggedIn } from '@/services/auth';
 
 import { AdapterApplicationFromDto } from '@/entities/application/adapter';
@@ -23,9 +21,6 @@ export const [AppDataModelProvider, useAppDataModel] = buildSelector(
   const { applicationId } = props;
 
   const { gitProfile } = useAuthLoggedIn();
-
-  const [selectedServerId, setSelectedServerId] =
-    useState<SchemaCommon.UnitId>();
 
   const [appDetailResponse, refreshAppDetailResponse] =
     ApiApplication.Detail.$Id.useGet({
@@ -53,10 +48,6 @@ export const [AppDataModelProvider, useAppDataModel] = buildSelector(
     ) {
       latestServerId = String(appDetailResponse.deploys[0].machine_id);
     }
-
-    if (!selectedServerId && latestServerId) {
-      setSelectedServerId(String(latestServerId));
-    }
   }
 
   const [gitDetailReponse, refreshGitDetailReponse] =
@@ -79,7 +70,6 @@ export const [AppDataModelProvider, useAppDataModel] = buildSelector(
     gitDetail: gitDetailReponse,
 
     applicationId,
-    selectedServerId: selectedServerId || latestServerId,
-    setSelectedServerId,
+    selectedServerId: latestServerId,
   };
 });

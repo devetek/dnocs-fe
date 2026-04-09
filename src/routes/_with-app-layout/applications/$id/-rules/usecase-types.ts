@@ -25,3 +25,9 @@ export interface ArtifactRollbackPayload {
 export interface DeploymentDeletePayload {
   deploymentId: SchemaCommon.UnitId;
 }
+
+export interface DeploymentRestorePayload {
+  applicationId: SchemaCommon.UnitId;
+  artifactId: SchemaCommon.UnitId;
+  workerId: SchemaCommon.UnitId;
+}

@@ -43,7 +43,7 @@ function Row(props: RowProps) {
           className="flex items-center gap-1"
           href={link}
           target="_blank"
-          rel="noopener noreferer"
+          rel="noreferrer"
         >
           <p className="text-sm font-bold hover:underline">{value}</p>
           <ExternalLinkIcon className="w-3 h-3" />

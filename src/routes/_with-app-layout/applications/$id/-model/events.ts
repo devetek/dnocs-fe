@@ -6,6 +6,7 @@ import type {
   ArtifactProgressCancelPayload,
   ArtifactRollbackPayload,
   DeploymentDeletePayload,
+  DeploymentRestorePayload,
 } from '../-rules/usecase-types';
 
 type EventsRegistry = Rescope<
@@ -16,6 +17,7 @@ type EventsRegistry = Rescope<
     'artifact-rollback': ArtifactRollbackPayload;
     'artifact-history-refresh': null;
     'deployment-delete': DeploymentDeletePayload;
+    'deployment-restore': DeploymentRestorePayload;
     'deployment-history-refresh': null;
     'app-detail-refresh': null;
     'git-detail-refresh': null;
