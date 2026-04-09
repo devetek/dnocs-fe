@@ -5,6 +5,7 @@ import {
   GitBranchIcon,
   HammerIcon,
   InfoIcon,
+  Pencil,
   PlayIcon,
   TerminalIcon,
 } from 'lucide-react';
@@ -22,11 +23,13 @@ import {
   AccordionTrigger,
 } from '@/shared/presentation/atoms/Accordion';
 import { Badge } from '@/shared/presentation/atoms/Badge';
+import { Button } from '@/shared/presentation/atoms/Button';
 import { Card } from '@/shared/presentation/atoms/Card';
 import { Spinner } from '@/shared/presentation/atoms/Spinner';
 import CardSectionTitled from '@/shared/presentation/molecules/CardSectionTitled';
 
 import { useAppDataModel } from '../../-model/app-data';
+import { useEmit } from '../../-model/events';
 
 import { AppInformationStates as UIStates } from './_States';
 
@@ -107,6 +110,22 @@ export default guard(function AppInformation() {
   const [appSource, appIdentity] = useAppDetail((s) => [s.identity.source, s.identity]);
   const configDefs = useAppDetail((s) => s.configDefs);
   const [gitDetail] = useAppDataModel((s) => [s.gitDetail]);
+  const [rawAppDefinition] = useAppDataModel((s) => [s.rawAppDefinition]);
+
+  const emit = useEmit();
+
+  const [appId, appName] = useAppDetail((s) => [s.id, s.identity.name]);
+
+  const handleEditBuild = () => {
+    if (!rawAppDefinition || !configDefs.lifecycle?.build) return;
+    emit('@applications::detail/application-build-edit', {
+      applicationId: appId,
+      applicationName: appName,
+      rawAppDefinition,
+      steps: configDefs.lifecycle.build.steps,
+      envs: configDefs.lifecycle.build.envs,
+    });
+  };
 
   const lifecycle = configDefs?.lifecycle;
 
@@ -209,16 +228,40 @@ export default guard(function AppInformation() {
                   )}
 
                   <div className="flex flex-col gap-1.5">
-                    <SectionLabel>Build Steps</SectionLabel>
+                    <div className="flex items-center justify-between">
+                      <SectionLabel>Build Steps</SectionLabel>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 px-2 text-xs gap-1"
+                        onClick={handleEditBuild}
+                      >
+                        <Pencil className="size-3" />
+                        Edit
+                      </Button>
+                    </div>
                     <StepsList steps={lifecycle.build.steps} />
                   </div>
 
-                  {lifecycle.build.envs.length > 0 && (
-                    <div className="flex flex-col gap-1.5">
+                  <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center justify-between">
                       <SectionLabel>Environment Variables</SectionLabel>
-                      <EnvTable envs={lifecycle.build.envs} />
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 px-2 text-xs gap-1"
+                        onClick={handleEditBuild}
+                      >
+                        <Pencil className="size-3" />
+                        Edit
+                      </Button>
                     </div>
-                  )}
+                    {lifecycle.build.envs.length > 0 ? (
+                      <EnvTable envs={lifecycle.build.envs} />
+                    ) : (
+                      <p className="text-xs text-muted-foreground italic">No environment variables</p>
+                    )}
+                  </div>
                 </div>
               </AccordionContent>
             </AccordionItem>

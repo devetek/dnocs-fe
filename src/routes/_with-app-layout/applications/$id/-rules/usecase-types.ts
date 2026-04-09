@@ -1,4 +1,6 @@
+import type { AppDefinition } from '@/shared/api/-dtos/application';
 import type { SchemaCommon } from '@/entities/shared/rules/schema';
+import type { UnitEnvironmentKV, UnitSteps } from '@/entities/shared/rules/schema/app-config';
 
 // =============================================================================
 //   Scope: Artifact *
@@ -39,4 +41,12 @@ export interface DeploymentRestorePayload {
 export interface ApplicationDeletePayload {
   applicationId: SchemaCommon.UnitId;
   applicationName: string;
+}
+
+export interface ApplicationBuildEditPayload {
+  applicationId: SchemaCommon.UnitId;
+  applicationName: string;
+  rawAppDefinition: AppDefinition;
+  steps: UnitSteps[];
+  envs: UnitEnvironmentKV[];
 }

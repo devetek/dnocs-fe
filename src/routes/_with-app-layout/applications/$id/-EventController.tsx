@@ -1,4 +1,5 @@
 import { useEmit, useSubscribe } from './-model/events';
+import useApplicationBuildEditUsecase from './-usecase/application-build-edit';
 import useApplicationDeleteUsecase from './-usecase/application-delete';
 import useArtifactDeleteUsecase from './-usecase/artifact-delete';
 import useArtifactProgressCancelUsecase from './-usecase/artifact-progress-cancel';
@@ -19,6 +20,10 @@ export default function EventController() {
   const [handleLogsDownload] = useLogsDownloadUsecase();
 
   const [handleApplicationDelete] = useApplicationDeleteUsecase();
+
+  const [handleApplicationBuildEdit] = useApplicationBuildEditUsecase({
+    onSuccess: () => emit('@applications::detail/app-detail-refresh', null),
+  });
 
   const [handleArtifactDelete] = useArtifactDeleteUsecase({
     onSuccess: handleDefaultSuccess,
@@ -71,6 +76,11 @@ export default function EventController() {
   useSubscribe(
     '@applications::detail/application-delete',
     handleApplicationDelete,
+  );
+
+  useSubscribe(
+    '@applications::detail/application-build-edit',
+    handleApplicationBuildEdit,
   );
 
   return null;

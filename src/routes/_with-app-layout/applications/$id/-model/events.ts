@@ -2,6 +2,7 @@ import { registerEvents } from '@/shared/libs/events';
 import type { Rescope } from '@/shared/libs/events/models/registerEvents';
 
 import type {
+  ApplicationBuildEditPayload,
   ApplicationDeletePayload,
   ArtifactDeletePayload,
   ArtifactProgressCancelPayload,
@@ -21,6 +22,7 @@ type EventsRegistry = Rescope<
     'deployment-restore': DeploymentRestorePayload;
     'deployment-history-refresh': null;
     'application-delete': ApplicationDeletePayload;
+    'application-build-edit': ApplicationBuildEditPayload;
     'app-detail-refresh': null;
     'git-detail-refresh': null;
     'server-usage-retry-all': null;
