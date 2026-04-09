@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 
-import { PlusCircleIcon } from 'lucide-react';
+import { PlusCircleIcon, TriangleAlertIcon } from 'lucide-react';
+
+import { useDevetekTranslations } from '@/services/i18n';
 
 import { Button } from '@/shared/presentation/atoms/Button';
 import { Card } from '@/shared/presentation/atoms/Card';
@@ -15,6 +17,8 @@ interface ArtifactsSectionProps {
 
 export default function ArtifactsSection(props: ArtifactsSectionProps) {
   const { ctaNewState, ctaNewOnClick, children } = props;
+
+  const t = useDevetekTranslations();
 
   return (
     <Card className="rounded-2xl">
@@ -41,7 +45,16 @@ export default function ArtifactsSection(props: ArtifactsSectionProps) {
         </div>
       </div>
 
-      <div className="p-4 pt-0 flex flex-col gap-2">{children}</div>
+      <div className="px-4 pb-2">
+        <div className="flex items-start gap-2 rounded-md border border-yellow-400/50 bg-yellow-50 dark:bg-yellow-950/30 px-3 py-2 text-yellow-800 dark:text-yellow-300">
+          <TriangleAlertIcon className="size-4 shrink-0 mt-0.5" />
+          <p className="text-xs leading-relaxed">
+            {t('page.applicationDetail.artifactsHistory.distributedStorageWarning')}
+          </p>
+        </div>
+      </div>
+
+      <div className="p-4 pt-2 flex flex-col gap-2">{children}</div>
     </Card>
   );
 }

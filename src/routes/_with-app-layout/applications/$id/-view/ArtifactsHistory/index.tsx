@@ -36,9 +36,10 @@ const ArtifactsTabContent = guard(() => {
     s.ownership.owner,
   ]);
 
-  const [artifactHistory, artifactPage, setArtifactPage] =
+  const [artifactHistory, deploymentHistory, artifactPage, setArtifactPage] =
     useArtifactHistoryModel((s) => [
       s.artifactHistory,
+      s.deploymentHistory,
       s.artifactPage,
       s.setArtifactPage,
     ]);
@@ -74,7 +75,14 @@ const ArtifactsTabContent = guard(() => {
       return <UIStates.Empty />;
     }
 
-    return <List appOwner={appOwner} list={list} />;
+    const deploymentList = iife(() => {
+      if (deploymentHistory.$status === 'success') return deploymentHistory.list;
+      if (deploymentHistory.$status === 'loading' && deploymentHistory.prevData)
+        return deploymentHistory.prevData.list;
+      return [];
+    });
+
+    return <List appOwner={appOwner} list={list} deploymentList={deploymentList} />;
   });
 
   const pag = iife(() => {

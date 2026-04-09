@@ -185,7 +185,8 @@
         "title": "Riwayat Artefak",
         "subtitle": "Artefak terkini dan opsi rollback",
         "emptyMessage": "Belum ada artefak tersedia.",
-        "unsupportedMessage": "Artefak tidak didukung untuk jenis aplikasi ini."
+        "unsupportedMessage": "Artefak tidak didukung untuk jenis aplikasi ini.",
+        "distributedStorageWarning": "Aplikasi ini tidak menggunakan distributed storage untuk menyimpan hasil build. Build dan deployment dijalankan secara terpisah di setiap mesin tempat aplikasi berjalan."
       },
       "usageStats": {
         "title": "Statistik Penggunaan",

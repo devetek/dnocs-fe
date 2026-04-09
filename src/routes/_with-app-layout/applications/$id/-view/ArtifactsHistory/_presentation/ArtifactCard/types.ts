@@ -4,11 +4,18 @@ import type { CicdArtifact } from '@/entities/cicd-artifact/rules/schema';
 
 import type { DeploymentStatus } from '../../_lib';
 
+export interface LogsOption {
+  label: string;
+  machineId: string;
+  onClick: () => void;
+}
+
 export interface ArtifactCardProps {
   deploymentStatus?: DeploymentStatus;
   data: CicdArtifact;
 
   onClickLogs?: () => void;
+  logsOptions?: LogsOption[];
   onClickRollback?: () => void;
   onClickDelete?: () => void;
   onClickStatus?: () => void;

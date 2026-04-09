@@ -194,7 +194,8 @@
         "title": "Artifacts History",
         "subtitle": "Recent artifacts and rollback options",
         "emptyMessage": "No artifacts available.",
-        "unsupportedMessage": "Artifacts are not supported for this app."
+        "unsupportedMessage": "Artifacts are not supported for this app.",
+        "distributedStorageWarning": "This application does not use distributed storage for build artifacts. Builds and deployments are executed individually on each machine where the application is running."
       },
       "usageStats": {
         "title": "Usage Stats",
