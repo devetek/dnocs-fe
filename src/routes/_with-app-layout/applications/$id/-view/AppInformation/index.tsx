@@ -127,6 +127,17 @@ export default guard(function AppInformation() {
     });
   };
 
+  const handleEditRun = () => {
+    if (!rawAppDefinition || !configDefs.lifecycle?.run) return;
+    emit('@applications::detail/application-run-edit', {
+      applicationId: appId,
+      applicationName: appName,
+      rawAppDefinition,
+      command: configDefs.lifecycle.run.command,
+      envs: configDefs.lifecycle.run.envs,
+    });
+  };
+
   const lifecycle = configDefs?.lifecycle;
 
   const repoInfo = iife(() => {
@@ -285,7 +296,18 @@ export default guard(function AppInformation() {
 
                   {lifecycle.run.command && (
                     <div className="flex flex-col gap-1.5">
-                      <SectionLabel>Command</SectionLabel>
+                      <div className="flex items-center justify-between">
+                        <SectionLabel>Command</SectionLabel>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 px-2 text-xs gap-1"
+                          onClick={handleEditRun}
+                        >
+                          <Pencil className="size-3" />
+                          Edit
+                        </Button>
+                      </div>
                       <code className="text-[11px] bg-muted rounded px-2 py-1.5 font-mono break-all">
                         {lifecycle.run.command}
                       </code>
@@ -294,7 +316,18 @@ export default guard(function AppInformation() {
 
                   {lifecycle.run.envs.length > 0 && (
                     <div className="flex flex-col gap-1.5">
-                      <SectionLabel>Environment Variables</SectionLabel>
+                      <div className="flex items-center justify-between">
+                        <SectionLabel>Environment Variables</SectionLabel>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 px-2 text-xs gap-1"
+                          onClick={handleEditRun}
+                        >
+                          <Pencil className="size-3" />
+                          Edit
+                        </Button>
+                      </div>
                       <EnvTable envs={lifecycle.run.envs} />
                     </div>
                   )}

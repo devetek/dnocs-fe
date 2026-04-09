@@ -50,3 +50,11 @@ export interface ApplicationBuildEditPayload {
   steps: UnitSteps[];
   envs: UnitEnvironmentKV[];
 }
+
+export interface ApplicationRunEditPayload {
+  applicationId: SchemaCommon.UnitId;
+  applicationName: string;
+  rawAppDefinition: AppDefinition;
+  command: string;
+  envs: UnitEnvironmentKV[];
+}
