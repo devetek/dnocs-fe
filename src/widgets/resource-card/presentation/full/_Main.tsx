@@ -47,7 +47,7 @@ RCDMain.Hero = function Hero(props: HeroProps) {
 };
 
 RCDMain.Content = function Content(props: ContentProps) {
-  const { className, title, status } = props;
+  const { className, title, status, subStatus } = props;
 
   const t = useDevetekTranslations();
 
@@ -76,6 +76,25 @@ RCDMain.Content = function Content(props: ContentProps) {
                 className="text-primary/70 text-xs break-all line-clamp-1 flex items-center gap-0.5 pr-2"
               >
                 <Icon className="size-3" />
+                {text}
+              </p>
+            );
+          })}
+        </div>
+      )}
+      {subStatus && (
+        <div className="flex items-center flex-wrap">
+          {subStatus.map((subStatusItem, index) => {
+            if (!subStatusItem) return null;
+
+            const { icon: Icon, text } = subStatusItem;
+
+            return (
+              <p
+                key={index}
+                className="text-primary/50 text-[10px] break-all line-clamp-1 flex items-center gap-0.5 pr-2"
+              >
+                <Icon className="size-2.5" />
                 {text}
               </p>
             );

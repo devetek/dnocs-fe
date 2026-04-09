@@ -1,18 +1,16 @@
-import { CircleDashedIcon } from 'lucide-react';
+import { BuildingIcon, CalendarIcon, Trash2Icon, UserIcon } from 'lucide-react';
 import { useMetaTags } from 'react-metatags-hook';
 
-import { useDevetekTranslations } from '@/services/i18n';
+import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
 
 import { getBundleIcon, getSourceBadge } from '@/entities/application/ui/lib';
-import { OS_SERVICE_STATE_METADATA } from '@/entities/os-service/ui/constants/state-metadata';
 
+import { getDistanceFromNow } from '@/shared/libs/browser/date';
 import {
   couple,
   guardedSelects,
 } from '@/shared/libs/react-factories/guardedSelect';
-import { cn } from '@/shared/libs/tailwind/cn';
-import { Spinner } from '@/shared/presentation/atoms/Spinner';
-import { IconServer } from '@/shared/presentation/icons';
+import { Button } from '@/shared/presentation/atoms/Button';
 import { Breadcrumb } from '@/shared/presentation/molecules/Breadcrumb';
 import FramedImageWithBadge from '@/shared/presentation/molecules/FramedImageWithBadge';
 import {
@@ -22,6 +20,7 @@ import {
 import type { PageHeaderStatuses } from '@/shared/presentation/organisms/PageHeader/types';
 
 import { useAppDataModel } from '../../-model/app-data';
+import { useEmit } from '../../-model/events';
 
 const FallbackLoading = () => (
   <PageHeaderShimmer hasHeadnote hasStatuses hasRightAppend />
@@ -78,7 +77,65 @@ const HeroIcon = () => {
 };
 
 const useHeaderStatus = (): PageHeaderStatuses => {
-  return [];
+  const [ownership] = useAppDetail((s) => [s.ownership]);
+
+  const statuses: PageHeaderStatuses = [];
+
+  if (ownership.owner) {
+    statuses.push({
+      kind: 'status',
+      icon: UserIcon,
+      text: ownership.owner,
+    });
+  }
+
+  if (ownership.team) {
+    statuses.push({
+      kind: 'status',
+      icon: BuildingIcon,
+      text: ownership.team,
+    });
+  }
+
+  return statuses;
+};
+
+const HeaderFootnote = () => {
+  const locale = useDevetekLocale();
+  const t = useDevetekTranslations();
+  const [timestamp] = useAppDetail((s) => [s.timestamp]);
+
+  return (
+    <div className="flex items-center gap-x-3 flex-wrap">
+      <span className="flex items-center gap-1">
+        <CalendarIcon className="size-3" />
+        {`${t('common.terms.createdAt')} ${getDistanceFromNow(timestamp.created, locale)}`}
+      </span>
+      <span className="flex items-center gap-1">
+        <CalendarIcon className="size-3" />
+        {`${t('common.terms.lastUpdated')} ${getDistanceFromNow(timestamp.updated, locale)}`}
+      </span>
+    </div>
+  );
+};
+
+const DeleteButton = () => {
+  const emit = useEmit();
+  const [appId, appName] = useAppDetail((s) => [s.id, s.identity.name]);
+
+  const handleDelete = () => {
+    emit('@applications::detail/application-delete', {
+      applicationId: appId,
+      applicationName: appName,
+    });
+  };
+
+  return (
+    <Button variant="destructive" size="sm" onClick={handleDelete}>
+      <Trash2Icon />
+      Delete App
+    </Button>
+  );
 };
 
 export default guard(function Header() {
@@ -90,6 +147,9 @@ export default guard(function Header() {
       title={<AppTitle />}
       heroIcon={HeroIcon}
       statuses={headerStatus}
+      footnote={<HeaderFootnote />}
+      footnoteAs="div"
+      rightAppend={<DeleteButton />}
     />
   );
 });

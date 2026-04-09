@@ -1,4 +1,4 @@
-import { BuildingIcon, GlobeIcon, UserIcon } from 'lucide-react';
+import { BuildingIcon, CalendarIcon, GlobeIcon, UserIcon } from 'lucide-react';
 
 import { useAuthLoggedIn } from '@/services/auth';
 import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
@@ -38,6 +38,7 @@ export default function AppCard(props: AppCardProps) {
   const artifactState = CICD_ARTIFACT_STATUS_METADATA[lastArtifactStatus];
 
   const lastUpdated = getDistanceFromNow(data.timestamp.updated, locale);
+  const dateCreated = getDistanceFromNow(data.timestamp.created, locale);
 
   const handleClickAppDomain = () => {
     const { domain } = data.additionalInfo;
@@ -116,6 +117,16 @@ export default function AppCard(props: AppCardProps) {
                   text: data.ownership.owner,
                 },
               ]}
+              subStatus={[
+                {
+                  icon: CalendarIcon,
+                  text: `${t('common.terms.createdAt')} ${dateCreated}`,
+                },
+                {
+                  icon: CalendarIcon,
+                  text: `${t('common.terms.lastUpdated')} ${lastUpdated}`,
+                },
+              ]}
             />
           </div>
         </ResourceCard.Compact.Main>
@@ -180,6 +191,16 @@ export default function AppCard(props: AppCardProps) {
             {
               icon: UserIcon,
               text: data.ownership.owner,
+            },
+          ]}
+          subStatus={[
+            {
+              icon: CalendarIcon,
+              text: `${t('common.terms.createdAt')} ${dateCreated}`,
+            },
+            {
+              icon: CalendarIcon,
+              text: `${t('common.terms.lastUpdated')} ${lastUpdated}`,
             },
           ]}
         />

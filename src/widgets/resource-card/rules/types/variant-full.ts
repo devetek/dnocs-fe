@@ -33,6 +33,7 @@ export interface ResourceCardFullMainContentProps {
   className?: string;
   title?: string;
   status?: Array<false | MainContentStatus>;
+  subStatus?: Array<false | MainContentStatus>;
 }
 
 export interface ResourceCardFullAdditionalsProps {

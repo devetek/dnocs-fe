@@ -1,4 +1,5 @@
 import { useEmit, useSubscribe } from './-model/events';
+import useApplicationDeleteUsecase from './-usecase/application-delete';
 import useArtifactDeleteUsecase from './-usecase/artifact-delete';
 import useArtifactProgressCancelUsecase from './-usecase/artifact-progress-cancel';
 import useArtifactRollbackUsecase from './-usecase/artifact-rollback';
@@ -16,6 +17,8 @@ export default function EventController() {
   };
 
   const [handleLogsDownload] = useLogsDownloadUsecase();
+
+  const [handleApplicationDelete] = useApplicationDeleteUsecase();
 
   const [handleArtifactDelete] = useArtifactDeleteUsecase({
     onSuccess: handleDefaultSuccess,
@@ -64,6 +67,11 @@ export default function EventController() {
   );
 
   useSubscribe('@applications::detail/github-login', handleGithubLogin);
+
+  useSubscribe(
+    '@applications::detail/application-delete',
+    handleApplicationDelete,
+  );
 
   return null;
 }

@@ -31,3 +31,12 @@ export interface DeploymentRestorePayload {
   artifactId: SchemaCommon.UnitId;
   workerId: SchemaCommon.UnitId;
 }
+
+// =============================================================================
+//   Scope: Application *
+// =============================================================================
+
+export interface ApplicationDeletePayload {
+  applicationId: SchemaCommon.UnitId;
+  applicationName: string;
+}
