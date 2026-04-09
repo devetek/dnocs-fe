@@ -68,6 +68,10 @@ export const [AppDataModelProvider, useAppDataModel] = buildSelector(
       AdapterApplicationFromDto.toApplicationDetail(raw).unwrap(),
     ),
     gitDetail: gitDetailReponse,
+    rawAppDefinition:
+      appDetailResponse.$status === 'success'
+        ? appDetailResponse.app_definition
+        : undefined,
 
     applicationId,
     selectedServerId: latestServerId,

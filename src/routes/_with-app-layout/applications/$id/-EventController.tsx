@@ -1,4 +1,7 @@
 import { useEmit, useSubscribe } from './-model/events';
+import useApplicationBuildEditUsecase from './-usecase/application-build-edit';
+import useApplicationRunEditUsecase from './-usecase/application-run-edit';
+import useApplicationDeleteUsecase from './-usecase/application-delete';
 import useArtifactDeleteUsecase from './-usecase/artifact-delete';
 import useArtifactProgressCancelUsecase from './-usecase/artifact-progress-cancel';
 import useArtifactRollbackUsecase from './-usecase/artifact-rollback';
@@ -16,6 +19,16 @@ export default function EventController() {
   };
 
   const [handleLogsDownload] = useLogsDownloadUsecase();
+
+  const [handleApplicationDelete] = useApplicationDeleteUsecase();
+
+  const [handleApplicationBuildEdit] = useApplicationBuildEditUsecase({
+    onSuccess: () => emit('@applications::detail/app-detail-refresh', null),
+  });
+
+  const [handleApplicationRunEdit] = useApplicationRunEditUsecase({
+    onSuccess: () => emit('@applications::detail/app-detail-refresh', null),
+  });
 
   const [handleArtifactDelete] = useArtifactDeleteUsecase({
     onSuccess: handleDefaultSuccess,
@@ -64,6 +77,21 @@ export default function EventController() {
   );
 
   useSubscribe('@applications::detail/github-login', handleGithubLogin);
+
+  useSubscribe(
+    '@applications::detail/application-delete',
+    handleApplicationDelete,
+  );
+
+  useSubscribe(
+    '@applications::detail/application-build-edit',
+    handleApplicationBuildEdit,
+  );
+
+  useSubscribe(
+    '@applications::detail/application-run-edit',
+    handleApplicationRunEdit,
+  );
 
   return null;
 }

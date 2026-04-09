@@ -4,6 +4,7 @@ import {
   AppWindowIcon,
   BoltIcon,
   Calendar,
+  ChevronDownIcon,
   ClockIcon,
   GitBranchIcon,
   HashIcon,
@@ -18,6 +19,12 @@ import {
 } from '@/shared/libs/browser/date';
 import { excludeFalsy } from '@/shared/libs/browser/typeguards';
 import { Button } from '@/shared/presentation/atoms/Button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/shared/presentation/atoms/DropdownMenu';
 import Shimmer from '@/shared/presentation/atoms/Shimmer';
 
 import { ArtifactCardPartials as Partials } from './_Partials';
@@ -31,6 +38,7 @@ export default function ArtifactCard(props: ArtifactCardProps) {
     deploymentStatus,
     data,
     onClickLogs,
+    logsOptions,
     onClickDelete,
     onClickRollback,
     onClickStatus,
@@ -42,9 +50,30 @@ export default function ArtifactCard(props: ArtifactCardProps) {
   );
 
   const elCta = [
-    <Button key="logs" variant="outline" size="sm" onClick={onClickLogs}>
-      Logs
-    </Button>,
+    logsOptions && logsOptions.length > 1 ? (
+      <DropdownMenu key="logs">
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" size="sm">
+            Logs
+            <ChevronDownIcon className="size-3 ml-1" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          {logsOptions.map((opt) => (
+            <DropdownMenuItem
+              key={opt.machineId}
+              onClick={opt.onClick}
+            >
+              {opt.label}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ) : (
+      <Button key="logs" variant="outline" size="sm" onClick={onClickLogs}>
+        Logs
+      </Button>
+    ),
     <Button
       key="rollback"
       variant="outline"

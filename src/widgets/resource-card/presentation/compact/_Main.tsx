@@ -44,7 +44,7 @@ CompactMain.Hero = function Hero(props: HeroProps) {
 };
 
 CompactMain.Content = function Content(props: ContentProps) {
-  const { className, title, status } = props;
+  const { className, title, status, subStatus } = props;
 
   const t = useDevetekTranslations();
 
@@ -73,6 +73,25 @@ CompactMain.Content = function Content(props: ContentProps) {
                 className="text-primary/70 text-[0.625rem] sm:text-xs break-all line-clamp-1 flex items-center gap-0.5 pr-2"
               >
                 <Icon className="size-2.5 sm:size-3 shrink-0" />
+                <span className="line-clamp-1">{text}</span>
+              </p>
+            );
+          })}
+        </div>
+      )}
+      {subStatus && (
+        <div className="flex items-center flex-wrap">
+          {subStatus.map((subStatusItem, index) => {
+            if (!subStatusItem) return null;
+
+            const { icon: Icon, text } = subStatusItem;
+
+            return (
+              <p
+                key={index}
+                className="text-primary/50 text-[0.5rem] sm:text-[0.625rem] break-all line-clamp-1 flex items-center gap-0.5 pr-2"
+              >
+                <Icon className="size-2 sm:size-2.5 shrink-0" />
                 <span className="line-clamp-1">{text}</span>
               </p>
             );
