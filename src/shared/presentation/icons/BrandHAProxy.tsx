@@ -12,205 +12,205 @@ export default function IconBrandHAProxy(props: LucideProps) {
         <path
           d="M31.973 23.69L25.323 16.172"
           stroke="#284A6A"
-          stroke-width="0.26"
+          strokeWidth="0.26"
           stroke-miterlimit="10"
         />
         <path
           d="M11 17.908L16.205 25.508"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M31.973 23.7L38.551 16.1M39.925 32.087L47.732 25.509M39.925 32.077L47.732 38.944M38.624 47.62L31.974 40.247L25.324 47.62M16.214 38.655L23.732 32.077M16.215 25.497L23.733 32.075M31.973 23.689L16.213 25.496M31.973 23.69L47.733 25.497"
           stroke="#284A6A"
-          stroke-width="0.26"
+          strokeWidth="0.26"
           stroke-miterlimit="10"
         />
         <path
           d="M38.55 16.1L39.925 32.077L38.625 47.619"
           stroke="#284A6A"
-          stroke-width="0.26"
+          strokeWidth="0.26"
           stroke-miterlimit="10"
         />
         <path
           d="M47.732 38.944L31.972 40.244M16.214 38.654L31.974 40.254"
           stroke="#284A6A"
-          stroke-width="0.26"
+          strokeWidth="0.26"
           stroke-miterlimit="10"
         />
         <path
           d="M25.323 47.62L23.723 32.078M25.323 16.173L23.723 32.076"
           stroke="#284A6A"
-          stroke-width="0.26"
+          strokeWidth="0.26"
           stroke-miterlimit="10"
         />
         <path
           d="M8.98499 27.522L16.215 25.498M17.732 10.752L25.332 16.174M25.323 16.174L27.058 7.354L38.55 16.1"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M36.816 7.354L38.55 16.1L52.937 17.908M46.142 10.752L38.542 16.102M52.937 17.898L47.732 25.498L55.105 27.522"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M47.732 25.498L54.962 36.486M36.816 7.354L25.322 16.174"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M47.732 25.498L46.132 10.751M47.732 38.944L54.962 36.486"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M47.732 38.944L55.105 27.522M47.732 38.944L52.937 45.956M47.732 38.944L46.132 53.112M38.624 47.62L46.142 53.114"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M38.624 47.62L52.937 45.957M38.624 47.62L36.9 56.5M38.624 47.62L27.058 56.5M25.323 47.62L27.058 56.52"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M25.323 47.62L36.9 56.5M17.733 53.114L25.333 47.62L11 46.028L16.214 38.655"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M17.732 53.113L16.214 38.655L8.914 36.415L16.214 25.498"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M16.214 38.655L8.98401 27.523M17.732 10.753L16.214 25.5"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M11 17.908L25.313 16.173"
           stroke="#284A6A"
-          stroke-width="0.13"
+          strokeWidth="0.13"
           stroke-miterlimit="10"
         />
         <path
           d="M12.166 8.15002L17.732 10.752L17.3 4.68002L27.058 7.35402"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M17.732 10.752L22.865 2.22201L27.058 7.35401L28.792 1.20001L36.816 7.35401"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M27.048 7.35301L35 0.993011L36.816 7.35401L41.009 2.22101M46.142 10.751L41 2.22201"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M46.142 10.752L46.648 4.68002M46.142 10.752L51.842 7.86002M46.142 10.752L56.045 12.27M36.816 7.35402L46.646 4.67902"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M52.937 17.908L56.045 12.27M52.937 17.908L51.852 7.86002M52.937 17.908L59.443 17.402M52.937 17.908L61.837 22.968"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M55.105 27.522L59.442 17.402M55.105 27.522L61.828 22.968M55.105 27.522L62.623 29.04L54.96 36.486"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M55.105 27.522L62.84 35.04L54.96 36.486L61.683 40.968L52.937 45.956"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M52.937 45.956L59.371 46.606L54.971 36.486M55.983 51.656L52.947 45.956L51.79 55.932"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M51.78 55.932L46.142 53.112M46.142 53.112L46.576 59.412M46.142 53.112L55.972 51.666M46.142 53.112L41 61.787"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M36.9 56.5L41 61.777M36.9 56.5L46.587 59.392M36.9 56.5L35 63.006M36.9 56.5L28.804 63.006"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M27.058 56.5L28.793 63.006M27.058 56.5L35 63.006M27.058 56.5L22.938 61.777M17.732 53.112L22.937 61.787"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M27.058 56.5L17.228 59.536M17.226 59.546L17.732 53.112L12.094 56.22M11 46.028L12.084 56.221"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M17.732 53.112L7.82996 51.74M11 46.028L7.81996 51.728M11 46.028L4.49396 46.678M11 46.028L2.04596 41.04L8.91296 36.414L1.10596 35.04"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M8.91298 36.414L4.51298 46.679M8.98498 27.522L1.10498 35.04"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M8.91296 36.414L1.10596 29.04M8.98596 27.522L2.26296 23.04"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M1.10498 29.04L8.98498 27.522L4.50298 17.402"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M11 17.908L4.494 17.402M11 17.908L2.263 23.04M11 17.908L7.9 12.56M11 17.908L12.157 8.14801"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path
           d="M17.732 10.752L7.89996 12.56"
           stroke="#24405D"
-          stroke-width="0.101"
+          strokeWidth="0.101"
           stroke-miterlimit="10"
         />
         <path

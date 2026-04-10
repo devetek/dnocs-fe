@@ -12,6 +12,7 @@ export * from './pricepackage';
 export * from './pricename';
 export * from './pricepackageitem';
 export * from './pricepackageconsumer';
+export * from './load-balancer';
 export * from './router';
 export * from './user';
 export * from './cloud';
@@ -23,3 +24,7 @@ export interface Pagination {
   total_item: number;
   total_page: number;
 }
+
+export type PayloadUpdateOwnership =
+  | { into: 'personal' } //
+  | { into: 'team'; teamId: string };

@@ -33,3 +33,8 @@ export const camelCaseToCapitalizedSentence = (sentence?: string) => {
       .trim()
   );
 };
+
+export const kebabCaseToCamelCase = (sentence?: string) => {
+  if (!sentence) return '';
+  return sentence.replace(/-([a-z])/g, (_, p1) => p1.toUpperCase());
+};
