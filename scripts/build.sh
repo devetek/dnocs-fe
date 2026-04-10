@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Copy env by environment variable to .env
+echo ">>>>> Copying environment variables for ${ENV} <<<<<"
 mv .env.${ENV} .env
 
 # Check condition, to determine build new or not
