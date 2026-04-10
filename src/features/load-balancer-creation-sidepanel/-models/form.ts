@@ -1,9 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createFormControl, useForm } from 'react-hook-form';
+
+import { buildRHF } from '@/shared/libs/react-factories/buildRHF';
 
 import { schemaCreationForm } from '../-rules/schemas/form';
 
-export const lbCreationFormProps = createFormControl({
+export const [FormProvider, useLbCreationForm] = buildRHF({
   resolver: zodResolver(schemaCreationForm),
   defaultValues: {
     description: '',
@@ -28,6 +29,3 @@ export const lbCreationFormProps = createFormControl({
     ],
   },
 });
-
-export const useLbCreationForm = () =>
-  useForm({ formControl: lbCreationFormProps.formControl });

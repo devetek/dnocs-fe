@@ -5,8 +5,8 @@ import { useToaster } from '@/services/toaster';
 import { ApiLoadBalancer } from '@/shared/api';
 import { iife } from '@/shared/libs/browser/fn';
 
-import { useEmit, useSubscribe } from '../-model/events';
-import { useLbCreationForm } from '../-model/form';
+import { useEmit, useSubscribe } from '../-models/events';
+import { useLbCreationForm } from '../-models/form';
 
 export default function useFormSubmissionUsecase() {
   const form = useLbCreationForm();
@@ -41,8 +41,7 @@ export default function useFormSubmissionUsecase() {
               : l7rule.pathMatch;
           });
           if (pathMatch === '/') {
-            defaultUpstream =
-              `${l7rule.upstreamsIfProxyPass?.[0]?.address ?? 'localhost'}:${l7rule.upstreamsIfProxyPass?.[0]?.port ?? '80'}`;
+            defaultUpstream = `${l7rule.upstreamsIfProxyPass?.[0]?.address ?? 'localhost'}:${l7rule.upstreamsIfProxyPass?.[0]?.port ?? '80'}`;
           }
 
           return {

@@ -6,8 +6,8 @@ import { useSidepanelEmit } from '@/services/sidepanel/model/event';
 
 import buildDialog from '@/widgets/dialog-builder';
 
-import { useSubscribe } from '../-model/events';
-import { useLbCreationForm } from '../-model/form';
+import { useSubscribe } from '../-models/events';
+import { useLbCreationForm } from '../-models/form';
 
 const useConfirmExitDialog = buildDialog({
   variant: 'warning',
@@ -25,7 +25,7 @@ export default function useContextualBehavior() {
 
   useEffect(() => {
     sidepanelEmit('%%sidepanel/allow-trivial-close', !isDirty);
-  }, [form, isDirty, sidepanelEmit]);
+  }, [isDirty, sidepanelEmit]);
 
   useSubscribe(
     '#load-balancer-creation-sidepanel/sidepanel-close',
@@ -35,7 +35,6 @@ export default function useContextualBehavior() {
         if (dialog.response !== 'yes') return;
       }
 
-      form.reset();
       sidepanelEmit('%%sidepanel/close', null);
     },
   );
