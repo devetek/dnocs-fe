@@ -82,7 +82,9 @@
       "tableView": "Table View",
       "xOfY": "{0} of {1}",
       "forX": "for {0}",
-      "description": "Description"
+      "description": "Description",
+      "ssh": "SSH",
+      "cloudProject": "Cloud Project"
     },
     "actions": {
       "refresh": "Refresh",
@@ -93,7 +95,6 @@
       "no": "No",
       "ok": "OK",
       "cancel": "Cancel",
-      "claim": "Claim",
       "delete": "Delete",
       "grant": "Grant",
       "next": "Next",
@@ -114,7 +115,8 @@
       "login": "Login",
       "signUp": "Sign Up",
       "back": "Back",
-      "create": "Create"
+      "create": "Create",
+      "reinstall": "Reinstall"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -461,10 +463,6 @@
       "title": "Reinstall Machine",
       "message": "Are you sure you want to reinstall machine with id <code>{machineID}</code>?"
     },
-    "claimToTeam": {
-      "title": "Claim to team",
-      "message": "Are you sure want to claim <code>{type}</code> <code>{name}</code> to team?"
-    },
     "machineDelete": {
       "title": "Delete Machine",
       "message": "Are you sure you want to delete machine <code>{machineName}</code> (<code>{machineID}</code>)?"
@@ -516,11 +514,6 @@
     "signUp": {
       "success": "Successfully registered {email}, please wait for the redirection.",
       "error": "Failed to register {email}!"
-    },
-    "claimToTeam": {
-      "success": "Successfully claim <code>{type}</code> <code>{name}</code> to team",
-      "noteam": "Please select team or create new team first!",
-      "error": "Failed to claim <code>{type}</code> <code>{name}</code> to team!"
     },
     "databaseDelete": {
       "success": "Successfully deleted database <code>{databaseName}</code>.",

@@ -93,7 +93,6 @@
       "no": "Tidak",
       "ok": "Oke",
       "cancel": "Batal",
-      "claim": "Klaim",
       "delete": "Hapus",
       "grant": "Izinkan",
       "next": "Selanjutnya",
@@ -114,7 +113,8 @@
       "login": "Masuk",
       "signUp": "Daftar",
       "back": "Kembali",
-      "create": "Buat"
+      "create": "Buat",
+      "reinstall": "Reinstall"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -452,10 +452,6 @@
       "title": "Re-install Mesin",
       "message": "Apa anda yakin anda ingin melakukan reinstall mesin dengan id <code>{machineID}</code>?"
     },
-    "claimToTeam": {
-      "title": "Masukkan ke tim",
-      "message": "Apa anda yakin memindahkan <code>{type}</code> <code>{name}</code> ke dalam tim?"
-    },
     "machineDelete": {
       "title": "Hapus Mesin",
       "message": "Apa anda yakin anda ingin menghapus mesin <code>{machineName}</code> (<code>{machineID}</code>)?"
@@ -507,11 +503,6 @@
     "signUp": {
       "success": "Berhasil mendaftarkan {email}, mohon menunggu untuk pengarahan halaman.",
       "error": "Gagal mendaftarkan {email}!"
-    },
-    "claimToTeam": {
-      "success": "Berhasil memindahkan <code>{type}</code> <code>{name}</code> ke tim",
-      "noteam": "Silakan pilih tim atau buat tim baru terlebih dahulu!",
-      "error": "Gagal memindahkan <code>{type}</code> <code>{name}</code> ke tim!"
     },
     "databaseDelete": {
       "success": "Berhasil menghapus database <code>{databaseName}</code>.",
