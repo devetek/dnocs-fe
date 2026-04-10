@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copy env example to .env before implement dPanel env variables
+# Copy env by environment variable to .env
 mv .env.${ENV} .env
 
 # Check condition, to determine build new or not
