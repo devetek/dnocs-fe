@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import dayjs from 'dayjs';
 import { BuildingIcon, EyeIcon, KeyIcon, UserIcon } from 'lucide-react';
 
-import { useDevetekLocale } from '@/services/i18n';
+import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
 import { getDistanceFromNow } from '@/shared/libs/browser/date';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { Tooltip } from '@/shared/presentation/atoms/Tooltip';
@@ -38,15 +38,15 @@ const Table = buildResourceTable<SshTableData>({
         </div>
       ),
       content: ({ row }) => (
-        <Tooltip message={row.type ?? 'SSH Key'}>
-          <img src={IconSSH} className="size-8 object-contain" alt="SSH Key" />
+        <Tooltip message={row.type ?? 'SSH'}>
+          <img src={IconSSH} className="size-8 object-contain" alt="SSH" />
         </Tooltip>
       ),
     },
     {
       key: 'name',
       width: '2fr',
-      header: 'SSH Key',
+      header: '@page.sshKeys.table.headers.key',
       content: function Content({ row }) {
         const emit = useEmit();
 
@@ -74,30 +74,34 @@ const Table = buildResourceTable<SshTableData>({
     {
       key: 'owner',
       width: '1.5fr',
-      header: 'Owner',
-      content: ({ row }) => (
-        <div className="flex flex-col justify-center">
-          {row.ownerName ? (
-            <p className="text-primary text-xs flex items-center gap-x-1">
-              <UserIcon className="size-3 shrink-0" />
-              {row.ownerName}
-            </p>
-          ) : (
-            <p className="text-primary/40 text-xs">—</p>
-          )}
-          {row.teamName && (
-            <p className="text-primary/70 text-[0.675rem] flex items-center mt-0.5">
-              <span>part of</span>
-              <BuildingIcon className="size-2.5 ml-1 mr-0.5" />
-              <span>{row.teamName}</span>
-            </p>
-          )}
-        </div>
-      ),
+      header: '@page.sshKeys.table.headers.owner',
+      content: function Content({ row }) {
+        const t = useDevetekTranslations();
+
+        return (
+          <div className="flex flex-col justify-center">
+            {row.ownerName ? (
+              <p className="text-primary text-xs flex items-center gap-x-1">
+                <UserIcon className="size-3 shrink-0" />
+                {row.ownerName}
+              </p>
+            ) : (
+              <p className="text-primary/40 text-xs">—</p>
+            )}
+            {row.teamName && (
+              <p className="text-primary/70 text-[0.675rem] flex items-center mt-0.5">
+                <span>{t('common.terms.partOf')}</span>
+                <BuildingIcon className="size-2.5 ml-1 mr-0.5" />
+                <span>{row.teamName}</span>
+              </p>
+            )}
+          </div>
+        );
+      },
     },
     {
       key: 'lastUpdated',
-      header: 'Last Modified',
+      header: '@page.sshKeys.table.headers.lastModified',
       content: function Content({ row }) {
         const locale = useDevetekLocale();
 
@@ -121,11 +125,12 @@ const Table = buildResourceTable<SshTableData>({
       key: 'actions',
       content: function Content({ row }) {
         const emit = useEmit();
+        const t = useDevetekTranslations();
 
         type Actions = ComponentProps<typeof ActionPopover>['actions'];
         const actions: Actions = [
           {
-            label: 'Migrate Ownership',
+            label: t('common.actions.migrateOwnership'),
             onClick: () => {
               emit('@ssh-keys/open--migrate-ownership', {
                 id: row.id,
@@ -136,7 +141,7 @@ const Table = buildResourceTable<SshTableData>({
           },
           {
             variant: 'danger',
-            label: 'Delete',
+            label: t('common.actions.delete'),
             onClick: () => {
               emit('@ssh-keys/ssh-key--delete', {
                 id: row.id,

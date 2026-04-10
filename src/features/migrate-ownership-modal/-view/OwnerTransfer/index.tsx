@@ -13,8 +13,11 @@ import { usePropsModel } from '../../-models';
 import { useEmit } from '../../-models/events';
 import { useMigrateOwnershipForm } from '../../-models/form';
 import { useResourcesModel } from '../../-models/resources';
+import { useDevetekTranslations } from '@/services/i18n';
 
 export default function OwnerTransfer() {
+  const t = useDevetekTranslations();
+
   const { mod } = usePropsModel();
 
   const emit = useEmit();
@@ -31,19 +34,22 @@ export default function OwnerTransfer() {
     emit('#migrate-ownership-modal/resources/teams-refresh');
   });
 
-  const currentOwner = mod.moduleTeam?.name || 'Personal';
+  const currentOwner =
+    mod.moduleTeam?.name || t('modal.migrateOwnership.personal');
 
   const renderedTeamsPicker = useMemo(() => {
     if (teams.$status === 'failed') {
       return (
         <div className="w-full h-8 border rounded flex items-center px-2">
           <p className="text-xs">
-            <em className="text-red-500/70">Failed to load teams.&nbsp;</em>
+            <em className="text-red-500/70">
+              {t('modal.migrateOwnership.failedLoadTeams')}&nbsp;
+            </em>
             <a
               className="text-primary/70 underline font-medium cursor-pointer"
               onClick={handleClickTryAgain}
             >
-              Try Again?
+              {t('common.actions.retry')}?
             </a>
           </p>
         </div>
@@ -77,7 +83,7 @@ export default function OwnerTransfer() {
         label: (
           <span className="flex items-center gap-x-1">
             <UserIcon className="size-4" />
-            <em>Me</em>
+            <em>{t('modal.migrateOwnership.me')}</em>
           </span>
         ),
         value: '0',
@@ -88,7 +94,7 @@ export default function OwnerTransfer() {
       <Combobox
         classNameButton="w-full"
         size="sm"
-        placeholder="Select a new owner"
+        placeholder={t('modal.migrateOwnership.selectNewOwner')}
         items={selections}
         onChange={newTeamId.field.onChange}
         value={newTeamId.field.value}
@@ -101,11 +107,15 @@ export default function OwnerTransfer() {
   return (
     <div className="flex flex-col">
       <div className="mt-4 grid grid-cols-[1fr_32px_1.5fr]">
-        <p className="font-bold text-xs text-primary/70">Current Owner</p>
+        <p className="font-bold text-xs text-primary/70">
+          {t('modal.migrateOwnership.currentOwner')}
+        </p>
 
         <div />
 
-        <p className="font-bold text-xs text-primary/70">New Owner</p>
+        <p className="font-bold text-xs text-primary/70">
+          {t('modal.migrateOwnership.newOwner')}
+        </p>
       </div>
 
       <div className="mt-1 grid grid-cols-[1fr_32px_1.5fr]">

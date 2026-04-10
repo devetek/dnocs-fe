@@ -2,6 +2,7 @@ import { useNavigate } from '@tanstack/react-router';
 import dayjs from 'dayjs';
 
 import { useDialog } from '@/services/dialog';
+import { useDevetekTranslations } from '@/services/i18n';
 import { useToaster } from '@/services/toaster';
 
 import { useSSHKeyCreateModal } from '@/features/ssh-create-modal';
@@ -17,6 +18,7 @@ import { AddNewCard, SshKeyInfoCard } from '../../-presentation';
 
 export default function ModeSshKey() {
   const navigate = useNavigate();
+  const t = useDevetekTranslations();
   const { searchQuery, pagination, setPagination } = useFilter();
 
   // const [deleteSSHKey] = useDeleteSSHKey();
@@ -33,14 +35,11 @@ export default function ModeSshKey() {
   const handleClickDeleteSSHKey = (sshKeyId: number, sshKeyName: string) => {
     return () => {
       openDialog({
-        title: 'Delete SSH Key',
-        content: (
-          <>
-            Are you sure you want to delete <br />
-            <code>{sshKeyName}</code> (<code>id</code> <code>{sshKeyId}</code>)
-            ?
-          </>
-        ),
+        title: t('page.sshKeys.deleteDialog.title'),
+        content: t('page.sshKeys.deleteDialog.message', {
+          name: sshKeyName,
+          id: sshKeyId,
+        }),
         variant: 'warning',
         actions: {
           variant: 'YesNo',
@@ -51,12 +50,9 @@ export default function ModeSshKey() {
             if (deleteResponse.$status === 'success') {
               openToaster({
                 variant: 'success',
-                message: (
-                  <>
-                    Successfully deleted SSH key
-                    <code>{sshKeyName}</code> (<code>{sshKeyId}</code>)
-                  </>
-                ),
+                message: t('page.sshKeys.toaster.deleteSuccess', {
+                  name: sshKeyName,
+                }),
               });
 
               refresh();
@@ -65,12 +61,9 @@ export default function ModeSshKey() {
 
             openToaster({
               variant: 'error',
-              title: (
-                <>
-                  Failed to delete SSH key <code>{sshKeyName}</code> (
-                  <code>{sshKeyId}</code>)
-                </>
-              ),
+              title: t('page.sshKeys.toaster.deleteError', {
+                name: sshKeyName,
+              }),
               message: deleteResponse.error.message,
             });
           },
@@ -133,7 +126,7 @@ export default function ModeSshKey() {
         {responseSSHKey.secrets?.map((sshkey) => {
           if (!sshkey.id || !sshkey.name || !sshkey.type) return null;
 
-          let formattedDate = 'Unknown Date';
+          let formattedDate = t('common.terms.unknown');
           if (sshkey.updated_at) {
             formattedDate = dayjs(sshkey.updated_at).format(
               'YYYY-MM-DD HH:mm:ss',

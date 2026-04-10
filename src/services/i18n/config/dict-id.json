@@ -82,7 +82,10 @@
       "tableView": "Tampilkan Tabel",
       "xOfY": "{0} dari {1}",
       "forX": "untuk {0}",
-      "description": "Keterangan"
+      "description": "Keterangan",
+      "partOf": "bagian dari",
+      "ssh": "SSH",
+      "cloudProject": "Proyek Cloud"
     },
     "actions": {
       "refresh": "Segarkan",
@@ -337,6 +340,24 @@
       "headerTitle": "Akun Cloud",
       "headerDesc": "Hubungkan penyedia cloud Anda untuk mengelola VM dan jaringan langsung dari dNocs.",
       "connectAccount": "Hubungkan Akun",
+      "actions": {
+        "viewRegions": "Lihat Wilayah"
+      },
+      "table": {
+        "headers": {
+          "project": "Proyek Cloud",
+          "owner": "Pemilik",
+          "lastModified": "Terakhir Diubah"
+        }
+      },
+      "deleteDialog": {
+        "title": "Hapus Proyek Cloud",
+        "message": "Apakah Anda yakin ingin menghapus \"{name}\" ({id})?"
+      },
+      "toaster": {
+        "deleteSuccess": "Berhasil menghapus proyek cloud \"{name}\"",
+        "deleteError": "Gagal menghapus proyek cloud \"{name}\""
+      },
       "emptyState": {
         "title": "Belum ada akun cloud terhubung",
         "message": "Hubungkan penyedia cloud untuk mulai mengelola sumber daya Anda di sini.",
@@ -347,6 +368,46 @@
       "headerTitle": "Kunci SSH",
       "headerDesc": "Kelola kunci SSH Anda untuk mengakses mesin virtual secara aman tanpa harus memasukkan kata sandi setiap saat.",
       "addKey": "Tambah Kunci SSH",
+      "table": {
+        "headers": {
+          "key": "Kunci SSH",
+          "owner": "Pemilik",
+          "lastModified": "Terakhir Diubah"
+        }
+      },
+      "deleteDialog": {
+        "title": "Hapus Kunci SSH",
+        "message": "Apakah Anda yakin ingin menghapus \"{name}\" ({id})?"
+      },
+      "toaster": {
+        "deleteSuccess": "Berhasil menghapus kunci SSH \"{name}\"",
+        "deleteError": "Gagal menghapus kunci SSH \"{name}\""
+      },
+      "detail": {
+        "copy": "Salin",
+        "copied": "Tersalin!",
+        "keyInformation": "Informasi Kunci",
+        "name": "Nama",
+        "type": "Tipe",
+        "bitLength": "Panjang Bit",
+        "publicKey": "Kunci Publik",
+        "safeToShare": "Aman dibagikan ke server",
+        "copyPublicKey": "Salin Kunci Publik",
+        "noPublicKeyData": "Tidak ada data kunci publik",
+        "privateKey": "Kunci Privat",
+        "hide": "Sembunyikan",
+        "reveal": "Tampilkan",
+        "copyPrivateKey": "Salin Kunci Privat",
+        "privateKeyWarning": "Jaga kerahasiaan kunci ini. Jangan pernah membagikan kunci privat Anda kepada siapa pun. Siapa pun yang memiliki kunci ini dapat masuk ke server Anda.",
+        "noPrivateKeyData": "Tidak ada data kunci privat",
+        "dangerZone": "Zona Berbahaya",
+        "deleteThisKey": "Hapus kunci SSH ini",
+        "deleteThisKeyDescription": "Setelah dihapus, kunci ini tidak dapat dipulihkan. Setiap server yang menggunakan kunci ini harus memakai kunci baru.",
+        "deleteKey": "Hapus Kunci",
+        "deleteDialog": {
+          "message": "Apakah Anda yakin ingin menghapus \"{name}\"? Tindakan ini tidak dapat dibatalkan."
+        }
+      },
       "emptyState": {
         "title": "Belum ada kunci SSH ditambahkan",
         "message": "Tambahkan kunci SSH untuk mengakses mesin virtual Anda secara aman tanpa memasukkan kata sandi setiap kali.",
@@ -700,6 +761,30 @@
     }
   },
   "modal": {
+    "migrateOwnership": {
+      "title": "Pindah Pemilik",
+      "currentOwner": "Pemilik Saat Ini",
+      "newOwner": "Pemilik Baru",
+      "selectNewOwner": "Pilih pemilik baru",
+      "failedLoadTeams": "Gagal memuat tim.",
+      "personal": "Pribadi",
+      "me": "Saya",
+      "resourceToMigrate": "{resource} yang akan dipindahkan",
+      "resourceType": {
+        "application": "Aplikasi",
+        "server": "Server",
+        "loadBalancer": "Load Balancer",
+        "domain": "Domain",
+        "secretSsh": "Rahasia SSH",
+        "cloudProject": "Proyek Cloud"
+      },
+      "summaryTitle": "Ringkasan Migrasi",
+      "summaryMessage": "Izin akan langsung dipindahkan ke pemilik baru. Tindakan ini akan mencabut akses pengelolaan dari pemilik saat ini.",
+      "toaster": {
+        "success": "Berhasil memindahkan kepemilikan",
+        "error": "Gagal memindahkan kepemilikan"
+      }
+    },
     "createTeam": {
       "title": "Buat Tim",
       "fieldName": "Nama Tim",

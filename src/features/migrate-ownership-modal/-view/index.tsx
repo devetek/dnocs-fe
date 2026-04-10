@@ -67,7 +67,7 @@ function Title() {
   return (
     <ModalLayoutGeneral.Title
       canClickClose
-      title="Migrate Ownership"
+      title={t('modal.migrateOwnership.title')}
       description={elSubtitle}
     />
   );

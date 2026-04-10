@@ -2,6 +2,8 @@ import type { ComponentType } from 'react';
 
 import type { LucideProps } from 'lucide-react';
 
+import { useDevetekTranslations } from '@/services/i18n';
+
 import { iife } from '@/shared/libs/browser/fn';
 import {
   IconApp,
@@ -30,29 +32,31 @@ interface InfoCardProps {
 export default function InfoCard(props: InfoCardProps) {
   const { mod } = props;
 
+  const t = useDevetekTranslations();
+
   const Logo = MODULE_LOGO[mod.type];
 
   const renderedResourceType = iife(() => {
     switch (mod.type) {
       case 'load-balancer':
-        return 'Load Balancer';
+        return t('modal.migrateOwnership.resourceType.loadBalancer');
 
       case 'application':
-        return 'Application';
+        return t('modal.migrateOwnership.resourceType.application');
 
       case 'server':
-        return 'Server';
+        return t('modal.migrateOwnership.resourceType.server');
 
       case 'domain':
-        return 'Domain';
+        return t('modal.migrateOwnership.resourceType.domain');
 
       case 'secret-ssh':
-        return 'SSH Secret';
+        return t('modal.migrateOwnership.resourceType.secretSsh');
 
       case 'cloud-project':
-        return 'Cloud Project';
+        return t('modal.migrateOwnership.resourceType.cloudProject');
     }
-  }).toLocaleUpperCase();
+  });
 
   return (
     <div className="border rounded-md bg-background inset-shadow-sm grid grid-cols-[auto_1fr] items-center">
@@ -64,7 +68,9 @@ export default function InfoCard(props: InfoCardProps) {
 
       <div className="py-3 pr-4 flex flex-col justify-center">
         <p className="text-primary/60 text-xs font-bold uppercase tracking-wide">
-          {renderedResourceType} TO MIGRATE
+          {t('modal.migrateOwnership.resourceToMigrate', {
+            resource: renderedResourceType,
+          })}
         </p>
 
         <p className="text-primary font-medium text-lg">{mod.moduleName}</p>

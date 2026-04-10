@@ -83,6 +83,7 @@
       "xOfY": "{0} of {1}",
       "forX": "for {0}",
       "description": "Description",
+      "partOf": "part of",
       "ssh": "SSH",
       "cloudProject": "Cloud Project"
     },
@@ -348,6 +349,24 @@
       "headerTitle": "Cloud Accounts",
       "headerDesc": "Connect your cloud provider to manage VMs and networks directly from dNocs.",
       "connectAccount": "Connect Account",
+      "actions": {
+        "viewRegions": "View Regions"
+      },
+      "table": {
+        "headers": {
+          "project": "Cloud Project",
+          "owner": "Owner",
+          "lastModified": "Last Modified"
+        }
+      },
+      "deleteDialog": {
+        "title": "Delete Cloud Project",
+        "message": "Are you sure you want to delete \"{name}\" ({id})?"
+      },
+      "toaster": {
+        "deleteSuccess": "Successfully deleted cloud project \"{name}\"",
+        "deleteError": "Failed to delete cloud project \"{name}\""
+      },
       "emptyState": {
         "title": "No cloud accounts connected",
         "message": "Connect a cloud provider to start managing your resources here.",
@@ -358,6 +377,46 @@
       "headerTitle": "SSH Keys",
       "headerDesc": "Manage your SSH keys to securely access virtual machines without entering a password each time.",
       "addKey": "Add SSH Key",
+      "table": {
+        "headers": {
+          "key": "SSH Key",
+          "owner": "Owner",
+          "lastModified": "Last Modified"
+        }
+      },
+      "deleteDialog": {
+        "title": "Delete SSH Key",
+        "message": "Are you sure you want to delete \"{name}\" ({id})?"
+      },
+      "toaster": {
+        "deleteSuccess": "Successfully deleted SSH key \"{name}\"",
+        "deleteError": "Failed to delete SSH key \"{name}\""
+      },
+      "detail": {
+        "copy": "Copy",
+        "copied": "Copied!",
+        "keyInformation": "Key Information",
+        "name": "Name",
+        "type": "Type",
+        "bitLength": "Bit Length",
+        "publicKey": "Public Key",
+        "safeToShare": "Safe to share with servers",
+        "copyPublicKey": "Copy Public Key",
+        "noPublicKeyData": "No public key data",
+        "privateKey": "Private Key",
+        "hide": "Hide",
+        "reveal": "Reveal",
+        "copyPrivateKey": "Copy Private Key",
+        "privateKeyWarning": "Keep this key secret. Never share your private key with anyone. Anyone with access to this key can log in to your servers.",
+        "noPrivateKeyData": "No private key data",
+        "dangerZone": "Danger Zone",
+        "deleteThisKey": "Delete this SSH key",
+        "deleteThisKeyDescription": "Once deleted, this key cannot be recovered. Any server configured to use it will require a new key.",
+        "deleteKey": "Delete Key",
+        "deleteDialog": {
+          "message": "Are you sure you want to delete \"{name}\"? This action cannot be undone."
+        }
+      },
       "emptyState": {
         "title": "No SSH keys added yet",
         "message": "Add an SSH key to securely access your virtual machines without entering a password each time.",
@@ -712,6 +771,30 @@
     }
   },
   "modal": {
+    "migrateOwnership": {
+      "title": "Migrate Ownership",
+      "currentOwner": "Current Owner",
+      "newOwner": "New Owner",
+      "selectNewOwner": "Select a new owner",
+      "failedLoadTeams": "Failed to load teams.",
+      "personal": "Personal",
+      "me": "Me",
+      "resourceToMigrate": "{resource} to migrate",
+      "resourceType": {
+        "application": "Application",
+        "server": "Server",
+        "loadBalancer": "Load Balancer",
+        "domain": "Domain",
+        "secretSsh": "SSH Secret",
+        "cloudProject": "Cloud Project"
+      },
+      "summaryTitle": "Migration Summary",
+      "summaryMessage": "Permissions will be transferred to the new owner immediately. This action will revoke existing management access for the current owner.",
+      "toaster": {
+        "success": "Ownership migrated successfully",
+        "error": "Failed to migrate ownership"
+      }
+    },
     "createTeam": {
       "title": "Create a Team",
       "fieldName": "Team Name",

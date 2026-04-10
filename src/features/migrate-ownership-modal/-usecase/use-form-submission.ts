@@ -1,4 +1,5 @@
 import { useToaster } from '@/services/toaster';
+import { useDevetekTranslations } from '@/services/i18n';
 
 import type { DTOs } from '@/shared/api';
 import {
@@ -17,6 +18,7 @@ import { useMigrateOwnershipForm } from '../-models/form';
 
 export default function useFormSubmissionUsecase() {
   const [openToaster] = useToaster();
+  const t = useDevetekTranslations();
 
   const emit = useEmit();
 
@@ -77,7 +79,7 @@ export default function useFormSubmissionUsecase() {
       if (response.$status === 'success') {
         openToaster({
           variant: 'success',
-          message: 'Ownership migrated successfully',
+          message: t('modal.migrateOwnership.toaster.success'),
         });
         emit('#migrate-ownership-modal/modal-close');
         onSuccess?.();
@@ -88,7 +90,7 @@ export default function useFormSubmissionUsecase() {
     } catch (error) {
       openToaster({
         variant: 'error',
-        message: 'Failed to migrate ownership',
+        message: t('modal.migrateOwnership.toaster.error'),
       });
       return;
     }
