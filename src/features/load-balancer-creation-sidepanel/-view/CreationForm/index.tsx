@@ -19,9 +19,9 @@ import { Combobox } from '@/shared/presentation/molecules/Combobox';
 import { ComboboxWithSearchCb } from '@/shared/presentation/molecules/ComboboxWithSearchCb';
 
 import CreationLayout from '../-presentation/CreationLayout';
-import { useEmit } from '../../-model/events';
-import { useLbCreationForm } from '../../-model/form';
-import { useResourcesModel } from '../../-model/resources';
+import { useEmit } from '../../-models/events';
+import { useLbCreationForm } from '../../-models/form';
+import { useResourcesModel } from '../../-models/resources';
 
 import RuleCard from './L7RulesCard';
 

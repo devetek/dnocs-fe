@@ -67,13 +67,14 @@ export default guard(function ServerList() {
           });
         };
 
-        const handleClickClaim = () => {
+        const handleClickMigrateOwnership = () => {
           return () => {
             if (!server.host.name) return undefined;
 
-            emit('@resources::servers/server-claim-to-org', {
+            emit('@resources::servers/server-migrate-ownership', {
               serverId: server.id,
               serverName: server.host.name,
+              serverTeam: server.ownership?.team,
             });
           };
         };
@@ -97,7 +98,7 @@ export default guard(function ServerList() {
             onClickEdit={handleClickEdit}
             onClickDetails={handleClickDetails}
             onClickReinstall={handleClickReinstall}
-            onClickClaimToOrganization={handleClickClaim()}
+            onClickMigrateOwnership={handleClickMigrateOwnership()}
             onClickDelete={handleClickDelete}
             onClickStatus={handleClickStatus}
           />

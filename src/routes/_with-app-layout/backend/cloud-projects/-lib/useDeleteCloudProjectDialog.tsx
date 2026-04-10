@@ -1,9 +1,12 @@
 import { useDialog } from '@/services/dialog';
+import { useDevetekTranslations } from '@/services/i18n';
 import { useToaster } from '@/services/toaster';
 
 import { ApiCloud } from '@/shared/api';
 
 export default function useDeleteCloudProjectDialog(onSuccess: () => void) {
+  const t = useDevetekTranslations();
+
   const [openToaster] = useToaster();
   const [openDialog] = useDialog();
 
@@ -12,13 +15,11 @@ export default function useDeleteCloudProjectDialog(onSuccess: () => void) {
     projectName: string,
   ) => {
     openDialog({
-      title: 'Delete Cloud Project',
-      content: (
-        <>
-          Are you sure you want to delete <br />
-          <code>{projectName}</code> (<code>{projectID}</code>)?
-        </>
-      ),
+      title: t('page.cloudProjects.deleteDialog.title'),
+      content: t('page.cloudProjects.deleteDialog.message', {
+        name: projectName,
+        id: projectID,
+      }),
       variant: 'warning',
       actions: {
         variant: 'YesNo',
@@ -30,12 +31,9 @@ export default function useDeleteCloudProjectDialog(onSuccess: () => void) {
           if (response.$status === 'success') {
             openToaster({
               variant: 'success',
-              message: (
-                <>
-                  Successfully deleted cloud project <code>{projectName}</code>{' '}
-                  (<code>{projectID}</code>)
-                </>
-              ),
+              message: t('page.cloudProjects.toaster.deleteSuccess', {
+                name: projectName,
+              }),
             });
             onSuccess();
             return;
@@ -43,12 +41,9 @@ export default function useDeleteCloudProjectDialog(onSuccess: () => void) {
 
           openToaster({
             variant: 'error',
-            title: (
-              <>
-                Failed to delete cloud project <code>{projectName}</code> (
-                <code>{projectID}</code>)
-              </>
-            ),
+            title: t('page.cloudProjects.toaster.deleteError', {
+              name: projectName,
+            }),
             message: response.error.message,
           });
         },

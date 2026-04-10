@@ -1,4 +1,5 @@
 import { useDialog } from '@/services/dialog';
+import { useDevetekTranslations } from '@/services/i18n';
 import { useToaster } from '@/services/toaster';
 
 import { ApiSecret } from '@/shared/api';
@@ -12,6 +13,7 @@ interface Params {
 
 export default function useDeleteSshKeyUsecase(params: Params) {
   const { onSuccess } = params;
+  const t = useDevetekTranslations();
 
   const [openToaster] = useToaster();
   const [openDialog] = useDialog();
@@ -20,8 +22,11 @@ export default function useDeleteSshKeyUsecase(params: Params) {
     const { id, name } = payload;
 
     openDialog({
-      title: 'Delete SSH Key',
-      content: `Are you sure you want to delete "${name}" (${id})?`,
+      title: t('page.sshKeys.deleteDialog.title'),
+      content: t('page.sshKeys.deleteDialog.message', {
+        name,
+        id,
+      }),
       variant: 'warning',
       actions: {
         variant: 'YesNo',
@@ -33,13 +38,17 @@ export default function useDeleteSshKeyUsecase(params: Params) {
           if (response.$status === 'success') {
             openToaster({
               variant: 'success',
-              message: `Successfully deleted SSH key "${name}"`,
+              message: t('page.sshKeys.toaster.deleteSuccess', {
+                name,
+              }),
             });
             onSuccess();
           } else {
             openToaster({
               variant: 'error',
-              message: `Failed to delete SSH key "${name}"`,
+              message: t('page.sshKeys.toaster.deleteError', {
+                name,
+              }),
             });
           }
         },

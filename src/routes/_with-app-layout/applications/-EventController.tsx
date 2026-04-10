@@ -1,8 +1,8 @@
 import { useEmit, useSubscribe } from './-model/events';
-import useApplicationClaimUsecase from './-usecase/application-claim';
 import useApplicationDeleteUsecase from './-usecase/application-delete';
 import useApplicationEditUsecase from './-usecase/application-edit';
 import useGithubLoginUsecase from './-usecase/github-login';
+import useApplicationOpenMigrateOwnershipUsecase from './-usecase/open-migrate-ownership';
 
 export default function EventController() {
   const emit = useEmit();
@@ -11,9 +11,10 @@ export default function EventController() {
     emit('@applications/application-refresh', null);
   };
 
-  const [handleApplicationClaim] = useApplicationClaimUsecase({
-    onSuccess: handleDefaultSuccess,
-  });
+  const [handleOpenMigrateOwnership] =
+    useApplicationOpenMigrateOwnershipUsecase({
+      onSuccess: handleDefaultSuccess,
+    });
 
   const [handleApplicationDelete] = useApplicationDeleteUsecase({
     onSuccess: handleDefaultSuccess,
@@ -25,7 +26,10 @@ export default function EventController() {
 
   const [handleGithubLogin] = useGithubLoginUsecase();
 
-  useSubscribe('@applications/application-claim', handleApplicationClaim);
+  useSubscribe(
+    '@applications/open--migrate-ownership',
+    handleOpenMigrateOwnership,
+  );
   useSubscribe('@applications/application-delete', handleApplicationDelete);
   useSubscribe('@applications/application-edit', handleApplicationEdit);
   useSubscribe('@applications/github-login', handleGithubLogin);

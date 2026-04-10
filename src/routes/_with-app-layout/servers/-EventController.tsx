@@ -1,7 +1,7 @@
 import { useEmit, useSubscribe } from './-model/events';
 import useMachineDeleteUsecase from './-usecase/machine-delete';
 import useMachineReinstallUsecase from './-usecase/machine-reinstall';
-import useServerClaimToOrgUsecase from './-usecase/server-claim-to-org';
+import useServerOpenMigrateOwnershipUsecase from './-usecase/open-migrate-ownership';
 import useServerEditSidepanelUsecase from './-usecase/server-edit-sidepanel';
 import useServerStatusInfoDialogUsecase from './-usecase/server-status-info-dialog';
 
@@ -12,13 +12,13 @@ export default function EventController() {
     emit('@resources::servers/servers-refresh', null);
   };
 
-  const [handleServerClaimToOrg] = useServerClaimToOrgUsecase({
+  const [handleOpenMigrateOwnership] = useServerOpenMigrateOwnershipUsecase({
     onSuccess: handleDefaultSuccess,
   });
 
   useSubscribe(
-    '@resources::servers/server-claim-to-org',
-    handleServerClaimToOrg,
+    '@resources::servers/server-migrate-ownership',
+    handleOpenMigrateOwnership,
   );
 
   const [handleMachineReinstall] = useMachineReinstallUsecase({

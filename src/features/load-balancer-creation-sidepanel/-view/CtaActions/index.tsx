@@ -5,8 +5,8 @@ import { useDevetekTranslations } from '@/services/i18n';
 
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 
-import { useEmit } from '../../-model/events';
-import { useLbCreationForm } from '../../-model/form';
+import { useEmit } from '../../-models/events';
+import { useLbCreationForm } from '../../-models/form';
 
 export default function CtaActions() {
   const t = useDevetekTranslations();

@@ -1,14 +1,9 @@
 import type { ComponentProps } from 'react';
 
 import dayjs from 'dayjs';
-import {
-  BuildingIcon,
-  CloudIcon,
-  EyeIcon,
-  UserIcon,
-} from 'lucide-react';
+import { BuildingIcon, CloudIcon, EyeIcon, UserIcon } from 'lucide-react';
 
-import { useDevetekLocale } from '@/services/i18n';
+import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
 import { getDistanceFromNow } from '@/shared/libs/browser/date';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { Tooltip } from '@/shared/presentation/atoms/Tooltip';
@@ -38,7 +33,11 @@ export interface CloudTableProps {
 
 const PROVIDER_META: Record<
   string,
-  { src?: string; label: string; icon?: React.ComponentType<{ className?: string }> }
+  {
+    src?: string;
+    label: string;
+    icon?: React.ComponentType<{ className?: string }>;
+  }
 > = {
   idcloudhost: { src: IconIDCloudHost, label: 'IDCloudHost' },
   gcp: { src: IconGoogleCloudPlatform, label: 'Google Cloud' },
@@ -55,20 +54,26 @@ const Table = buildResourceTable<CloudTableData>({
           <CloudIcon className="size-4 text-primary/70" />
         </div>
       ),
-      content: ({ row }) => {
+      content: function Content({ row }) {
+        const t = useDevetekTranslations();
+
         const meta =
           PROVIDER_META[row.provider?.toLocaleLowerCase() ?? ''] ?? null;
 
         if (meta?.src) {
           return (
             <Tooltip message={meta.label}>
-              <img src={meta.src} className="size-8 object-contain" alt={meta.label} />
+              <img
+                src={meta.src}
+                className="size-8 object-contain"
+                alt={meta.label}
+              />
             </Tooltip>
           );
         }
 
         return (
-          <Tooltip message={row.provider ?? 'Unknown'}>
+          <Tooltip message={row.provider ?? t('common.terms.unknown')}>
             <CloudIcon className="size-6 text-primary/60" />
           </Tooltip>
         );
@@ -77,7 +82,7 @@ const Table = buildResourceTable<CloudTableData>({
     {
       key: 'name',
       width: '2fr',
-      header: 'Cloud Project',
+      header: '@page.cloudProjects.table.headers.project',
       content: function Content({ row }) {
         const emit = useEmit();
         const providerKey = row.provider?.toLocaleLowerCase() ?? '';
@@ -107,30 +112,34 @@ const Table = buildResourceTable<CloudTableData>({
     {
       key: 'owner',
       width: '1.5fr',
-      header: 'Owner',
-      content: ({ row }) => (
-        <div className="flex flex-col justify-center">
-          {row.ownerName ? (
-            <p className="text-primary text-xs flex items-center gap-x-1">
-              <UserIcon className="size-3 shrink-0" />
-              {row.ownerName}
-            </p>
-          ) : (
-            <p className="text-primary/40 text-xs">—</p>
-          )}
-          {row.teamName && (
-            <p className="text-primary/70 text-[0.675rem] flex items-center mt-0.5">
-              <span>part of</span>
-              <BuildingIcon className="size-2.5 ml-1 mr-0.5" />
-              <span>{row.teamName}</span>
-            </p>
-          )}
-        </div>
-      ),
+      header: '@page.cloudProjects.table.headers.owner',
+      content: function Content({ row }) {
+        const t = useDevetekTranslations();
+
+        return (
+          <div className="flex flex-col justify-center">
+            {row.ownerName ? (
+              <p className="text-primary text-xs flex items-center gap-x-1">
+                <UserIcon className="size-3 shrink-0" />
+                {row.ownerName}
+              </p>
+            ) : (
+              <p className="text-primary/40 text-xs">—</p>
+            )}
+            {row.teamName && (
+              <p className="text-primary/70 text-[0.675rem] flex items-center mt-0.5">
+                <span>{t('common.terms.partOf')}</span>
+                <BuildingIcon className="size-2.5 ml-1 mr-0.5" />
+                <span>{row.teamName}</span>
+              </p>
+            )}
+          </div>
+        );
+      },
     },
     {
       key: 'lastUpdated',
-      header: 'Last Modified',
+      header: '@page.cloudProjects.table.headers.lastModified',
       content: function Content({ row }) {
         const locale = useDevetekLocale();
 
@@ -154,12 +163,23 @@ const Table = buildResourceTable<CloudTableData>({
       key: 'actions',
       content: function Content({ row }) {
         const emit = useEmit();
+        const t = useDevetekTranslations();
 
         type Actions = ComponentProps<typeof ActionPopover>['actions'];
         const actions: Actions = [
           {
+            label: t('common.actions.migrateOwnership'),
+            onClick: () => {
+              emit('@cloud-projects/open--migrate-ownership', {
+                id: row.id,
+                name: row.name ?? String(row.id),
+                teamName: row.teamName,
+              });
+            },
+          },
+          {
             variant: 'danger',
-            label: 'Delete',
+            label: t('common.actions.delete'),
             onClick: () => {
               emit('@cloud-projects/project--delete', {
                 id: row.id,

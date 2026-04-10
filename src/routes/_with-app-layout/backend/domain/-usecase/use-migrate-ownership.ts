@@ -1,27 +1,32 @@
-// import { useMigrateOwnershipModal } from '@/features/migrate-ownership-modal';
+import { useMigrateOwnershipModal } from '@/features/migrate-ownership-modal';
 
 import useHandler from '@/shared/libs/react-hooks/useHandler';
 
-// import type { LbMigrateOwnershipPayload as Payload } from '../-rules/usecase-types';
+import type { DomainMigrateOwnershipPayload as Payload } from '../-rules/usecase-types';
 
 interface Params {
   onSuccess: () => void;
 }
 
-export default function useLbOpenMigrateOwnershipUsecase(params: Params) {
-  const { onSuccess: _1 } = params;
+export default function useDomainOpenMigrateOwnershipUsecase(params: Params) {
+  const { onSuccess } = params;
 
-  // const [openModalMigrateOwnership] = useMigrateOwnershipModal();
+  const [openModalMigrateOwnership] = useMigrateOwnershipModal();
 
-  const handleUsecase = useHandler(() => {
-    // TODO
-    // openModalMigrateOwnership({
-    //   mod: {
-    //     type: 'load-balancer',
-    //     ...payload,
-    //   },
-    //   onSuccess,
-    // });
+  const handleUsecase = useHandler((payload: Payload) => {
+    openModalMigrateOwnership({
+      mod: {
+        type: 'domain',
+        moduleId: payload.id,
+        moduleName: payload.domain.hostname,
+        moduleTeam: payload.ownership.team
+          ? {
+              name: payload.ownership.team,
+            }
+          : undefined,
+      },
+      onSuccess,
+    });
   });
 
   return [handleUsecase] as const;

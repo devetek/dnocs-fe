@@ -4,14 +4,14 @@ import { registerEvents } from '@/shared/libs/events';
 import type { Rescope } from '@/shared/libs/events/models/registerEvents';
 
 import type {
-  ApplicationClaimPayload,
   ApplicationDeletePayload,
+  ApplicationMigrateOwnershipPayload,
 } from '../-rules/usecase-types';
 
 type EventsRegistry = Rescope<
   '@applications',
   {
-    'application-claim': ApplicationClaimPayload;
+    'open--migrate-ownership': ApplicationMigrateOwnershipPayload;
     'application-delete': ApplicationDeletePayload;
     'application-refresh': null;
     'application-edit': ApplicationCard;

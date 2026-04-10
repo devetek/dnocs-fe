@@ -6,7 +6,7 @@ import type { Rescope } from '@/shared/libs/events/models/registerEvents';
 import type {
   MachineDeletePayload,
   MachineReinstallPayload,
-  ServerClaimToOrgPayload,
+  ServerMigrateOwnershipPayload,
 } from '../-usecase/types';
 
 type EventsRegistry = Rescope<
@@ -15,7 +15,7 @@ type EventsRegistry = Rescope<
     'machine-delete': MachineDeletePayload;
     'machine-reinstall': MachineReinstallPayload;
     'servers-refresh': null;
-    'server-claim-to-org': ServerClaimToOrgPayload;
+    'server-migrate-ownership': ServerMigrateOwnershipPayload;
     'server-status-info-dialog': ServerCard;
     'server-edit-sidepanel': ServerCard;
   }

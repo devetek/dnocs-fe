@@ -5,6 +5,7 @@ import type { FilterRules } from '../-rules';
 import type {
   CloudProjectDeletePayload,
   CloudProjectDetailsPayload,
+  CloudProjectMigrateOwnershipPayload,
 } from '../-rules/usecase-types';
 
 type EventsRegistry = Rescope<
@@ -16,6 +17,7 @@ type EventsRegistry = Rescope<
     'filters/pagination--set': number;
     'data--refresh': null;
     'project--delete': CloudProjectDeletePayload;
+    'open--migrate-ownership': CloudProjectMigrateOwnershipPayload;
     'open--details': CloudProjectDetailsPayload;
   }
 >;

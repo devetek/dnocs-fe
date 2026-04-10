@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 
 import { useDialog } from '@/services/dialog';
+import { useDevetekTranslations } from '@/services/i18n';
 import { useToaster } from '@/services/toaster';
 
 import type { DTOs } from '@/shared/api';
@@ -31,6 +32,7 @@ interface ModeSSHKeyProps {
 }
 
 function CopyButton({ text, label }: { text: string; label?: string }) {
+  const t = useDevetekTranslations();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -50,7 +52,9 @@ function CopyButton({ text, label }: { text: string; label?: string }) {
       ) : (
         <ClipboardIcon className="w-3.5 h-3.5 mr-1.5" />
       )}
-      {copied ? 'Copied!' : (label ?? 'Copy')}
+      {copied
+        ? t('page.sshKeys.detail.copied')
+        : (label ?? t('page.sshKeys.detail.copy'))}
     </Button>
   );
 }
@@ -76,6 +80,7 @@ function MetaItem({
 }
 
 export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
+  const t = useDevetekTranslations();
   const [privateRevealed, setPrivateRevealed] = useState(false);
 
   const sshKeyID = sshkey.id ?? 0;
@@ -97,13 +102,10 @@ export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
 
   const handleDelete = () => {
     openDialog({
-      title: 'Delete SSH Key',
-      content: (
-        <>
-          Are you sure you want to delete <br />
-          <code>{sshKeyName}</code>? This action cannot be undone.
-        </>
-      ),
+      title: t('page.sshKeys.deleteDialog.title'),
+      content: t('page.sshKeys.detail.deleteDialog.message', {
+        name: sshKeyName,
+      }),
       variant: 'warning',
       actions: {
         variant: 'YesNo',
@@ -115,11 +117,9 @@ export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
           if (res.$status === 'success') {
             openToaster({
               variant: 'success',
-              message: (
-                <>
-                  SSH key <code>{sshKeyName}</code> deleted successfully.
-                </>
-              ),
+              message: t('page.sshKeys.toaster.deleteSuccess', {
+                name: sshKeyName,
+              }),
             });
             navigate({ to: '/backend/secret-managers/ssh-key', replace: true });
             return;
@@ -127,7 +127,9 @@ export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
 
           openToaster({
             variant: 'error',
-            title: <>Failed to delete SSH key</>,
+            title: t('page.sshKeys.toaster.deleteError', {
+              name: sshKeyName,
+            }),
             message: res.error.message,
           });
         },
@@ -140,14 +142,34 @@ export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
       {/* Metadata */}
       <Card className="p-4">
         <p className="text-xs font-semibold text-primary/50 uppercase tracking-wide mb-3">
-          Key Information
+          {t('page.sshKeys.detail.keyInformation')}
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <MetaItem icon={KeyRoundIcon} label="Name" value={sshKeyName} />
-          <MetaItem icon={KeyRoundIcon} label="Type" value={keyType} />
-          <MetaItem icon={RulerIcon} label="Bit Length" value={keyLength} />
-          <MetaItem icon={CalendarIcon} label="Created" value={createdAt} />
-          <MetaItem icon={CalendarIcon} label="Last Updated" value={updatedAt} />
+          <MetaItem
+            icon={KeyRoundIcon}
+            label={t('page.sshKeys.detail.name')}
+            value={sshKeyName}
+          />
+          <MetaItem
+            icon={KeyRoundIcon}
+            label={t('page.sshKeys.detail.type')}
+            value={keyType}
+          />
+          <MetaItem
+            icon={RulerIcon}
+            label={t('page.sshKeys.detail.bitLength')}
+            value={keyLength}
+          />
+          <MetaItem
+            icon={CalendarIcon}
+            label={t('common.terms.createdAt')}
+            value={createdAt}
+          />
+          <MetaItem
+            icon={CalendarIcon}
+            label={t('common.terms.lastUpdated')}
+            value={updatedAt}
+          />
         </div>
       </Card>
 
@@ -156,18 +178,25 @@ export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
         <div className="px-4 py-3 border-b flex items-center justify-between gap-2">
           <p className="text-sm font-semibold flex items-center gap-2">
             <GlobeIcon className="w-4 h-4 text-primary/60" />
-            Public Key
+            {t('page.sshKeys.detail.publicKey')}
           </p>
           <div className="flex items-center gap-2">
             <span className="text-xs text-primary/50">
-              Safe to share with servers
+              {t('page.sshKeys.detail.safeToShare')}
             </span>
-            <CopyButton text={sshPubKey} label="Copy Public Key" />
+            <CopyButton
+              text={sshPubKey}
+              label={t('page.sshKeys.detail.copyPublicKey')}
+            />
           </div>
         </div>
         <div className="p-4 bg-muted/30">
           <pre className="font-mono text-xs leading-relaxed break-all whitespace-pre-wrap text-primary/80 max-h-48 overflow-y-auto">
-            {sshPubKey || <em className="opacity-40">No public key data</em>}
+            {sshPubKey || (
+              <em className="opacity-40">
+                {t('page.sshKeys.detail.noPublicKeyData')}
+              </em>
+            )}
           </pre>
         </div>
       </Card>
@@ -182,7 +211,7 @@ export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
         <div className="px-4 py-3 border-b flex items-center justify-between gap-2">
           <p className="text-sm font-semibold flex items-center gap-2">
             <LockIcon className="w-4 h-4 text-amber-500" />
-            Private Key
+            {t('page.sshKeys.detail.privateKey')}
           </p>
           <div className="flex items-center gap-2">
             <Button
@@ -195,10 +224,15 @@ export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
               ) : (
                 <EyeIcon className="w-4 h-4 mr-1.5" />
               )}
-              {privateRevealed ? 'Hide' : 'Reveal'}
+              {privateRevealed
+                ? t('page.sshKeys.detail.hide')
+                : t('page.sshKeys.detail.reveal')}
             </Button>
             {privateRevealed && (
-              <CopyButton text={sshPrivKey} label="Copy Private Key" />
+              <CopyButton
+                text={sshPrivKey}
+                label={t('page.sshKeys.detail.copyPrivateKey')}
+              />
             )}
           </div>
         </div>
@@ -212,15 +246,17 @@ export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
           <div className="flex items-start gap-2 mb-3 p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
             <AlertTriangleIcon className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
             <p className="text-xs text-amber-600 leading-relaxed">
-              <strong>Keep this key secret.</strong> Never share your private
-              key with anyone. Anyone with access to this key can log in to
-              your servers.
+              {t('page.sshKeys.detail.privateKeyWarning')}
             </p>
           </div>
 
           {privateRevealed ? (
             <pre className="font-mono text-xs leading-relaxed break-all whitespace-pre-wrap text-primary/80 max-h-64 overflow-y-auto">
-              {sshPrivKey || <em className="opacity-40">No private key data</em>}
+              {sshPrivKey || (
+                <em className="opacity-40">
+                  {t('page.sshKeys.detail.noPrivateKeyData')}
+                </em>
+              )}
             </pre>
           ) : (
             <div className="flex items-center justify-center h-16 select-none">
@@ -235,14 +271,17 @@ export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
       {/* Danger Zone */}
       <Card className="border-red-500/20 overflow-hidden">
         <div className="px-4 py-3 border-b border-red-500/20 bg-red-500/5">
-          <p className="text-sm font-semibold text-red-500">Danger Zone</p>
+          <p className="text-sm font-semibold text-red-500">
+            {t('page.sshKeys.detail.dangerZone')}
+          </p>
         </div>
         <div className="p-4 flex items-center justify-between gap-4">
           <div className="flex flex-col gap-0.5">
-            <p className="text-sm font-medium">Delete this SSH key</p>
+            <p className="text-sm font-medium">
+              {t('page.sshKeys.detail.deleteThisKey')}
+            </p>
             <p className="text-xs text-primary/50">
-              Once deleted, this key cannot be recovered. Any server configured
-              to use it will require a new key.
+              {t('page.sshKeys.detail.deleteThisKeyDescription')}
             </p>
           </div>
           <Button
@@ -252,7 +291,7 @@ export default function ModeSshKey({ sshkey, refresh }: ModeSSHKeyProps) {
             onClick={handleDelete}
           >
             <Trash2Icon className="w-4 h-4 mr-1.5" />
-            Delete Key
+            {t('page.sshKeys.detail.deleteKey')}
           </Button>
         </div>
       </Card>

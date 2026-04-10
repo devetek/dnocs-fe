@@ -1,4 +1,5 @@
 import { useDialog } from '@/services/dialog';
+import { useDevetekTranslations } from '@/services/i18n';
 import { useToaster } from '@/services/toaster';
 
 import { ApiCloud } from '@/shared/api';
@@ -12,6 +13,7 @@ interface Params {
 
 export default function useDeleteCloudProjectUsecase(params: Params) {
   const { onSuccess } = params;
+  const t = useDevetekTranslations();
 
   const [openToaster] = useToaster();
   const [openDialog] = useDialog();
@@ -20,8 +22,11 @@ export default function useDeleteCloudProjectUsecase(params: Params) {
     const { id, name } = payload;
 
     openDialog({
-      title: 'Delete Cloud Project',
-      content: `Are you sure you want to delete "${name}" (${id})?`,
+      title: t('page.cloudProjects.deleteDialog.title'),
+      content: t('page.cloudProjects.deleteDialog.message', {
+        name,
+        id,
+      }),
       variant: 'warning',
       actions: {
         variant: 'YesNo',
@@ -33,13 +38,17 @@ export default function useDeleteCloudProjectUsecase(params: Params) {
           if (response.$status === 'success') {
             openToaster({
               variant: 'success',
-              message: `Successfully deleted cloud project "${name}"`,
+              message: t('page.cloudProjects.toaster.deleteSuccess', {
+                name,
+              }),
             });
             onSuccess();
           } else {
             openToaster({
               variant: 'error',
-              message: `Failed to delete cloud project "${name}"`,
+              message: t('page.cloudProjects.toaster.deleteError', {
+                name,
+              }),
             });
           }
         },
@@ -49,4 +58,3 @@ export default function useDeleteCloudProjectUsecase(params: Params) {
 
   return [handleUsecase] as const;
 }
-

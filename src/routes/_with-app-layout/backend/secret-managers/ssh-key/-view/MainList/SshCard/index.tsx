@@ -2,6 +2,8 @@ import type { ComponentProps } from 'react';
 
 import { BuildingIcon, KeyRoundIcon, UserIcon } from 'lucide-react';
 
+import { useDevetekTranslations } from '@/services/i18n';
+
 import IconSSH from '@/shared/assets/ico-ssh.svg';
 import IconEye from '@/shared/presentation/icons/Eye';
 import IconEyeActive from '@/shared/presentation/icons/EyeActive';
@@ -19,6 +21,8 @@ export default function SshCard(props: SshCardProps) {
   const { data } = props;
   const { id, name, type, lastUpdated, ownerName, teamName } = data;
 
+  const t = useDevetekTranslations();
+
   const emit = useEmit();
 
   const handleClickDetails = () =>
@@ -30,14 +34,23 @@ export default function SshCard(props: SshCardProps) {
   type Actions = ComponentProps<typeof ResourceCard.Compact.Actions>['actions'];
   const actions: Actions = [
     {
-      label: 'Details',
+      label: t('common.actions.details'),
       icon: IconEye,
       iconActive: IconEyeActive,
       onClick: handleClickDetails,
     },
     {
+      label: t('common.actions.migrateOwnership'),
+      onClick: () =>
+        emit('@ssh-keys/open--migrate-ownership', {
+          id,
+          name: name ?? String(id),
+          teamName,
+        }),
+    },
+    {
       variant: 'destructive',
-      label: 'Delete',
+      label: t('common.actions.delete'),
       onClick: () =>
         emit('@ssh-keys/ssh-key--delete', {
           id,
@@ -62,7 +75,7 @@ export default function SshCard(props: SshCardProps) {
         >
           <ResourceCard.Compact.Main.Hero
             image={IconSSH}
-            tooltipMessage="SSH Key"
+            tooltipMessage={t('page.sshKeys.table.headers.key')}
           />
           <ResourceCard.Compact.Main.Content
             title={name ?? undefined}
@@ -73,12 +86,12 @@ export default function SshCard(props: SshCardProps) {
       <ResourceCard.Compact.Actions
         visibleActionOnlyIcon
         actions={actions}
-        labelMore="More"
+        labelMore={t('common.actions.more')}
       />
       <ResourceCard.Compact.Footnote>
         <ResourceCard.Compact.Footnote.Item
           icon={IconLastDateActive}
-          label="Last updated"
+          label={t('common.terms.lastUpdated')}
           value={lastUpdated ?? undefined}
         />
       </ResourceCard.Compact.Footnote>

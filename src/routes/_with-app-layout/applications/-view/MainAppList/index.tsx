@@ -30,7 +30,8 @@ export default buildResponseView({
     const isDesktop = useBreakpoint('lg');
     const { viewMode } = useFilterModel();
 
-    const derivedViewMode = viewMode !== 'auto' ? viewMode : isDesktop ? 'list' : 'grid';
+    const derivedViewMode =
+      viewMode !== 'auto' ? viewMode : isDesktop ? 'list' : 'grid';
 
     if (list.length < 1) {
       return (
@@ -59,11 +60,8 @@ export default buildResponseView({
             emit('@applications/application-edit', application);
           };
 
-          const handleClickClaim = () => {
-            emit('@applications/application-claim', {
-              appName: application.identity.name,
-              id: application.id,
-            });
+          const handleClickMigrateOwnership = () => {
+            emit('@applications/open--migrate-ownership', application);
           };
 
           const handleClickDelete = () => {
@@ -80,7 +78,7 @@ export default buildResponseView({
               data={application}
               onClickEdit={handleClickEdit}
               onClickDetails={handleClickDetails}
-              onClickClaimToOrganization={handleClickClaim}
+              onClickMigrateOwnership={handleClickMigrateOwnership}
               onClickDelete={handleClickDelete}
             />
           );
@@ -89,4 +87,3 @@ export default buildResponseView({
     );
   },
 });
-

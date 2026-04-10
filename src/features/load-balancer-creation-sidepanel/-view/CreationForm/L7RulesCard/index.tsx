@@ -5,15 +5,15 @@ import { useController, useFieldArray, useWatch } from 'react-hook-form';
 
 import { useDevetekTranslations } from '@/services/i18n';
 
-import { useLbCreationForm } from '@/features/load-balancer-creation-sidepanel/-model/form';
-import { useResourcesModel } from '@/features/load-balancer-creation-sidepanel/-model/resources';
-
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { ErrorInline } from '@/shared/presentation/atoms/ErrorInline';
 import { Input } from '@/shared/presentation/atoms/Input';
 import { Tooltip } from '@/shared/presentation/atoms/Tooltip';
 import { Combobox } from '@/shared/presentation/molecules/Combobox';
 import { ComboboxWithSearchCb } from '@/shared/presentation/molecules/ComboboxWithSearchCb';
+
+import { useLbCreationForm } from '../../../-models/form';
+import { useResourcesModel } from '../../../-models/resources';
 
 interface RuleCardProps {
   index: number;
