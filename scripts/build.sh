@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Copy env example to .env before implement dPanel env variables
+# Copy env by environment variable to .env, and remove prod for non production environment
+echo ">>>>> Copying environment variables for ${ENV} <<<<<"
 mv .env.${ENV} .env
+
+if [ ${ENV} != "production" ]; then
+    rm .env.production
+fi
 
 # Check condition, to determine build new or not
 CURRENT_VERSION=""
