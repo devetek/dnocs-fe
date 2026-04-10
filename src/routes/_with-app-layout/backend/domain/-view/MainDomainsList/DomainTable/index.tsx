@@ -131,7 +131,6 @@ const Table = buildResourceTable<DomainTableData>({
             onClick: () => {
               emit('@domain-dns/open--migrate-ownership', row);
             },
-            disabled: true,
           },
           {
             variant: 'danger',

@@ -2,13 +2,15 @@ import { useMigrateOwnershipModal } from '@/features/migrate-ownership-modal';
 
 import useHandler from '@/shared/libs/react-hooks/useHandler';
 
-import type { DomainMigrateOwnershipPayload as Payload } from '../-rules/usecase-types';
+import type { ApplicationMigrateOwnershipPayload as Payload } from '../-rules/usecase-types';
 
 interface Params {
   onSuccess: () => void;
 }
 
-export default function useDomainOpenMigrateOwnershipUsecase(params: Params) {
+export default function useApplicationOpenMigrateOwnershipUsecase(
+  params: Params,
+) {
   const { onSuccess } = params;
 
   const [openModalMigrateOwnership] = useMigrateOwnershipModal();
@@ -16,9 +18,9 @@ export default function useDomainOpenMigrateOwnershipUsecase(params: Params) {
   const handleUsecase = useHandler((payload: Payload) => {
     openModalMigrateOwnership({
       mod: {
-        type: 'domain',
+        type: 'application',
         moduleId: payload.id,
-        moduleName: payload.domain.hostname,
+        moduleName: payload.identity.name,
         moduleTeam: payload.ownership.team
           ? {
               name: payload.ownership.team,

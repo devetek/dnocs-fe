@@ -8,6 +8,6 @@ export interface ServerCardProps {
   onClickStatus?: () => void;
   onClickDetails?: () => void;
   onClickReinstall?: () => void;
-  onClickClaimToOrganization?: () => void;
+  onClickMigrateOwnership?: () => void;
   onClickDelete?: () => void;
 }

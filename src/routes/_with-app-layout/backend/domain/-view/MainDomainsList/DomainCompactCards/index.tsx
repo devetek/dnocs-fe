@@ -114,7 +114,6 @@ export default function DomainCompactCards(props: Props) {
           {
             label: t('common.actions.migrateOwnership'),
             onClick: handleClickMigrateOwnership.intoEvent(item),
-            disabled: true,
           },
           {
             variant: 'destructive',

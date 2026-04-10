@@ -24,7 +24,7 @@ export default function AppCard(props: AppCardProps) {
     data,
     onClickEdit,
     onClickDelete,
-    onClickClaimToOrganization,
+    onClickMigrateOwnership,
     onClickDetails,
   } = props;
 
@@ -71,8 +71,8 @@ export default function AppCard(props: AppCardProps) {
         onClick: onClickEdit,
       },
     {
-      label: t('common.actions.claim'),
-      onClick: onClickClaimToOrganization,
+      label: t('common.actions.migrateOwnership'),
+      onClick: onClickMigrateOwnership,
     },
     {
       variant: 'destructive' as const,
@@ -96,7 +96,10 @@ export default function AppCard(props: AppCardProps) {
     const { icon: ServiceStateIcon, color: serviceStateColor } = serviceState;
 
     return (
-      <ResourceCard.Compact classNameCardWrapper={cnCardWrapper} onClickBody={onClickDetails}>
+      <ResourceCard.Compact
+        classNameCardWrapper={cnCardWrapper}
+        onClickBody={onClickDetails}
+      >
         <ResourceCard.Compact.Main>
           <div className="flex items-start gap-x-2 w-full text-left">
             <ResourceCard.Compact.Main.Hero
@@ -163,7 +166,10 @@ export default function AppCard(props: AppCardProps) {
   }
 
   return (
-    <ResourceCard.Full classNameCardWrapper={cnCardWrapper} onClickBody={onClickDetails}>
+    <ResourceCard.Full
+      classNameCardWrapper={cnCardWrapper}
+      onClickBody={onClickDetails}
+    >
       <ResourceCard.Full.Main>
         <ResourceCard.Full.Main.Hero
           image={getBundleIcon(data.identity.bundleType)}

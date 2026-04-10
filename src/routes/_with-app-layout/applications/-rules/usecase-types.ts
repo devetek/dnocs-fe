@@ -1,3 +1,4 @@
+import type { ApplicationCard } from '@/entities/application/rules/schema';
 import type { SchemaCommon } from '@/entities/shared/rules/schema';
 
 export interface ApplicationDeletePayload {
@@ -5,7 +6,4 @@ export interface ApplicationDeletePayload {
   id: SchemaCommon.UnitId;
 }
 
-export interface ApplicationClaimPayload {
-  appName: string;
-  id: SchemaCommon.UnitId;
-}
+export type ApplicationMigrateOwnershipPayload = ApplicationCard;

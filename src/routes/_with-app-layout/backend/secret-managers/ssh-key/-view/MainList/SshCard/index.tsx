@@ -36,6 +36,15 @@ export default function SshCard(props: SshCardProps) {
       onClick: handleClickDetails,
     },
     {
+      label: 'Migrate Ownership',
+      onClick: () =>
+        emit('@ssh-keys/open--migrate-ownership', {
+          id,
+          name: name ?? String(id),
+          teamName,
+        }),
+    },
+    {
       variant: 'destructive',
       label: 'Delete',
       onClick: () =>

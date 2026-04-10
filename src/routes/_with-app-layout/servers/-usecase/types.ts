@@ -1,8 +1,9 @@
 import type { SchemaCommon } from '@/entities/shared/rules/schema';
 
-export interface ServerClaimToOrgPayload {
+export interface ServerMigrateOwnershipPayload {
   serverId: SchemaCommon.UnitId;
   serverName: string;
+  serverTeam?: string;
 }
 
 export interface MachineReinstallPayload {

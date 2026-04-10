@@ -1,12 +1,7 @@
 import type { ComponentProps } from 'react';
 
 import dayjs from 'dayjs';
-import {
-  BuildingIcon,
-  CloudIcon,
-  EyeIcon,
-  UserIcon,
-} from 'lucide-react';
+import { BuildingIcon, CloudIcon, EyeIcon, UserIcon } from 'lucide-react';
 
 import { useDevetekLocale } from '@/services/i18n';
 import { getDistanceFromNow } from '@/shared/libs/browser/date';
@@ -38,7 +33,11 @@ export interface CloudTableProps {
 
 const PROVIDER_META: Record<
   string,
-  { src?: string; label: string; icon?: React.ComponentType<{ className?: string }> }
+  {
+    src?: string;
+    label: string;
+    icon?: React.ComponentType<{ className?: string }>;
+  }
 > = {
   idcloudhost: { src: IconIDCloudHost, label: 'IDCloudHost' },
   gcp: { src: IconGoogleCloudPlatform, label: 'Google Cloud' },
@@ -62,7 +61,11 @@ const Table = buildResourceTable<CloudTableData>({
         if (meta?.src) {
           return (
             <Tooltip message={meta.label}>
-              <img src={meta.src} className="size-8 object-contain" alt={meta.label} />
+              <img
+                src={meta.src}
+                className="size-8 object-contain"
+                alt={meta.label}
+              />
             </Tooltip>
           );
         }
@@ -157,6 +160,16 @@ const Table = buildResourceTable<CloudTableData>({
 
         type Actions = ComponentProps<typeof ActionPopover>['actions'];
         const actions: Actions = [
+          {
+            label: 'Migrate Ownership',
+            onClick: () => {
+              emit('@cloud-projects/open--migrate-ownership', {
+                id: row.id,
+                name: row.name ?? String(row.id),
+                teamName: row.teamName,
+              });
+            },
+          },
           {
             variant: 'danger',
             label: 'Delete',

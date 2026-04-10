@@ -31,7 +31,7 @@ export default function ServerCard(props: ServerCardProps) {
     onClickEdit,
     onClickStatus,
     onClickDetails,
-    onClickClaimToOrganization,
+    onClickMigrateOwnership,
     onClickDelete,
     onClickReinstall,
   } = props;
@@ -65,7 +65,7 @@ export default function ServerCard(props: ServerCardProps) {
       onClick: onClickDetails,
     },
     data.state.status !== 'progress' && {
-      label: 'Reinstall',
+      label: t('common.actions.reinstall'),
       onClick: onClickReinstall,
     },
     data.state.status !== 'progress' &&
@@ -73,9 +73,9 @@ export default function ServerCard(props: ServerCardProps) {
         label: t('common.actions.edit'),
         onClick: onClickEdit,
       },
-    !!onClickClaimToOrganization && {
-      label: t('common.actions.claim'),
-      onClick: onClickClaimToOrganization,
+    !!onClickMigrateOwnership && {
+      label: t('common.actions.migrateOwnership'),
+      onClick: onClickMigrateOwnership,
     },
     !!onClickDelete && {
       variant: 'destructive' as const,
@@ -96,13 +96,18 @@ export default function ServerCard(props: ServerCardProps) {
 
   if (variant === 'compact') {
     return (
-      <ResourceCard.Compact classNameCardWrapper={cnCardWrapper} onClickBody={onClickDetails}>
+      <ResourceCard.Compact
+        classNameCardWrapper={cnCardWrapper}
+        onClickBody={onClickDetails}
+      >
         <ResourceCard.Compact.Main>
           <ResourceCard.Compact.Main.Hero
             image={serverIconSrc}
             badge={isAnomalousStatus ? serverStateMetadata.icon : undefined}
             badgeTooltipMessage={
-              isAnomalousStatus ? t(serverStateMetadata.i18n.statusLabel) : undefined
+              isAnomalousStatus
+                ? t(serverStateMetadata.i18n.statusLabel)
+                : undefined
             }
             classNameBadge={statusBadgeColorClass}
           />
@@ -186,13 +191,18 @@ export default function ServerCard(props: ServerCardProps) {
   }
 
   return (
-    <ResourceCard.Full classNameCardWrapper={cnCardWrapper} onClickBody={onClickDetails}>
+    <ResourceCard.Full
+      classNameCardWrapper={cnCardWrapper}
+      onClickBody={onClickDetails}
+    >
       <ResourceCard.Full.Main>
         <ResourceCard.Full.Main.Hero
           image={serverIconSrc}
           badge={isAnomalousStatus ? serverStateMetadata.icon : undefined}
           badgeTooltipMessage={
-            isAnomalousStatus ? t(serverStateMetadata.i18n.statusLabel) : undefined
+            isAnomalousStatus
+              ? t(serverStateMetadata.i18n.statusLabel)
+              : undefined
           }
           classNameBadge={statusBadgeColorClass}
         />

@@ -101,7 +101,6 @@ export default function LbCard(props: LbCardProps) {
     {
       label: t('common.actions.migrateOwnership'),
       onClick: onClickMigrateOwnership,
-      disabled: true,
     },
     {
       variant: 'destructive',

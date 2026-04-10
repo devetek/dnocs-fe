@@ -2,13 +2,13 @@ import { useMigrateOwnershipModal } from '@/features/migrate-ownership-modal';
 
 import useHandler from '@/shared/libs/react-hooks/useHandler';
 
-import type { DomainMigrateOwnershipPayload as Payload } from '../-rules/usecase-types';
+import type { ServerMigrateOwnershipPayload as Payload } from './types';
 
 interface Params {
   onSuccess: () => void;
 }
 
-export default function useDomainOpenMigrateOwnershipUsecase(params: Params) {
+export default function useServerOpenMigrateOwnershipUsecase(params: Params) {
   const { onSuccess } = params;
 
   const [openModalMigrateOwnership] = useMigrateOwnershipModal();
@@ -16,12 +16,12 @@ export default function useDomainOpenMigrateOwnershipUsecase(params: Params) {
   const handleUsecase = useHandler((payload: Payload) => {
     openModalMigrateOwnership({
       mod: {
-        type: 'domain',
-        moduleId: payload.id,
-        moduleName: payload.domain.hostname,
-        moduleTeam: payload.ownership.team
+        type: 'server',
+        moduleId: payload.serverId,
+        moduleName: payload.serverName,
+        moduleTeam: payload.serverTeam
           ? {
-              name: payload.ownership.team,
+              name: payload.serverTeam,
             }
           : undefined,
       },

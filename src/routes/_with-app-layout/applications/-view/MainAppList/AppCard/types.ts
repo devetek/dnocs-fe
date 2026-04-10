@@ -6,6 +6,6 @@ export interface AppCardProps {
 
   onClickEdit?: () => void;
   onClickDetails?: () => void;
-  onClickClaimToOrganization?: () => void;
+  onClickMigrateOwnership?: () => void;
   onClickDelete?: () => void;
 }

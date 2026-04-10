@@ -125,6 +125,16 @@ const Table = buildResourceTable<SshTableData>({
         type Actions = ComponentProps<typeof ActionPopover>['actions'];
         const actions: Actions = [
           {
+            label: 'Migrate Ownership',
+            onClick: () => {
+              emit('@ssh-keys/open--migrate-ownership', {
+                id: row.id,
+                name: row.name ?? String(row.id),
+                teamName: row.teamName,
+              });
+            },
+          },
+          {
             variant: 'danger',
             label: 'Delete',
             onClick: () => {

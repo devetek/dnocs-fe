@@ -50,6 +50,15 @@ export default function CloudCard(props: CloudCardProps) {
       onClick: handleClickDetails,
     },
     {
+      label: 'Migrate Ownership',
+      onClick: () =>
+        emit('@cloud-projects/open--migrate-ownership', {
+          id,
+          name: name ?? String(id),
+          teamName,
+        }),
+    },
+    {
       variant: 'destructive',
       label: 'Delete',
       onClick: () =>
@@ -79,10 +88,7 @@ export default function CloudCard(props: CloudCardProps) {
           />
           <ResourceCard.Compact.Main.Content
             title={name ?? undefined}
-            status={[
-              { icon: CloudIcon, text: meta.label },
-              ...ownershipStatus,
-            ]}
+            status={[{ icon: CloudIcon, text: meta.label }, ...ownershipStatus]}
           />
         </button>
       </ResourceCard.Compact.Main>

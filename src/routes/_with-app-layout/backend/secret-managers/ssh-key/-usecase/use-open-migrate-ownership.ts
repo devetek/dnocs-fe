@@ -2,13 +2,13 @@ import { useMigrateOwnershipModal } from '@/features/migrate-ownership-modal';
 
 import useHandler from '@/shared/libs/react-hooks/useHandler';
 
-import type { DomainMigrateOwnershipPayload as Payload } from '../-rules/usecase-types';
+import type { SshKeyMigrateOwnershipPayload as Payload } from '../-rules/usecase-types';
 
 interface Params {
   onSuccess: () => void;
 }
 
-export default function useDomainOpenMigrateOwnershipUsecase(params: Params) {
+export default function useOpenSshKeyMigrateOwnershipUsecase(params: Params) {
   const { onSuccess } = params;
 
   const [openModalMigrateOwnership] = useMigrateOwnershipModal();
@@ -16,12 +16,12 @@ export default function useDomainOpenMigrateOwnershipUsecase(params: Params) {
   const handleUsecase = useHandler((payload: Payload) => {
     openModalMigrateOwnership({
       mod: {
-        type: 'domain',
-        moduleId: payload.id,
-        moduleName: payload.domain.hostname,
-        moduleTeam: payload.ownership.team
+        type: 'secret-ssh',
+        moduleId: String(payload.id),
+        moduleName: payload.name,
+        moduleTeam: payload.teamName
           ? {
-              name: payload.ownership.team,
+              name: payload.teamName,
             }
           : undefined,
       },
