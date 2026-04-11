@@ -499,6 +499,7 @@ function SectionL4Port() {
                   max={65_535}
                   {...form.control.register(
                     `l4rule.upstreams.${index}.port` as const,
+                    { valueAsNumber: true },
                   )}
                 />
               </div>
