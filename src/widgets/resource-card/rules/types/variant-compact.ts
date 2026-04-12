@@ -27,6 +27,7 @@ export interface ResourceCardCompactMainHeroProps {
 export interface ResourceCardCompactMainContentProps {
   className?: string;
   title?: string;
+  description?: string;
   status?: Array<false | MainContentStatus>;
   subStatus?: Array<false | MainContentStatus>;
 }

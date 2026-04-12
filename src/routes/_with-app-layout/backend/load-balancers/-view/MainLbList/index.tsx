@@ -53,6 +53,9 @@ export default buildResponseView({
             onClickDelete={() => {
               emit('@load-balancers/lb--delete', loadBalancer);
             }}
+            onClickRestore={() => {
+              emit('@load-balancers/lb--restore', loadBalancer);
+            }}
           />
         ))}
       </LayoutAutoGridList>

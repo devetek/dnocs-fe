@@ -44,7 +44,7 @@ CompactMain.Hero = function Hero(props: HeroProps) {
 };
 
 CompactMain.Content = function Content(props: ContentProps) {
-  const { className, title, status, subStatus } = props;
+  const { className, title, description, status, subStatus } = props;
 
   const t = useDevetekTranslations();
 
@@ -60,6 +60,11 @@ CompactMain.Content = function Content(props: ContentProps) {
           {title || <em className="opacity-50">{t('common.terms.unknown')}</em>}
         </p>
       </Tooltip>
+      {description && (
+        <p className="text-primary/60 text-[0.625rem] sm:text-xs break-all line-clamp-1">
+          {description}
+        </p>
+      )}
       {status && (
         <div className="flex items-center flex-wrap">
           {status.map((statusItem, index) => {

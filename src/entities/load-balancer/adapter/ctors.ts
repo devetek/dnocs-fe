@@ -21,7 +21,56 @@ export function ctorState(raw: DTOs.RouterV1) {
 }
 
 export function ctorConfiguration(raw: DTOs.RouterV1) {
+  const lbKind = raw.config?.lb_kind ?? 'l7';
+
+  if (lbKind === 'l4') {
+    const l4Rules = (raw.rules ?? []).filter(
+      (rule) => rule.path_match === '/' || (raw.rules ?? []).length === 1,
+    );
+    const upstreams = l4Rules.flatMap((rule) =>
+      (rule.target?.upstreams ?? []).map((u) => ({
+        address: u.address ?? '',
+        port: parseInt(u.port ?? '0') || 0,
+      })),
+    );
+
+    return {
+      lbKind: 'l4',
+      upstreams,
+    } as KeysOnlyDeep<z.input<typeof configuration>>;
+  }
+
+  // L7 — map raw.rules if available, fall back to legacy raw.upstream
+  const rulesFromApi = (raw.rules ?? []).map((rule): KeysOnlyDeep<L7Rule> => {
+    if (rule.target?.application_id) {
+      return {
+        upstream: {
+          type: 'proxy-pass-app',
+          matchingPath: rule.path_match ?? '/',
+          target: {
+            applicationId: rule.target.application_id,
+            port: -1,
+          },
+        },
+      };
+    }
+
+    return {
+      upstream: {
+        type: 'proxy-pass',
+        matchingPath: rule.path_match ?? '/',
+        backendTarget: (rule.target?.upstreams ?? []).map((u) => ({
+          address: u.address ?? '',
+          port: parseInt(u.port ?? '0') || 0,
+        })),
+      },
+    };
+  });
+
   const rules = iife(() => {
+    if (rulesFromApi.length > 0) return rulesFromApi;
+
+    // Legacy fallback: build one rule from raw.upstream
     if (!Number.isNaN(Number(raw.upstream))) {
       return [
         {

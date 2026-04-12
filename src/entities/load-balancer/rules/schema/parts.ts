@@ -146,6 +146,11 @@ export const configuration = z.discriminatedUnion('lbKind', [
   }),
   z.object({
     lbKind: z.literal('l4'),
-    ports: z.array(z.number()),
+    upstreams: z.array(
+      z.object({
+        address: z.string(),
+        port: z.number(),
+      }),
+    ),
   }),
 ]);

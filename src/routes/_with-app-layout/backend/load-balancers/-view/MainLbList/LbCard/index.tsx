@@ -36,6 +36,7 @@ export default function LbCard(props: LbCardProps) {
     onClickEdit,
     onClickMigrateOwnership,
     onClickDelete,
+    onClickRestore,
   } = props;
 
   const t = useDevetekTranslations();
@@ -63,8 +64,8 @@ export default function LbCard(props: LbCardProps) {
   const elRulesDesc = iife(() => {
     switch (data.configuration.lbKind) {
       case 'l4':
-        return t('page.loadBalancers.xPorts', {
-          length: data.configuration.ports.length,
+        return t('page.loadBalancers.xUpstream', {
+          length: data.configuration.upstreams.length,
         });
 
       case 'l7':
@@ -102,6 +103,10 @@ export default function LbCard(props: LbCardProps) {
       label: t('common.actions.migrateOwnership'),
       onClick: onClickMigrateOwnership,
     },
+    data.state.status === 'deleted' && {
+      label: t('common.actions.restore'),
+      onClick: onClickRestore,
+    },
     {
       variant: 'destructive',
       label: t('common.actions.delete'),
@@ -120,6 +125,7 @@ export default function LbCard(props: LbCardProps) {
           />
           <ResourceCard.Compact.Main.Content
             title={data.domain.fqdn}
+            description={data.description}
             status={[
               !!data.ownership.team && {
                 icon: BuildingIcon,
@@ -184,6 +190,7 @@ export default function LbCard(props: LbCardProps) {
         />
         <ResourceCard.Full.Main.Content
           title={data.domain.fqdn}
+          description={data.description}
           status={[
             !!data.ownership.team && {
               icon: BuildingIcon,

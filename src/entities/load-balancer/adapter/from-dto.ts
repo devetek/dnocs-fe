@@ -27,6 +27,7 @@ export const toLoadBalancerCard = createAdapter<
     id: String(raw.id),
     state: ctorState(raw),
     domain: raw.domain,
+    description: raw.name,
     ownership: {
       owner: raw.user?.fullname || raw.user?.username,
       team: raw.organization?.name,
