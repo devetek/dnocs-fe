@@ -40,5 +40,5 @@ if [[ "${NEXT_VERSION}" != "${CURRENT_VERSION}" ]]; then
 fi
 
 if [[ "${NEXT_VERSION}" == "${CURRENT_VERSION}" ]]; then
-    echo "Skip build, no commit changes detected, please push new commit to trigger a build!"
+    echo ">>>>> Skip build, no commit changes detected, please push new commit to trigger a build! <<<<<"
 fi
