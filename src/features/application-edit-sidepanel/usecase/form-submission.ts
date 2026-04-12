@@ -16,17 +16,29 @@ export default function useFormSubmissionUsecase() {
   const sidepanelEmit = useEmit();
 
   const handleSubmit = form.handleSubmit(async (values) => {
-    const { autoDeploy } = values;
+    const { autoDeploy, workdir, port } = values;
 
     const response = await ApiApplication.Update.$Id.doPost({
       applicationId: props.applicationId,
       payload: {
+        workdir: workdir || undefined,
         app_config: {
           auto_deploy: {
             branch: autoDeploy.fromBranch,
             enabled: autoDeploy.isEnabled,
           },
         },
+        ...(port != null && props.rawAppDefinition != null
+          ? {
+              app_definition: {
+                ...props.rawAppDefinition,
+                run: {
+                  ...props.rawAppDefinition.run,
+                  port,
+                },
+              },
+            }
+          : {}),
       },
     });
 

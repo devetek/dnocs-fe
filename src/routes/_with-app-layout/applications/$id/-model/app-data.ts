@@ -72,6 +72,10 @@ export const [AppDataModelProvider, useAppDataModel] = buildSelector(
       appDetailResponse.$status === 'success'
         ? appDetailResponse.app_definition
         : undefined,
+    rawWorkdir:
+      appDetailResponse.$status === 'success'
+        ? (appDetailResponse.workdir ?? '')
+        : '',
 
     applicationId,
     selectedServerId: latestServerId,

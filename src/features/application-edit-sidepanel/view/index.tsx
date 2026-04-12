@@ -32,7 +32,7 @@ export default function ApplicationEditSidepanel(props: Props) {
       >
         <Controller />
 
-        <Layout>
+        <Layout classNameFrame="w-[100vw] sm:w-[80vw] sm:max-w-[380px]">
           <Layout.Title
             title={t('sidepanel.editApplication.title')}
             subtitle={applicationName || `Id: ${applicationId}`}

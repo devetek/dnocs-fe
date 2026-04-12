@@ -218,6 +218,11 @@
       "appLogs": {
         "title": "Application Logs",
         "subtitle": "Real-time application logs and errors"
+      },
+      "dangerZone": {
+        "title": "Danger Zone",
+        "deleteThisApp": "Delete Application",
+        "deleteThisAppDescription": "Permanently remove this application and all its data. This action cannot be undone."
       }
     },
     "applicationsCreate": {
@@ -646,6 +651,13 @@
         "title": "Auto Deployment",
         "enable": "Enable auto deployment",
         "deployFromBranch": "Deploy from branch"
+      },
+      "general": {
+        "title": "General",
+        "workdir": "Work Directory",
+        "workdirPlaceholder": "/app",
+        "port": "Port",
+        "portPlaceholder": "e.g. 3000"
       }
     },
     "artifactNew": {

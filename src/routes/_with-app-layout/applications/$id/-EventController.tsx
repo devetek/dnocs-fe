@@ -1,5 +1,6 @@
 import { useEmit, useSubscribe } from './-model/events';
 import useApplicationBuildEditUsecase from './-usecase/application-build-edit';
+import useApplicationEditUsecase from './-usecase/application-edit';
 import useApplicationRunEditUsecase from './-usecase/application-run-edit';
 import useApplicationDeleteUsecase from './-usecase/application-delete';
 import useArtifactDeleteUsecase from './-usecase/artifact-delete';
@@ -21,6 +22,10 @@ export default function EventController() {
   const [handleLogsDownload] = useLogsDownloadUsecase();
 
   const [handleApplicationDelete] = useApplicationDeleteUsecase();
+
+  const [handleApplicationEdit] = useApplicationEditUsecase({
+    onSuccess: () => emit('@applications::detail/app-detail-refresh', null),
+  });
 
   const [handleApplicationBuildEdit] = useApplicationBuildEditUsecase({
     onSuccess: () => emit('@applications::detail/app-detail-refresh', null),
@@ -78,10 +83,9 @@ export default function EventController() {
 
   useSubscribe('@applications::detail/github-login', handleGithubLogin);
 
-  useSubscribe(
-    '@applications::detail/application-delete',
-    handleApplicationDelete,
-  );
+  useSubscribe('@applications::detail/application-delete', handleApplicationDelete);
+
+  useSubscribe('@applications::detail/application-edit', handleApplicationEdit);
 
   useSubscribe(
     '@applications::detail/application-build-edit',

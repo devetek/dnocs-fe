@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { useController } from 'react-hook-form';
 
 import { useDevetekTranslations } from '@/services/i18n';
@@ -21,14 +19,6 @@ export default function FormItemFromBranch() {
     control: form.control,
     name: 'autoDeploy.fromBranch',
   });
-
-  useEffect(() => {
-    return () => {
-      form.setValue('autoDeploy.fromBranch', undefined, {
-        shouldDirty: true,
-      });
-    };
-  }, [form]);
 
   if (branchState.$status === 'initial' || branchState.$status === 'loading') {
     return <GitBranchLoading />;

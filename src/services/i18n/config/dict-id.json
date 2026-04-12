@@ -209,6 +209,11 @@
       "appLogs": {
         "title": "Log Aplikasi",
         "subtitle": "Log aplikasi dan error terkini"
+      },
+      "dangerZone": {
+        "title": "Danger Zone",
+        "deleteThisApp": "Hapus Aplikasi",
+        "deleteThisAppDescription": "Hapus aplikasi ini beserta seluruh datanya secara permanen. Tindakan ini tidak dapat dibatalkan."
       }
     },
     "applicationsCreate": {
@@ -637,6 +642,13 @@
         "title": "Deploy otomatis",
         "enable": "Gunakan deploy otomatis",
         "deployFromBranch": "Deploy dari branch"
+      },
+      "general": {
+        "title": "Umum",
+        "workdir": "Direktori Kerja",
+        "workdirPlaceholder": "/app",
+        "port": "Port",
+        "portPlaceholder": "misal 3000"
       }
     },
     "artifactNew": {
