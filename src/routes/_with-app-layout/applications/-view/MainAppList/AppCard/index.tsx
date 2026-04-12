@@ -1,16 +1,15 @@
-import { BuildingIcon, GlobeIcon, UserIcon } from 'lucide-react';
+import { BuildingIcon, Code2Icon, GithubIcon, GitBranchIcon, ServerIcon, UserIcon } from 'lucide-react';
+
+import { useNavigate } from '@tanstack/react-router';
 
 import { useAuthLoggedIn } from '@/services/auth';
 import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
 
 import { getBundleIcon, getSourceBadge } from '@/entities/application/ui/lib';
-import { CICD_ARTIFACT_STATUS_METADATA } from '@/entities/cicd-artifact/ui/constants/state-metadata';
-import { OS_SERVICE_STATE_METADATA } from '@/entities/os-service/ui/constants/state-metadata';
 
 import { getDistanceFromNow } from '@/shared/libs/browser/date';
 import { capitalizeFirstLetter } from '@/shared/libs/browser/string';
 import { cn } from '@/shared/libs/tailwind/cn';
-import { IconServer } from '@/shared/presentation/icons';
 import IconEye from '@/shared/presentation/icons/Eye';
 import IconEyeActive from '@/shared/presentation/icons/EyeActive';
 import IconLastDateActive from '@/shared/presentation/icons/LastDateActive';
@@ -32,24 +31,11 @@ export default function AppCard(props: AppCardProps) {
   const locale = useDevetekLocale();
   const { gitProfile } = useAuthLoggedIn();
 
+  const navigate = useNavigate();
+
   const { status: lastArtifactStatus } = data.state.lastArtifact;
 
-  const serviceState = OS_SERVICE_STATE_METADATA[data.state.service];
-  const artifactState = CICD_ARTIFACT_STATUS_METADATA[lastArtifactStatus];
-
   const lastUpdated = getDistanceFromNow(data.timestamp.updated, locale);
-
-  const handleClickAppDomain = () => {
-    const { domain } = data.additionalInfo;
-
-    if (!domain) return undefined;
-
-    const refinedDomain = /^https?:\/\//.test(domain)
-      ? domain
-      : `https://${domain}`;
-
-    window.open(refinedDomain, '_blank');
-  };
 
   const cnCardWrapper = cn({
     'border-red-500': lastArtifactStatus === 'failed',
@@ -90,10 +76,13 @@ export default function AppCard(props: AppCardProps) {
   };
 
   if (variant === 'compact') {
-    const { icon: ArtifactStateIcon, color: artifactStateColor } =
-      artifactState;
+    const sourceValue = data.identity.source === 'repository'
+      ? `${data.identity.repoOrganization}/${data.identity.repoName}`
+      : undefined;
 
-    const { icon: ServiceStateIcon, color: serviceStateColor } = serviceState;
+    const deployValue = data.configDefs.cicd.autoDeploy.enabled
+      ? data.configDefs.cicd.autoDeploy.fromBranch
+      : t('common.terms.off');
 
     return (
       <ResourceCard.Compact
@@ -125,9 +114,14 @@ export default function AppCard(props: AppCardProps) {
         <ResourceCard.Compact.SecondaryInfos
           infos={[
             {
-              icon: IconServer,
-              infoLabel: t('common.terms.server'),
-              value: data.additionalInfo.server?.name,
+              icon: GithubIcon,
+              infoLabel: t('common.terms.source'),
+              value: sourceValue,
+            },
+            {
+              icon: GitBranchIcon,
+              infoLabel: t('common.terms.auto'),
+              value: deployValue,
             },
           ]}
         />
@@ -137,23 +131,13 @@ export default function AppCard(props: AppCardProps) {
           actions={actions}
         />
         <ResourceCard.Compact.Footnote>
-          <ResourceCard.Compact.Footnote.StatusIcons
-            icons={[
-              ({ className }) => (
-                <ArtifactStateIcon
-                  className={className}
-                  style={{ color: `var(${artifactStateColor})` }}
-                />
-              ),
-              ({ className }) => (
-                <ServiceStateIcon
-                  className={className}
-                  style={{ color: `var(${serviceStateColor})` }}
-                />
-              ),
-            ]}
-            tooltipMessage="Status and Service State"
-          />
+          {data.configDefs.lifecycle?.setup.languages[0] && (
+            <ResourceCard.Compact.Footnote.Item
+              icon={Code2Icon}
+              label={t('common.terms.language')}
+              value={`${data.configDefs.lifecycle.setup.languages[0].name} ${data.configDefs.lifecycle.setup.languages[0].version}`}
+            />
+          )}
           <ResourceCard.Compact.Footnote.Spacer />
           <ResourceCard.Compact.Footnote.Item
             icon={IconLastDateActive}
@@ -164,6 +148,10 @@ export default function AppCard(props: AppCardProps) {
       </ResourceCard.Compact>
     );
   }
+
+  const sourceValue = data.identity.source === 'repository'
+    ? `${data.identity.repoOrganization}/${data.identity.repoName}`
+    : undefined;
 
   return (
     <ResourceCard.Full
@@ -192,32 +180,29 @@ export default function AppCard(props: AppCardProps) {
       </ResourceCard.Full.Main>
       <ResourceCard.Full.Additionals slots={2}>
         <ResourceCard.Full.Additionals.PrimeInfo
-          title={t('common.terms.server')}
-          titleIcon={IconServer}
-          value={data.additionalInfo.server?.name}
+          title={t('common.terms.source')}
+          titleIcon={GithubIcon}
+          value={sourceValue}
+        />
+        <ResourceCard.Full.Additionals.PrimeInfoList
+          title={t('common.terms.deploy')}
+          titleIcon={ServerIcon}
+          infos={data.additionalInfo.servers.map((server) => ({
+            icon: ServerIcon,
+            infoLabel: server.name,
+            value: server.name,
+            onClick: () => navigate({ to: '/servers/$id', params: { id: String(server.id) } }),
+          }))}
         />
       </ResourceCard.Full.Additionals>
       <ResourceCard.Full.Footnote>
-        <ResourceCard.Full.Footnote.Item
-          label={t('common.terms.artifact')}
-          value={t(artifactState.i18n.statusLabel)}
-          valueIcon={artifactState.icon}
-          style={{
-            valueWrapper: {
-              color: `var(${artifactState.color})`,
-            },
-          }}
-        />
-        <ResourceCard.Full.Footnote.Item
-          label={t('common.terms.service')}
-          value={t(serviceState.i18n.statusLabel)}
-          valueIcon={serviceState.icon}
-          style={{
-            valueWrapper: {
-              color: `var(${serviceState.color})`,
-            },
-          }}
-        />
+        {data.configDefs.lifecycle?.setup.languages[0] && (
+          <ResourceCard.Full.Footnote.Item
+            label={t('common.terms.language')}
+            labelIcon={Code2Icon}
+            value={`${data.configDefs.lifecycle.setup.languages[0].name} ${data.configDefs.lifecycle.setup.languages[0].version}`}
+          />
+        )}
         <ResourceCard.Full.Footnote.Spacer />
         <ResourceCard.Full.Footnote.Item
           label={t('common.terms.lastUpdated')}

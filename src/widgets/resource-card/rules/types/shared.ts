@@ -36,4 +36,6 @@ export interface AdditionalsInfo {
   icon: CommonIcon;
   infoLabel: string;
   value?: string | null;
+  values?: string[];
+  onClick?: () => void;
 }

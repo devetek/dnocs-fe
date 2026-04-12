@@ -42,7 +42,7 @@ export default function Forms() {
         <FormItemEnable />
       </div>
 
-      {enableDeployment && (
+      
         <div className="flex flex-col gap-1 pb-4">
           <p className="font-bold text-xs text-primary/70">
             {t('deployFromBranch')}
@@ -56,7 +56,6 @@ export default function Forms() {
             message={form.formState.errors.autoDeploy?.fromBranch?.message}
           />
         </div>
-      )}
     </div>
   );
 }

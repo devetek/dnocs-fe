@@ -102,7 +102,7 @@ export function ctorState(
       message: raw.artifacts?.[0]?.error,
       status: raw.artifacts?.[0]?.installer_status,
     },
-    service: raw.deploys?.[0]?.service.state,
+    service: raw.deploys?.[0]?.service?.state,
   };
 }
 

@@ -85,7 +85,14 @@
       "description": "Description",
       "partOf": "part of",
       "ssh": "SSH",
-      "cloudProject": "Cloud Project"
+      "cloudProject": "Cloud Project",
+      "language": "Language",
+      "deployments": "Deployments",
+      "autoDeploy": "Auto Deploy",
+      "auto": "Auto",
+      "off": "Off",
+      "source": "Source",
+      "deploy": "Deploy"
     },
     "actions": {
       "refresh": "Refresh",

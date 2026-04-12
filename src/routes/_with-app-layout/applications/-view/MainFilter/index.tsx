@@ -6,7 +6,6 @@ import { Button } from '@/shared/presentation/atoms/ButtonV2';
 import { Card } from '@/shared/presentation/atoms/Card';
 import SearchCollapsible from '@/shared/presentation/atoms/SearchCollapsible';
 import SearchKeywordBadge from '@/shared/presentation/atoms/SearchKeywordBadge';
-import { Combobox } from '@/shared/presentation/molecules/Combobox';
 import { buildSegmentedControl } from '@/widgets/ui-atomic-builder/atom-segmented-control';
 
 import { useEmit } from '../../-model/events';
@@ -83,35 +82,6 @@ const SlotSearchCollapsible = () => {
   );
 };
 
-const SlotOwnership = () => {
-  const t = useDevetekTranslations();
-  const { setPagination, setOwnership, ownership } = useFilterModel();
-
-  return (
-    <Combobox
-      classNameButton="bg-card w-40"
-      placeholder={t('common.terms.ownership')}
-      items={
-        [
-          {
-            label: t('common.terms.mine'),
-            value: 'mine',
-          },
-          {
-            label: t('common.terms.teamResource'),
-            value: 'team',
-          },
-        ] as const
-      }
-      value={ownership}
-      onChange={(value) => {
-        setPagination(1);
-        setOwnership(value);
-      }}
-    />
-  );
-};
-
 const SlotKeywordBadge = () => {
   const { searchQuery, setSearchQuery, setPagination } = useFilterModel();
 
@@ -132,7 +102,6 @@ export default function MainFilter() {
       <Card className="bg-card/30 rounded-xl p-1.5 grid grid-cols-[1fr_auto] gap-x-2">
         <div className="flex items-center gap-2 flex-wrap">
           <SlotSearchCollapsible />
-          <SlotOwnership />
         </div>
 
         <div className="flex items-center gap-x-1">

@@ -17,12 +17,12 @@ export const schemaApplicationCard = z.object({
   timestamp: SchemaCommon.timestamp,
   additionalInfo: z.object({
     domain: z.string().optional(),
-    server: z
-      .object({
+    servers: z.array(
+      z.object({
         id: z.number(),
         name: z.string(),
-      })
-      .optional(),
+      }),
+    ),
   }),
 });
 

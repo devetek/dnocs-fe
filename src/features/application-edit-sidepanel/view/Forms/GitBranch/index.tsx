@@ -7,25 +7,15 @@ import { useDevetekTranslations } from '@/services/i18n';
 import { useApplicationEditModel } from '@/features/application-edit-sidepanel/model';
 import { useGitBranchModel } from '@/features/application-edit-sidepanel/model/git-branch';
 
-import {
-  couple,
-  guardedSelects,
-} from '@/shared/libs/react-factories/guardedSelect';
 import { ComboboxWithSearch } from '@/shared/presentation/molecules/ComboboxWithSearch';
 
 import { GitBranchError, GitBranchLoading } from '../../_presentation';
 
-const [guard, useGitBranches] = guardedSelects({
-  fallbackLoading: GitBranchLoading,
-  fallbackError: GitBranchError,
-})(couple(useGitBranchModel, (s) => s));
-
-export default guard(function FormItemFromBranch() {
+export default function FormItemFromBranch() {
   const { form } = useApplicationEditModel();
-
   const t = useDevetekTranslations();
 
-  const gitBranches = useGitBranches((s) => s.branches);
+  const branchState = useGitBranchModel();
 
   const { field } = useController({
     control: form.control,
@@ -40,20 +30,26 @@ export default guard(function FormItemFromBranch() {
     };
   }, [form]);
 
-  if (!form.watch('autoDeploy.isEnabled')) return null;
+  if (branchState.$status === 'initial' || branchState.$status === 'loading') {
+    return <GitBranchLoading />;
+  }
+
+  if (branchState.$status === 'failed') {
+    return <GitBranchError />;
+  }
+
+  const branches = (branchState as { branches: Array<{ name: string; commitHead: string }> }).branches;
 
   return (
     <ComboboxWithSearch
       classNameButton="w-full"
       value={field.value}
       onChange={field.onChange}
-      items={gitBranches.map((branch) => {
-        return {
-          label: branch.name,
-          value: branch.name,
-        };
-      })}
+      items={branches.map((branch: { name: string }) => ({
+        label: branch.name,
+        value: branch.name,
+      }))}
       placeholder={t('common.terms.selectBranch')}
     />
   );
-});
+}
