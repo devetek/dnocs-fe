@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useController } from 'react-hook-form';
+import { useController, useWatch } from 'react-hook-form';
 
 import { useDevetekTranslations } from '@/services/i18n';
 
@@ -64,7 +64,10 @@ export default function Forms() {
   const t = useDevetekTranslations('sidepanel.editApplication.autoDeployment');
   const tAll = useDevetekTranslations();
 
-  const enableDeployment = form.watch('autoDeploy.isEnabled');
+  const enableDeployment = useWatch({
+    control: form.control,
+    name: 'autoDeploy.isEnabled',
+  });
 
   useEffect(() => {
     if (!enableDeployment) {
