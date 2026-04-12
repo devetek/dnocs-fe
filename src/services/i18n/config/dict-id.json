@@ -209,6 +209,11 @@
       "appLogs": {
         "title": "Log Aplikasi",
         "subtitle": "Log aplikasi dan error terkini"
+      },
+      "dangerZone": {
+        "title": "Danger Zone",
+        "deleteThisApp": "Hapus Aplikasi",
+        "deleteThisAppDescription": "Hapus aplikasi ini beserta seluruh datanya secara permanen. Tindakan ini tidak dapat dibatalkan."
       }
     },
     "applicationsCreate": {

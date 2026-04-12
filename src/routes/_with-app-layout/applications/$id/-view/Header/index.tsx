@@ -1,4 +1,4 @@
-import { BuildingIcon, CalendarIcon, RefreshCwIcon, Trash2Icon, UserIcon } from 'lucide-react';
+import { BuildingIcon, CalendarIcon, RefreshCwIcon, UserIcon } from 'lucide-react';
 import { useMetaTags } from 'react-metatags-hook';
 
 import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
@@ -133,25 +133,6 @@ const RefreshButton = () => {
   );
 };
 
-const DeleteButton = () => {
-  const emit = useEmit();
-  const [appId, appName] = useAppDetail((s) => [s.id, s.identity.name]);
-
-  const handleDelete = () => {
-    emit('@applications::detail/application-delete', {
-      applicationId: appId,
-      applicationName: appName,
-    });
-  };
-
-  return (
-    <Button variant="destructive" size="sm" onClick={handleDelete}>
-      <Trash2Icon />
-      Delete App
-    </Button>
-  );
-};
-
 export default guard(function Header() {
   const headerStatus = useHeaderStatus();
 
@@ -166,7 +147,6 @@ export default guard(function Header() {
       rightAppend={
         <div className="flex items-center gap-2">
           <RefreshButton />
-          <DeleteButton />
         </div>
       }
     />

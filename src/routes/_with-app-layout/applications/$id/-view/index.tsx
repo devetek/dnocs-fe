@@ -4,6 +4,7 @@ import AppInformation from './AppInformation';
 import AppLogs from './AppLogs';
 import ArtifactsHistory from './ArtifactsHistory';
 import BannerGithubLogin from './BannerGithubLogin';
+import DangerZone from './DangerZone';
 import Header from './Header';
 
 export default function ApplicationsDetailView() {
@@ -23,6 +24,10 @@ export default function ApplicationsDetailView() {
             <AppInformation />
           </Layout.Aside>
         </Layout.Content>
+
+        <div className="mt-4">
+          <DangerZone />
+        </div>
       </Layout>
     </Guard>
   );

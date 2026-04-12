@@ -218,6 +218,11 @@
       "appLogs": {
         "title": "Application Logs",
         "subtitle": "Real-time application logs and errors"
+      },
+      "dangerZone": {
+        "title": "Danger Zone",
+        "deleteThisApp": "Delete Application",
+        "deleteThisAppDescription": "Permanently remove this application and all its data. This action cannot be undone."
       }
     },
     "applicationsCreate": {
