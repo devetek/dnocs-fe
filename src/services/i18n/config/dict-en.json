@@ -89,6 +89,7 @@
       "language": "Language",
       "deployments": "Deployments",
       "autoDeploy": "Auto Deploy",
+      "auto": "Auto",
       "off": "Off",
       "source": "Source",
       "deploy": "Deploy"

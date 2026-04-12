@@ -120,7 +120,7 @@ export default function AppCard(props: AppCardProps) {
             },
             {
               icon: GitBranchIcon,
-              infoLabel: t('common.terms.deploy'),
+              infoLabel: t('common.terms.auto'),
               value: deployValue,
             },
           ]}
