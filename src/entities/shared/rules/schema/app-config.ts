@@ -52,7 +52,7 @@ export const cicd = z.object({
     }),
     z.object({
       enabled: z.literal(true),
-      fromBranch: z.string(),
+      fromBranch: z.string().optional(),
     }),
   ]),
 });

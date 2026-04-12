@@ -651,6 +651,13 @@
         "title": "Auto Deployment",
         "enable": "Enable auto deployment",
         "deployFromBranch": "Deploy from branch"
+      },
+      "general": {
+        "title": "General",
+        "workdir": "Work Directory",
+        "workdirPlaceholder": "/app",
+        "port": "Port",
+        "portPlaceholder": "e.g. 3000"
       }
     },
     "artifactNew": {

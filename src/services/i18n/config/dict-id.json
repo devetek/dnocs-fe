@@ -642,6 +642,13 @@
         "title": "Deploy otomatis",
         "enable": "Gunakan deploy otomatis",
         "deployFromBranch": "Deploy dari branch"
+      },
+      "general": {
+        "title": "Umum",
+        "workdir": "Direktori Kerja",
+        "workdirPlaceholder": "/app",
+        "port": "Port",
+        "portPlaceholder": "misal 3000"
       }
     },
     "artifactNew": {

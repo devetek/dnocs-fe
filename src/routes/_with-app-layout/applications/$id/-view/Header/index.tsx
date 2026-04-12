@@ -1,4 +1,4 @@
-import { BuildingIcon, CalendarIcon, RefreshCwIcon, UserIcon } from 'lucide-react';
+import { BuildingIcon, CalendarIcon, PencilIcon, RefreshCwIcon, UserIcon } from 'lucide-react';
 import { useMetaTags } from 'react-metatags-hook';
 
 import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
@@ -133,6 +133,46 @@ const RefreshButton = () => {
   );
 };
 
+const EditButton = () => {
+  const emit = useEmit();
+  const [appId, appName, appIdentity, appConfigDefs] = useAppDetail((s) => [
+    s.id,
+    s.identity.name,
+    s.identity,
+    s.configDefs,
+  ]);
+  const appData = useAppDataModel();
+
+  const handleEdit = () => {
+    if (appIdentity.source !== 'repository') return;
+
+    emit('@applications::detail/application-edit', {
+      applicationId: appId,
+      applicationName: appName,
+      repoName: appIdentity.repoName ?? '',
+      repoOrganization: appIdentity.repoOrganization ?? '',
+      rawAppDefinition: appData.rawAppDefinition,
+      workdir: appData.rawWorkdir,
+      port: appData.rawAppDefinition?.run.port,
+      autoDeploy: {
+        fromBranch: appConfigDefs.cicd.autoDeploy.enabled
+          ? appConfigDefs.cicd.autoDeploy.fromBranch
+          : undefined,
+        isEnabled: appConfigDefs.cicd.autoDeploy.enabled,
+      },
+    });
+  };
+
+  if (appIdentity.source !== 'repository') return null;
+
+  return (
+    <Button variant="outline" size="sm" onClick={handleEdit}>
+      <PencilIcon />
+      Edit
+    </Button>
+  );
+};
+
 export default guard(function Header() {
   const headerStatus = useHeaderStatus();
 
@@ -147,6 +187,7 @@ export default guard(function Header() {
       rightAppend={
         <div className="flex items-center gap-2">
           <RefreshButton />
+          <EditButton />
         </div>
       }
     />

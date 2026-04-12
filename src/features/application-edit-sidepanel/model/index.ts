@@ -19,6 +19,8 @@ export const [ApplicationEditModelProvider, useApplicationEditModel] =
             fromBranch: props.autoDeploy.fromBranch || '',
             isEnabled: !!props.autoDeploy.isEnabled,
           },
+          workdir: props.workdir ?? '',
+          port: props.port,
         },
       });
 
