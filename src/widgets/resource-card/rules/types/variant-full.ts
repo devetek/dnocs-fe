@@ -56,6 +56,12 @@ export interface ResourceCardFullAdditionalsSecondaryInfosProps {
   infos: AdditionalsInfo[];
 }
 
+export interface ResourceCardFullAdditionalsPrimeInfoListProps {
+  title: string;
+  titleIcon: CommonIcon;
+  infos: AdditionalsInfo[];
+}
+
 export interface ResourceCardFullFootnoteProps {
   className?: string;
   children: ReactNode;

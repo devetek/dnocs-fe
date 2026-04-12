@@ -22,8 +22,6 @@ export const toApplicationCard = createAdapter<
   DTOs.ApplicationV1,
   ApplicationCard
 >((raw) => {
-  const latestDeployment = raw.deploys?.[0];
-
   return schemaApplicationCard.parse({
     id: String(raw.id),
     identity: ctorIdentity(raw),
@@ -39,12 +37,12 @@ export const toApplicationCard = createAdapter<
     },
     additionalInfo: {
       domain: raw.domain,
-      server: latestDeployment?.machine?.id
-        ? {
-            id: latestDeployment.machine.id,
-            name: latestDeployment.machine.hostname,
-          }
-        : undefined,
+      servers: (raw.deploys ?? [])
+        .filter((d) => d.machine?.id != null)
+        .map((d) => ({
+          id: d.machine!.id,
+          name: d.machine!.hostname,
+        })),
     },
   } satisfies KeysOnlyDeep<z.input<typeof schemaApplicationCard>>);
 });

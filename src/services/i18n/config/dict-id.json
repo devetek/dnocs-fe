@@ -85,7 +85,13 @@
       "description": "Keterangan",
       "partOf": "bagian dari",
       "ssh": "SSH",
-      "cloudProject": "Proyek Cloud"
+      "cloudProject": "Proyek Cloud",
+      "language": "Bahasa",
+      "deployments": "Deployments",
+      "autoDeploy": "Auto Deploy",
+      "off": "Mati",
+      "source": "Sumber",
+      "deploy": "Deploy"
     },
     "actions": {
       "refresh": "Segarkan",

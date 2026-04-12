@@ -47,5 +47,8 @@ export default function ResourceCardFull(props: Props) {
 
 ResourceCardFull.Main = slotted('Main', RCDMain);
 ResourceCardFull.Additionals = slotted('Additionals', RCDAdditionals);
+ResourceCardFull.Additionals.PrimeInfo = RCDAdditionals.PrimeInfo;
+ResourceCardFull.Additionals.PrimeInfoList = RCDAdditionals.PrimeInfoList;
+ResourceCardFull.Additionals.SecondaryInfos = RCDAdditionals.SecondaryInfos;
 ResourceCardFull.Actions = slotted('Actions', RCDActions);
 ResourceCardFull.Footnote = slotted('Footnote', RCDFootnote);
