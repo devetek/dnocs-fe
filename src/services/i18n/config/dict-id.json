@@ -117,7 +117,8 @@
       "signUp": "Daftar",
       "back": "Kembali",
       "create": "Buat",
-      "reinstall": "Reinstall"
+      "reinstall": "Reinstall",
+      "restore": "Pulihkan"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -592,8 +593,10 @@
     "loadBalancerDelete": {
       "success": "Berhasil menghapus load balancer « {loadBalancer} ».",
       "error": "Gagal menghapus load balancer « {loadBalancer} »!"
-    },
-    "domainDelete": {
+    },    "loadBalancerRestore": {
+      "success": "Berhasil memulihkan load balancer « {loadBalancer} ».",
+      "error": "Gagal memulihkan load balancer « {loadBalancer} »!"
+    },    "domainDelete": {
       "success": "Berhasil menghapus domain « {domain} ».",
       "error": "Gagal menghapus domain « {domain} »!"
     },

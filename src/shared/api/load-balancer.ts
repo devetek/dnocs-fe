@@ -1,5 +1,6 @@
 import * as Create from './load-balancer.create';
 import * as Update$IdCaseMigrateOwnership from './load-balancer.update.$id[migrate-ownership]';
+import * as Update$IdCaseRestore from './load-balancer.update.$id[restore]';
 
 const Root = {
   Create,
@@ -7,6 +8,7 @@ const Root = {
     $Id: {
       $: {
         MigrateOwnership: Update$IdCaseMigrateOwnership,
+        Restore: Update$IdCaseRestore,
       },
     },
   },

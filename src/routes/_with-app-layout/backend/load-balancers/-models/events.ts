@@ -6,6 +6,7 @@ import type {
   LbDeletePayload,
   LbMigrateOwnershipPayload,
   LbOpenDetailsPayload,
+  LbRestorePayload,
 } from '../-rules/usecase-types';
 
 type EventsRegistry = Rescope<
@@ -16,6 +17,7 @@ type EventsRegistry = Rescope<
     'filters/pagination--set': number;
     'data--refresh': null;
     'lb--delete': LbDeletePayload;
+    'lb--restore': LbRestorePayload;
     'open--create': null;
     'open--migrate-ownership': LbMigrateOwnershipPayload;
     'open--details': LbOpenDetailsPayload;

@@ -117,7 +117,8 @@
       "signUp": "Sign Up",
       "back": "Back",
       "create": "Create",
-      "reinstall": "Reinstall"
+      "reinstall": "Reinstall",
+      "restore": "Restore"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -609,8 +610,10 @@
     "loadBalancerDelete": {
       "success": "Successfully deleted load balancer « {loadBalancer} ».",
       "error": "Failed to delete load balancer « {loadBalancer} »!"
-    },
-    "loadBalancerCreate": {
+    },    "loadBalancerRestore": {
+      "success": "Successfully restored load balancer « {loadBalancer} ».",
+      "error": "Failed to restore load balancer « {loadBalancer} »!"
+    },    "loadBalancerCreate": {
       "success": "Load balancer created successfully.",
       "error": "Failed to create load balancer."
     },

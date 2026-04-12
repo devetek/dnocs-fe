@@ -1,4 +1,5 @@
-import { ArrowRightIcon, CrosshairIcon, StarIcon } from 'lucide-react';
+import { ArrowRightIcon, BoxIcon, CrosshairIcon, StarIcon } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
 
 import { useDevetekTranslations } from '@/services/i18n';
 
@@ -37,22 +38,100 @@ export default function L7RuleRow(props: L7RuleRowProps) {
 
   const t = useDevetekTranslations();
 
-  if (upstreamRule.type !== 'proxy-pass') {
-    throw Error('TODO!');
+  if (upstreamRule.type === 'proxy-pass') {
+    const { backendTarget, matchingPath } = upstreamRule;
+    const { address, port } = backendTarget.at(0) ?? {};
+
+    return (
+      <div className="bg-card/30 border shadow-xs rounded-sm overflow-hidden">
+        <Subheading
+          upstreamType="proxy-pass"
+          priority={1}
+          trafficPercentage="100%"
+        />
+
+        <div className="bg-card shadow-xs border-t rounded-sm overflow-hidden">
+          <div className="px-3.5 py-2.5 w-full grid grid-cols-[1.75fr_auto_2fr] gap-x-2">
+            <div className="flex flex-col">
+              <h6 className="font-semibold text-primary/70 text-[0.7rem]">
+                {t('sidepanel.loadBalancerDetails.pathPattern')}
+              </h6>
+              <code className="font-semibold text-primary text-sm break-all">
+                {matchingPath}
+              </code>
+            </div>
+            <div className="flex items-center justify-center">
+              <ArrowRightIcon className="text-primary/80" />
+            </div>
+            <div className="flex flex-col">
+              {address != null && port != null ? (
+                <>
+                  <h6 className="font-semibold text-primary/70 text-[0.7rem]">
+                    Target ({address.protocol.toLocaleUpperCase()})
+                  </h6>
+                  <code className="font-semibold text-primary text-sm tracking-tighter break-all">
+                    {address.hostname}:<span className="opacity-70">{port}</span>
+                  </code>
+                </>
+              ) : (
+                <span className="text-primary/40 text-xs italic">—</span>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
-  const { backendTarget, matchingPath } = upstreamRule;
+  if (upstreamRule.type === 'proxy-pass-app') {
+    const { matchingPath, target } = upstreamRule;
 
-  const { address, port } = backendTarget.at(0) ?? {};
+    return (
+      <div className="bg-card/30 border shadow-xs rounded-sm overflow-hidden">
+        <Subheading
+          upstreamType="proxy-pass-app"
+          priority={1}
+          trafficPercentage="100%"
+        />
 
-  if (address == null || port == null) {
-    throw Error('TODO!');
+        <div className="bg-card shadow-xs border-t rounded-sm overflow-hidden">
+          <div className="px-3.5 py-2.5 w-full grid grid-cols-[1.75fr_auto_2fr] gap-x-2">
+            <div className="flex flex-col">
+              <h6 className="font-semibold text-primary/70 text-[0.7rem]">
+                {t('sidepanel.loadBalancerDetails.pathPattern')}
+              </h6>
+              <code className="font-semibold text-primary text-sm break-all">
+                {matchingPath}
+              </code>
+            </div>
+            <div className="flex items-center justify-center">
+              <ArrowRightIcon className="text-primary/80" />
+            </div>
+            <div className="flex flex-col">
+              <h6 className="font-semibold text-primary/70 text-[0.7rem] flex items-center gap-x-1">
+                <BoxIcon className="size-3" /> Application
+              </h6>
+              <Link
+                to="/applications/$id"
+                params={{ id: String(target.applicationId) }}
+                className="font-semibold text-primary text-sm tracking-tighter break-all underline underline-offset-2 hover:opacity-70"
+              >
+                #{target.applicationId}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
+
+  // static-file
+  const { matchingPath, filePath } = upstreamRule;
 
   return (
     <div className="bg-card/30 border shadow-xs rounded-sm overflow-hidden">
       <Subheading
-        upstreamType="proxy-pass"
+        upstreamType="static-file"
         priority={1}
         trafficPercentage="100%"
       />
@@ -72,10 +151,10 @@ export default function L7RuleRow(props: L7RuleRowProps) {
           </div>
           <div className="flex flex-col">
             <h6 className="font-semibold text-primary/70 text-[0.7rem]">
-              Target ({address.protocol.toLocaleUpperCase()})
+              Static File
             </h6>
             <code className="font-semibold text-primary text-sm tracking-tighter break-all">
-              {address.hostname}:<span className="opacity-70">{port}</span>
+              {filePath.join(', ')}
             </code>
           </div>
         </div>
