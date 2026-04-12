@@ -18,16 +18,13 @@ export default function ApplicationsDetailView() {
             <BannerGithubLogin />
             <ArtifactsHistory />
             <AppLogs />
+            <DangerZone />
           </Layout.Main>
 
           <Layout.Aside>
             <AppInformation />
           </Layout.Aside>
         </Layout.Content>
-
-        <div className="mt-4">
-          <DangerZone />
-        </div>
       </Layout>
     </Guard>
   );
