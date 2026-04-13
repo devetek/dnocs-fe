@@ -182,6 +182,14 @@
         "title": "Tidak ada aplikasi ditemukan.",
         "message": "Mengapa tidak menambahkan yang baru untuk memulai?",
         "cta": "Tambah aplikasi baru"
+      },
+      "appCard": {
+        "loadBalancers": {
+          "title": "Load Balancer",
+          "emptyMessage": "Tidak ada load balancer yang terhubung ke aplikasi ini.",
+          "expand": "Tampilkan load balancer",
+          "collapse": "Sembunyikan load balancer"
+        }
       }
     },
     "applicationDetail": {

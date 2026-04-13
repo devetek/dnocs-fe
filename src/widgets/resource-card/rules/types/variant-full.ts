@@ -87,3 +87,7 @@ export interface ResourceCardFullActionsProps {
   visibleActionOnlyIcon?: boolean;
   labelMore?: string;
 }
+
+export interface ResourceCardFullExpandableProps {
+  children: ReactNode;
+}
