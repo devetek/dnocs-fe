@@ -15,6 +15,7 @@ import IconEyeActive from '@/shared/presentation/icons/EyeActive';
 import IconLastDateActive from '@/shared/presentation/icons/LastDateActive';
 import { ResourceCard } from '@/widgets/resource-card';
 
+import AppLoadBalancers from './AppLoadBalancers';
 import type { AppCardProps } from './types';
 
 export default function AppCard(props: AppCardProps) {
@@ -210,6 +211,9 @@ export default function AppCard(props: AppCardProps) {
           value={lastUpdated}
         />
       </ResourceCard.Full.Footnote>
+      <ResourceCard.Full.Expandable>
+        <AppLoadBalancers applicationId={data.id} />
+      </ResourceCard.Full.Expandable>
       <ResourceCard.Full.Actions
         visibleActionOnlyIcon
         labelMore={t('common.actions.more')}

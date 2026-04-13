@@ -191,6 +191,14 @@
         "title": "No applications found.",
         "message": "Why not add new one to get started?",
         "cta": "Add new application"
+      },
+      "appCard": {
+        "loadBalancers": {
+          "title": "Load Balancers",
+          "emptyMessage": "No load balancers linked to this application.",
+          "expand": "Show load balancers",
+          "collapse": "Hide load balancers"
+        }
       }
     },
     "applicationDetail": {

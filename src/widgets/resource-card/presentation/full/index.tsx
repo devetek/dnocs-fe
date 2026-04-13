@@ -6,6 +6,7 @@ import type { ResourceCardFullProps as Props } from '../../rules/types/variant-f
 
 import RCDActions from './_Actions';
 import RCDAdditionals from './_Additionals';
+import RCDExpandable from './_Expandable';
 import RCDFootnote from './_Footnote';
 import RCDMain from './_Main';
 
@@ -14,12 +15,13 @@ const slotted = createScopeForSlot('@@ResourceCardFull');
 export default function ResourceCardFull(props: Props) {
   const { classNameCardWrapper, classNameCardInner, onClickBody, children } = props;
 
-  const [slotMain, slotAdditionals, slotActions, slotFootnote] = extractSlots(
+  const [slotMain, slotAdditionals, slotActions, slotFootnote, slotExpandable] = extractSlots(
     children,
     ResourceCardFull.Main,
     ResourceCardFull.Additionals,
     ResourceCardFull.Actions,
     ResourceCardFull.Footnote,
+    ResourceCardFull.Expandable,
   );
 
   const cnCardWrapper = cn(
@@ -40,6 +42,8 @@ export default function ResourceCardFull(props: Props) {
         <section>{slotActions}</section>
       </Card>
 
+      {slotExpandable}
+
       <div className={cnFooterWrapper}>{slotFootnote}</div>
     </Card>
   );
@@ -51,4 +55,6 @@ ResourceCardFull.Additionals.PrimeInfo = RCDAdditionals.PrimeInfo;
 ResourceCardFull.Additionals.PrimeInfoList = RCDAdditionals.PrimeInfoList;
 ResourceCardFull.Additionals.SecondaryInfos = RCDAdditionals.SecondaryInfos;
 ResourceCardFull.Actions = slotted('Actions', RCDActions);
+ResourceCardFull.Expandable = slotted('Expandable', RCDExpandable);
 ResourceCardFull.Footnote = slotted('Footnote', RCDFootnote);
+
