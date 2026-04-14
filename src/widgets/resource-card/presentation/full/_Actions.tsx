@@ -58,6 +58,35 @@ const ActionButton = (props: ActionButtonProps) => {
     );
   });
 
+  if (action.href) {
+    if (visibleActionOnlyIcon && elIcon) {
+      return (
+        <Tooltip as="div" message={label} passthrough>
+          <a
+            href={action.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cnActionWrapper}
+          >
+            {elIcon}
+          </a>
+        </Tooltip>
+      );
+    }
+
+    return (
+      <a
+        href={action.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cnActionWrapper}
+      >
+        {elIcon}
+        {label}
+      </a>
+    );
+  }
+
   if (visibleActionOnlyIcon && elIcon) {
     return (
       <Tooltip as="div" message={label} passthrough>

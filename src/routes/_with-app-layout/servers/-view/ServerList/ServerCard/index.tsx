@@ -8,6 +8,8 @@ import {
   UserIcon,
 } from 'lucide-react';
 
+import { useNavigate, useRouter } from '@tanstack/react-router';
+
 import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
 
 import { SERVER_PROVIDER_METADATA } from '@/entities/server/ui/constants/provider-metadata';
@@ -30,7 +32,6 @@ export default function ServerCard(props: ServerCardProps) {
 
     onClickEdit,
     onClickStatus,
-    onClickDetails,
     onClickMigrateOwnership,
     onClickDelete,
     onClickReinstall,
@@ -38,8 +39,12 @@ export default function ServerCard(props: ServerCardProps) {
 
   const t = useDevetekTranslations();
   const locale = useDevetekLocale();
+  const navigate = useNavigate();
+  const router = useRouter();
 
   const lastUpdated = getDistanceFromNow(data.timestamp.updated, locale);
+
+  const detailsHref = router.buildLocation({ to: '/servers/$id', params: { id: data.id } }).href;
 
   const cnCardWrapper = cn({
     'border-red-500': data.state.status === 'failed',
@@ -58,11 +63,11 @@ export default function ServerCard(props: ServerCardProps) {
     SERVER_PROVIDER_METADATA[data.cloud?.provider ?? 'other'];
 
   const actions = [
-    !!onClickDetails && {
+    {
       label: t('common.actions.details'),
       icon: IconEye,
       iconActive: IconEyeActive,
-      onClick: onClickDetails,
+      href: detailsHref,
     },
     data.state.status !== 'progress' && {
       label: t('common.actions.reinstall'),
@@ -98,7 +103,7 @@ export default function ServerCard(props: ServerCardProps) {
     return (
       <ResourceCard.Compact
         classNameCardWrapper={cnCardWrapper}
-        onClickBody={onClickDetails}
+        onClickBody={data.host.name ? () => navigate({ to: '/servers/$id', params: { id: data.id } }) : undefined}
       >
         <ResourceCard.Compact.Main>
           <ResourceCard.Compact.Main.Hero
@@ -193,7 +198,6 @@ export default function ServerCard(props: ServerCardProps) {
   return (
     <ResourceCard.Full
       classNameCardWrapper={cnCardWrapper}
-      onClickBody={onClickDetails}
     >
       <ResourceCard.Full.Main>
         <ResourceCard.Full.Main.Hero
@@ -208,6 +212,7 @@ export default function ServerCard(props: ServerCardProps) {
         />
         <ResourceCard.Full.Main.Content
           title={data.host.name}
+          onClickTitle={data.host.name ? () => navigate({ to: '/servers/$id', params: { id: data.id } }) : undefined}
           status={[
             !!data.ownership.team && {
               icon: BuildingIcon,
