@@ -2,7 +2,6 @@ import { BuildingIcon, Code2Icon, GithubIcon, GitBranchIcon, ServerIcon, UserIco
 
 import { useNavigate } from '@tanstack/react-router';
 
-import { useAuthLoggedIn } from '@/services/auth';
 import { useDevetekLocale, useDevetekTranslations } from '@/services/i18n';
 
 import { getBundleIcon, getSourceBadge } from '@/entities/application/ui/lib';
@@ -22,7 +21,6 @@ export default function AppCard(props: AppCardProps) {
   const {
     variant,
     data,
-    onClickEdit,
     onClickDelete,
     onClickMigrateOwnership,
     onClickDetails,
@@ -30,7 +28,6 @@ export default function AppCard(props: AppCardProps) {
 
   const t = useDevetekTranslations();
   const locale = useDevetekLocale();
-  const { gitProfile } = useAuthLoggedIn();
 
   const navigate = useNavigate();
 
@@ -51,12 +48,6 @@ export default function AppCard(props: AppCardProps) {
       iconActive: IconEyeActive,
       onClick: onClickDetails,
     },
-    !!onClickEdit &&
-      data.identity.source === 'repository' && {
-        disabled: !gitProfile,
-        label: t('common.actions.edit'),
-        onClick: onClickEdit,
-      },
     {
       label: t('common.actions.migrateOwnership'),
       onClick: onClickMigrateOwnership,
@@ -88,7 +79,7 @@ export default function AppCard(props: AppCardProps) {
     return (
       <ResourceCard.Compact
         classNameCardWrapper={cnCardWrapper}
-        onClickBody={onClickDetails}
+        onClickBody={() => navigate({ to: '/applications/$id', params: { id: String(data.id) } })}
       >
         <ResourceCard.Compact.Main>
           <div className="flex items-start gap-x-2 w-full text-left">
@@ -157,7 +148,6 @@ export default function AppCard(props: AppCardProps) {
   return (
     <ResourceCard.Full
       classNameCardWrapper={cnCardWrapper}
-      onClickBody={onClickDetails}
     >
       <ResourceCard.Full.Main>
         <ResourceCard.Full.Main.Hero
@@ -167,6 +157,7 @@ export default function AppCard(props: AppCardProps) {
         />
         <ResourceCard.Full.Main.Content
           title={data.identity.name}
+          onClickTitle={() => navigate({ to: '/applications/$id', params: { id: String(data.id) } })}
           status={[
             !!data.ownership.team && {
               icon: BuildingIcon,

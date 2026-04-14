@@ -47,7 +47,7 @@ RCDMain.Hero = function Hero(props: HeroProps) {
 };
 
 RCDMain.Content = function Content(props: ContentProps) {
-  const { className, title, description, status, subStatus } = props;
+  const { className, title, description, status, subStatus, onClickTitle } = props;
 
   const t = useDevetekTranslations();
 
@@ -59,7 +59,10 @@ RCDMain.Content = function Content(props: ContentProps) {
   return (
     <div className={cnWrapper}>
       <Tooltip message={title}>
-        <p className="font-bold text-sm sm:text-base break-all line-clamp-1 w-max max-w-full">
+        <p
+          className={cn('font-bold text-sm sm:text-base break-all line-clamp-1 w-max max-w-full', onClickTitle && 'cursor-pointer hover:underline')}
+          onClick={onClickTitle}
+        >
           {title || <em className="opacity-50">{t('common.terms.unknown')}</em>}
         </p>
       </Tooltip>

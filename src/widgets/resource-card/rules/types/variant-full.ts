@@ -35,6 +35,7 @@ export interface ResourceCardFullMainContentProps {
   description?: string;
   status?: Array<false | MainContentStatus>;
   subStatus?: Array<false | MainContentStatus>;
+  onClickTitle?: () => void;
 }
 
 export interface ResourceCardFullAdditionalsProps {
