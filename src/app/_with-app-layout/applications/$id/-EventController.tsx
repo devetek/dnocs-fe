@@ -2,6 +2,7 @@ import { useEmit, useSubscribe } from './-model/events';
 import useApplicationBuildEditUsecase from './-usecase/application-build-edit';
 import useApplicationEditUsecase from './-usecase/application-edit';
 import useApplicationRunEditUsecase from './-usecase/application-run-edit';
+import useApplicationSetupEditUsecase from './-usecase/application-setup-edit';
 import useApplicationDeleteUsecase from './-usecase/application-delete';
 import useArtifactDeleteUsecase from './-usecase/artifact-delete';
 import useArtifactProgressCancelUsecase from './-usecase/artifact-progress-cancel';
@@ -32,6 +33,10 @@ export default function EventController() {
   });
 
   const [handleApplicationRunEdit] = useApplicationRunEditUsecase({
+    onSuccess: () => emit('@applications::detail/app-detail-refresh', null),
+  });
+
+  const [handleApplicationSetupEdit] = useApplicationSetupEditUsecase({
     onSuccess: () => emit('@applications::detail/app-detail-refresh', null),
   });
 
@@ -95,6 +100,11 @@ export default function EventController() {
   useSubscribe(
     '@applications::detail/application-run-edit',
     handleApplicationRunEdit,
+  );
+
+  useSubscribe(
+    '@applications::detail/application-setup-edit',
+    handleApplicationSetupEdit,
   );
 
   return null;
