@@ -670,6 +670,7 @@ export const getVarsGit = (vars: GitVars) => {
   };
 
   let useRole: unknown[] = [];
+  const phpPackagesExtra: string[] = [];
   switch (appProgLang) {
     case 'go':
       useRole = [
@@ -696,6 +697,10 @@ export const getVarsGit = (vars: GitVars) => {
       ];
       break;
     case 'php':
+      if (appProgLangVersion?.includes('8.')) {
+        phpPackagesExtra.push(`php${appProgLangVersion}-swoole`);
+      }
+
       useRole = [
         {
           name: 'geerlingguy.php-versions',
@@ -709,7 +714,7 @@ export const getVarsGit = (vars: GitVars) => {
             php_enable_php_fpm: false,
             php_fpm_state: 'stopped',
             php_fpm_enabled_on_boot: false,
-            php_packages_extra: [`php${appProgLangVersion}-swoole`],
+            php_packages_extra: phpPackagesExtra,
           },
         },
         {
