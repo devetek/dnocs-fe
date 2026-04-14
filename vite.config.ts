@@ -9,10 +9,12 @@ import viteTsConfigPaths from 'vite-tsconfig-paths';
 const BUILD_DIR: string = process.env.BUILD_DIR || '.output';
 const BASE_PATH: string = process.env.BASE_PATH || '/';
 const isProduction: boolean = process.env.NODE_ENV === 'production';
-const ALLOWED_HOSTS: string[] | true = process.env.ALLOWED_HOSTS ? JSON.parse(process.env.ALLOWED_HOSTS || '["*"]') : true;
+const ALLOWED_HOSTS: string[] | true = process.env.ALLOWED_HOSTS
+  ? JSON.parse(process.env.ALLOWED_HOSTS || '["*"]')
+  : true;
 
 const config = defineConfig({
-  build:{
+  build: {
     outDir: BUILD_DIR,
   },
   base: BASE_PATH,
@@ -27,14 +29,18 @@ const config = defineConfig({
       baseURL: BASE_PATH,
       output: {
         dir: BUILD_DIR,
-      }
+      },
     }),
     // this is the plugin that enables path aliases
     viteTsConfigPaths({
       projects: ['./tsconfig.json'],
     }),
     tailwindcss(),
-    tanstackStart({}),
+    tanstackStart({
+      router: {
+        routesDirectory: './app',
+      },
+    }),
     viteReact({
       babel: {
         plugins: ['babel-plugin-react-compiler'],
