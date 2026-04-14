@@ -79,7 +79,7 @@ export default function AppCard(props: AppCardProps) {
     return (
       <ResourceCard.Compact
         classNameCardWrapper={cnCardWrapper}
-        onClickBody={onClickDetails}
+        onClickBody={() => navigate({ to: '/applications/$id', params: { id: String(data.id) } })}
       >
         <ResourceCard.Compact.Main>
           <div className="flex items-start gap-x-2 w-full text-left">
