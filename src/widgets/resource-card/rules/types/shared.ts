@@ -12,6 +12,7 @@ export interface Action {
   icon?: CommonIcon;
   iconActive?: CommonIcon;
   onClick?: () => void;
+  href?: string;
 }
 
 export interface ActionButtonProps {
