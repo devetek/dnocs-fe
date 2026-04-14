@@ -5,9 +5,9 @@ import { useDevetekLocale } from '@/services/i18n';
 import { setLocale } from '@/services/i18n/usecase';
 import { useTheme } from '@/services/theme/model';
 
-import useDisplayView from '@/routes/-lib/use-display-view';
-import { useModel } from '@/routes/-models';
-import { useEmit } from '@/routes/-models/events';
+import useDisplayView from '@/app/-lib/use-display-view';
+import { useModel } from '@/app/-models';
+import { useEmit } from '@/app/-models/events';
 import { Button } from '@/shared/presentation/atoms/ButtonV2';
 
 import BrandLogo from '../-presentation/BrandLogo';
