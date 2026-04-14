@@ -59,6 +59,14 @@ export interface ApplicationRunEditPayload {
   envs: UnitEnvironmentKV[];
 }
 
+export interface ApplicationSetupEditPayload {
+  applicationId: SchemaCommon.UnitId;
+  applicationName: string;
+  rawAppDefinition: AppDefinition;
+  language: { name: string; version: string };
+  languages: Array<{ name: string; version: string }>;
+}
+
 export interface ApplicationEditPayload {
   applicationId: SchemaCommon.UnitId;
   applicationName: string;

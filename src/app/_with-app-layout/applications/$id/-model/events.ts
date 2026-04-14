@@ -6,6 +6,7 @@ import type {
   ApplicationDeletePayload,
   ApplicationEditPayload,
   ApplicationRunEditPayload,
+  ApplicationSetupEditPayload,
   ArtifactDeletePayload,
   ArtifactProgressCancelPayload,
   ArtifactRollbackPayload,
@@ -27,6 +28,7 @@ type EventsRegistry = Rescope<
     'application-edit': ApplicationEditPayload;
     'application-build-edit': ApplicationBuildEditPayload;
     'application-run-edit': ApplicationRunEditPayload;
+    'application-setup-edit': ApplicationSetupEditPayload;
     'app-detail-refresh': null;
     'git-detail-refresh': null;
     'server-usage-retry-all': null;

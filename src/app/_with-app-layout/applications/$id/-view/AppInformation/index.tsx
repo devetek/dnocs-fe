@@ -138,6 +138,17 @@ export default guard(function AppInformation() {
     });
   };
 
+  const handleEditSetup = () => {
+    if (!rawAppDefinition || !configDefs.lifecycle?.setup) return;
+    emit('@applications::detail/application-setup-edit', {
+      applicationId: appId,
+      applicationName: appName,
+      rawAppDefinition,
+      language: configDefs.lifecycle.setup.languages[0] ?? { name: '', version: '' },
+      languages: configDefs.lifecycle.setup.languages.slice(1),
+    });
+  };
+
   const lifecycle = configDefs?.lifecycle;
 
   const repoInfo = iife(() => {
@@ -228,14 +239,27 @@ export default guard(function AppInformation() {
               <AccordionContent className="px-4 pb-4">
                 <div className="flex flex-col gap-4">
                   {lifecycle.setup?.languages[0] && (
-                    <InfoRow
-                      label="Language Version"
-                      value={
-                        <Badge variant="outline" className="text-xs w-max font-mono">
-                          {lifecycle.setup.languages[0].name} {lifecycle.setup.languages[0].version}
-                        </Badge>
-                      }
-                    />
+                    <div className="flex flex-col gap-1.5">
+                      <div className="flex items-center justify-between">
+                        <SectionLabel>Language</SectionLabel>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 px-2 text-xs gap-1"
+                          onClick={handleEditSetup}
+                        >
+                          <Pencil className="size-3" />
+                          Edit
+                        </Button>
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {lifecycle.setup.languages.map((lang, i) => (
+                          <Badge key={i} variant="outline" className="text-xs font-mono">
+                            {lang.name} {lang.version}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
                   )}
 
                   <div className="flex flex-col gap-1.5">
