@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, useRouter } from '@tanstack/react-router';
 
 import { useDevetekTranslations } from '@/services/i18n';
 
@@ -24,6 +24,7 @@ export default buildResponseView({
     const { list } = props;
 
     const navigate = useNavigate();
+    const router = useRouter();
     const t = useDevetekTranslations();
     const emit = useEmit();
 
@@ -53,7 +54,8 @@ export default buildResponseView({
         {list.map((application: ApplicationCard) => {
           const handleClickDetails = () => {
             const { id } = application;
-            navigate({ to: '/applications/$id', params: { id: String(id) } });
+            const href = router.buildLocation({ to: '/applications/$id', params: { id: String(id) } }).href;
+            window.open(href, '_blank', 'noopener,noreferrer');
           };
 
           const handleClickEdit = () => {
