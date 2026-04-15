@@ -18,11 +18,14 @@ export const [WorkersModelProvider, useWorkersModel] = buildSelector(
   const { userProfile } = useAuthLoggedIn();
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [page, setPage] = useState(1);
 
   const [responseWorkersMine, refreshWorkersMine] = ApiServer.Find.useGet({
     filter: 'mine',
     userId: userProfile.id,
     searchQuery,
+    page,
+    pageSize: 3,
   });
 
   const [responseWorkersSharedWithMe, refreshWorkersSharedWithMe] =
@@ -30,12 +33,16 @@ export const [WorkersModelProvider, useWorkersModel] = buildSelector(
       filter: 'shared-with-me',
       userId: userProfile.id,
       searchQuery,
+      page,
+      pageSize: 3,
     });
 
   const [responseWorkersTeam, refreshWorkersTeam] = ApiServer.Find.useGet({
     filter: 'team',
     userId: userProfile.id,
     searchQuery,
+    page,
+    pageSize: 3,
   });
 
   useSubscribe('#artifact-new-sidepanel/workers-refresh', () => {
@@ -64,7 +71,14 @@ export const [WorkersModelProvider, useWorkersModel] = buildSelector(
     workersTeam: useAdapter(responseWorkersTeam, adapterWorkers),
     search: {
       query: searchQuery,
-      setQuery: setSearchQuery,
+      setQuery: (q: string) => {
+        setSearchQuery(q);
+        setPage(1);
+      },
+    },
+    pagination: {
+      page,
+      setPage,
     },
   };
 });

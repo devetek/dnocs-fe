@@ -1,8 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useController } from 'react-hook-form';
 
 import { useDevetekTranslations } from '@/services/i18n';
+
+import { useDebounceValue } from '@/shared/libs/react-hooks/useDebounce';
 
 import { useEmit } from '@/features/artifact-new-sidepanel/model/events';
 import { useArtifactNewGeneralModel } from '@/features/artifact-new-sidepanel/model/general';
@@ -22,8 +24,6 @@ import {
   createFieldError,
 } from '../../_presentation/FieldStates';
 import FieldWrapper from '../../_presentation/FieldWrapper';
-
-const PER_PAGE = 3;
 
 const [guard, useWorkersMine, useWorkersSharedWithMe, useWorkersTeam] =
   guardedSelects({
@@ -47,14 +47,25 @@ const WorkersList = guard(() => {
   const workersMine = useWorkersMine((s) => s.servers);
   const workersSharedWithMe = useWorkersSharedWithMe((s) => s.servers);
   const workersTeam = useWorkersTeam((s) => s.servers);
+  const paginationMine = useWorkersMine((s) => s.pagination);
+  const paginationShared = useWorkersSharedWithMe((s) => s.pagination);
+  const paginationTeam = useWorkersTeam((s) => s.pagination);
+
+  const setSearchQuery = useWorkersModel((s) => s.search.setQuery);
+  const page = useWorkersModel((s) => s.pagination.page);
+  const setPage = useWorkersModel((s) => s.pagination.setPage);
 
   const [search, setSearch] = useState('');
-  const [page, setPage] = useState(1);
+  const [debouncedSearch] = useDebounceValue(search);
 
   const { field } = useController({
     control: form.control,
     name: 'workerId',
   });
+
+  useEffect(() => {
+    setSearchQuery(debouncedSearch);
+  }, [debouncedSearch]);
 
   const allItems = useMemo(() => {
     const servers = [
@@ -71,18 +82,15 @@ const WorkersList = guard(() => {
     });
   }, [workersMine, workersSharedWithMe, workersTeam]);
 
-  const filtered = useMemo(() => {
-    const q = search.toLowerCase();
-    return q ? allItems.filter((s) => s.hostname.toLowerCase().includes(q)) : allItems;
-  }, [allItems, search]);
-
-  const totalPage = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
-  const safePage = Math.min(page, totalPage);
-  const paged = filtered.slice((safePage - 1) * PER_PAGE, safePage * PER_PAGE);
+  const totalPage = Math.max(
+    1,
+    paginationMine?.total_page ?? 1,
+    paginationShared?.total_page ?? 1,
+    paginationTeam?.total_page ?? 1,
+  );
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    setPage(1);
   };
 
   return (
@@ -95,10 +103,10 @@ const WorkersList = guard(() => {
       />
 
       <div className="flex flex-col gap-1">
-        {paged.length === 0 ? (
+        {allItems.length === 0 ? (
           <p className="text-xs text-muted-foreground italic py-2 text-center">No servers found</p>
         ) : (
-          paged.map((server) => {
+          allItems.map((server) => {
             const isSelected = field.value === server.id;
             return (
               <button
@@ -120,11 +128,13 @@ const WorkersList = guard(() => {
       </div>
 
       {totalPage > 1 && (
-        <Pagination
-          currentPage={safePage}
-          maxPage={totalPage}
-          onPageChange={setPage}
-        />
+        <div className="flex justify-end scale-75 origin-right">
+          <Pagination
+            currentPage={page}
+            maxPage={totalPage}
+            onPageChange={setPage}
+          />
+        </div>
       )}
     </div>
   );

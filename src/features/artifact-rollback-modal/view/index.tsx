@@ -141,11 +141,13 @@ export default function ArtifactRollbackModal(props: Props) {
         ))}
 
         {totalPage > 1 && (
-          <Pagination
-            currentPage={page}
-            maxPage={totalPage}
-            onPageChange={setPage}
-          />
+          <div className="flex justify-end">
+            <Pagination
+              currentPage={page}
+              maxPage={totalPage}
+              onPageChange={setPage}
+            />
+          </div>
         )}
 
         <Button
