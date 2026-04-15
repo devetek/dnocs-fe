@@ -18,6 +18,7 @@ export interface ArtifactDeletePayload {
 export interface ArtifactRollbackPayload {
   commitHead: string;
   artifactId: SchemaCommon.UnitId;
+  applicationId: SchemaCommon.UnitId;
 }
 
 // =============================================================================

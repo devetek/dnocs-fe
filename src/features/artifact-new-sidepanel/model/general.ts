@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
@@ -13,17 +11,10 @@ export const [ArtifactNewGeneralModelProvider, useArtifactNewGeneralModel] =
     const form = useForm({
       resolver: zodResolver(schemaArtifactNewForm),
       defaultValues: {
-        appConfigFile: '',
         fromBranch: '',
         workerId: props.currentServerId || '',
       },
     });
-
-    const fromBranch = form.watch('fromBranch');
-
-    useEffect(() => {
-      form.resetField('appConfigFile');
-    }, [fromBranch, form]);
 
     return {
       props,

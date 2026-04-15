@@ -68,6 +68,7 @@ export function ArtifactsHistoryList(props: ArtifactsHistoryListProps) {
       emit('@applications::detail/artifact-rollback', {
         commitHead: artifact.commitMetadata.head,
         artifactId: artifact.id,
+        applicationId: artifact.pointerIds.application,
       });
     };
 
