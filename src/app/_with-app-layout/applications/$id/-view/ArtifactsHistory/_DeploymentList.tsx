@@ -4,7 +4,9 @@ import {
   Calendar,
   CheckIcon,
   ClockIcon,
+  CodeIcon,
   GitBranchIcon,
+  HammerIcon,
   HashIcon,
   LoaderCircle,
   OctagonAlertIcon,
@@ -17,6 +19,8 @@ import {
   UserCogIcon,
   XIcon,
 } from 'lucide-react';
+
+import { useRouter } from '@tanstack/react-router';
 
 import { useDevetekLocale } from '@/services/i18n';
 
@@ -105,6 +109,8 @@ interface DeploymentCardProps {
 function DeploymentCard({ data, artifact, onClickActivity, onClickDelete, onClickRestore }: DeploymentCardProps) {
   const locale = useDevetekLocale();
   const updatedAt = getDistanceFromNow(data.timestamp.updated, locale);
+  const router = useRouter();
+  const serverHref = router.buildLocation({ to: '/servers/$id', params: { id: data.serverSnapshot.id } }).href;
 
   const cnCard = cn('shadow-none rounded-lg', {
     'border-green-600/40': data.state.status === 'ready',
@@ -168,10 +174,15 @@ function DeploymentCard({ data, artifact, onClickActivity, onClickDelete, onClic
         )}
 
         <div className="flex items-center flex-wrap gap-x-4 gap-y-1">
-          <p className="text-xs text-primary/70 flex items-center gap-0.5">
+          <a
+            href={serverHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-primary/70 flex items-center gap-0.5 hover:underline"
+          >
             <ServerIcon className="size-3" />
             {data.serverSnapshot.hostName}
-          </p>
+          </a>
 
           {data.osService && (
             <p className="text-xs text-primary/70 flex items-center gap-0.5">
@@ -201,6 +212,34 @@ function DeploymentCard({ data, artifact, onClickActivity, onClickDelete, onClic
             {updatedAt}
           </p>
         </div>
+
+        {/* ── Artifact Snapshot ── */}
+        {artifact && (
+          <div className="flex items-center flex-wrap gap-x-3 gap-y-1 pt-2 border-t border-border/50">
+            <p className="text-xs text-primary/70 flex items-center gap-0.5 font-mono">
+              <BoltIcon className="size-3 shrink-0" />
+              artifact/{artifact.id}
+            </p>
+
+            {artifact.configSnapshot.lifecycle.setup.languages.length > 0 && (
+              <div className="flex items-center gap-1">
+                <CodeIcon className="size-3 text-muted-foreground shrink-0" />
+                {artifact.configSnapshot.lifecycle.setup.languages.map((lang, i) => (
+                  <span key={i} className="text-[10px] bg-muted px-1.5 py-0.5 rounded font-mono leading-none">
+                    {lang.name} {lang.version}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {artifact.configSnapshot.lifecycle.build.steps.length > 0 && (
+              <p className="text-xs text-primary/70 flex items-center gap-0.5">
+                <HammerIcon className="size-3 shrink-0" />
+                {artifact.configSnapshot.lifecycle.build.steps.length} step{artifact.configSnapshot.lifecycle.build.steps.length !== 1 ? 's' : ''}
+              </p>
+            )}
+          </div>
+        )}
 
         {data.state.message && (
           <p className="text-xs text-destructive line-clamp-2">

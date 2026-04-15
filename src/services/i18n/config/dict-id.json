@@ -74,6 +74,7 @@
       "service": "Layanan",
       "rules": "Aturan",
       "pending": "Tertunda",
+      "used": "Digunakan",
       "searchPlaceholder": "Cari...",
       "searchResultsFor": "Hasil pencarian untuk",
       "automaticView": "Tampilan Otomatis",

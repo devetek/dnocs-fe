@@ -1,6 +1,6 @@
 import { useToaster } from '@/services/toaster';
 
-import { ApiArtifact, ApiDeploy, ApiGitBranch, ApiGitFile } from '@/shared/api';
+import { ApiArtifact, ApiDeploy, ApiGitBranch } from '@/shared/api';
 import { iife } from '@/shared/libs/browser/fn';
 
 import { useEmit, useSubscribe } from '../model/events';
@@ -13,30 +13,7 @@ export default function useFormSubmissionUsecase() {
   const sidepanelEmit = useEmit();
 
   const handleSubmit = form.handleSubmit(async (values) => {
-    const { appConfigFile, fromBranch, workerId } = values;
-
-    const appConfigFileResponse = await iife(() => {
-      if (appConfigFile === 'default') return Promise.resolve(null);
-
-      return ApiGitFile.Detail.$RepoOrg.$RepoName.fetchGet({
-        repoName: props.repoName,
-        repoOrganization: props.repoOrganization,
-        branch: fromBranch,
-        filePath: appConfigFile,
-      });
-    });
-
-    if (
-      appConfigFileResponse != null &&
-      (appConfigFileResponse.$status === 'failed' ||
-        !appConfigFileResponse.definition)
-    ) {
-      openToaster({
-        message: `Failed to load app config ${appConfigFile}, please try again later.`,
-        variant: 'error',
-      });
-      return;
-    }
+    const { fromBranch, workerId } = values;
 
     const currentBranchResponse =
       await ApiGitBranch.Detail.$RepoOrg.$RepoName.fetchGet({
@@ -58,10 +35,10 @@ export default function useFormSubmissionUsecase() {
     }
 
     const responseArtifactCreation = await ApiArtifact.Create.doPost({
-      appDefinition: appConfigFileResponse?.definition,
+      appDefinition: undefined,
       applicationId: props.applicationId,
       workerId,
-      appConfigFile,
+      appConfigFile: 'default',
       fromBranch,
       commit: {
         message: currentBranchResponse.commit.message,
