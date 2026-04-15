@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useController } from 'react-hook-form';
 
@@ -25,7 +25,7 @@ import {
 } from '../../_presentation/FieldStates';
 import FieldWrapper from '../../_presentation/FieldWrapper';
 
-const [guard, useWorkersMine, useWorkersSharedWithMe, useWorkersTeam] =
+const [guard, useWorkers] =
   guardedSelects({
     fallbackLoading: FieldLoading,
     fallbackError: createFieldError({
@@ -36,20 +36,14 @@ const [guard, useWorkersMine, useWorkersSharedWithMe, useWorkersTeam] =
       },
     }),
   })(
-    couple(useWorkersModel, (s) => s.workersMine),
-    couple(useWorkersModel, (s) => s.workersSharedWithMe),
-    couple(useWorkersModel, (s) => s.workersTeam),
+    couple(useWorkersModel, (s) => s.workers),
   );
 
 const WorkersList = guard(() => {
   const { form } = useArtifactNewGeneralModel();
 
-  const workersMine = useWorkersMine((s) => s.servers);
-  const workersSharedWithMe = useWorkersSharedWithMe((s) => s.servers);
-  const workersTeam = useWorkersTeam((s) => s.servers);
-  const paginationMine = useWorkersMine((s) => s.pagination);
-  const paginationShared = useWorkersSharedWithMe((s) => s.pagination);
-  const paginationTeam = useWorkersTeam((s) => s.pagination);
+  const servers = useWorkers((s) => s.servers);
+  const pagination = useWorkers((s) => s.pagination);
 
   const setSearchQuery = useWorkersModel((s) => s.search.setQuery);
   const page = useWorkersModel((s) => s.pagination.page);
@@ -67,27 +61,7 @@ const WorkersList = guard(() => {
     setSearchQuery(debouncedSearch);
   }, [debouncedSearch]);
 
-  const allItems = useMemo(() => {
-    const servers = [
-      ...workersMine,
-      ...workersSharedWithMe,
-      ...workersTeam,
-    ];
-
-    const seen = new Set<string>();
-    return servers.filter((s) => {
-      if (seen.has(s.id)) return false;
-      seen.add(s.id);
-      return true;
-    });
-  }, [workersMine, workersSharedWithMe, workersTeam]);
-
-  const totalPage = Math.max(
-    1,
-    paginationMine?.total_page ?? 1,
-    paginationShared?.total_page ?? 1,
-    paginationTeam?.total_page ?? 1,
-  );
+  const totalPage = Math.max(1, pagination?.total_page ?? 1);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -103,10 +77,10 @@ const WorkersList = guard(() => {
       />
 
       <div className="flex flex-col gap-1">
-        {allItems.length === 0 ? (
+        {servers.length === 0 ? (
           <p className="text-xs text-muted-foreground italic py-2 text-center">No servers found</p>
         ) : (
-          allItems.map((server) => {
+          servers.map((server) => {
             const isSelected = field.value === server.id;
             return (
               <button
