@@ -74,6 +74,7 @@
       "service": "Service",
       "rules": "Rules",
       "pending": "Pending",
+      "used": "Used",
       "searchPlaceholder": "Search...",
       "searchResultsFor": "Search results for",
       "automaticView": "Automatic View",

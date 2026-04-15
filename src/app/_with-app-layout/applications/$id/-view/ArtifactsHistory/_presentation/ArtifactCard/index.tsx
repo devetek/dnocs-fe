@@ -1,13 +1,18 @@
 import { Fragment } from 'react';
 
 import {
-  AppWindowIcon,
   BoltIcon,
   Calendar,
+  CheckIcon,
   ChevronDownIcon,
   ClockIcon,
+  CodeIcon,
   GitBranchIcon,
+  GlobeIcon,
   HashIcon,
+  HammerIcon,
+  LoaderCircle,
+  TerminalIcon,
   UserCogIcon,
 } from 'lucide-react';
 
@@ -37,6 +42,8 @@ export default function ArtifactCard(props: ArtifactCardProps) {
   const {
     deploymentStatus,
     data,
+    isUsed,
+    isDeploying,
     onClickLogs,
     logsOptions,
     onClickDelete,
@@ -121,6 +128,18 @@ export default function ArtifactCard(props: ArtifactCardProps) {
         </div>
 
         <div className="flex items-center gap-2">
+          {isDeploying && (
+            <span className="inline-flex items-center gap-1 rounded-tr-[7px] rounded-bl-md pl-1.5 pr-3 py-1 text-xs font-semibold bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">
+              <LoaderCircle className="size-3 animate-spin" />
+              {t('common.terms.inProgress')}
+            </span>
+          )}
+          {isUsed && !isDeploying && (
+            <span className="inline-flex items-center gap-1 rounded-tr-[7px] rounded-bl-md pl-1.5 pr-3 py-1 text-xs font-semibold bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+              <CheckIcon className="size-3" />
+              {t('common.terms.used')}
+            </span>
+          )}
           <Partials.StatusBadge
             deploymentStatus={deploymentStatus}
             onClickStatus={onClickStatus}
@@ -152,11 +171,39 @@ export default function ArtifactCard(props: ArtifactCardProps) {
                 <Calendar className="size-3" />
                 {artifactBuildFormattedDate}
               </p>
+            </div>
+
+            {/* ── Config Snapshot ── */}
+            <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mt-1 pt-2 border-t border-border/50">
+              {data.configSnapshot.lifecycle.setup.languages.length > 0 && (
+                <div className="flex items-center gap-1">
+                  <CodeIcon className="size-3 text-muted-foreground shrink-0" />
+                  {data.configSnapshot.lifecycle.setup.languages.map((lang, i) => (
+                    <span key={i} className="text-[10px] bg-muted px-1.5 py-0.5 rounded font-mono leading-none">
+                      {lang.name} {lang.version}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {data.configSnapshot.lifecycle.build.steps.length > 0 && (
+                <p className="text-xs text-primary/70 flex items-center gap-0.5">
+                  <HammerIcon className="size-3 shrink-0" />
+                  {data.configSnapshot.lifecycle.build.steps.length} step{data.configSnapshot.lifecycle.build.steps.length !== 1 ? 's' : ''}
+                </p>
+              )}
 
               <p className="text-xs text-primary/70 flex items-center gap-0.5">
-                <AppWindowIcon className="size-3" />
-                {data.configSnapshot.lifecycle.run.name}
+                <GlobeIcon className="size-3 shrink-0" />
+                :{data.configSnapshot.lifecycle.run.port}
               </p>
+
+              {data.configSnapshot.lifecycle.run.command && (
+                <p className="text-xs text-primary/70 flex items-center gap-0.5 font-mono max-w-[180px] truncate">
+                  <TerminalIcon className="size-3 shrink-0" />
+                  {data.configSnapshot.lifecycle.run.command}
+                </p>
+              )}
             </div>
           </div>
 

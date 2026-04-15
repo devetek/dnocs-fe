@@ -71,10 +71,15 @@ export function ArtifactsHistoryList(props: ArtifactsHistoryListProps) {
       });
     };
 
+    const isUsed = related.length > 0;
+    const isDeploying = related.some((d) => d.state.status === 'progress');
+
     return (
       <ArtifactCard
         key={artifact.id}
         data={artifact}
+        isUsed={isUsed}
+        isDeploying={isDeploying}
         onClickLogs={handleClickLogs}
         logsOptions={logsOptions}
         onClickStatus={handleClickStatus}

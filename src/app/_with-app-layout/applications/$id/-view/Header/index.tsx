@@ -127,7 +127,7 @@ const RefreshButton = () => {
   };
 
   return (
-    <Button variant="outline" size="icon" onClick={handleRefresh}>
+    <Button variant="outline" size="sm" onClick={handleRefresh}>
       <RefreshCwIcon />
     </Button>
   );

@@ -13,6 +13,8 @@ export interface LogsOption {
 export interface ArtifactCardProps {
   deploymentStatus?: DeploymentStatus;
   data: CicdArtifact;
+  isUsed?: boolean;
+  isDeploying?: boolean;
 
   onClickLogs?: () => void;
   logsOptions?: LogsOption[];
