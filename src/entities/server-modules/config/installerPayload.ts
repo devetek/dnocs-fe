@@ -185,7 +185,7 @@ export const payloadUtCaddyServer: PayloadFn = (props) => {
   return {
     installer_attributes: {
       router_action: 'install',
-      router_git_version: 'tags/v0.1.0-alpha.0',
+      router_git_version: 'tags/v0.1.0-alpha.1',
     },
     installer_type: 'infrastructure',
     installer_name: 'caddyserver',
