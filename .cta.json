@@ -7,13 +7,13 @@
   "addOnOptions": {},
   "git": true,
   "version": 1,
-  "framework": "react-cra",
+  "framework": "react",
   "chosenAddOns": [
-    "eslint",
-    "nitro",
     "start",
-    "storybook",
+    "shadcn",
+    "biome",
     "compiler",
+    "storybook",
     "shadcn"
   ]
 }

@@ -198,30 +198,30 @@ const WithAppLayoutBackendSecretManagersSshKeyIdIndexRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
-  '/applications': typeof WithAppLayoutApplicationsIndexRoute
-  '/dashboard': typeof WithAppLayoutDashboardIndexRoute
-  '/profile': typeof WithAppLayoutProfileIndexRoute
-  '/servers': typeof WithAppLayoutServersIndexRoute
-  '/teams': typeof WithAppLayoutTeamsIndexRoute
-  '/applications/$id': typeof WithAppLayoutApplicationsIdIndexRoute
-  '/applications/create': typeof WithAppLayoutApplicationsCreateIndexRoute
-  '/backend/cloud-projects': typeof WithAppLayoutBackendCloudProjectsIndexRoute
-  '/backend/database': typeof WithAppLayoutBackendDatabaseIndexRoute
-  '/backend/domain': typeof WithAppLayoutBackendDomainIndexRoute
-  '/backend/load-balancers': typeof WithAppLayoutBackendLoadBalancersIndexRoute
-  '/discover/modules': typeof WithAppLayoutDiscoverModulesIndexRoute
-  '/pawon/package': typeof WithAppLayoutPawonPackageIndexRoute
-  '/pawon/payment': typeof WithAppLayoutPawonPaymentIndexRoute
-  '/pawon/service': typeof WithAppLayoutPawonServiceIndexRoute
-  '/servers/$id': typeof WithAppLayoutServersIdIndexRoute
-  '/servers/create': typeof WithAppLayoutServersCreateIndexRoute
-  '/teams/$id': typeof WithAppLayoutTeamsIdIndexRoute
-  '/backend/secret-managers/ssh-key': typeof WithAppLayoutBackendSecretManagersSshKeyIndexRoute
-  '/pawon/package/$id': typeof WithAppLayoutPawonPackageIdIndexRoute
-  '/servers/$id/running-services': typeof WithAppLayoutServersIdRunningServicesIndexRoute
-  '/servers/create/vm-instant': typeof WithAppLayoutServersCreateVmInstantIndexRoute
-  '/servers/create/vm-manual': typeof WithAppLayoutServersCreateVmManualIndexRoute
-  '/backend/secret-managers/ssh-key/$id': typeof WithAppLayoutBackendSecretManagersSshKeyIdIndexRoute
+  '/applications/': typeof WithAppLayoutApplicationsIndexRoute
+  '/dashboard/': typeof WithAppLayoutDashboardIndexRoute
+  '/profile/': typeof WithAppLayoutProfileIndexRoute
+  '/servers/': typeof WithAppLayoutServersIndexRoute
+  '/teams/': typeof WithAppLayoutTeamsIndexRoute
+  '/applications/$id/': typeof WithAppLayoutApplicationsIdIndexRoute
+  '/applications/create/': typeof WithAppLayoutApplicationsCreateIndexRoute
+  '/backend/cloud-projects/': typeof WithAppLayoutBackendCloudProjectsIndexRoute
+  '/backend/database/': typeof WithAppLayoutBackendDatabaseIndexRoute
+  '/backend/domain/': typeof WithAppLayoutBackendDomainIndexRoute
+  '/backend/load-balancers/': typeof WithAppLayoutBackendLoadBalancersIndexRoute
+  '/discover/modules/': typeof WithAppLayoutDiscoverModulesIndexRoute
+  '/pawon/package/': typeof WithAppLayoutPawonPackageIndexRoute
+  '/pawon/payment/': typeof WithAppLayoutPawonPaymentIndexRoute
+  '/pawon/service/': typeof WithAppLayoutPawonServiceIndexRoute
+  '/servers/$id/': typeof WithAppLayoutServersIdIndexRoute
+  '/servers/create/': typeof WithAppLayoutServersCreateIndexRoute
+  '/teams/$id/': typeof WithAppLayoutTeamsIdIndexRoute
+  '/backend/secret-managers/ssh-key/': typeof WithAppLayoutBackendSecretManagersSshKeyIndexRoute
+  '/pawon/package/$id/': typeof WithAppLayoutPawonPackageIdIndexRoute
+  '/servers/$id/running-services/': typeof WithAppLayoutServersIdRunningServicesIndexRoute
+  '/servers/create/vm-instant/': typeof WithAppLayoutServersCreateVmInstantIndexRoute
+  '/servers/create/vm-manual/': typeof WithAppLayoutServersCreateVmManualIndexRoute
+  '/backend/secret-managers/ssh-key/$id/': typeof WithAppLayoutBackendSecretManagersSshKeyIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -286,30 +286,30 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$'
-    | '/applications'
-    | '/dashboard'
-    | '/profile'
-    | '/servers'
-    | '/teams'
-    | '/applications/$id'
-    | '/applications/create'
-    | '/backend/cloud-projects'
-    | '/backend/database'
-    | '/backend/domain'
-    | '/backend/load-balancers'
-    | '/discover/modules'
-    | '/pawon/package'
-    | '/pawon/payment'
-    | '/pawon/service'
-    | '/servers/$id'
-    | '/servers/create'
-    | '/teams/$id'
-    | '/backend/secret-managers/ssh-key'
-    | '/pawon/package/$id'
-    | '/servers/$id/running-services'
-    | '/servers/create/vm-instant'
-    | '/servers/create/vm-manual'
-    | '/backend/secret-managers/ssh-key/$id'
+    | '/applications/'
+    | '/dashboard/'
+    | '/profile/'
+    | '/servers/'
+    | '/teams/'
+    | '/applications/$id/'
+    | '/applications/create/'
+    | '/backend/cloud-projects/'
+    | '/backend/database/'
+    | '/backend/domain/'
+    | '/backend/load-balancers/'
+    | '/discover/modules/'
+    | '/pawon/package/'
+    | '/pawon/payment/'
+    | '/pawon/service/'
+    | '/servers/$id/'
+    | '/servers/create/'
+    | '/teams/$id/'
+    | '/backend/secret-managers/ssh-key/'
+    | '/pawon/package/$id/'
+    | '/servers/$id/running-services/'
+    | '/servers/create/vm-instant/'
+    | '/servers/create/vm-manual/'
+    | '/backend/secret-managers/ssh-key/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -387,7 +387,7 @@ declare module '@tanstack/react-router' {
     '/_with-app-layout': {
       id: '/_with-app-layout'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof WithAppLayoutRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -401,168 +401,168 @@ declare module '@tanstack/react-router' {
     '/_with-app-layout/teams/': {
       id: '/_with-app-layout/teams/'
       path: '/teams'
-      fullPath: '/teams'
+      fullPath: '/teams/'
       preLoaderRoute: typeof WithAppLayoutTeamsIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/servers/': {
       id: '/_with-app-layout/servers/'
       path: '/servers'
-      fullPath: '/servers'
+      fullPath: '/servers/'
       preLoaderRoute: typeof WithAppLayoutServersIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/profile/': {
       id: '/_with-app-layout/profile/'
       path: '/profile'
-      fullPath: '/profile'
+      fullPath: '/profile/'
       preLoaderRoute: typeof WithAppLayoutProfileIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/dashboard/': {
       id: '/_with-app-layout/dashboard/'
       path: '/dashboard'
-      fullPath: '/dashboard'
+      fullPath: '/dashboard/'
       preLoaderRoute: typeof WithAppLayoutDashboardIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/applications/': {
       id: '/_with-app-layout/applications/'
       path: '/applications'
-      fullPath: '/applications'
+      fullPath: '/applications/'
       preLoaderRoute: typeof WithAppLayoutApplicationsIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/teams/$id/': {
       id: '/_with-app-layout/teams/$id/'
       path: '/teams/$id'
-      fullPath: '/teams/$id'
+      fullPath: '/teams/$id/'
       preLoaderRoute: typeof WithAppLayoutTeamsIdIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/servers/create/': {
       id: '/_with-app-layout/servers/create/'
       path: '/servers/create'
-      fullPath: '/servers/create'
+      fullPath: '/servers/create/'
       preLoaderRoute: typeof WithAppLayoutServersCreateIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/servers/$id/': {
       id: '/_with-app-layout/servers/$id/'
       path: '/servers/$id'
-      fullPath: '/servers/$id'
+      fullPath: '/servers/$id/'
       preLoaderRoute: typeof WithAppLayoutServersIdIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/pawon/service/': {
       id: '/_with-app-layout/pawon/service/'
       path: '/pawon/service'
-      fullPath: '/pawon/service'
+      fullPath: '/pawon/service/'
       preLoaderRoute: typeof WithAppLayoutPawonServiceIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/pawon/payment/': {
       id: '/_with-app-layout/pawon/payment/'
       path: '/pawon/payment'
-      fullPath: '/pawon/payment'
+      fullPath: '/pawon/payment/'
       preLoaderRoute: typeof WithAppLayoutPawonPaymentIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/pawon/package/': {
       id: '/_with-app-layout/pawon/package/'
       path: '/pawon/package'
-      fullPath: '/pawon/package'
+      fullPath: '/pawon/package/'
       preLoaderRoute: typeof WithAppLayoutPawonPackageIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/discover/modules/': {
       id: '/_with-app-layout/discover/modules/'
       path: '/discover/modules'
-      fullPath: '/discover/modules'
+      fullPath: '/discover/modules/'
       preLoaderRoute: typeof WithAppLayoutDiscoverModulesIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/backend/load-balancers/': {
       id: '/_with-app-layout/backend/load-balancers/'
       path: '/backend/load-balancers'
-      fullPath: '/backend/load-balancers'
+      fullPath: '/backend/load-balancers/'
       preLoaderRoute: typeof WithAppLayoutBackendLoadBalancersIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/backend/domain/': {
       id: '/_with-app-layout/backend/domain/'
       path: '/backend/domain'
-      fullPath: '/backend/domain'
+      fullPath: '/backend/domain/'
       preLoaderRoute: typeof WithAppLayoutBackendDomainIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/backend/database/': {
       id: '/_with-app-layout/backend/database/'
       path: '/backend/database'
-      fullPath: '/backend/database'
+      fullPath: '/backend/database/'
       preLoaderRoute: typeof WithAppLayoutBackendDatabaseIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/backend/cloud-projects/': {
       id: '/_with-app-layout/backend/cloud-projects/'
       path: '/backend/cloud-projects'
-      fullPath: '/backend/cloud-projects'
+      fullPath: '/backend/cloud-projects/'
       preLoaderRoute: typeof WithAppLayoutBackendCloudProjectsIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/applications/create/': {
       id: '/_with-app-layout/applications/create/'
       path: '/applications/create'
-      fullPath: '/applications/create'
+      fullPath: '/applications/create/'
       preLoaderRoute: typeof WithAppLayoutApplicationsCreateIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/applications/$id/': {
       id: '/_with-app-layout/applications/$id/'
       path: '/applications/$id'
-      fullPath: '/applications/$id'
+      fullPath: '/applications/$id/'
       preLoaderRoute: typeof WithAppLayoutApplicationsIdIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/servers/create/vm-manual/': {
       id: '/_with-app-layout/servers/create/vm-manual/'
       path: '/servers/create/vm-manual'
-      fullPath: '/servers/create/vm-manual'
+      fullPath: '/servers/create/vm-manual/'
       preLoaderRoute: typeof WithAppLayoutServersCreateVmManualIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/servers/create/vm-instant/': {
       id: '/_with-app-layout/servers/create/vm-instant/'
       path: '/servers/create/vm-instant'
-      fullPath: '/servers/create/vm-instant'
+      fullPath: '/servers/create/vm-instant/'
       preLoaderRoute: typeof WithAppLayoutServersCreateVmInstantIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/servers/$id/running-services/': {
       id: '/_with-app-layout/servers/$id/running-services/'
       path: '/servers/$id/running-services'
-      fullPath: '/servers/$id/running-services'
+      fullPath: '/servers/$id/running-services/'
       preLoaderRoute: typeof WithAppLayoutServersIdRunningServicesIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/pawon/package/$id/': {
       id: '/_with-app-layout/pawon/package/$id/'
       path: '/pawon/package/$id'
-      fullPath: '/pawon/package/$id'
+      fullPath: '/pawon/package/$id/'
       preLoaderRoute: typeof WithAppLayoutPawonPackageIdIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/backend/secret-managers/ssh-key/': {
       id: '/_with-app-layout/backend/secret-managers/ssh-key/'
       path: '/backend/secret-managers/ssh-key'
-      fullPath: '/backend/secret-managers/ssh-key'
+      fullPath: '/backend/secret-managers/ssh-key/'
       preLoaderRoute: typeof WithAppLayoutBackendSecretManagersSshKeyIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
     '/_with-app-layout/backend/secret-managers/ssh-key/$id/': {
       id: '/_with-app-layout/backend/secret-managers/ssh-key/$id/'
       path: '/backend/secret-managers/ssh-key/$id'
-      fullPath: '/backend/secret-managers/ssh-key/$id'
+      fullPath: '/backend/secret-managers/ssh-key/$id/'
       preLoaderRoute: typeof WithAppLayoutBackendSecretManagersSshKeyIdIndexRouteImport
       parentRoute: typeof WithAppLayoutRouteRoute
     }
