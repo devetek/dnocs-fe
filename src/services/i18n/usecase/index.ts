@@ -5,7 +5,7 @@ import { DEFAULT_LOCALE, LOCALE_COOKIE, REGISTERED_LOCALES } from '../config';
 
 export async function loadMessages(locale: Locale) {
   // Vite automatically splits this into chunks
-  return (await import(`@/services/i18n/config/dict-${locale}.json`)).default;
+  return (await import(`../config/dict-${locale}.json`)).default;
 }
 
 export async function getLocale(): Promise<Locale> {
