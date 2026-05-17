@@ -1,10 +1,14 @@
-@import 'tailwindcss';
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 
-@import 'tw-animate-css';
+@import "tailwindcss";
+
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --font-roboto-mono: "Roboto Mono";
+
   --breakpoint-sm: 40rem;
   --breakpoint-md: 48rem;
   --breakpoint-lg: 64rem;
@@ -59,6 +63,9 @@
 
   --color-alert-warning-bg: var(--alert-warning-bg);
   --color-alert-warning-fg: var(--alert-warning-fg);
+
+  --text-2xs: 0.625rem; /* 10px */
+  --text-3xs: 0.5rem; /* 8px */
 }
 
 /*
