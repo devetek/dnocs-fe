@@ -1,9 +1,9 @@
 import type { PropsWithChildren, RefObject } from 'react';
 import { createContext, use, useEffect, useRef } from 'react';
 
+import { deepEqual, shallowEqual } from 'fast-equals';
 import type { StoreApi } from 'zustand';
 import { createStore, useStore } from 'zustand';
-import { useShallow } from 'zustand/shallow';
 
 export default function buildSelector(description: string) {
   return function <T, Props>(useSource: (props: Props) => T) {
@@ -41,18 +41,31 @@ export default function buildSelector(description: string) {
     function useSelector<V>(selector?: (store: T) => V) {
       const storeInstance = use(StoreInstanceContext);
 
+      const prevSelected = useRef<V>(undefined);
+
       if (typeof storeInstance === 'symbol' || storeInstance.current == null) {
         throw new Error(
           `use${description}Selector must be used within a ${description}Provider`,
         );
       }
 
-      return useStore(
-        storeInstance.current,
-        useShallow((store) =>
-          selector == null ? store.source : selector(store.source),
-        ),
-      );
+      return useStore(storeInstance.current, (store) => {
+        if (selector == null) return store.source;
+
+        const selected = selector(store.source);
+        const previous = prevSelected.current;
+
+        if (previous != null && shallowEqual(selected, previous)) {
+          return previous;
+        }
+
+        if (previous != null && deepEqual(selected, previous)) {
+          return previous;
+        }
+
+        prevSelected.current = selected;
+        return prevSelected.current;
+      });
     }
 
     return [Provider, useSelector] as const;
