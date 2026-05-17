@@ -13,7 +13,7 @@ export interface PushActivityPayload {
 }
 
 export interface ServiceStateMetadata {
-  color: string;
+  colorGroup: string;
   icon: (props: LucideProps) => ReactNode;
   i18n: {
     statusLabel: string;

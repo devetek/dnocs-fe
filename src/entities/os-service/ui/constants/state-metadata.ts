@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 import {
   CircleArrowUpIcon,
   CircleHelpIcon,
@@ -11,7 +13,7 @@ import type { SchemaOsServiceParts } from '../../rules/schema';
 import type { ServiceStateMetadata } from '../../rules/types';
 
 const RESTARTING: ServiceStateMetadata = {
-  color: '--color-yellow-500',
+  colorGroup: 'yellow',
   icon: CircleArrowUpIcon,
   i18n: {
     statusLabel: 'common.terms.restarting',
@@ -23,28 +25,28 @@ export const OS_SERVICE_STATE_METADATA: Record<
   ServiceStateMetadata
 > = {
   running: {
-    color: '--color-green-500',
+    colorGroup: 'green',
     icon: CirclePlayIcon,
     i18n: {
       statusLabel: 'common.terms.running',
     },
   },
   dead: {
-    color: '--color-gray-500',
+    colorGroup: 'gray',
     icon: SkullIcon,
     i18n: {
       statusLabel: 'common.terms.dead',
     },
   },
   failed: {
-    color: '--color-red-500',
+    colorGroup: 'red',
     icon: CircleXIcon,
     i18n: {
       statusLabel: 'common.terms.failed',
     },
   },
   exited: {
-    color: '--color-red-500',
+    colorGroup: 'red',
     icon: LogOutIcon,
     i18n: {
       statusLabel: 'common.terms.exited',
@@ -54,10 +56,27 @@ export const OS_SERVICE_STATE_METADATA: Record<
   reloading: RESTARTING,
   restarting: RESTARTING,
   unknown: {
-    color: '--color-gray-500',
+    colorGroup: 'gray',
     icon: CircleHelpIcon,
     i18n: {
       statusLabel: 'common.terms.unknown',
     },
   },
+};
+
+export const injectDynStyles = (
+  prefix: string | null,
+  state: SchemaOsServiceParts.State,
+): CSSProperties => {
+  const { colorGroup } = OS_SERVICE_STATE_METADATA[state];
+
+  const pre = prefix ? `--color-${prefix}` : `--color`;
+
+  return {
+    [`${pre}-hero`]: `var(--color-${colorGroup}-500)`,
+    [`${pre}-bg`]: `var(--color-${colorGroup}-100)`,
+    [`${pre}-bg-dark`]: `var(--color-${colorGroup}-900)`,
+    [`${pre}-text`]: `var(--color-${colorGroup}-700)`,
+    [`${pre}-text-dark`]: `var(--color-${colorGroup}-300)`,
+  } as CSSProperties;
 };
