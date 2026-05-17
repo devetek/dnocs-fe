@@ -40,18 +40,20 @@ const NavButton = (props: NavButtonProps) => {
   const cnButton = cn('p-2 transition-all', {
     'rounded-l-full': icon === 'back',
     'rounded-r-full': icon === 'forward',
-    'hover:bg-card': !isDisabled,
+    'hover:bg-black/5 dark:hover:bg-white/5 active:bg-accent dark:active:bg-accent group':
+      !isDisabled,
     'cursor-no-drop': isDisabled,
   });
 
   return (
     <button
       className={cnButton}
+      type="button"
       onClick={handleClick}
       aria-disabled={isDisabled}
     >
       <Icon
-        className="size-5 text-primary data-[disabled=true]:opacity-40"
+        className="size-5 text-primary data-[disabled=true]:opacity-40 data-[disabled=false]:group-active:text-white"
         data-disabled={isDisabled}
       />
     </button>
@@ -76,7 +78,12 @@ const PaginationRows = (props: PaginationRowsProps) => {
     });
 
     return (
-      <button key={index} className={cnButton} onClick={handleClickPage}>
+      <button
+        key={index}
+        type="button"
+        className={cnButton}
+        onClick={handleClickPage}
+      >
         {page}
       </button>
     );
@@ -110,7 +117,7 @@ const PaginationRows = (props: PaginationRowsProps) => {
 
     if (!hasSpaced) {
       elPagination.push(
-        <button key={pageIndex} disabled className="px-2.25">
+        <button key={pageIndex} type="button" disabled className="px-2.25">
           <EllipsisIcon className="size-4" />
         </button>,
       );
@@ -192,7 +199,11 @@ export default function PaginationV2(props: PaginationV2Props) {
       );
 
       elPaginationContent = (
-        <button className={cnButton} onClick={handleClickPaginationInfo}>
+        <button
+          className={cnButton}
+          type="button"
+          onClick={handleClickPaginationInfo}
+        >
           {elRenderedPageInfo}
 
           {!isDisabled && <Maximize2 className="size-2.75" />}
