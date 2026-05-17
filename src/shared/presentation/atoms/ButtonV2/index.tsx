@@ -36,7 +36,7 @@ const STYLES_BTNCOLOR_BASE_FLAT = {
   ),
   secondary: cn(
     'bg-secondary text-secondary-foreground not-disabled:hover:bg-accent not-disabled:hover:text-accent-foreground',
-    'not-disabled:active:[filter:_brightness(0.9)]',
+    'not-disabled:active:filter-[brightness(0.9)]',
   ),
   secondaryDanger: cn(
     'border border-destructive bg-secondary text-destructive not-disabled:hover:text-destructive-foreground not-disabled:hover:bg-accent',
@@ -47,11 +47,14 @@ const STYLES_BTNCOLOR_BASE_OUTLINE = {
   primary: cn(
     'border border-primary text-primary not-disabled:hover:bg-primary/90 not-disabled:hover:text-primary-foreground',
   ),
+  primaryDanger: cn(
+    'border border-destructive text-destructive not-disabled:hover:text-destructive-foreground not-disabled:hover:bg-destructive/90',
+  ),
   secondary: cn(
     'border text-secondary-foreground not-disabled:hover:bg-accent not-disabled:hover:text-accent-foreground',
   ),
-  danger: cn(
-    'border border-destructive text-destructive not-disabled:hover:text-destructive-foreground not-disabled:hover:bg-destructive/90',
+  secondaryDanger: cn(
+    'border text-destructive not-disabled:hover:text-destructive-foreground not-disabled:hover:bg-destructive/90',
   ),
 };
 
@@ -193,14 +196,21 @@ const buttonVariants = iife(() => {
       },
       {
         buttonStyle: 'outline',
+        buttonColor: 'primary',
+        danger: true,
+        className: STYLES_BTNCOLOR_BASE_OUTLINE.primaryDanger,
+      },
+      {
+        buttonStyle: 'outline',
         buttonColor: 'secondary',
         danger: false,
         className: STYLES_BTNCOLOR_BASE_OUTLINE.secondary,
       },
       {
         buttonStyle: 'outline',
+        buttonColor: 'secondary',
         danger: true,
-        className: STYLES_BTNCOLOR_BASE_OUTLINE.danger,
+        className: STYLES_BTNCOLOR_BASE_OUTLINE.secondaryDanger,
       },
       // #endregion outline
 
@@ -242,7 +252,7 @@ const Comp = (props: ButtonExtraProps & HTMLAttributes<HTMLElement>) => {
 
   return (
     <Slot {...rest}>
-      <button>{children}</button>
+      <button type="button">{children}</button>
     </Slot>
   );
 };
