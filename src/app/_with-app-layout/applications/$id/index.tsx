@@ -1,26 +1,18 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import EventController from './-EventController';
-import { AppDataModelProvider } from './-model/app-data';
-import { AppLogsModelProvider } from './-model/app-logs';
-import { ArtifactHistoryModelProvider } from './-model/artifact-history';
-import View from './-view';
+import { ResourcesModelProvider } from './-models/resources';
+import View from './-views';
 
-export const Route = createFileRoute('/_with-app-layout/applications/$id/')({
-  component: ApplicationDetailPage,
+export const Route = createFileRoute('/_with-app-layout/applications/new/$id/')({
+  component: ApplicationDetailsPage,
 });
 
-function ApplicationDetailPage() {
-  const { id } = Route.useParams();
+function ApplicationDetailsPage() {
+  const { id: applicationId } = Route.useParams();
 
   return (
-    <AppDataModelProvider applicationId={id}>
-      <ArtifactHistoryModelProvider applicationId={id}>
-        <AppLogsModelProvider>
-          <EventController />
-          <View />
-        </AppLogsModelProvider>
-      </ArtifactHistoryModelProvider>
-    </AppDataModelProvider>
+    <ResourcesModelProvider applicationId={applicationId}>
+      <View />
+    </ResourcesModelProvider>
   );
 }
