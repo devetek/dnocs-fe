@@ -6,11 +6,13 @@ import { useEffect, useMemo, useRef } from 'react';
 import '@/shared/libs/browser/array';
 
 import { f } from '../../browser/fn';
+import { THROW_MARKER } from '../-config';
 import type {
   Accessor,
   Ergoed,
   OnUpdateParams,
   Response,
+  ThrownObject,
 } from '../-rules/types';
 
 const GlobalInstanceCache = new WeakMap<object, Map<string, any>>();
@@ -204,17 +206,17 @@ function proxyManager(
               return handlers;
             }
 
-            function thrown(onUpdate: (params: OnUpdateParams) => void) {
-              updaterRegistry.add(onUpdate);
-
-              return () => {
-                updaterRegistry.delete(onUpdate);
-              };
-            }
-
-            throw assigned(thrown, {
+            throw {
+              __marker: THROW_MARKER,
               meta: parse$(rootResponse),
-            });
+              registerUpdate: (onUpdate: (params: OnUpdateParams) => void) => {
+                updaterRegistry.add(onUpdate);
+
+                return () => {
+                  updaterRegistry.delete(onUpdate);
+                };
+              },
+            } as ThrownObject;
           }
         },
       },
@@ -223,3 +225,22 @@ function proxyManager(
 
   return createPathProxy();
 }
+
+const filteredLogger = (instance: (...params: unknown[]) => void) => {
+  return (...params: unknown[]) => {
+    for (const param of params) {
+      if (
+        typeof param === 'object' &&
+        param != null &&
+        '__marker' in param &&
+        param.__marker === THROW_MARKER
+      ) {
+        return;
+      }
+    }
+
+    instance(...params);
+  };
+};
+
+console.error = filteredLogger(console.error);

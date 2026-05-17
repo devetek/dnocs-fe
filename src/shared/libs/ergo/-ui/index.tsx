@@ -3,9 +3,11 @@ import React, { createRef } from 'react';
 
 import type { WithChildren } from '@/shared/libs/types/react';
 
+import { THROW_MARKER } from '../-config';
 import type {
   OnUpdateMetadata,
   OnUpdateParams,
+  ThrownObject,
   WithErgoViewStates,
 } from '../-rules/types';
 
@@ -27,10 +29,11 @@ function createErgoGuard() {
   type Props = WithChildren & WithErgoViewStates;
 
   type States = {
-    thrown?: {
-      (onUpdate: (params: OnUpdateParams) => void): () => void;
-      meta: OnUpdateMetadata;
-    };
+    // thrown?: {
+    //   (onUpdate: (params: OnUpdateParams) => void): () => void;
+    //   meta: OnUpdateMetadata;
+    // };
+    registerUpdate?: ThrownObject['registerUpdate'];
     meta: OnUpdateMetadata;
   };
 
@@ -62,9 +65,9 @@ function createErgoGuard() {
     }
 
     setupThrown = () => {
-      if (this.state.thrown == null) return;
-      const registerUpdater = this.state.thrown;
-      this.setState({ thrown: undefined });
+      if (this.state.registerUpdate == null) return;
+      const registerUpdater = this.state.registerUpdate;
+      this.setState({ registerUpdate: undefined });
 
       this.refCleanup.current = registerUpdater(this.onUpdate);
     };
@@ -76,12 +79,18 @@ function createErgoGuard() {
     };
 
     static getDerivedStateFromError(thrown: unknown): States {
-      if (typeof thrown === 'function') {
-        const castedThrown = thrown as NonNullable<States['thrown']>;
+      const check =
+        typeof thrown === 'object' &&
+        thrown != null &&
+        '__marker' in thrown &&
+        thrown.__marker === THROW_MARKER;
+
+      if (check) {
+        const { meta, registerUpdate } = thrown as ThrownObject;
 
         return {
-          meta: castedThrown.meta,
-          thrown: castedThrown,
+          meta,
+          registerUpdate,
         };
       }
 
@@ -107,18 +116,14 @@ function createErgoGuard() {
 
 const filteredLogger = (instance: (...params: unknown[]) => void) => {
   return (...params: unknown[]) => {
-    const joined = params.join('\n');
-
-    const FILTERED = ['ErgoGuard_INTERNAL'];
-
-    if (FILTERED.find((it) => joined.includes(it)) != null) {
-      return;
+    for (const param in params) {
+      if (typeof param === 'string' && param.includes('ErgoGuard_INTERNAL')) {
+        return;
+      }
     }
 
     instance(...params);
   };
 };
 
-console.log = filteredLogger(console.log);
-console.debug = filteredLogger(console.debug);
 console.error = filteredLogger(console.error);

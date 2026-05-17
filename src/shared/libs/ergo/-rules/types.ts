@@ -50,3 +50,9 @@ export interface WithErgoViewStates {
   error?: ComponentType<ResponseError>;
   loading?: ComponentType<unknown>;
 }
+
+export interface ThrownObject {
+  __marker: symbol;
+  meta: OnUpdateMetadata;
+  registerUpdate: (onUpdate: (params: OnUpdateParams) => void) => () => void;
+}
