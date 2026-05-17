@@ -8,13 +8,15 @@
   "files": {
     "ignoreUnknown": false,
     "includes": [
-      "**/src/**/*",
-      "**/.vscode/**/*",
-      "**/.storybook/**/*",
-      "**/index.html",
-      "**/vite.config.ts",
-      "!**/src/routeTree.gen.ts",
-      "!**/src/styles.css"
+      "src/**/*",
+      ".vscode/**/*",
+      ".zed/**/*",
+      ".storybook/**/*",
+      "index.html",
+      "vite.config.ts",
+      "!src/routeTree.gen.ts",
+      "!src/styles.css",
+      "!node_modules/**/*"
     ]
   },
   "formatter": {
