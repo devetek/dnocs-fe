@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: For generic constraints */
 type BuiltinLeaf =
   | Date
   | RegExp
