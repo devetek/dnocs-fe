@@ -1,19 +1,19 @@
 import z from 'zod';
 
-import { schemaOsService } from '@/entities/os-service/rules/schema';
+import { configSnapshot } from '@/entities/cicd-artifact/rules/schema/parts';
 import { SchemaCommon } from '@/entities/shared/rules/schema';
 
-import { pointerIds, serverSnapshot, state } from './parts';
+import { deploymentMetadata, executor, state, timestamp } from './parts';
 
 export * as CicdDeploymentParts from './parts';
 
 export const schemaCicdDeployment = z.object({
   id: SchemaCommon.unitId,
   state,
-  pointerIds,
-  timestamp: SchemaCommon.timestamp,
-  serverSnapshot,
-  osService: schemaOsService.optional(),
+  timestamp,
+  executor,
+  deploymentMetadata,
+  configSnapshot,
 });
 
 export type CicdDeployment = z.output<typeof schemaCicdDeployment>;

@@ -2,6 +2,12 @@ import type z from 'zod';
 
 import { AdapterOsServiceFromDto } from '@/entities/os-service/adapter';
 import { createAdapter } from '@/entities/shared/lib/createAdapter';
+import '@/shared/libs/browser/string';
+
+import {
+  ctorCommitMetadata,
+  ctorConfigSnapshot,
+} from '@/entities/cicd-artifact/adapter/ctors';
 
 import type { DTOs } from '@/shared/api';
 import type { KeysOnlyDeep } from '@/shared/libs/types/keys-only';
@@ -17,11 +23,6 @@ export const toCicdDeployment = createAdapter<DTOs.DeployV1, CicdDeployment>(
 
     return schemaCicdDeployment.parse({
       id: String(raw.id),
-      pointerIds: {
-        application: String(raw.application_id),
-        artifact: String(raw.artifact_id),
-        machine: String(raw.machine_id),
-      },
       state: {
         status: raw.installer_status,
         message: raw.error,
@@ -30,18 +31,29 @@ export const toCicdDeployment = createAdapter<DTOs.DeployV1, CicdDeployment>(
         created: raw.created_at,
         updated: raw.updated_at,
       },
-      serverSnapshot: {
-        id: String(raw.machine_id),
-        hostName: raw.machine.hostname,
+      executor: {
+        userName: raw.user?.username,
       },
-      osService: raw.service.name
-        ? {
-            serviceName: raw.service.name,
-            serviceState: AdapterOsServiceFromDto.toState(
-              raw.service.state,
-            ).unwrap(),
-          }
-        : undefined,
+      deploymentMetadata: {
+        artifact: {
+          id: String.tryFrom(raw.artifact_id),
+          commitMetadata: ctorCommitMetadata(raw.artifact),
+        },
+        server: {
+          id: String.tryFrom(raw.machine_id),
+          hostname: raw.machine?.hostname,
+        },
+        targetAppId: String.tryFrom(raw.application_id),
+        osService: raw.service.name
+          ? {
+              serviceName: raw.service.name,
+              serviceState: AdapterOsServiceFromDto.toState(
+                raw.service.state,
+              ).unwrap(),
+            }
+          : undefined,
+      },
+      configSnapshot: ctorConfigSnapshot(raw.artifact),
     } satisfies KeysOnlyDeep<z.input<typeof schemaCicdDeployment>>);
   },
 );

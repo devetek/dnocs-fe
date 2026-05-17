@@ -1,13 +1,10 @@
-import z from 'zod';
+import dayjs from 'dayjs';
+import { z } from 'zod';
 
-import { SchemaCommon } from '@/entities/shared/rules/schema';
-
-export type PointerIds = z.output<typeof pointerIds>;
-export const pointerIds = z.object({
-  machine: SchemaCommon.unitId,
-  application: SchemaCommon.unitId,
-  artifact: SchemaCommon.unitId,
-});
+import { SchemaCicdArtifactParts } from '@/entities/cicd-artifact/rules/schema';
+import { schemaOsService } from '@/entities/os-service/rules/schema';
+import { schemaServerMinimal } from '@/entities/server/rules/schema';
+import { SchemaAppConfig, SchemaCommon } from '@/entities/shared/rules/schema';
 
 export type State = z.output<typeof state>;
 export const state = SchemaCommon.createState(
@@ -24,8 +21,40 @@ export const state = SchemaCommon.createState(
   'unknown',
 );
 
-export type ServerSnapshot = z.output<typeof serverSnapshot>;
-export const serverSnapshot = z.object({
+export type Executor = z.output<typeof executor>;
+export const executor = z.object({
+  userName: z.string(),
+});
+
+export type Timestamp = z.output<typeof timestamp>;
+export const timestamp = SchemaCommon.timestamp.transform((ts) => {
+  const { created, updated } = ts;
+
+  return {
+    created,
+    updated,
+    buildTimeInSeconds: dayjs(updated).diff(created, 'second'),
+  };
+});
+
+export type DeploymentArtifact = z.output<typeof deploymentArtifact>;
+export const deploymentArtifact = z.object({
   id: SchemaCommon.unitId,
-  hostName: z.string(),
+  commitMetadata: SchemaCicdArtifactParts.commitMetadata,
+});
+
+export type ConfigSnapshot = z.output<typeof configSnapshot>;
+export const configSnapshot = z.object({
+  lifecycle: SchemaAppConfig.lifecycle,
+});
+
+export type DeploymentMetadata = z.output<typeof deploymentMetadata>;
+export const deploymentMetadata = z.object({
+  targetAppId: SchemaCommon.unitId,
+  artifact: z.object({
+    id: SchemaCommon.unitId,
+    commitMetadata: SchemaCicdArtifactParts.commitMetadata,
+  }),
+  server: schemaServerMinimal,
+  osService: schemaOsService.optional(),
 });
