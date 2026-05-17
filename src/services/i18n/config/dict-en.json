@@ -93,7 +93,8 @@
       "auto": "Auto",
       "off": "Off",
       "source": "Source",
-      "deploy": "Deploy"
+      "deploy": "Deploy",
+      "quickActions": "Quick Actions"
     },
     "actions": {
       "refresh": "Refresh",
@@ -126,7 +127,9 @@
       "back": "Back",
       "create": "Create",
       "reinstall": "Reinstall",
-      "restore": "Restore"
+      "restore": "Restore",
+      "newArtifact": "New Artifact",
+      "all": "All"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -208,8 +211,20 @@
       },
       "githubBanner": {
         "title": "Some information might be missing",
-        "subtitle": "You'll need to log in to your GitHub account to see them."
+        "subtitle": "You'll need to log in to your GitHub account to see them.",
+        "ctaLabel": "Login to GitHub"
       },
+
+      "logsRt": {
+        "title": "Runtime Logs"
+      },
+      "technicalMetadata": {
+        "title": "Technical Metadata"
+      },
+      "connectedResources": {
+        "title": "Connected Resources"
+      },
+
       "artifactsHistory": {
         "title": "Artifacts History",
         "subtitle": "Recent artifacts and rollback options",
@@ -631,10 +646,12 @@
     "loadBalancerDelete": {
       "success": "Successfully deleted load balancer « {loadBalancer} ».",
       "error": "Failed to delete load balancer « {loadBalancer} »!"
-    },    "loadBalancerRestore": {
+    },
+    "loadBalancerRestore": {
       "success": "Successfully restored load balancer « {loadBalancer} ».",
       "error": "Failed to restore load balancer « {loadBalancer} »!"
-    },    "loadBalancerCreate": {
+    },
+    "loadBalancerCreate": {
       "success": "Load balancer created successfully.",
       "error": "Failed to create load balancer."
     },

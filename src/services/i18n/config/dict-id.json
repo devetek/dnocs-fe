@@ -93,7 +93,8 @@
       "auto": "Auto",
       "off": "Mati",
       "source": "Sumber",
-      "deploy": "Deploy"
+      "deploy": "Deploy",
+      "quickActions": "Aksi Cepat"
     },
     "actions": {
       "refresh": "Segarkan",
@@ -126,7 +127,9 @@
       "back": "Kembali",
       "create": "Buat",
       "reinstall": "Reinstall",
-      "restore": "Pulihkan"
+      "restore": "Pulihkan",
+      "newArtifact": "Artefak Baru",
+      "all": "Semua"
     },
     "brands": {
       "googleCloud": "Google Cloud",
@@ -199,8 +202,20 @@
       },
       "githubBanner": {
         "title": "Beberapa informasi mungkin tidak tersedia",
-        "subtitle": "Anda perlu login ke akun GitHub anda untuk melihatnya."
+        "subtitle": "Anda perlu login ke akun GitHub anda untuk melihatnya.",
+        "ctaLabel": "Login ke GitHub"
       },
+
+      "logsRt": {
+        "title": "Log Runtime"
+      },
+      "technicalMetadata": {
+        "title": "Metadata Teknis"
+      },
+      "connectedResources": {
+        "title": "Resources Terkoneksi"
+      },
+
       "artifactsHistory": {
         "title": "Riwayat Artefak",
         "subtitle": "Artefak terkini dan opsi rollback",
@@ -614,10 +629,12 @@
     "loadBalancerDelete": {
       "success": "Berhasil menghapus load balancer « {loadBalancer} ».",
       "error": "Gagal menghapus load balancer « {loadBalancer} »!"
-    },    "loadBalancerRestore": {
+    },
+    "loadBalancerRestore": {
       "success": "Berhasil memulihkan load balancer « {loadBalancer} ».",
       "error": "Gagal memulihkan load balancer « {loadBalancer} »!"
-    },    "domainDelete": {
+    },
+    "domainDelete": {
       "success": "Berhasil menghapus domain « {domain} ».",
       "error": "Gagal menghapus domain « {domain} »!"
     },
