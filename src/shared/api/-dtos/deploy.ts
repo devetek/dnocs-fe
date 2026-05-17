@@ -1,4 +1,4 @@
-import type { MachineV1, ServiceOriginDetailV1 } from '.';
+import type { ArtifactV1, MachineV1, ServiceOriginDetailV1 } from '.';
 
 export interface DeployV1 {
   id?: number;
@@ -7,7 +7,12 @@ export interface DeployV1 {
   installer_status?: string;
   error?: string;
   user_id?: number;
+  user?: {
+    id: number;
+    username: string;
+  };
   artifact_id: number;
+  artifact: ArtifactV1;
   created_at?: string;
   updated_at?: string;
   machine?: MachineV1;

@@ -1,3 +1,5 @@
+import { createElement } from 'react';
+
 import { Card } from '../../atoms/Card';
 import Shimmer from '../../atoms/Shimmer';
 
@@ -31,3 +33,7 @@ export default function PageHeaderShimmer(props: PageHeaderShimmerProps) {
     </Card>
   );
 }
+
+PageHeaderShimmer.build = function build(props: PageHeaderShimmerProps) {
+  return () => createElement(PageHeaderShimmer, props);
+};

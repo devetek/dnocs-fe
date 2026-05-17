@@ -5,6 +5,7 @@ import type {
   WithApiGetOptions,
 } from '@/shared/libs/api-client/rules/types';
 
+import useApiGetWhen from '../libs/api-client/hooks/useApiGetWhen';
 import type { DTOs } from '.';
 
 // =============================================================================
@@ -30,6 +31,17 @@ export function recipe(params: RecipeParams): GetRequestRecipe {
 
 export function useGet(params: WithApiGetOptions<RecipeParams>) {
   return useApiGet<DTOs.GitRepositoryV1>(recipe(params), params.options);
+}
+
+export function useGetWhen(
+  predicate: () => WithApiGetOptions<RecipeParams> | undefined,
+) {
+  const params = predicate();
+
+  return useApiGetWhen<DTOs.GitRepositoryV1>({
+    config: params != null ? recipe(params) : undefined,
+    options: params?.options,
+  });
 }
 
 export function fetchGet(params: RecipeParams) {

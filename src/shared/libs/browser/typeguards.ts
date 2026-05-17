@@ -10,5 +10,11 @@ export function excludeNully<T>(item: T | null | undefined): item is T {
 }
 
 export function excludeFalsy<T>(item: T | false | null | undefined): item is T {
-  return excludeNully(item) && item != false;
+  return excludeNully(item) && item !== false;
+}
+
+export function isJsObject(payload: unknown): payload is object {
+  return (
+    typeof payload === 'object' && payload != null && !Array.isArray(payload)
+  );
 }

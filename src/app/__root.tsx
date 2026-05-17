@@ -22,8 +22,12 @@ import { ToasterController } from '@/services/toaster';
 
 import { EventsProvider } from '@/shared/libs/events';
 
-import NotFoundView from './-view/NotFound';
+// Polyfills
+import '@/shared/libs/browser/array';
+import '@/shared/libs/browser/string';
+
 import appCss from '../styles.css?url';
+import NotFoundView from './-view/NotFound';
 
 const getHeaders = createServerFn().handler(() => {
   const headers = getRequestHeaders();

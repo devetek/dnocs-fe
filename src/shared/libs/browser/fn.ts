@@ -32,8 +32,14 @@
  * myModule.publicMethod(); // "I'm private"
  */
 
-export function iife<T>(fn: () => T) {
+export function f<T>(fn: () => T) {
   return fn();
 }
 
+export const iife = f;
+
 export function noop() {}
+
+export function identity<T>(value: T): T {
+  return value;
+}

@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import type { Emitter, Handler } from 'mitt';
 
 import useHandler from '@/shared/libs/react-hooks/useHandler';
@@ -55,11 +57,36 @@ export default function registerEvents<E extends Record<string, unknown>>() {
   const useEmit = () => {
     const refEvents = useEventsContext() as { current: Emitter<E> };
 
-    const emit = useHandler((type, event) => {
-      refEvents.current.emit(type, event);
-    }) as Emitter<E>['emit'];
+    return useMemo(() => {
+      function emitter(type: string, event: any) {
+        refEvents.current.emit(type, event);
+      }
 
-    return emit;
+      Object.assign(emitter, {
+        intoOnClick: (type: string, event: any) => {
+          return () => {
+            refEvents.current.emit(type, event);
+          };
+        },
+        intoOnChange: (type: string) => {
+          return (event: any) => {
+            refEvents.current.emit(type, event);
+          };
+        },
+      });
+
+      return emitter as Emitter<E>['emit'] & {
+        intoOnClick: {
+          <K extends keyof E>(type: K, event: E[K]): () => void;
+          <K extends keyof E>(
+            type: undefined extends E[K] ? K : never,
+          ): () => void;
+        };
+        intoOnChange: {
+          <K extends keyof E>(type: K): (event: E[K]) => void;
+        };
+      };
+    }, [refEvents]);
   };
 
   const createSubscription = <K extends keyof E>(eventName: K) => {
