@@ -1,7 +1,6 @@
 import { ZodError } from 'zod';
 
 import type { ResponseError, ResponseErrors } from '../rules/types';
-
 import { AdapterError } from './error';
 
 export function processError(error: unknown): ResponseError {

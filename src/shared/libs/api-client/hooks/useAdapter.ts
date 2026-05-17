@@ -26,6 +26,7 @@ export default function useAdapter<Raw, Data>(
 
         return {
           $status: 'loading',
+          from: response.from,
           prevData: prevDataAdapted,
           prevError: response.prevError,
         };

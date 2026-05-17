@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: is used as generic constraints and to escape complex types */
 import { useMemo, useState } from 'react';
 
 import { shallowEqual } from 'fast-equals';
@@ -11,6 +12,7 @@ type OfRaw<T extends Array<Response<any>>> = {
   [K in keyof T]: T[K] extends Response<infer RR> ? RR : never;
 };
 
+/** @deprecated */
 export default function useAdapterMany<R extends Array<Response<any>>, Data>(
   response: [...R],
   adapter: Adapter<OfRaw<R>, Data>,

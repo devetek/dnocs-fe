@@ -5,7 +5,6 @@ import type {
   DoRequestRecipe,
   PureResponse,
 } from '../rules/types';
-
 import { axiosClient } from './client';
 import { BaseResponseError } from './error';
 

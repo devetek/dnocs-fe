@@ -26,6 +26,8 @@ export default function useApiGet<D>(
   } = options ?? {};
   const { url } = config;
 
+  const refPrevURL = useRef<string | null>(null);
+
   const [response, setResponse] = useState<Response<D>>({
     $status: 'initial',
   });
@@ -65,6 +67,8 @@ export default function useApiGet<D>(
       refAbortController.current = controller;
       refBusy.current = true;
 
+      const from = refPrevURL.current !== url ? 'change' : 'refresh';
+
       setResponse((prevResponse) => {
         let prevData: D | undefined;
         let prevError: ResponseError | undefined;
@@ -73,10 +77,14 @@ export default function useApiGet<D>(
           prevData = prevResponse;
         } else if (prevResponse.$status === 'failed') {
           prevError = prevResponse;
+        } else if (prevResponse.$status === 'loading') {
+          prevData = prevResponse.prevData;
+          prevError = prevResponse.prevError;
         }
 
         return {
           $status: 'loading',
+          from,
           prevData,
           prevError,
         };
@@ -139,6 +147,7 @@ export default function useApiGet<D>(
           });
         })
         .finally(() => {
+          refPrevURL.current = url;
           if (refAbortController.current !== controller) return;
 
           refAbortController.current = null;
@@ -162,7 +171,7 @@ export default function useApiGet<D>(
 
     fetchData();
     return abortFetch;
-  }, [skip, url, fetchData, abortFetch]);
+  }, [skip, fetchData, abortFetch]);
 
   useEffect(() => {
     if (skip || refreshIntervalMs <= 0) return;

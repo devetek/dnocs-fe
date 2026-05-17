@@ -23,8 +23,7 @@ export class AdapterError extends Error {
 
   constructor(errors: string[]) {
     const errorMessages = errors.map((error) => `- ${error}`);
-    const fallbackErrorMessage =
-      '<< Adapter Error >>\n' + errorMessages.join('\n');
+    const fallbackErrorMessage = `<< Adapter Error >>\n${errorMessages.join('\n')}`;
 
     super(fallbackErrorMessage);
 

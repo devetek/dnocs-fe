@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { AxiosError, isCancel } from 'axios';
 
@@ -22,9 +22,13 @@ export default function useApiGetLazy<D, P>(
 
   const stableRecipe = useHandler(recipe);
 
+  const refPrevURL = useRef<string | null>(null);
+
   const fetchData = useCallback(
     (params: P) => {
       const { url } = stableRecipe(params);
+
+      const from = refPrevURL.current !== url ? 'change' : 'refresh';
 
       setResponse((prevResponse) => {
         let prevData: D | undefined;
@@ -40,6 +44,7 @@ export default function useApiGetLazy<D, P>(
           $status: 'loading',
           prevData,
           prevError,
+          from,
         };
       });
 
@@ -64,6 +69,7 @@ export default function useApiGetLazy<D, P>(
           setResponse(data);
         })
         .catch((error) => {
+          refPrevURL.current = url;
           if (isCancel(error)) {
             return;
           }

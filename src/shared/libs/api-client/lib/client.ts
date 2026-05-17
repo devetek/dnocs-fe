@@ -5,7 +5,6 @@ import { isBrowser } from '../../browser/environment';
 import { iife } from '../../browser/fn';
 import { LS_ORGANIZATION_ID, X_AUTH_ORGANIZATION_ID } from '../config';
 import type { ApiClientResponse, BaseResponse } from '../rules/types';
-
 import { BaseResponseError } from './error';
 
 export const axiosClient = axios.create({

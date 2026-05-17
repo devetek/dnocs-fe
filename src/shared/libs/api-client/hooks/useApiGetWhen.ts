@@ -1,5 +1,4 @@
 import type { UseApiGetWhenParams } from '../rules/types';
-
 import useApiGet from './useApiGet';
 
 export default function useApiGetWhen<D>(params: UseApiGetWhenParams) {

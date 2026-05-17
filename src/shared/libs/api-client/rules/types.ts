@@ -17,14 +17,19 @@ export type ApiClientResponse<D> =
 //   Response Unit
 // =============================================================================
 
+export type Response<D, E = ResponseError> =
+  | { $status: 'initial' }
+  | {
+      $status: 'loading';
+      from: LoadingFrom;
+      prevData?: D;
+      prevError?: E;
+    }
+  | PureResponse<D, E>;
+
 export type PureResponse<D, E = ResponseError> =
   | ({ $status: 'success' } & D)
   | ({ $status: 'failed' } & E);
-
-export type Response<D, E = ResponseError> =
-  | { $status: 'initial' }
-  | { $status: 'loading'; prevData?: D; prevError?: E }
-  | PureResponse<D, E>;
 
 export type ResponseError =
   | { kind: 'api'; error: AxiosError | BaseResponseError }
@@ -39,6 +44,8 @@ export type ResponseErrors =
     };
 
 export type Adapter<Raw, Data> = (raw: Raw) => Data;
+
+export type LoadingFrom = 'change' | 'refresh';
 
 // =============================================================================
 //   Request Recipe
