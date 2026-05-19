@@ -26,10 +26,17 @@ export default function TabbedCardWithActions(props: Props) {
             const isActive = activeId ? item.id === activeId : index === 0;
 
             const cnTab = cn(
-              'px-2 py-1 mt-0 cursor-pointer transition-all',
-              'rounded-tl-lg rounded-tr-lg border-l border-t border-r border-transparent',
-              'text-primary font-medium',
-              isActive && 'mt-2 bg-card shadow-sm border-border',
+              'relative h-11 pt-2 before:transition-all before:duration-300',
+              'before:relative before:block before:bg-card before:size-full before:rounded-t-lg',
+              'before:border before:border-b-0',
+              'before:top-0 opacity-100 before:border-border before:shadow-sm',
+              !isActive &&
+                'before:top-2 before:opacity-0 before:border-transparent',
+            );
+
+            const cnTabContent = cn(
+              'absolute left-1/2 top-1/2 -translate-x-1/2 transition-all before:duration-300',
+              !isActive ? '-translate-y-1/2' : 'translate-y-[calc(-50%+4px)]',
             );
 
             return (
@@ -39,7 +46,7 @@ export default function TabbedCardWithActions(props: Props) {
                 className={cnTab}
                 onClick={() => setActiveId(item.id)}
               >
-                {item.label}
+                <span className={cnTabContent}>{item.label}</span>
               </button>
             );
           })}
